@@ -25,7 +25,7 @@ public class GridManager : MonoBehaviour
             return;
         }
 
-        gridSystem = new GridSystem(10, 10);
+        gridSystem = new GridSystem(5, 5);
         gridSystem.CreateDebugObjcet(gridDebugObjectPrefab, debugObjectContainer);
     }
 
