@@ -67,4 +67,7 @@ public class GridManager : MonoBehaviour
     public bool CheckOnGrid(Vector3 position) => gridSystem.CheckOnGrid(position);
 
 
+
+
+    public void SetElement(Element element, GridPosition gridPosition) => gridSystem.SetElement(element, gridPosition);
 }

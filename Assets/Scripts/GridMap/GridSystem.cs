@@ -5,6 +5,7 @@ public class GridSystem
     private int width;
     private int height;
     private GridTile[,] gridTileArray;
+    private TileData[,] tileDataArray;
 
     private GridTile OutOfGrid;
 
@@ -17,12 +18,14 @@ public class GridSystem
         OutOfGrid = new GridTile(new GridPosition(-100, -100));
 
         gridTileArray = new GridTile[width, height];
+        tileDataArray = new TileData[width, height];
 
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
                 gridTileArray[x, y] = new GridTile(new GridPosition(x, y));
+                tileDataArray[x, y] = new TileData(new GridPosition(x, y));
             }
         }
     }
@@ -37,7 +40,7 @@ public class GridSystem
                 debugTransform.SetParent(container);
 
                 GridDebugObject gridDebugObject = debugTransform.GetComponent<GridDebugObject>();
-                gridDebugObject.SetGridObject(GetGridTile(new GridPosition(x, y)));
+                gridDebugObject.SetGridObject(GetGridTile(new GridPosition(x, y)), GetTileData(new GridPosition(x, y)));
             }
         }
     }
@@ -98,5 +101,17 @@ public class GridSystem
         GridPosition gridPosition = GetGridPosition(position);
 
         return CheckOnGrid(gridPosition);
+    }
+
+
+
+    private TileData GetTileData(GridPosition gridPosition)
+    {
+        return tileDataArray[gridPosition.x, gridPosition.y];
+    }
+
+    public void SetElement(Element element, GridPosition gridPosition)
+    {
+        tileDataArray[gridPosition.x, gridPosition.y].element = element;
     }
 }
