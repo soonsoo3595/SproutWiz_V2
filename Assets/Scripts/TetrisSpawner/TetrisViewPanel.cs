@@ -31,23 +31,35 @@ public class TetrisViewPanel : MonoBehaviour
             tetrisList.Add(tetris);
         }
 
-        EventManager.Instance.applyTetris += ReplaceSlot;
+        EventManager.Instance.applyTetris += ApplyTetris;
     }
 
-    private void ReplaceSlot(TetrisObject tetrisObject)
+    private void ApplyTetris(TetrisObject tetrisObject)
     {
+        SetTileData(tetrisObject);
+
         tetrisList.Remove(tetrisObject.transform);
         tetrisList.Add(Instantiate(TetrisPrefabs[preViewSystem.GetRandomNum()]));
 
         int count = 0;
 
-        foreach(Transform tetris in tetrisList)
+        foreach (Transform tetris in tetrisList)
         {
             tetris.SetParent(ViewSlots[count]);
             tetris.localScale = new Vector3(50f, 50f, 50f);
             tetris.localPosition = Vector3.zero;
 
             count++;
+        }
+    }
+
+    private static void SetTileData(TetrisObject tetrisObject)
+    {
+        List<TileUnit> units = tetrisObject.GetUnitList();
+
+        foreach (TileUnit unit in units)
+        {
+            GridManager.Instance.SetElement(Element.Fire, unit.GetGridPosition());
         }
     }
 }

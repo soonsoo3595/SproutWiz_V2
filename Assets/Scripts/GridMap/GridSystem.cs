@@ -112,6 +112,6 @@ public class GridSystem
 
     public void SetElement(Element element, GridPosition gridPosition)
     {
-        tileDataArray[gridPosition.x, gridPosition.y].element = element;
+        GetTileData(gridPosition).element = element;
     }
 }

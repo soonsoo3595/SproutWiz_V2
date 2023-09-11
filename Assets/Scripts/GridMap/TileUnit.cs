@@ -73,9 +73,19 @@ public class TileUnit : MonoBehaviour
             GridManager.Instance.AddUnitAtGridPosition(gridPosition, this);
     }
 
+    private void OnDestroy()
+    {
+        ExitGrid();
+    }
+
 
     public bool GetOnGrid()
     {
         return onGrid;
+    }
+
+    public GridPosition GetGridPosition()
+    {
+        return gridPosition;
     }
 }

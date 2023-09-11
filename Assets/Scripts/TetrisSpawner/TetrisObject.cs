@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TetrisObject : MonoBehaviour
@@ -28,11 +28,11 @@ public class TetrisObject : MonoBehaviour
         }
         else
         {
-            ReleseDrag();
+            ReleaseDrag();
         }
     }
 
-    private void ReleseDrag()
+    private void ReleaseDrag()
     {
         if (CheckAllUnitOnGrid())
         {
@@ -65,4 +65,13 @@ public class TetrisObject : MonoBehaviour
 
         return true;
     }
+
+
+    public List<TileUnit> GetUnitList()
+    {
+        List<TileUnit> result = new List<TileUnit>(units);
+
+        return result;
+    }
+
 }
