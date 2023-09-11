@@ -6,9 +6,6 @@ public class TetrisViewPanel : MonoBehaviour
     [SerializeField]
     private List<RectTransform> ViewSlots;
 
-    [SerializeField]
-    private List<Transform> TetrisPrefabs;
-
     private List<Transform> tetrisList;
 
     private PreViewSystem preViewSystem;
@@ -16,7 +13,7 @@ public class TetrisViewPanel : MonoBehaviour
 
     private void Awake()
     {
-        preViewSystem = new PreViewSystem(ViewSlots.Count, TetrisPrefabs.Count);
+        preViewSystem = new PreViewSystem(ViewSlots.Count);
         tetrisList = new List<Transform>();
     }
 
@@ -24,7 +21,7 @@ public class TetrisViewPanel : MonoBehaviour
     {
         foreach (RectTransform slot in ViewSlots)
         {
-            Transform tetris = Instantiate(TetrisPrefabs[preViewSystem.GetRandomNum()], slot);
+            Transform tetris = Instantiate(preViewSystem.GetNewTetris(), slot);
             tetris.localScale = new Vector3(50f, 50f, 50f);
             tetris.localPosition = Vector3.zero;
 
@@ -39,7 +36,7 @@ public class TetrisViewPanel : MonoBehaviour
         SetTileData(tetrisObject);
 
         tetrisList.Remove(tetrisObject.transform);
-        tetrisList.Add(Instantiate(TetrisPrefabs[preViewSystem.GetRandomNum()]));
+        tetrisList.Add(Instantiate(preViewSystem.GetNewTetris()));
 
         int count = 0;
 

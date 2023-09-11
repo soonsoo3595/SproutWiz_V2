@@ -3,17 +3,32 @@ using UnityEngine;
 public class PreViewSystem
 {
     private int slotNum;
-    private int tetrisVariant;
+    private int tetrisVariantCount;
 
-    public PreViewSystem(int slotNum, int tetrisVariant)
+    Transform[] TetrisPrefabs;
+
+    public PreViewSystem(int slotNum)
     {
         this.slotNum = slotNum;
-        this.tetrisVariant = tetrisVariant;
+
+        TetrisPrefabs = Resources.LoadAll<Transform>("Prefabs/Tetris/");
+        tetrisVariantCount = TetrisPrefabs.Length;
+
+        if(tetrisVariantCount <= 0)
+        {
+            Debug.Log("경로에 생성 가능한 테트리스 없음");
+        }
     }
 
-    public int GetRandomNum()
+    public Transform GetNewTetris()
     {
-        return Random.Range(0, tetrisVariant);
+       return TetrisPrefabs[GetRandomNum()];
+    }
+
+
+    private int GetRandomNum()
+    {
+        return Random.Range(0, tetrisVariantCount);
     }
 
 
