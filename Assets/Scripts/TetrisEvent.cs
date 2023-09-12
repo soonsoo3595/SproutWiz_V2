@@ -8,7 +8,7 @@ public class TetrisEvent : MonoBehaviour
 {
     void Start()
     {
-        //EventManager.Instance.applyTetris += SetTileData;
+        EventManager.Instance.applyTetris += SetTileData;
     }
 
 
@@ -18,7 +18,7 @@ public class TetrisEvent : MonoBehaviour
 
         foreach (TetrisUnit unit in units)
         {
-            GridManager.Instance.SetElement(Element.Fire, unit.GetGridPosition());
+            GridManager.Instance.SetElement(unit.GetElement(), unit.GetGridPosition());
         }
     }
 

@@ -37,8 +37,6 @@ public class TetrisViewPanel : MonoBehaviour
 
     private void ApplyTetris(TetrisObject tetrisObject)
     {
-        SetTileData(tetrisObject);
-
         tetrisList.Remove(tetrisObject.transform);
 
         Transform newTetris = Instantiate(preViewSystem.GetRandomTetris());
@@ -56,17 +54,6 @@ public class TetrisViewPanel : MonoBehaviour
             count++;
         }
     }
-
-    private static void SetTileData(TetrisObject tetrisObject)
-    {
-        List<TetrisUnit> units = tetrisObject.GetUnitList();
-
-        foreach (TetrisUnit unit in units)
-        {
-            GridManager.Instance.SetElement(unit.GetElement(), unit.GetGridPosition());
-        }
-    }
-
 
     private void SetDefaultSize(Transform tetris)
     {
