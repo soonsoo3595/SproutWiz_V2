@@ -25,7 +25,7 @@ public class TetrisViewPanel : MonoBehaviour
         SetTetrisToAllSlot();
         RelocateTetris();
 
-        EventManager.Instance.applyTetris += UpdateTetrisSlot;
+        LevelData.applyTetris += UpdateTetrisSlot;
     }
 
     private void SetTetrisToAllSlot()

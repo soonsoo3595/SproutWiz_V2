@@ -37,7 +37,8 @@ public class TetrisObject : MonoBehaviour
         if (CheckAllUnitOnGrid())
         {
             Debug.Log("테트리스 배치 성공");
-            EventManager.Instance.applyTetris(this);
+
+            LevelData.applyTetris(this);
             Destroy(gameObject);
         }
         else

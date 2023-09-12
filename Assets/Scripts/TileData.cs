@@ -30,6 +30,6 @@ public class TileData
 
     public override string ToString()
     {
-        return element.ToString();
+        return element.ToString() + '\n' + growPoint.ToString();
     }
 }

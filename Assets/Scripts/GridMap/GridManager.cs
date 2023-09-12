@@ -69,5 +69,5 @@ public class GridManager : MonoBehaviour
 
 
 
-    public void SetElement(Element element, GridPosition gridPosition) => gridSystem.SetElement(element, gridPosition);
+    //public void SetElement(Element element, GridPosition gridPosition) => gridSystem.SetElement(element, gridPosition);
 }
