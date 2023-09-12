@@ -22,28 +22,49 @@ public class TetrisViewPanel : MonoBehaviour
 
     private void Start()
     {
-        foreach (RectTransform slot in ViewSlots)
-        {
-            Transform tetris = Instantiate(preViewSystem.GetRandomTetris(), slot);
-            tetris.GetComponent<TetrisObject>().SetAllUnitState(1, preViewSystem.GetRandomElement());
+        SetTetrisToAllSlot();
+        RelocateTetris();
 
-            SetDefaultSize(tetris);
-
-            tetrisList.Add(tetris);
-        }
-
-        EventManager.Instance.applyTetris += ApplyTetris;
+        EventManager.Instance.applyTetris += UpdateTetrisSlot;
     }
 
-    private void ApplyTetris(TetrisObject tetrisObject)
+    private void SetTetrisToAllSlot()
+    {
+        foreach (RectTransform slot in ViewSlots)
+        {
+            AddNewTetris();
+        }
+    }
+
+    private void UpdateTetrisSlot(TetrisObject tetrisObject)
+    {
+        ReplaceTetris(tetrisObject);
+        RelocateTetris();
+    }
+
+
+
+    private void ReplaceTetris(TetrisObject tetrisObject)
     {
         tetrisList.Remove(tetrisObject.transform);
+        AddNewTetris();
+    }
 
+    private void AddNewTetris()
+    {
+        tetrisList.Add(SpawnTetris());
+    }
+
+    private Transform SpawnTetris()
+    {
         Transform newTetris = Instantiate(preViewSystem.GetRandomTetris());
         newTetris.GetComponent<TetrisObject>().SetAllUnitState(1, preViewSystem.GetRandomElement());
 
-        tetrisList.Add(newTetris);
+        return newTetris;
+    }
 
+    private void RelocateTetris()
+    {
         int count = 0;
 
         foreach (Transform tetris in tetrisList)

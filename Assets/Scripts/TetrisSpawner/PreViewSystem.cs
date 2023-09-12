@@ -12,10 +12,15 @@ public class PreViewSystem
     {
         this.slotNum = slotNum;
 
+        LoadPrefabs();
+    }
+
+    private void LoadPrefabs()
+    {
         TetrisPrefabs = Resources.LoadAll<Transform>("Prefabs/Tetris/");
         tetrisVariantCount = TetrisPrefabs.Length;
 
-        if(tetrisVariantCount <= 0)
+        if (tetrisVariantCount <= 0)
         {
             Debug.Log("경로에 생성 가능한 테트리스 없음");
         }
@@ -28,11 +33,11 @@ public class PreViewSystem
 
     public Element GetRandomElement()
     {
-        int temp = UnityEngine.Random.Range((int)Element.Fire, (int)Element.Grass + 1);
+        int randomElement = UnityEngine.Random.Range((int)Element.Fire, (int)Element.Grass + 1);
 
-        if(Enum.IsDefined(typeof(Element), temp))
+        if(Enum.IsDefined(typeof(Element), randomElement))
         {
-            return (Element)temp;
+            return (Element)randomElement;
         }
         else
         {
