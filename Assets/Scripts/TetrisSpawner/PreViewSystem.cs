@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PreViewSystem
@@ -20,16 +21,24 @@ public class PreViewSystem
         }
     }
 
-    public Transform GetNewTetris()
+    public Transform GetRandomTetris()
     {
-       return TetrisPrefabs[GetRandomNum()];
+       return TetrisPrefabs[UnityEngine.Random.Range(0, tetrisVariantCount)];
     }
 
-
-    private int GetRandomNum()
+    public Element GetRandomElement()
     {
-        return Random.Range(0, tetrisVariantCount);
+        int temp = UnityEngine.Random.Range((int)Element.Fire, (int)Element.Grass + 1);
+
+        if(Enum.IsDefined(typeof(Element), temp))
+        {
+            return (Element)temp;
+        }
+        else
+        {
+            Debug.Log("속성 부여 에러");
+
+            return Element.None;
+        }
     }
-
-
 }

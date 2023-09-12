@@ -6,6 +6,9 @@ public class TetrisViewPanel : MonoBehaviour
     [SerializeField]
     private List<RectTransform> ViewSlots;
 
+    [SerializeField]
+    private float TetrisSize = 50;
+
     private List<Transform> tetrisList;
 
     private PreViewSystem preViewSystem;
@@ -21,9 +24,10 @@ public class TetrisViewPanel : MonoBehaviour
     {
         foreach (RectTransform slot in ViewSlots)
         {
-            Transform tetris = Instantiate(preViewSystem.GetNewTetris(), slot);
-            tetris.localScale = new Vector3(50f, 50f, 50f);
-            tetris.localPosition = Vector3.zero;
+            Transform tetris = Instantiate(preViewSystem.GetRandomTetris(), slot);
+            tetris.GetComponent<TetrisObject>().SetAllUnitState(1, preViewSystem.GetRandomElement());
+
+            SetDefaultSize(tetris);
 
             tetrisList.Add(tetris);
         }
@@ -36,15 +40,18 @@ public class TetrisViewPanel : MonoBehaviour
         SetTileData(tetrisObject);
 
         tetrisList.Remove(tetrisObject.transform);
-        tetrisList.Add(Instantiate(preViewSystem.GetNewTetris()));
+
+        Transform newTetris = Instantiate(preViewSystem.GetRandomTetris());
+        newTetris.GetComponent<TetrisObject>().SetAllUnitState(1, preViewSystem.GetRandomElement());
+
+        tetrisList.Add(newTetris);
 
         int count = 0;
 
         foreach (Transform tetris in tetrisList)
         {
             tetris.SetParent(ViewSlots[count]);
-            tetris.localScale = new Vector3(50f, 50f, 50f);
-            tetris.localPosition = Vector3.zero;
+            SetDefaultSize(tetris);
 
             count++;
         }
@@ -52,11 +59,18 @@ public class TetrisViewPanel : MonoBehaviour
 
     private static void SetTileData(TetrisObject tetrisObject)
     {
-        List<TileUnit> units = tetrisObject.GetUnitList();
+        List<TetrisUnit> units = tetrisObject.GetUnitList();
 
-        foreach (TileUnit unit in units)
+        foreach (TetrisUnit unit in units)
         {
-            GridManager.Instance.SetElement(Element.Fire, unit.GetGridPosition());
+            GridManager.Instance.SetElement(unit.GetElement(), unit.GetGridPosition());
         }
+    }
+
+
+    private void SetDefaultSize(Transform tetris)
+    {
+        tetris.localScale = new Vector3(TetrisSize, TetrisSize);
+        tetris.localPosition = Vector3.zero;
     }
 }

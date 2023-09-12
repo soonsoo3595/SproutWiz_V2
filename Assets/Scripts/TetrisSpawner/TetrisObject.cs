@@ -5,12 +5,12 @@ public class TetrisObject : MonoBehaviour
 {
     [SerializeField]
     private bool isAttackedMouse;
-    private TileUnit[] units;
+    private TetrisUnit[] units;
 
     private void Awake()
     {
         isAttackedMouse = false;
-        units = GetComponentsInChildren<TileUnit>();
+        units = GetComponentsInChildren<TetrisUnit>();
     }
 
     private void Update()
@@ -58,7 +58,7 @@ public class TetrisObject : MonoBehaviour
 
     private bool CheckAllUnitOnGrid()
     {
-        foreach (TileUnit unit in units)
+        foreach (TetrisUnit unit in units)
         {
             if (!unit.GetOnGrid()) return false;
         }
@@ -66,10 +66,17 @@ public class TetrisObject : MonoBehaviour
         return true;
     }
 
-
-    public List<TileUnit> GetUnitList()
+    public void SetAllUnitState(int growPoint, Element element)
     {
-        List<TileUnit> result = new List<TileUnit>(units);
+        foreach (TetrisUnit unit in units)
+        {
+            unit.SetUnitState(growPoint, element);
+        }
+    }
+
+    public List<TetrisUnit> GetUnitList()
+    {
+        List<TetrisUnit> result = new List<TetrisUnit>(units);
 
         return result;
     }
