@@ -25,7 +25,7 @@ public class GridManager : MonoBehaviour
             return;
         }
 
-        gridSystem = new GridSystem(10, 10);
+        gridSystem = new GridSystem(5, 5);
         gridSystem.CreateDebugObjcet(gridDebugObjectPrefab, debugObjectContainer);
     }
 
@@ -55,7 +55,7 @@ public class GridManager : MonoBehaviour
 
     public GridPosition GetGridPosition(Vector3 worldPosition) => gridSystem.GetGridPosition(worldPosition);
 
-    public Vector3 GetWorldPosition(GridPosition gridPosition) => gridSystem.GetWorldPosition(gridPosition.x, gridPosition.y);
+    public Vector3 GetWorldPosition(GridPosition gridPosition) => gridSystem.GetWorldPosition(gridPosition);
 
     public int GetWidth() => gridSystem.GetWidth();
 
@@ -65,6 +65,4 @@ public class GridManager : MonoBehaviour
     public bool CheckOnGrid(GridPosition gridPosition) => gridSystem.CheckOnGrid(gridPosition);
 
     public bool CheckOnGrid(Vector3 position) => gridSystem.CheckOnGrid(position);
-
-
 }

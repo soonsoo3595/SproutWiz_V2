@@ -25,7 +25,7 @@ public class GridTile
 
             foreach (TileUnit unit in units)
             {
-                unitString += unit + "\n";
+                unitString += unit.name + "\n";
             }
 
             return gridPosition.ToString() + "\n" + unitString;

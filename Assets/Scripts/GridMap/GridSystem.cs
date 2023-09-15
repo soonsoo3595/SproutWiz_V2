@@ -4,7 +4,9 @@ public class GridSystem
 {
     private int width;
     private int height;
+
     private GridTile[,] gridTileArray;
+    private LevelData levelData;
 
     private GridTile OutOfGrid;
 
@@ -13,10 +15,8 @@ public class GridSystem
         this.width = width;
         this.height = height;
 
-        // 맵 밖에 있는 경우 null값 대신 임시GridPosition 반환
-        OutOfGrid = new GridTile(new GridPosition(-100, -100));
-
         gridTileArray = new GridTile[width, height];
+        levelData = new LevelData(width, height);
 
         for (int x = 0; x < width; x++)
         {
@@ -25,6 +25,9 @@ public class GridSystem
                 gridTileArray[x, y] = new GridTile(new GridPosition(x, y));
             }
         }
+
+        // 맵 밖에 있는 경우 null값 대신 임시GridPosition 반환
+        OutOfGrid = new GridTile(new GridPosition(-100, -100));
     }
 
     public void CreateDebugObjcet(Transform debugPrefab, Transform container)
@@ -37,7 +40,7 @@ public class GridSystem
                 debugTransform.SetParent(container);
 
                 GridDebugObject gridDebugObject = debugTransform.GetComponent<GridDebugObject>();
-                gridDebugObject.SetGridObject(GetGridTile(new GridPosition(x, y)));
+                gridDebugObject.SetGridObject(GetGridTile(new GridPosition(x, y)), levelData.GetData(new GridPosition(x, y)));
             }
         }
     }
@@ -83,20 +86,11 @@ public class GridSystem
 
     public bool CheckOnGrid(GridPosition gridPosition)
     {
-        if (gridPosition >= (0, 0) && gridPosition < (width, height))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return (gridPosition >= (0, 0) && gridPosition < (width, height));
     }
 
     public bool CheckOnGrid(Vector3 position)
     {
-        GridPosition gridPosition = GetGridPosition(position);
-
-        return CheckOnGrid(gridPosition);
+        return CheckOnGrid(GetGridPosition(position));
     }
 }
