@@ -28,19 +28,20 @@ public class LevelData
             }
         }
     }
-
+    
+    
     private void SetTileData(TetrisObject tetrisObject)
     {
         List<TetrisUnit> units = tetrisObject.GetUnitList();
 
         foreach (TetrisUnit unit in units)
         {
-            GetTileData(unit.GetGridPosition()).element = unit.GetElement();
-            GetTileData(unit.GetGridPosition()).growPoint = unit.GetGrowPoint();
+            GetData(unit.GetGridPosition()).element = unit.GetElement();
+            GetData(unit.GetGridPosition()).growPoint = unit.GetGrowPoint();
         }
     }
 
-    public TileData GetTileData(GridPosition gridPosition)
+    public TileData GetData(GridPosition gridPosition)
     {
         return tileDataArray[gridPosition.x, gridPosition.y];
     }

@@ -29,6 +29,11 @@ public class TileUnit : MonoBehaviour
         onGrid = GridManager.Instance.CheckOnGrid(transform.position);
     }
 
+    private void OnDestroy()
+    {
+        ExitGrid();
+    }
+
 
     private void CheckMoveGridPosition()
     {
@@ -71,11 +76,6 @@ public class TileUnit : MonoBehaviour
 
         if (GridManager.Instance.CheckOnGrid(gridPosition))
             GridManager.Instance.AddUnitAtGridPosition(gridPosition, this);
-    }
-
-    private void OnDestroy()
-    {
-        ExitGrid();
     }
 
 
