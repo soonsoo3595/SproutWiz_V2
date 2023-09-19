@@ -35,18 +35,18 @@ public class TetrisUnit : TileUnit
     {
         Color blockColor = new Color();
 
-        switch (element)
+        switch (element.GetElementType())
         {
-            case Element.None:
+            case ElementType.None:
                 blockColor = Color.white;
                 break;
-            case Element.Fire:
+            case ElementType.Fire:
                 blockColor = Color.red;
                 break;
-            case Element.Warter:
+            case ElementType.Water:
                 blockColor = Color.blue;
                 break;
-            case Element.Grass:
+            case ElementType.Grass:
                 blockColor = Color.green;
                 break;
         }

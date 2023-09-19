@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class LevelData
@@ -36,8 +37,8 @@ public class LevelData
 
         foreach (TetrisUnit unit in units)
         {
-            GetData(unit.GetGridPosition()).element = unit.GetElement();
-            GetData(unit.GetGridPosition()).growPoint = unit.GetGrowPoint();
+            TileData tile = GetData(unit.GetGridPosition());
+            tile.SetData(unit);
         }
     }
 
@@ -45,4 +46,5 @@ public class LevelData
     {
         return tileDataArray[gridPosition.x, gridPosition.y];
     }
+
 }

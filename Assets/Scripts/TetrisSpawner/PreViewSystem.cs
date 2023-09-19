@@ -33,17 +33,19 @@ public class PreViewSystem
 
     public Element GetRandomElement()
     {
-        int randomElement = UnityEngine.Random.Range((int)Element.Fire, (int)Element.Grass + 1);
+        Element newElement = new Element();
 
-        if(Enum.IsDefined(typeof(Element), randomElement))
+        int randomElement = UnityEngine.Random.Range((int)ElementType.Fire, (int)ElementType.Grass + 1);
+
+        if (Enum.IsDefined(typeof(ElementType), randomElement))
         {
-            return (Element)randomElement;
+            newElement.SetElementType((ElementType)randomElement);
         }
         else
         {
             Debug.Log("속성 부여 에러");
-
-            return Element.None;
         }
+
+        return newElement;
     }
 }
