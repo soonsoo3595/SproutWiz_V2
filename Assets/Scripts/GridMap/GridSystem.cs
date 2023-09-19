@@ -74,6 +74,11 @@ public class GridSystem
 
     }
 
+    public TileData GetTileData(GridPosition position)
+    {
+        return levelData.GetData(position);
+    }
+
     public int GetWidth()
     {
         return width;

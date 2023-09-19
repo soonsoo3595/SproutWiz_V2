@@ -65,4 +65,6 @@ public class GridManager : MonoBehaviour
     public bool CheckOnGrid(GridPosition gridPosition) => gridSystem.CheckOnGrid(gridPosition);
 
     public bool CheckOnGrid(Vector3 position) => gridSystem.CheckOnGrid(position);
+
+    public TileData GetTileData(GridPosition position) => gridSystem.GetTileData(position);
 }
