@@ -9,6 +9,9 @@ public class LevelData
     public delegate void ApplyTetris(TetrisObject tetrisObject);
     static public ApplyTetris applyTetris;
 
+    public delegate void ChangeTileData(GridPosition gridPosition);
+    static public ChangeTileData changeTileData;
+
     public LevelData(int width, int height) 
     {
         InitGridData(width, height);
@@ -38,6 +41,9 @@ public class LevelData
         {
             GetData(unit.GetGridPosition()).element = unit.GetElement();
             GetData(unit.GetGridPosition()).growPoint = unit.GetGrowPoint();
+
+            // 값 갱신이 없으면 실행하지 말아야함.
+            changeTileData(unit.GetGridPosition());
         }
     }
 
