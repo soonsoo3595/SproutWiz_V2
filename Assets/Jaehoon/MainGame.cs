@@ -8,6 +8,8 @@ public class MainGame : MonoBehaviour
     public Timer timer;
     public Button pauseBtn;
 
+    public GameObject blind;
+
     void Awake()
     {
         pauseBtn.onClick.AddListener(ClickPause);
@@ -28,10 +30,12 @@ public class MainGame : MonoBehaviour
         if(timer.isPaused)
         {
             timer.ResumeTimer();
+            blind.SetActive(false);
         }
         else
         {
             timer.PauseTimer();
+            blind.SetActive(true);
         }
     }
 }
