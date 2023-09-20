@@ -10,7 +10,6 @@ public class TileData
     public int growPoint;
     public int maxGrowPoint;
     public Element element;
-    public GrowthStep step;
 
     public TileData(GridPosition gridPosition)
     {
@@ -18,25 +17,24 @@ public class TileData
         this.growPoint = 0;
         this.maxGrowPoint = 6;  // 나중에 maxGrowPoint를 따로 빼서 하드코딩 안하게
         this.element = new Element();
-        this.step = GrowthStep.Empty;
     }
 
     public override string ToString()
     {
-        return element.ToString() + '\n' + growPoint.ToString() + '\n' + step.ToString();
+        return element.ToString() + '\n' + growPoint.ToString() + '\n';
     }
 
     public void InitTile()
     {
         growPoint = 0;
-        step = GrowthStep.Empty;
+        element.InitElement();
     }
 
     public void SetData(TetrisUnit unit)
     {
-        if (step == GrowthStep.Empty)
+        if (element.IsNone())
         {
-            element = unit.GetElement();
+            element.SetElementType(unit.GetElement().GetElementType());
             growPoint++;
         }
         else
@@ -65,17 +63,9 @@ public class TileData
         {
             InitTile();
         }
-        else if(growPoint == 1)
-        {
-            step = GrowthStep.Sprout;
-        }
-        else if(growPoint > 1 && growPoint < maxGrowPoint)
-        {
-            step = GrowthStep.GrowUp;
-        }
         else if(growPoint == maxGrowPoint)
         {
-            step = GrowthStep.Harvest;
+            Debug.Log(gridPosition.ToString() + "수확");
             InitTile();
         }
         

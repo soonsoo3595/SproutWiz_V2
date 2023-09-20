@@ -11,5 +11,4 @@ public enum ElementType { None, Fire, Water, Grass }
 
 public enum ElementRelation { Assignment, Disadvantage, Equal, Advantage }
 
-public enum GrowthStep { Empty, Sprout, GrowUp, Harvest}
 

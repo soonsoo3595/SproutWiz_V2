@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class Element
 {
@@ -45,26 +46,20 @@ public class Element
 
     public static bool operator >(Element tile, Element unit)
     {
-        if(tile.elementType == ElementType.Fire)
+        if (tile.elementType == ElementType.Fire)
         {
-            if (unit.elementType == ElementType.Grass)
-                return true;
-            else
-                return false;
+            if (unit.elementType == ElementType.Grass)  return true;
+            else return false;
         }
         else if(tile.elementType == ElementType.Water)
         {
-            if (unit.elementType == ElementType.Fire)
-                return true;
-            else
-                return false;
+            if (unit.elementType == ElementType.Fire)   return true;
+            else return false;
         }
         else if (tile.elementType == ElementType.Grass)
         {
-            if (unit.elementType == ElementType.Water)
-                return true;
-            else
-                return false;
+            if (unit.elementType == ElementType.Water)  return true;
+            else return false;
         }
         else
         {
@@ -76,24 +71,18 @@ public class Element
     {
         if (tile.elementType == ElementType.Fire)
         {
-            if (unit.elementType == ElementType.Water)
-                return true;
-            else
-                return false;
+            if (unit.elementType == ElementType.Water)  return true;
+            else return false;
         }
         else if (tile.elementType == ElementType.Water)
         {
-            if (unit.elementType == ElementType.Grass)
-                return true;
-            else
-                return false;
+            if (unit.elementType == ElementType.Grass)  return true;
+            else return false;
         }
         else if (tile.elementType == ElementType.Grass)
         {
-            if (unit.elementType == ElementType.Fire)
-                return true;
-            else
-                return false;
+            if (unit.elementType == ElementType.Fire)   return true;
+            else return false;
         }
         else
         {
@@ -105,17 +94,14 @@ public class Element
     {
         if (this == element)
         {
-            Debug.Log("加己 包拌 悼殿");
             return ElementRelation.Equal;
         }
         else if (this < element)
         {
-            Debug.Log("加己 包拌 阂府");
             return ElementRelation.Disadvantage;
         }
         else if (this > element)
         {
-            Debug.Log("加己 包拌 快困");
             return ElementRelation.Advantage;
         }
         else
@@ -129,4 +115,9 @@ public class Element
 
     public void InitElement() { elementType = ElementType.None; }
     
+    public bool IsNone()
+    {
+        if (elementType == ElementType.None) return true;
+        else return false;
+    }
 }
