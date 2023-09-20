@@ -31,7 +31,7 @@ public class Element
 
     public override string ToString()
     {
-        return $"Element : {elementType}";
+        return $"{elementType}";
     }
 
     public static bool operator ==(Element tile, Element unit)
