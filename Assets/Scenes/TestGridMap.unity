@@ -220,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55fbc2b7dbd0155459d90fc493530911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSetting: {fileID: 11400000, guid: fc95992759bb09742881d40d43056267, type: 2}
   gridDebugObjectPrefab: {fileID: 3750986870174246637, guid: a61bc7b13371d644d860f658ea961484, type: 3}
   debugObjectContainer: {fileID: 1411381683}
 --- !u!4 &628541588
