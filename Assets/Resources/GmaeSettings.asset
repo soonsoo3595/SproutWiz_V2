@@ -14,11 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridMapWidth: 5
   GridMapHeight: 5
-  PercentageOfMixTetris: 77.7
-  EnableMix_Three_Type: 1
-  probabilityA: 18.082565
-  probabilityB: 63.498337
-  probabilityC: 18.419096
-  EnableMix_Two_Type: 0
-  probabilityD: NaN
-  probabilityE: NaN
+  fireRatio: 0.10218617
+  waterRatio: 0.4480161
+  grassRatio: 0.44979775

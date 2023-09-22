@@ -9,17 +9,9 @@ public class GameSetting : ScriptableObject
     public int GridMapWidth = 5;
     public int GridMapHeight = 5;
 
-    public float PercentageOfMixTetris = 0;
-    public bool EnableMix_Three_Type = false;
-
-    public float probabilityA = 1f;
-    public float probabilityB = 1f;
-    public float probabilityC = 1f;
-
-    public bool EnableMix_Two_Type = false;
-
-    public float probabilityD = 1f;
-    public float probabilityE = 1f;
+    public float fireRatio = 1f;
+    public float waterRatio = 0f;
+    public float grassRatio = 0f;
 }
 
 
