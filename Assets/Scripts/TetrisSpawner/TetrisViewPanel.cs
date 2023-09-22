@@ -55,12 +55,21 @@ public class TetrisViewPanel : MonoBehaviour
         tetrisList.Add(SpawnTetris());
     }
 
+
     private Transform SpawnTetris()
     {
         Transform newTetris = Instantiate(preViewSystem.GetRandomTetris());
-        newTetris.GetComponent<TetrisObject>().SetAllUnitState(1, preViewSystem.GetRandomElement());
+
+        StateSetting(newTetris.GetComponent<TetrisObject>());
 
         return newTetris;
+    }
+
+    private void StateSetting(TetrisObject Tetris)
+    {
+        //TetrisSpawnSetting setting = 
+
+        Tetris.SetAllUnitState(1, preViewSystem.GetRandomElement());
     }
 
     private void RelocateTetris()

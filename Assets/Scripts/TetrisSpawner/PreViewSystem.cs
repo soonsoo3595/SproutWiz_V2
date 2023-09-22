@@ -26,26 +26,34 @@ public class PreViewSystem
         }
     }
 
+
     public Transform GetRandomTetris()
     {
-       return TetrisPrefabs[UnityEngine.Random.Range(0, tetrisVariantCount)];
+        return TetrisPrefabs[UnityEngine.Random.Range(0, tetrisVariantCount)];
     }
 
     public Element GetRandomElement()
     {
-        Element newElement = new Element();
+        ElementType randomElement = (ElementType)UnityEngine.Random.Range((int)ElementType.Fire, (int)ElementType.Grass + 1);
 
-        int randomElement = UnityEngine.Random.Range((int)ElementType.Fire, (int)ElementType.Grass + 1);
-
-        if (Enum.IsDefined(typeof(ElementType), randomElement))
-        {
-            newElement.SetElementType((ElementType)randomElement);
-        }
-        else
-        {
-            Debug.Log("속성 부여 에러");
-        }
+        Element newElement = new Element(randomElement);
 
         return newElement;
+    }
+}
+
+public struct TetrisSpawnSetting
+{
+    int growPoint;
+    float fireRatio;
+    float waterRatio;
+    float grassRatio;
+
+    public TetrisSpawnSetting(int growPoint, float fire, float water, float grass)
+    {
+        this.growPoint = growPoint;
+        this.fireRatio = fire;
+        this.waterRatio = water;
+        this.grassRatio = grass;
     }
 }

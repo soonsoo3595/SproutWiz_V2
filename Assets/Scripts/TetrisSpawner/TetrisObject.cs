@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -69,10 +70,26 @@ public class TetrisObject : MonoBehaviour
 
     public void SetAllUnitState(int growPoint, Element element)
     {
-        foreach (TetrisUnit unit in units)
+        for(int num = 0; num < GetUnitCount(); num++)
         {
-            unit.SetUnitState(growPoint, element);
+            SetUnitState(num, growPoint, element);
         }
+    }
+
+    public void SetUnitState(int unitNumber ,int growPoint, Element element)
+    {
+        if (unitNumber < 0 && unitNumber > GetUnitCount())
+        {
+            Debug.Log("잘못된 유닛 번호");
+            return;
+        }
+
+        units[unitNumber].SetUnitState(growPoint, element);
+    }
+
+    public int GetUnitCount()
+    {
+        return units.Length;
     }
 
     public List<TetrisUnit> GetUnitList()
