@@ -6,13 +6,17 @@ public class GameSettingEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-       //base.OnInspectorGUI();
+        //base.OnInspectorGUI();
 
         GameSetting setting = (GameSetting)target;
 
+        EditorGUILayout.LabelField("맵 사이즈", EditorStyles.boldLabel);
         setting.GridMapWidth = EditorGUILayout.IntSlider("맵 가로 사이즈", setting.GridMapWidth, 1, 10);
         setting.GridMapHeight = EditorGUILayout.IntSlider("맵 세로 사이즈", setting.GridMapHeight, 1, 10);
 
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("테트리스 스폰 속성", EditorStyles.boldLabel);
+        setting.mixBlockEnable = EditorGUILayout.Toggle("속성 혼합 활성화", setting.mixBlockEnable);
         setting.fireRatio = EditorGUILayout.Slider("불속성 비율", setting.fireRatio, 0f, 1f);
         setting.waterRatio = EditorGUILayout.Slider("물속성 비율", setting.waterRatio, 0f, 1f);
         setting.grassRatio = EditorGUILayout.Slider("풀속성 비율", setting.grassRatio, 0f, 1f);

@@ -40,14 +40,39 @@ public class PreViewSystem
 
         return newElement;
     }
+
+    public Element GetRandomElement(TetrisSpawnSetting setting)
+    {
+        float random = UnityEngine.Random.value;
+        Element newElement;
+
+        if (random <= setting.fireRatio)
+        {
+            newElement = new Element(ElementType.Fire);
+
+            return newElement;
+        }
+        else if(random <= setting.fireRatio + setting.waterRatio)
+        {
+            newElement = new Element(ElementType.Water);
+
+            return newElement;
+        }
+        else
+        {
+            newElement = new Element(ElementType.Grass);
+
+            return newElement;
+        }
+    }
 }
 
 public struct TetrisSpawnSetting
 {
-    int growPoint;
-    float fireRatio;
-    float waterRatio;
-    float grassRatio;
+    public int growPoint;
+    public float fireRatio;
+    public float waterRatio;
+    public float grassRatio;
 
     public TetrisSpawnSetting(int growPoint, float fire, float water, float grass)
     {

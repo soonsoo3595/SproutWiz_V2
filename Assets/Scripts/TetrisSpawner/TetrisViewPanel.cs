@@ -68,12 +68,19 @@ public class TetrisViewPanel : MonoBehaviour
     private void StateSetting(TetrisObject Tetris)
     {
         GameSetting setting = GridManager.Instance.GetSetting();
-
         TetrisSpawnSetting Setting = new TetrisSpawnSetting(1, setting.fireRatio, setting.waterRatio, setting.grassRatio);
 
-        // TODO: 속성 부여 
-
-        Tetris.SetAllUnitState(1, preViewSystem.GetRandomElement());
+        if(setting.mixBlockEnable)
+        {
+            for (int i = 0; i < Tetris.GetUnitCount(); i++)
+            {
+                Tetris.SetUnitState(i, 1, preViewSystem.GetRandomElement(Setting));
+            }
+        }
+        else
+        {
+            Tetris.SetAllUnitState(1, preViewSystem.GetRandomElement());
+        }
     }
 
     private void RelocateTetris()
