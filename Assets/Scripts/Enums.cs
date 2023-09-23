@@ -9,6 +9,6 @@ public class Enums : MonoBehaviour
 
 public enum ElementType { None, Fire, Water, Grass }
 
-public enum ElementRelation { Assignment, Disadvantage, Equal, Advantage }
+public enum ElementRelation { Disadvantage, Equal, Advantage }
 
 
