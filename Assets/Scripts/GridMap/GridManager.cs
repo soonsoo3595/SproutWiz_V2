@@ -12,6 +12,13 @@ public class GridManager : MonoBehaviour
 
     private GridSystem gridSystem;
 
+
+    public delegate void AddUnitOnGridTile(GridPosition position, TileUnit unit);
+    static public AddUnitOnGridTile addUnitOnGridTile;
+
+    public delegate void RemoveUnitOnGridTile(GridPosition position, TileUnit unit);
+    static public RemoveUnitOnGridTile removeUnitOnGridTile;
+
     void Awake()
     {
         if (Instance == null)
@@ -33,6 +40,9 @@ public class GridManager : MonoBehaviour
     public void AddUnitAtGridPosition(GridPosition gridPosition, TileUnit unit)
     {
         GridTile gridObject = gridSystem.GetGridTile(gridPosition);
+
+        addUnitOnGridTile(gridPosition, unit);
+
         gridObject.AddUnit(unit);
     }
 
@@ -45,6 +55,9 @@ public class GridManager : MonoBehaviour
     public void RemoveUnitAtGridPosition(GridPosition gridPosition, TileUnit unit)
     {
         GridTile gridObject = gridSystem.GetGridTile(gridPosition);
+
+        removeUnitOnGridTile(gridPosition, unit);
+
         gridObject.RemoveUnit(unit);
     }
 

@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GridSystemVisual : MonoBehaviour
 {
@@ -20,6 +22,8 @@ public class GridSystemVisual : MonoBehaviour
         }
 
         LevelData.changeTileData += UpdataVisual;
+        GridManager.addUnitOnGridTile += AddUnit;
+        GridManager.removeUnitOnGridTile += RemoveUnit;
     }
 
     // 타일값 갱신 이후 호출되야 함.
@@ -36,6 +40,28 @@ public class GridSystemVisual : MonoBehaviour
         Element targetElement = GridManager.Instance.GetTileData(position).element;
 
         visual.SetTileColor(ElementColor(targetElement));
+    }
+
+    private void AddUnit(GridPosition position, TileUnit unit)
+    {
+        if (!GridManager.Instance.CheckOnGrid(position)) return;
+
+        GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
+
+        
+        visual.SetTileColor(Color.black);
+    }
+
+    private void RemoveUnit(GridPosition position, TileUnit unit)
+    {
+        if (!GridManager.Instance.CheckOnGrid(position)) return;
+
+        GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
+
+        List<TileUnit> units = GridManager.Instance.GetUnitListAtGridPosition(position);
+        if (units.Count > 1) return;
+
+        ChangeSprite(position);
     }
 
     private Color ElementColor(Element element)

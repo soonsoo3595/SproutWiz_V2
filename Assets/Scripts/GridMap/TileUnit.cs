@@ -62,6 +62,7 @@ public class TileUnit : MonoBehaviour
     private void MoveTo(GridPosition newGridPosition)
     {
         GridManager.Instance.UnitMovedGridPosition(this, gridPosition, newGridPosition);
+
         gridPosition = newGridPosition;
     }
 

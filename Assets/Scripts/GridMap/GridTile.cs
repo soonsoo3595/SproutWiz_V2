@@ -7,6 +7,7 @@ public class GridTile
     private GridPosition gridPosition;
     private List<TileUnit> units;
 
+
     public GridTile(GridPosition gridPosition)
     {
         this.gridPosition = gridPosition;
