@@ -1,41 +1,53 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GoalContainer : MonoBehaviour
 {
-    public List<GameObject> goals;
     public GameObject goalPrefab;
-    public Stage stage;
-
+    public List<StageInfo> stageInfos;
+    public MainGame mainGame;
     public Sprite[] elementSprites;
 
     void Start()
     {
-        stage = new Stage();
-        InitContainer();
+        UpdateContainer();
     }
 
-    public void InitContainer()
+    public void UpdateContainer()
     {
-        int goalSize = stage.goalList.Count;
+        List<GoalData> list = GetGoal();
 
-        for(int i = 0; i < goalSize; i++)
+        list.Sort(SortGoal);
+        
+        for(int i = 0; i < list.Count; i++)
         {
-            GameObject gameObject = Instantiate(goalPrefab);
+            GameObject goalObject = Instantiate(goalPrefab, transform, false);
 
-            Goal goal = gameObject.GetComponent<Goal>();
-            goal.goalData.element = stage.goalList[i].element;
-            goal.goalData.count = stage.goalList[i].count;
+            Goal goal = goalObject.GetComponent<Goal>();
+            goal.goalData.SetData(list[i].element, list[i].count);
 
             goal.image.sprite = elementSprites[(int)(goal.goalData.element.GetElementType()) - 1];
             goal.text.text = $"x{goal.goalData.count}";
-
-            gameObject.transform.SetParent(transform, false);
         }
 
     }
 
+    public List<GoalData> GetGoal()
+    {
+        Stage stage = mainGame.stage;
+        int currentStage = stage.currentStage;
+        
+        stage.SetStageGoal(stageInfos[currentStage - 1]);
+
+        return stage.goalList;
+    }
+    
+    private int SortGoal(GoalData op1, GoalData op2)
+    {
+        return op1.element.GetElementType() < op2.element.GetElementType() ? -1 : 1;
+    }
     
     
 }

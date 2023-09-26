@@ -6,44 +6,32 @@ public class Stage
 {
     public List<GoalData> goalList;
     public List<Element> elementList;
-
+    
+    public int currentStage;
+    
     public Stage()
     {
         goalList = new List<GoalData>();
         elementList = new List<Element>();
 
-        InitElemetList();
-        SetStageGoal(1);
+        currentStage = 1;
+        
+        InitElementList();
     }
-    public void SetStageGoal(int num)
+
+    public void SetStageGoal(StageInfo stageInfo)
     {
-        if(num == 1)
+        for (int i = 0; i < 3; i++)
         {
-            Stage1();
-        }
-        else if(num == 2)
-        {
-            Stage2();
-        }
-        else if (num == 3)
-        {
-            Stage3();
-        }
-        else if( num == 4)
-        {
-            Stage4();
-        }
-        else if(num ==5)
-        {
-            Stage5();
-        }
-        else if(num >= 6)
-        {
-            Stage6(num);
+            if(stageInfo.targets[i] == 0)
+                continue;
+
+            GoalData goal = new GoalData(elementList[i], stageInfo.targets[i]);
+            goalList.Add(goal);
         }
     }
 
-    public void InitElemetList()
+    public void InitElementList()
     {
         List<int> numList = new List<int>(3) { 1, 2, 3 };
 
@@ -58,37 +46,4 @@ public class Stage
         }
     }
 
-    public void Stage1()
-    {
-        for(int i = 0; i < 2; i++)
-        {
-            GoalData goal = new GoalData(elementList[i], 2);
-            goalList.Add(goal);
-        }
-    }
-
-    public void Stage2()
-    {
-
-    }
-
-    public void Stage3()
-    {
-
-    }
-
-    public void Stage4()
-    {
-
-    }
-
-    public void Stage5()
-    {
-
-    }
-
-    public void Stage6(int num)
-    {
-
-    }
 }

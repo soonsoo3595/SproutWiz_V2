@@ -19,6 +19,12 @@ public class GoalData
         this.element = element;
         this.count = count;
     }
+
+    public void SetData(Element element, int count) 
+    {
+        this.element = element;
+        this.count = count;
+    }
 }
 public class Goal : MonoBehaviour
 {

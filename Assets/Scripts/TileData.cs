@@ -24,10 +24,12 @@ public class TileData
         return element.ToString() + '\n' + growPoint.ToString() + '\n';
     }
 
+    public int GetGrowPoint() => growPoint;
+    public void SetGrowPoint(int point) => growPoint = point; 
     public void InitTile()
     {
         growPoint = 0;
-        element.InitElement();
+        element.Init();
     }
 
     public void SetData(TetrisUnit unit)
@@ -39,18 +41,13 @@ public class TileData
         }
         else
         {
-            switch (element.GetElementRelation(unit.GetElement()))
+            growPoint = element.GetElementRelation(unit.GetElement()) switch
             {
-                case ElementRelation.Advantage:
-                    growPoint = Mathf.Clamp(growPoint + unit.GetGrowPoint() * 2, 0, maxGrowPoint);
-                    break;
-                case ElementRelation.Equal:
-                    growPoint = Mathf.Clamp(growPoint + unit.GetGrowPoint(), 0, maxGrowPoint);
-                    break;
-                case ElementRelation.Disadvantage:
-                    growPoint = 0;
-                    break;
-            }
+                ElementRelation.Advantage => Mathf.Clamp(growPoint + unit.GetGrowPoint() * 2, 0, maxGrowPoint),
+                ElementRelation.Equal => Mathf.Clamp(growPoint + unit.GetGrowPoint(), 0, maxGrowPoint),
+                ElementRelation.Disadvantage => 0,
+                _ => growPoint
+            };
         }
 
         UpdateTile();

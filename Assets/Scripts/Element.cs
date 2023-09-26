@@ -46,48 +46,30 @@ public class Element
 
     public static bool operator >(Element tile, Element unit)
     {
-        if (tile.elementType == ElementType.Fire)
+        return tile.elementType switch
         {
-            if (unit.elementType == ElementType.Grass)  return true;
-            else return false;
-        }
-        else if(tile.elementType == ElementType.Water)
-        {
-            if (unit.elementType == ElementType.Fire)   return true;
-            else return false;
-        }
-        else if (tile.elementType == ElementType.Grass)
-        {
-            if (unit.elementType == ElementType.Water)  return true;
-            else return false;
-        }
-        else
-        {
-            return false;
-        }
+            ElementType.Fire when unit.elementType == ElementType.Grass => true,
+            ElementType.Fire => false,
+            ElementType.Water when unit.elementType == ElementType.Fire => true,
+            ElementType.Water => false,
+            ElementType.Grass when unit.elementType == ElementType.Water => true,
+            ElementType.Grass => false,
+            _ => false
+        };
     }
 
     public static bool operator <(Element tile, Element unit)
     {
-        if (tile.elementType == ElementType.Fire)
+        return tile.elementType switch
         {
-            if (unit.elementType == ElementType.Water)  return true;
-            else return false;
-        }
-        else if (tile.elementType == ElementType.Water)
-        {
-            if (unit.elementType == ElementType.Grass)  return true;
-            else return false;
-        }
-        else if (tile.elementType == ElementType.Grass)
-        {
-            if (unit.elementType == ElementType.Fire)   return true;
-            else return false;
-        }
-        else
-        {
-            return false;
-        }
+            ElementType.Fire when unit.elementType == ElementType.Water => true,
+            ElementType.Fire => false,
+            ElementType.Water when unit.elementType == ElementType.Grass => true,
+            ElementType.Water => false,
+            ElementType.Grass when unit.elementType == ElementType.Fire => true,
+            ElementType.Grass => false,
+            _ => false
+        };
     }
 
     public ElementRelation GetElementRelation(Element element)
@@ -113,11 +95,7 @@ public class Element
 
     public void SetElementType(ElementType elementType) { this.elementType = elementType; }
 
-    public void InitElement() { elementType = ElementType.None; }
-    
-    public bool IsNone()
-    {
-        if (elementType == ElementType.None) return true;
-        else return false;
-    }
+    public void Init() { elementType = ElementType.None; }
+
+    public bool IsNone() => elementType == ElementType.None;
 }
