@@ -3,22 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Order
-{
-    public TileData tile;
-    public TetrisUnit unit;
-
-    public Order(TileData tile, TetrisUnit unit)
-    {
-        this.tile = tile;
-        this.unit = unit;
-    }
-}
 public class TileFactory : MonoBehaviour
 {
     public static TileFactory Instance { get; private set; }
-    public Queue<Order> orderQueue = new Queue<Order>();
-
+    
     private void Awake()
     {
         if (Instance == null)
@@ -30,67 +18,53 @@ public class TileFactory : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
     }
 
-    private void Start()
-    {
-    }
-
-    public void EnqueueOrder(TileData tile, TetrisUnit unit)
+    public void MakeOrder(TileData tile, TetrisUnit unit)
     {
         Order order = new Order(tile, unit);
-        orderQueue.Enqueue(order);
+        ProcessOrder(order);
     }
-    
-    public void SetData(Order order)
+
+    private void ProcessOrder(Order order)
     {
-        Element element = order.tile.element;
-        TetrisUnit unit = order.unit;
-        int growPoint = order.tile.growPoint;
-        int maxGrowPoint = order.tile.maxGrowPoint;
-        
-        if (element.IsNone())
+        if (order.GetTile().GetElement().GetElementType() == ElementType.None)
         {
-            element.SetElementType(unit.GetElement().GetElementType());
-            growPoint++;
+            Assign(order);
         }
         else
         {
-            switch (element.GetElementRelation(unit.GetElement()))
-            {
-                case ElementRelation.Advantage:
-                    growPoint = Mathf.Clamp(growPoint + unit.GetGrowPoint() * 2, 0, maxGrowPoint);
-                    break;
-                case ElementRelation.Equal:
-                    growPoint = Mathf.Clamp(growPoint + unit.GetGrowPoint(), 0, maxGrowPoint);
-                    break;
-                case ElementRelation.Disadvantage:
-                    growPoint = 0;
-                    break;
-            }
+            UpdateTile(order);
         }
-
-        order.tile.growPoint = growPoint;
-        UpdateTile(order);
     }
-    
+
+    public void Assign(Order order)
+    {
+        Element element = order.GetTile().GetElement();
+        TetrisUnit unit = order.GetUnit();
+        
+        element.SetElementType(unit.GetElement().GetElementType());
+        order.GetTile().SetGrowPoint(1);
+    }
+
     public void UpdateTile(Order order)
     {
-        int growPoint = order.tile.growPoint;
-        if(growPoint == 0)
+        Element element = order.GetTile().GetElement();
+        TetrisUnit unit = order.GetUnit();
+
+        switch (element.GetElementRelation(unit.GetElement()))
         {
-            InitTile(order);
+            case ElementRelation.Advantage:
+                order.GetTile().SetGrowPoint(unit.GetGrowPoint() * 2);
+                break;
+            case ElementRelation.Equal:
+                order.GetTile().SetGrowPoint(unit.GetGrowPoint());
+                break;
+            case ElementRelation.Disadvantage:
+                order.GetTile().InitTile();
+                break;
         }
-        else if(growPoint == order.tile.maxGrowPoint)
-        {
-            InitTile(order);
-        }
-        
     }
     
-    public void InitTile(Order order)
-    {
-        order.tile.growPoint = 0;
-        order.tile.element.Init();
-    }
 }

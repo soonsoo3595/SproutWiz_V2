@@ -41,8 +41,8 @@ public class LevelData
         foreach (TetrisUnit unit in units)
         {
             TileData tile = GetData(unit.GetGridPosition());
-            // TileFactory.Instance.EnqueueOrder(tile, unit);
-            tile.SetData(unit);
+            TileFactory.Instance.MakeOrder(tile, unit);
+            // tile.SetData(unit);
 
             // 값 갱신이 없으면 실행하지 말아야함.
             changeTileData(unit.GetGridPosition());
