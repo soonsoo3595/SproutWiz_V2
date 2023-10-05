@@ -58,7 +58,7 @@ public class TetrisViewPanel : MonoBehaviour
     private Transform SpawnTetris()
     {
         Transform newTetris = Instantiate(preViewSystem.GetRandomTetris());
-        newTetris.GetComponent<TetrisObject>().SetAllUnitState(1, preViewSystem.GetRandomElement());
+        newTetris.GetComponent<TetrisObject>().SetAllUnitState(preViewSystem.GetRandomElement());
 
         return newTetris;
     }

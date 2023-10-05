@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class TetrisUnit : TileUnit
 {
-    int growPoint;
     Element element;
 
     private void Start()
@@ -14,17 +13,11 @@ public class TetrisUnit : TileUnit
         SetBlockColor();
     }
 
-    public void SetUnitState(int growPoint, Element element)
+    public void SetUnitState(Element element)
     {
-        this.growPoint = growPoint;
         this.element = element;
     }
-
-    public int GetGrowPoint()
-    {
-        return growPoint;
-    }
-
+    
     public Element GetElement()
     {
         return element;

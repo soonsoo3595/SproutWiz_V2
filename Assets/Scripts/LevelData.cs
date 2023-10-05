@@ -8,10 +8,10 @@ public class LevelData
     private TileData[,] tileDataArray;
 
     public delegate void ApplyTetris(TetrisObject tetrisObject);
-    static public ApplyTetris applyTetris;
+    public static ApplyTetris applyTetris;
 
     public delegate void ChangeTileData(GridPosition gridPosition);
-    static public ChangeTileData changeTileData;
+    public static ChangeTileData changeTileData;
 
     public LevelData(int width, int height) 
     {
@@ -42,7 +42,6 @@ public class LevelData
         {
             TileData tile = GetData(unit.GetGridPosition());
             TileFactory.Instance.MakeOrder(tile, unit);
-            // tile.SetData(unit);
 
             // 값 갱신이 없으면 실행하지 말아야함.
             changeTileData(unit.GetGridPosition());

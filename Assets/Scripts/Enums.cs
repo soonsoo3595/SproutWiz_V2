@@ -7,8 +7,10 @@ public class Enums : MonoBehaviour
     
 }
 
+public enum GrowPoint { Seed, Growth, Harvest}
+
 public enum ElementType { None, Fire, Water, Grass }
 
-public enum ElementRelation { Disadvantage, Equal, Advantage }
+public enum ElementRelation { Disadvantage, Equal, Irrelevant }
 
 

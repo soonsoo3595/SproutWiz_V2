@@ -82,20 +82,15 @@ public class Element
         {
             return ElementRelation.Disadvantage;
         }
-        else if (this > element)
-        {
-            return ElementRelation.Advantage;
-        }
         else
-            return ElementRelation.Equal;
+        {
+            return ElementRelation.Irrelevant;
+        }
     }
-
 
     public ElementType GetElementType() => elementType;
 
     public void SetElementType(ElementType elementType) { this.elementType = elementType; }
 
     public void Init() { elementType = ElementType.None; }
-
-    public bool IsNone() => elementType == ElementType.None;
 }

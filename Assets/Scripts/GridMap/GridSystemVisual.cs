@@ -19,11 +19,11 @@ public class GridSystemVisual : MonoBehaviour
             }
         }
 
-        LevelData.changeTileData += UpdataVisual;
+        LevelData.changeTileData += UpdateVisual;
     }
 
     // 타일값 갱신 이후 호출되야 함.
-    private void UpdataVisual(GridPosition position)
+    private void UpdateVisual(GridPosition position)
     {
         ChangeSprite(position);
     }
@@ -33,7 +33,7 @@ public class GridSystemVisual : MonoBehaviour
     {
         GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
 
-        Element targetElement = GridManager.Instance.GetTileData(position).element;
+        Element targetElement = GridManager.Instance.GetTileData(position).GetElement();
 
         visual.SetTileColor(ElementColor(targetElement));
     }

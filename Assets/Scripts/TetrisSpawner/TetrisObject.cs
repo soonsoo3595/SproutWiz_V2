@@ -36,7 +36,7 @@ public class TetrisObject : MonoBehaviour
     {
         if (CheckAllUnitOnGrid())
         {
-            Debug.Log("抛飘府胶 硅摹 己傍");
+            Debug.Log("韰岉姼毽姢 氚办箻 靹标车");
 
             LevelData.applyTetris(this);
             Destroy(gameObject);
@@ -67,11 +67,11 @@ public class TetrisObject : MonoBehaviour
         return true;
     }
 
-    public void SetAllUnitState(int growPoint, Element element)
+    public void SetAllUnitState(Element element)
     {
         foreach (TetrisUnit unit in units)
         {
-            unit.SetUnitState(growPoint, element);
+            unit.SetUnitState(element);
         }
     }
 

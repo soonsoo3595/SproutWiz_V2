@@ -6,6 +6,10 @@ using UnityEngine;
 public class TileFactory : MonoBehaviour
 {
     public static TileFactory Instance { get; private set; }
+
+    public delegate void Harvest(TileData tile);
+
+    public static Harvest harvest;
     
     private void Awake()
     {
@@ -18,53 +22,80 @@ public class TileFactory : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
     }
 
     public void MakeOrder(TileData tile, TetrisUnit unit)
     {
         Order order = new Order(tile, unit);
-        ProcessOrder(order);
+        ClassifyOrder(order);
     }
 
-    private void ProcessOrder(Order order)
+    private void ClassifyOrder(Order order)
     {
-        if (order.GetTile().GetElement().GetElementType() == ElementType.None)
+        if (order.GetTile().growPoint == GrowPoint.Seed)
         {
-            Assign(order);
+            Grant(order);
         }
-        else
+        else if (order.GetTile().growPoint == GrowPoint.Growth)
         {
-            UpdateTile(order);
+            Process(order);
         }
     }
 
-    public void Assign(Order order)
+    private void Grant(Order order)
     {
         Element element = order.GetTile().GetElement();
         TetrisUnit unit = order.GetUnit();
-        
+
         element.SetElementType(unit.GetElement().GetElementType());
-        order.GetTile().SetGrowPoint(1);
+        order.GetTile().growPoint = GrowPoint.Growth;
     }
 
-    public void UpdateTile(Order order)
+    private void Process(Order order)
     {
         Element element = order.GetTile().GetElement();
         TetrisUnit unit = order.GetUnit();
 
         switch (element.GetElementRelation(unit.GetElement()))
         {
-            case ElementRelation.Advantage:
-                order.GetTile().SetGrowPoint(unit.GetGrowPoint() * 2);
+            case ElementRelation.Irrelevant:
+                Irrelevant(order);
                 break;
             case ElementRelation.Equal:
-                order.GetTile().SetGrowPoint(unit.GetGrowPoint());
+                Equal(order);
                 break;
             case ElementRelation.Disadvantage:
-                order.GetTile().InitTile();
+                DisAdvantage(order);
                 break;
         }
+        
+        FinishOrder(order);
     }
     
+    // 확률 추가할 경우 이 밑 함수들 만지면 될 듯
+    private void Irrelevant(Order order)
+    {
+        order.GetTile().growPoint = GrowPoint.Harvest;
+    }
+
+    private void Equal(Order order)
+    {
+        order.GetTile().growPoint = GrowPoint.Harvest;
+    }
+
+    private void DisAdvantage(Order order)
+    {
+        order.GetTile().InitTile();
+    }
+
+    private void FinishOrder(Order order)
+    {
+        if (order.GetTile().growPoint == GrowPoint.Harvest)
+        {
+            harvest(order.GetTile());
+            order.GetTile().InitTile();
+        }
+        
+    }
+
 }
