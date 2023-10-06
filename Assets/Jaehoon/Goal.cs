@@ -26,11 +26,11 @@ public class GoalData
         this.count = count;
     }
 }
+
 public class Goal : MonoBehaviour
 {
     public Image image;
     public Text text;
 
     [HideInInspector] public GoalData goalData = new GoalData();
-
 }

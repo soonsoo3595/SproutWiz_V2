@@ -1,49 +1,87 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class Stage
+public class Stage : MonoBehaviour
 {
-    public List<GoalData> goalList;
-    public List<Element> elementList;
-    
+    [HideInInspector] public List<GoalData> goalList;
+
+    private int elementCount;
     public int currentStage;
-    
-    public Stage()
+
+    private void Start()
     {
         goalList = new List<GoalData>();
-        elementList = new List<Element>();
 
         currentStage = 1;
-        
-        InitElementList();
+        elementCount = 3;
     }
 
-    public void SetStageGoal(StageInfo stageInfo)
+    public void SetStage()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            if(stageInfo.targets[i] == 0)
-                continue;
+        int rand = currentStage == 1 ? 0 : Random.Range(0, 3);
+        
+        SetGoal((GoalType)rand);
+    }
 
-            GoalData goal = new GoalData(elementList[i], stageInfo.targets[i]);
-            goalList.Add(goal);
+    public void NextStage()
+    {
+        goalList.Clear();
+        currentStage++;
+    }
+    
+    public void SetGoal(GoalType goalType)
+    {
+        switch(goalType)
+        {
+          case GoalType.A:
+              TypeA();
+              break;
+          case GoalType.B:
+              TypeB();
+              break;
+          case GoalType.C:
+              TypeC();
+              break;
         }
     }
 
-    public void InitElementList()
+    private void TypeA()
+    {
+        int rand = Random.Range(0, elementCount);
+
+        Element element = new Element((ElementType)rand + 1);
+        GoalData goalData = new GoalData(element, 2 * currentStage);
+        goalList.Add(goalData);
+    }
+
+    private void TypeB()
     {
         List<int> numList = new List<int>(3) { 1, 2, 3 };
 
-        while(numList.Count > 0)
+        while(numList.Count > elementCount - 2)
         {
             int rand = Random.Range(0, numList.Count);
 
             Element element = new Element((ElementType)numList[rand]);
-            elementList.Add(element);
+            GoalData goalData = new GoalData(element, currentStage);
+            goalList.Add(goalData);
 
             numList.RemoveAt(rand);
         }
     }
 
+    private void TypeC()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            Element element = new Element((ElementType)i + 1);
+            GoalData goalData = new GoalData(element, currentStage);
+            goalList.Add(goalData);
+        }
+    }
+    
 }

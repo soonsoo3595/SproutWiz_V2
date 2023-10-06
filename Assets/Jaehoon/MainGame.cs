@@ -12,14 +12,9 @@ public class MainGame : MonoBehaviour
 
     [Header("Stage")]
     public Stage stage;
-    public int initStage = 1;
-    public int currentStage = 1;
-    
     void Awake()
     {
         pauseBtn.onClick.AddListener(ClickPause);
-        
-        stage = new Stage();
     }
 
     void Start()
