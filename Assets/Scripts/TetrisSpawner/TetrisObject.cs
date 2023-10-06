@@ -25,7 +25,7 @@ public class TetrisObject : MonoBehaviour
 
         if (isAttackedMouse)
         {
-            transform.localScale = new Vector3(255f, 255f, 255f);
+            transform.localScale = new Vector3(257f, 257f, 257f);
         }
         else
         {

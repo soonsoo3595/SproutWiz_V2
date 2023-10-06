@@ -45,7 +45,7 @@ public class TileUnit : MonoBehaviour
         }
     }
 
-    private void MoveGridPosition(GridPosition newGridPosition)
+    protected virtual void MoveGridPosition(GridPosition newGridPosition)
     {
         bool isMoveInGrid = GridManager.Instance.CheckOnGrid(newGridPosition);
 
@@ -59,14 +59,14 @@ public class TileUnit : MonoBehaviour
         }
     }
 
-    private void MoveTo(GridPosition newGridPosition)
+    protected void MoveTo(GridPosition newGridPosition)
     {
         GridManager.Instance.UnitMovedGridPosition(this, gridPosition, newGridPosition);
 
         gridPosition = newGridPosition;
     }
 
-    private void ExitGrid()
+    protected void ExitGrid()
     {
         GridManager.Instance.RemoveUnitAtGridPosition(gridPosition, this);
     }

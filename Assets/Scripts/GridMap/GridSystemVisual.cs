@@ -48,8 +48,39 @@ public class GridSystemVisual : MonoBehaviour
 
         GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
 
-        
-        visual.SetTileColor(Color.black);
+        visual.SetAlpha(ElementRelationColor(position, unit));
+    }
+
+    private float ElementRelationColor(GridPosition position, TileUnit unit)
+    {
+        float result = 0f;
+
+        if(GridManager.Instance.GetTileData(position).element.GetElementType() == ElementType.None)
+        {
+            GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
+
+            visual.SetTileColor(Color.black);
+            return 0.5f;
+        }
+
+
+        TetrisUnit tetrisUnit = unit as TetrisUnit;
+        ElementRelation relation = GridManager.Instance.GetTileData(position).element.GetElementRelation(tetrisUnit.GetElement());
+
+        switch (relation)
+        {
+            case ElementRelation.Equal:
+                result = 0.5f;
+                break;
+            case ElementRelation.Disadvantage:
+                result = 0.05f;
+                break;
+            case ElementRelation.Advantage:
+                result = 1f;
+                break;
+        }
+
+        return result;
     }
 
     private void RemoveUnit(GridPosition position, TileUnit unit)
@@ -84,7 +115,7 @@ public class GridSystemVisual : MonoBehaviour
                 break;
         }
 
-        result.a = 0.7f;
+        result.a = 0.5f;
 
         return result;
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class TetrisUnit : TileUnit
 {
@@ -28,6 +29,31 @@ public class TetrisUnit : TileUnit
     public Element GetElement()
     {
         return element;
+    }
+
+    protected override void MoveGridPosition(GridPosition newGridPosition)
+    {
+        //base.MoveGridPosition(newGridPosition);
+
+        bool isMoveInGrid = GridManager.Instance.CheckOnGrid(newGridPosition);
+        bool isEmptyTile = false;
+        
+        if (GridManager.Instance.GetUnitListAtGridPosition(newGridPosition).Count < 1)
+            isEmptyTile = true;
+        
+
+        if (isMoveInGrid && isEmptyTile)
+        {
+            MoveTo(newGridPosition);
+        }
+        else if(isMoveInGrid && !isEmptyTile)
+        {
+
+        }
+        else
+        {
+            ExitGrid();
+        }
     }
 
 

@@ -15,6 +15,6 @@ MonoBehaviour:
   GridMapWidth: 5
   GridMapHeight: 5
   mixBlockEnable: 0
-  fireRatio: 1
-  waterRatio: 0
+  fireRatio: 0.49697763
+  waterRatio: 0.5030224
   grassRatio: 0
