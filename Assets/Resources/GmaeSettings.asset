@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridMapWidth: 5
   GridMapHeight: 5
-  mixBlockEnable: 0
-  fireRatio: 0.49697763
-  waterRatio: 0.5030224
-  grassRatio: 0
+  mixBlockEnable: 1
+  singleElementRatio: 0.24570277
+  doubleElementRatio: 0.7542972

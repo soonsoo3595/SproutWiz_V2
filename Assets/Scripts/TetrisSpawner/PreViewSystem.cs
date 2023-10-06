@@ -1,4 +1,5 @@
-using System;
+//using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PreViewSystem
@@ -8,16 +9,21 @@ public class PreViewSystem
 
     Transform[] TetrisPrefabs;
 
+    private int[] countSpanwNum;
+
     public PreViewSystem(int slotNum)
     {
         this.slotNum = slotNum;
+        countSpanwNum = new int[4];
 
         LoadPrefabs();
     }
 
     private void LoadPrefabs()
     {
-        TetrisPrefabs = Resources.LoadAll<Transform>("Prefabs/Tetris/");
+        string path = "Prefabs/Tetris/";
+
+        TetrisPrefabs = Resources.LoadAll<Transform>(path);
         tetrisVariantCount = TetrisPrefabs.Length;
 
         if (tetrisVariantCount <= 0)
@@ -34,51 +40,41 @@ public class PreViewSystem
 
     public Element GetRandomElement()
     {
-        ElementType randomElement = (ElementType)UnityEngine.Random.Range((int)ElementType.Fire, (int)ElementType.Grass + 1);
+        ElementType randomElement = (ElementType)Random.Range((int)ElementType.Fire, (int)ElementType.Grass + 1);
 
-        Element newElement = new Element(randomElement);
+        // 랜덤값 확인용.
+        countSpanwNum[(int)randomElement]++;
 
-        return newElement;
+        return new Element(randomElement);
     }
 
-    public Element GetRandomElement(TetrisSpawnSetting setting)
+    public Element GetSecondElement(Element baseElement)
     {
-        float random = UnityEngine.Random.value;
-        Element newElement;
+        List<int> list = new List<int>() { 1, 2, 3 };
+        list.Remove((int)baseElement.GetElementType());
 
-        if (random <= setting.fireRatio)
-        {
-            newElement = new Element(ElementType.Fire);
+        Element secondElement = new Element((ElementType)list[Random.Range(0, 2)]);
 
-            return newElement;
-        }
-        else if(random <= setting.fireRatio + setting.waterRatio)
-        {
-            newElement = new Element(ElementType.Water);
-
-            return newElement;
-        }
-        else
-        {
-            newElement = new Element(ElementType.Grass);
-
-            return newElement;
-        }
+        return secondElement;
     }
+
+
+    public void PrintStatistics()
+    {
+        Debug.Log($"속성 생성 개수\n" +
+            $"Fire : {countSpanwNum[1]}, Water : {countSpanwNum[2]}, Grass : {countSpanwNum[3]}");
+    }
+
 }
 
 public struct TetrisSpawnSetting
 {
-    public int growPoint;
-    public float fireRatio;
-    public float waterRatio;
-    public float grassRatio;
+    public float singleElementRatio;
+    public float doubleElementRatio;
 
-    public TetrisSpawnSetting(int growPoint, float fire, float water, float grass)
+    public TetrisSpawnSetting(float singleRadio, float doubleRatio)
     {
-        this.growPoint = growPoint;
-        this.fireRatio = fire;
-        this.waterRatio = water;
-        this.grassRatio = grass;
+        singleElementRatio = singleRadio;
+        doubleElementRatio = doubleRatio;
     }
 }
