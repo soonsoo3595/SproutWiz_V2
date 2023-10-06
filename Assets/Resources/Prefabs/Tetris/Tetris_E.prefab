@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 837848603661689503}
   - component: {fileID: 533760235727821228}
   m_Layer: 0
-  m_Name: Tetris
+  m_Name: Tetris_E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,11 +63,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6522472827220398748, guid: d5b0a2dd2b94e7c4493bdef1fdc21379, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6522472827220398748, guid: d5b0a2dd2b94e7c4493bdef1fdc21379, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6522472827220398748, guid: d5b0a2dd2b94e7c4493bdef1fdc21379, type: 3}
       propertyPath: m_LocalPosition.z
