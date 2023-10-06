@@ -12,9 +12,8 @@ public class GameSetting : ScriptableObject
 
     public bool mixBlockEnable = false;
 
-    public float fireRatio = 1f;
-    public float waterRatio = 0f;
-    public float grassRatio = 0f;
+    public float singleElementRatio = 1f;
+    public float doubleElementRatio = 0f;
 }
 
 

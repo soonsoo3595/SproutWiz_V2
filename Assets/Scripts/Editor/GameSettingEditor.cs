@@ -17,22 +17,20 @@ public class GameSettingEditor : Editor
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("테트리스 스폰 속성", EditorStyles.boldLabel);
         setting.mixBlockEnable = EditorGUILayout.Toggle("속성 혼합 활성화", setting.mixBlockEnable);
-        setting.fireRatio = EditorGUILayout.Slider("불속성 비율", setting.fireRatio, 0f, 1f);
-        setting.waterRatio = EditorGUILayout.Slider("물속성 비율", setting.waterRatio, 0f, 1f);
-        setting.grassRatio = EditorGUILayout.Slider("풀속성 비율", setting.grassRatio, 0f, 1f);
+        setting.singleElementRatio = EditorGUILayout.Slider("단일 속성 비율", setting.singleElementRatio, 0f, 1f);
+        setting.doubleElementRatio = EditorGUILayout.Slider("혼합 속성 비율", setting.doubleElementRatio, 0f, 1f);
+
 
         float totalProbability = 1f;
         
-
         if (EditorGUI.EndChangeCheck())
         {
-            float ratio = totalProbability / (setting.fireRatio + setting.waterRatio + setting.grassRatio);
+            float ratio = totalProbability / (setting.singleElementRatio + setting.doubleElementRatio);
 
             if(ratio > 0f)
             {
-                setting.fireRatio *= ratio;
-                setting.waterRatio *= ratio;
-                setting.grassRatio *= ratio;
+                setting.singleElementRatio *= ratio;
+                setting.doubleElementRatio *= ratio;
             }
 
             serializedObject.ApplyModifiedProperties();
