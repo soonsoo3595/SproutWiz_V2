@@ -7,8 +7,9 @@ public class Timer : MonoBehaviour
 {
     private float remainTime = 0f;
 
+    public MainGame mainGame;
     public Slider slider;
-    public float totalTime = 10f;
+    public float totalTime = 80f;
     public bool isPaused = false;
 
     private IEnumerator RunTimer()
@@ -28,6 +29,9 @@ public class Timer : MonoBehaviour
                 yield return null;
             }
         }
+        
+        // 타이머 종료 시 아래의 코드 실행
+        mainGame.EndGame();
     }
 
     private void UpdateTimerUI()

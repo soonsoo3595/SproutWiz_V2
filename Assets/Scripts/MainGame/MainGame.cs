@@ -9,12 +9,21 @@ public class MainGame : MonoBehaviour
     public Button pauseBtn;
 
     public GameObject blind;
-
+    
     [Header("Stage")]
     public Stage stage;
+
+    public GoalContainer goalContainer;
+    
+    [Header("GameOver")] 
+    public GameObject gameOverPopup;
+
+    public Button retryBtn;
+    
     void Awake()
     {
         pauseBtn.onClick.AddListener(ClickPause);
+        retryBtn.onClick.AddListener(Retry);
     }
 
     void Start()
@@ -26,6 +35,22 @@ public class MainGame : MonoBehaviour
     public void StartGame()
     {
         timer.StartTimer();
+    }
+
+    public void EndGame()
+    {
+        gameOverPopup.SetActive(true);
+    }
+
+    public void Retry()
+    {
+        gameOverPopup.SetActive(false);
+        
+        stage.InitStage();
+        goalContainer.UpdateContainer();
+        
+        timer.ResetTimer();
+        StartGame();
     }
 
     void ClickPause()

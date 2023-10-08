@@ -10,16 +10,27 @@ public class Stage : MonoBehaviour
     [HideInInspector] public List<GoalData> goalList;
 
     private int elementCount;
+    private Element prevElement;
+    
     public int currentStage;
 
     private void Start()
     {
         goalList = new List<GoalData>();
+        prevElement = new Element();
 
         currentStage = 1;
         elementCount = 3;
     }
 
+    public void InitStage()
+    {
+        goalList.Clear();
+        prevElement.Init();
+
+        currentStage = 1;
+    }
+    
     public void SetStage()
     {
         int rand = currentStage == 1 ? 0 : Random.Range(0, 3);
@@ -54,6 +65,12 @@ public class Stage : MonoBehaviour
         int rand = Random.Range(0, elementCount);
 
         Element element = new Element((ElementType)rand + 1);
+        
+        if (prevElement == element)
+        {
+            TypeA();            
+        }
+        
         GoalData goalData = new GoalData(element, 2 * currentStage);
         goalList.Add(goalData);
     }

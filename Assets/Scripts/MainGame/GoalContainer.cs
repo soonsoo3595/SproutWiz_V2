@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GoalContainer : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class GoalContainer : MonoBehaviour
     void Start()
     {
         TileFactory.harvest += AfterHarvest;
+        LevelData.checkAchieveGoal += IsAchieveGoal;
 
         UpdateContainer();
     }
@@ -71,27 +73,35 @@ public class GoalContainer : MonoBehaviour
             goalObjectList[i].goalData.count = Mathf.Clamp(goalObjectList[i].goalData.count - 1, 0, 99);
             UpdateText(goalObjectList[i]);
         }
-
-        if (IsAchieveGoal())
-        {
-            Debug.Log("Achieve");
-            mainGame.stage.NextStage();
-            UpdateContainer();
-        }
-        else
-        {
-            Debug.Log("Fail");
-        }
     }
 
-    private bool IsAchieveGoal()
+    public void IsAchieveGoal()
     {
-        foreach (var goal in goalObjectList)
+        bool flag = true;
+        
+        for (int i = 0; i < goalDataList.Count; i++)
         {
-            if (goal.goalData.count > 0)
-                return false;
+            if (goalObjectList[i].goalData.count > 0)
+            {
+                flag = false;
+                break;
+            }
         }
 
-        return true;
+        if (!flag) return;
+
+        PlayAnimation();
+        mainGame.stage.NextStage();
+        UpdateContainer();
+    }
+
+    private void PlayAnimation()
+    {
+        Sequence sequence = DOTween.Sequence()
+            .Append(transform.DOScale(Vector3.zero, 0.1f))
+            .Append(transform.DOScale(Vector3.one, 1f));
+
+        sequence.Play();
+
     }
 }

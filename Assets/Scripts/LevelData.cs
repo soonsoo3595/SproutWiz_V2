@@ -13,6 +13,10 @@ public class LevelData
     public delegate void ChangeTileData(GridPosition gridPosition);
     public static ChangeTileData changeTileData;
 
+    public delegate void CheckAchieveGoal();
+
+    public static CheckAchieveGoal checkAchieveGoal;
+    
     public LevelData(int width, int height) 
     {
         InitGridData(width, height);
@@ -46,6 +50,8 @@ public class LevelData
             // 값 갱신이 없으면 실행하지 말아야함.
             changeTileData(unit.GetGridPosition());
         }
+
+        checkAchieveGoal();
     }
 
     public TileData GetData(GridPosition gridPosition)
