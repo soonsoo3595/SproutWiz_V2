@@ -15,4 +15,5 @@ public enum ElementRelation { Disadvantage, Equal, Irrelevant }
 
 public enum GoalType {A, B, C}
 
+public enum ButtonType { Popup, Back }
 
