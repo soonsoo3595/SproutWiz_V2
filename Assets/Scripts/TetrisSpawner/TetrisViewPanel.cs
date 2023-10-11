@@ -80,13 +80,35 @@ public class TetrisViewPanel : MonoBehaviour
     }
 
 
-
     private Transform SpawnTetris()
     {
         Transform newTetris = Instantiate(preViewSystem.GetRandomTetris());
         StateSetting(newTetris.GetComponent<TetrisObject>());
+        Rotate(newTetris);
 
         return newTetris;
+    }
+
+    private void Rotate(Transform newTetris)
+    {
+        float rotation = Random.value;
+
+        if (rotation <= 0.25f)
+        {
+
+        }
+        else if (rotation <= 0.5f)
+        {
+            newTetris.Rotate(new Vector3(0f, 0f, 90f));
+        }
+        else if (rotation <= 0.75f)
+        {
+            newTetris.Rotate(new Vector3(0f, 0f, 180f));
+        }
+        else
+        {
+            newTetris.Rotate(new Vector3(0f, 0f, 270f));
+        }
     }
 
     private void StateSetting(TetrisObject Tetris)
