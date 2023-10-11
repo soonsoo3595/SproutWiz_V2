@@ -79,6 +79,8 @@ public class Stage : MonoBehaviour
 
     private void TypeB()
     {
+        prevElement.Init();
+        
         List<int> numList = new List<int>(3) { 1, 2, 3 };
 
         while(numList.Count > elementCount - 2)
@@ -95,6 +97,8 @@ public class Stage : MonoBehaviour
 
     private void TypeC()
     {
+        prevElement.Init();
+
         for (int i = 0; i < 3; i++)
         {
             Element element = new Element((ElementType)i + 1);
