@@ -116,7 +116,7 @@ public class TetrisViewPanel : MonoBehaviour
         Element baseElement = preViewSystem.GetRandomElement();
         GameSetting setting = GridManager.Instance.GetSetting();
 
-        Tetris.SetAllUnitState(1, baseElement);
+        Tetris.SetAllUnitState(baseElement);
 
 
         if (!setting.mixBlockEnable) return;
@@ -125,7 +125,7 @@ public class TetrisViewPanel : MonoBehaviour
             int unitNum = Random.Range(0, Tetris.GetUnitCount());
             Element secondElement = preViewSystem.GetSecondElement(baseElement);
 
-            Tetris.SetUnitState(unitNum, 1, secondElement);
+            Tetris.SetUnitState(unitNum, secondElement);
         }
     }
 

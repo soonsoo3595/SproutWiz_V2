@@ -14,7 +14,7 @@ public class Stage : MonoBehaviour
     
     public int currentStage;
 
-    private void Start()
+    private void Awake()
     {
         goalList = new List<GoalData>();
         prevElement = new Element();
@@ -70,7 +70,9 @@ public class Stage : MonoBehaviour
         {
             TypeA();            
         }
-        
+
+        prevElement.SetElementType(element.GetElementType());
+
         GoalData goalData = new GoalData(element, 2 * currentStage);
         goalList.Add(goalData);
     }

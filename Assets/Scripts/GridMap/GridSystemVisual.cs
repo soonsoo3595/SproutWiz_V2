@@ -21,7 +21,7 @@ public class GridSystemVisual : MonoBehaviour
             }
         }
 
-        LevelData.changeTileData += UpdataVisual;
+        LevelData.changeTileData += UpdateVisual;
         GridManager.addUnitOnGridTile += AddUnit;
         GridManager.removeUnitOnGridTile += RemoveUnit;
     }
@@ -55,7 +55,7 @@ public class GridSystemVisual : MonoBehaviour
     {
         float result = 0f;
 
-        if(GridManager.Instance.GetTileData(position).element.GetElementType() == ElementType.None)
+        if(GridManager.Instance.GetTileData(position).GetElement().GetElementType() == ElementType.None)
         {
             GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
 
@@ -65,7 +65,7 @@ public class GridSystemVisual : MonoBehaviour
 
 
         TetrisUnit tetrisUnit = unit as TetrisUnit;
-        ElementRelation relation = GridManager.Instance.GetTileData(position).element.GetElementRelation(tetrisUnit.GetElement());
+        ElementRelation relation = GridManager.Instance.GetTileData(position).GetElement().GetElementRelation(tetrisUnit.GetElement());
 
         switch (relation)
         {
@@ -75,8 +75,8 @@ public class GridSystemVisual : MonoBehaviour
             case ElementRelation.Disadvantage:
                 result = 0.05f;
                 break;
-            case ElementRelation.Advantage:
-                result = 1f;
+            case ElementRelation.Irrelevant:
+                result = 0.5f;
                 break;
         }
 

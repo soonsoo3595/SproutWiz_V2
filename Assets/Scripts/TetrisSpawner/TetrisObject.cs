@@ -37,7 +37,6 @@ public class TetrisObject : MonoBehaviour
     {
         if (CheckAllUnitOnGrid())
         {
-            Debug.Log("��Ʈ���� ��ġ ����");
 
             LevelData.applyTetris(this);
             Destroy(gameObject);
@@ -68,12 +67,28 @@ public class TetrisObject : MonoBehaviour
         return true;
     }
 
+    public void SetUnitState(int unitNumber, Element element)
+    {
+        if (unitNumber < 0 && unitNumber > GetUnitCount())
+        {
+            Debug.Log("잘못된 유닛 번호");
+            return;
+        }
+
+        units[unitNumber].SetUnitState(element);
+    }
+
     public void SetAllUnitState(Element element)
     {
         foreach (TetrisUnit unit in units)
         {
             unit.SetUnitState(element);
         }
+    }
+
+    public int GetUnitCount()
+    {
+        return units.Length;
     }
 
     public List<TetrisUnit> GetUnitList()
