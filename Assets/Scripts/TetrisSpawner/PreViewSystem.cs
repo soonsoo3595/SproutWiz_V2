@@ -1,4 +1,5 @@
-using System;
+//using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PreViewSystem
@@ -8,16 +9,21 @@ public class PreViewSystem
 
     Transform[] TetrisPrefabs;
 
+    private int[] countSpanwNum;
+
     public PreViewSystem(int slotNum)
     {
         this.slotNum = slotNum;
+        countSpanwNum = new int[4];
 
         LoadPrefabs();
     }
 
     private void LoadPrefabs()
     {
-        TetrisPrefabs = Resources.LoadAll<Transform>("Prefabs/Tetris/");
+        string path = "Prefabs/Tetris/";
+
+        TetrisPrefabs = Resources.LoadAll<Transform>(path);
         tetrisVariantCount = TetrisPrefabs.Length;
 
         if (tetrisVariantCount <= 0)
@@ -26,26 +32,49 @@ public class PreViewSystem
         }
     }
 
+
     public Transform GetRandomTetris()
     {
-       return TetrisPrefabs[UnityEngine.Random.Range(0, tetrisVariantCount)];
+        return TetrisPrefabs[UnityEngine.Random.Range(0, tetrisVariantCount)];
     }
 
     public Element GetRandomElement()
     {
-        Element newElement = new Element();
+        ElementType randomElement = (ElementType)Random.Range((int)ElementType.Fire, (int)ElementType.Grass + 1);
 
-        int randomElement = UnityEngine.Random.Range((int)ElementType.Fire, (int)ElementType.Grass + 1);
+        // 랜덤값 확인용.
+        countSpanwNum[(int)randomElement]++;
 
-        if (Enum.IsDefined(typeof(ElementType), randomElement))
-        {
-            newElement.SetElementType((ElementType)randomElement);
-        }
-        else
-        {
-            Debug.Log("속성 부여 에러");
-        }
+        return new Element(randomElement);
+    }
 
-        return newElement;
+    public Element GetSecondElement(Element baseElement)
+    {
+        List<int> list = new List<int>() { 1, 2, 3 };
+        list.Remove((int)baseElement.GetElementType());
+
+        Element secondElement = new Element((ElementType)list[Random.Range(0, 2)]);
+
+        return secondElement;
+    }
+
+
+    public void PrintStatistics()
+    {
+        Debug.Log($"속성 생성 개수\n" +
+            $"Fire : {countSpanwNum[1]}, Water : {countSpanwNum[2]}, Grass : {countSpanwNum[3]}");
+    }
+
+}
+
+public struct TetrisSpawnSetting
+{
+    public float singleElementRatio;
+    public float doubleElementRatio;
+
+    public TetrisSpawnSetting(float singleRadio, float doubleRatio)
+    {
+        singleElementRatio = singleRadio;
+        doubleElementRatio = doubleRatio;
     }
 }

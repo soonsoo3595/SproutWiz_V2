@@ -28,6 +28,11 @@ public class TetrisViewPanel : MonoBehaviour
         LevelData.applyTetris += UpdateTetrisSlot;
     }
 
+    private void OnDestroy()
+    {
+        preViewSystem.PrintStatistics();
+    }
+
     private void SetTetrisToAllSlot()
     {
         foreach (RectTransform slot in ViewSlots)
@@ -50,19 +55,6 @@ public class TetrisViewPanel : MonoBehaviour
         AddNewTetris();
     }
 
-    private void AddNewTetris()
-    {
-        tetrisList.Add(SpawnTetris());
-    }
-
-    private Transform SpawnTetris()
-    {
-        Transform newTetris = Instantiate(preViewSystem.GetRandomTetris());
-        newTetris.GetComponent<TetrisObject>().SetAllUnitState(preViewSystem.GetRandomElement());
-
-        return newTetris;
-    }
-
     private void RelocateTetris()
     {
         int count = 0;
@@ -76,9 +68,67 @@ public class TetrisViewPanel : MonoBehaviour
         }
     }
 
+    private void AddNewTetris()
+    {
+        tetrisList.Add(SpawnTetris());
+    }
+
     private void SetDefaultSize(Transform tetris)
     {
         tetris.localScale = new Vector3(TetrisSize, TetrisSize);
         tetris.localPosition = Vector3.zero;
     }
+
+
+    private Transform SpawnTetris()
+    {
+        Transform newTetris = Instantiate(preViewSystem.GetRandomTetris());
+        StateSetting(newTetris.GetComponent<TetrisObject>());
+        Rotate(newTetris);
+
+        return newTetris;
+    }
+
+    private void Rotate(Transform newTetris)
+    {
+        float rotation = Random.value;
+
+        if (rotation <= 0.25f)
+        {
+
+        }
+        else if (rotation <= 0.5f)
+        {
+            newTetris.Rotate(new Vector3(0f, 0f, 90f));
+        }
+        else if (rotation <= 0.75f)
+        {
+            newTetris.Rotate(new Vector3(0f, 0f, 180f));
+        }
+        else
+        {
+            newTetris.Rotate(new Vector3(0f, 0f, 270f));
+        }
+    }
+
+    private void StateSetting(TetrisObject Tetris)
+    {
+        Element baseElement = preViewSystem.GetRandomElement();
+        GameSetting setting = GridManager.Instance.GetSetting();
+
+        Tetris.SetAllUnitState(1, baseElement);
+
+
+        if (!setting.mixBlockEnable) return;
+        if(Random.value > setting.singleElementRatio)
+        {
+            int unitNum = Random.Range(0, Tetris.GetUnitCount());
+            Element secondElement = preViewSystem.GetSecondElement(baseElement);
+
+            Tetris.SetUnitState(unitNum, 1, secondElement);
+        }
+    }
+
+    
+
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ public class TetrisObject : MonoBehaviour
 
         if (isAttackedMouse)
         {
-            transform.localScale = new Vector3(250f, 250f, 250f);
+            transform.localScale = new Vector3(257f, 257f, 257f);
         }
         else
         {
@@ -36,7 +37,7 @@ public class TetrisObject : MonoBehaviour
     {
         if (CheckAllUnitOnGrid())
         {
-            Debug.Log("테트리스 배치 성공");
+            Debug.Log("��Ʈ���� ��ġ ����");
 
             LevelData.applyTetris(this);
             Destroy(gameObject);

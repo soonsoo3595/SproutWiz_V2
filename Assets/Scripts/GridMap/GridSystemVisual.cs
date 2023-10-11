@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class GridSystemVisual : MonoBehaviour
 {
@@ -19,7 +21,9 @@ public class GridSystemVisual : MonoBehaviour
             }
         }
 
-        LevelData.changeTileData += UpdateVisual;
+        LevelData.changeTileData += UpdataVisual;
+        GridManager.addUnitOnGridTile += AddUnit;
+        GridManager.removeUnitOnGridTile += RemoveUnit;
     }
 
     // 타일값 갱신 이후 호출되야 함.
@@ -36,6 +40,59 @@ public class GridSystemVisual : MonoBehaviour
         Element targetElement = GridManager.Instance.GetTileData(position).GetElement();
 
         visual.SetTileColor(ElementColor(targetElement));
+    }
+
+    private void AddUnit(GridPosition position, TileUnit unit)
+    {
+        if (!GridManager.Instance.CheckOnGrid(position)) return;
+
+        GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
+
+        visual.SetAlpha(ElementRelationColor(position, unit));
+    }
+
+    private float ElementRelationColor(GridPosition position, TileUnit unit)
+    {
+        float result = 0f;
+
+        if(GridManager.Instance.GetTileData(position).element.GetElementType() == ElementType.None)
+        {
+            GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
+
+            visual.SetTileColor(Color.black);
+            return 0.5f;
+        }
+
+
+        TetrisUnit tetrisUnit = unit as TetrisUnit;
+        ElementRelation relation = GridManager.Instance.GetTileData(position).element.GetElementRelation(tetrisUnit.GetElement());
+
+        switch (relation)
+        {
+            case ElementRelation.Equal:
+                result = 0.5f;
+                break;
+            case ElementRelation.Disadvantage:
+                result = 0.05f;
+                break;
+            case ElementRelation.Advantage:
+                result = 1f;
+                break;
+        }
+
+        return result;
+    }
+
+    private void RemoveUnit(GridPosition position, TileUnit unit)
+    {
+        if (!GridManager.Instance.CheckOnGrid(position)) return;
+
+        GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
+
+        List<TileUnit> units = GridManager.Instance.GetUnitListAtGridPosition(position);
+        if (units.Count > 1) return;
+
+        ChangeSprite(position);
     }
 
     private Color ElementColor(Element element)
@@ -58,7 +115,7 @@ public class GridSystemVisual : MonoBehaviour
                 break;
         }
 
-        result.a = 0.7f;
+        result.a = 0.5f;
 
         return result;
     }

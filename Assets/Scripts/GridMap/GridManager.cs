@@ -6,10 +6,18 @@ public class GridManager : MonoBehaviour
 {
     public static GridManager Instance { get; private set; }
 
+    [SerializeField] private GameSetting gameSetting;
     [SerializeField] private Transform gridDebugObjectPrefab;
     [SerializeField] private Transform debugObjectContainer;
 
     private GridSystem gridSystem;
+
+
+    public delegate void AddUnitOnGridTile(GridPosition position, TileUnit unit);
+    static public AddUnitOnGridTile addUnitOnGridTile;
+
+    public delegate void RemoveUnitOnGridTile(GridPosition position, TileUnit unit);
+    static public RemoveUnitOnGridTile removeUnitOnGridTile;
 
     void Awake()
     {
@@ -25,13 +33,16 @@ public class GridManager : MonoBehaviour
             return;
         }
 
-        gridSystem = new GridSystem(5, 5);
+        gridSystem = new GridSystem(gameSetting.GridMapWidth, gameSetting.GridMapHeight);
         gridSystem.CreateDebugObjcet(gridDebugObjectPrefab, debugObjectContainer);
     }
 
     public void AddUnitAtGridPosition(GridPosition gridPosition, TileUnit unit)
     {
         GridTile gridObject = gridSystem.GetGridTile(gridPosition);
+
+        addUnitOnGridTile(gridPosition, unit);
+
         gridObject.AddUnit(unit);
     }
 
@@ -44,6 +55,9 @@ public class GridManager : MonoBehaviour
     public void RemoveUnitAtGridPosition(GridPosition gridPosition, TileUnit unit)
     {
         GridTile gridObject = gridSystem.GetGridTile(gridPosition);
+
+        removeUnitOnGridTile(gridPosition, unit);
+
         gridObject.RemoveUnit(unit);
     }
 
@@ -67,4 +81,6 @@ public class GridManager : MonoBehaviour
     public bool CheckOnGrid(Vector3 position) => gridSystem.CheckOnGrid(position);
 
     public TileData GetTileData(GridPosition position) => gridSystem.GetTileData(position);
+
+    public GameSetting GetSetting() => gameSetting;
 }
