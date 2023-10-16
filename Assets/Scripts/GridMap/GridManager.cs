@@ -83,4 +83,6 @@ public class GridManager : MonoBehaviour
     public TileData GetTileData(GridPosition position) => gridSystem.GetTileData(position);
 
     public GameSetting GetSetting() => gameSetting;
+
+    public void ClearGrid() => gridSystem.ClearGridSystem();
 }

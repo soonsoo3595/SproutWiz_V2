@@ -9,6 +9,7 @@ public class MainGame : MonoBehaviour
     public Button pauseBtn;
 
     public GameObject blind;
+
     
     [Header("Stage")]
     public Stage stage;
@@ -44,6 +45,8 @@ public class MainGame : MonoBehaviour
 
     public void Retry()
     {
+        GridManager.Instance.ClearGrid();
+
         gameOverPopup.SetActive(false);
         
         stage.InitStage();

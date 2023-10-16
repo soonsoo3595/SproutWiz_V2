@@ -628,7 +628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: {fileID: 1159730895}
   pauseBtn: {fileID: 422896768}
-  blind: {fileID: 0}
+  blind: {fileID: 1935636531}
   stage: {fileID: 279601987}
   goalContainer: {fileID: 185047897}
   gameOverPopup: {fileID: 862388857}
@@ -1648,7 +1648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainGame: {fileID: 371425298}
   slider: {fileID: 1159730896}
-  totalTime: 60
+  totalTime: 80
   isPaused: 0
 --- !u!114 &1159730896
 MonoBehaviour:

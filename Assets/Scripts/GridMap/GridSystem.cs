@@ -98,4 +98,18 @@ public class GridSystem
     {
         return CheckOnGrid(GetGridPosition(position));
     }
+
+    public void ClearGridSystem()
+    {
+        gridTileArray = new GridTile[width, height];
+        levelData = new LevelData(width, height);
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                gridTileArray[x, y] = new GridTile(new GridPosition(x, y));
+            }
+        }
+    }
 }

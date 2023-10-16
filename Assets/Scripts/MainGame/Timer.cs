@@ -7,6 +7,7 @@ public class Timer : MonoBehaviour
 {
     private float remainTime = 0f;
 
+
     public MainGame mainGame;
     public Slider slider;
     public float totalTime = 80f;

@@ -11,6 +11,7 @@ public class TileFactory : MonoBehaviour
 
     public static Harvest harvest;
     
+
     private void Awake()
     {
         if (Instance == null)
