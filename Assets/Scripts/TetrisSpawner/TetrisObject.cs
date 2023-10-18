@@ -56,7 +56,7 @@ public class TetrisObject : MonoBehaviour
             new Vector2(Input.mousePosition.x, Input.mousePosition.y));
 
         transform.position = newPos;
-        transform.localPosition += new Vector3(0, 500);
+        transform.localPosition += new Vector3(0, GridManager.Instance.GetSetting().DistanceFromHand);
     }
 
     private bool CheckAllUnitOnGrid()

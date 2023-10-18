@@ -16,6 +16,11 @@ public class GameSettingEditor : Editor
 
         setting.timeLimit = EditorGUILayout.IntField("시간 제한", setting.timeLimit);
 
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("스크롤 미리보기 세팅", EditorStyles.boldLabel);
+        setting.DistanceFromHand = EditorGUILayout.Slider("손과 테트리스 이격", setting.DistanceFromHand, 0f, 1000f);
+        setting.DistanceFromTetris_x = EditorGUILayout.Slider("이미지 이격 x", setting.DistanceFromTetris_x, -1000f, 1000f);
+        setting.DistanceFromTetris_y = EditorGUILayout.Slider("이미지 이격 y", setting.DistanceFromTetris_y, -1000f, 1000f);
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("테트리스 스폰 속성", EditorStyles.boldLabel);
@@ -52,6 +57,15 @@ public class GameSettingEditor : Editor
         setting.disadvantage.percentage = EditorGUILayout.FloatField(setting.disadvantage.percentage, GUILayout.Width(100));
         EditorGUILayout.EndHorizontal();
 
+
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("스크롤 스폰 확률", EditorStyles.boldLabel);
+        for(int i = 0; i< 7; i++)
+        {
+            setting.tetrisSpawnSet.typeRatio[i] = EditorGUILayout.IntSlider($" {(char)('A'+ i)} 타입 : ", setting.tetrisSpawnSet.typeRatio[i], 0, 100);
+        }
+
+
         float totalProbability = 1f;
         
         if (EditorGUI.EndChangeCheck())
@@ -63,8 +77,23 @@ public class GameSettingEditor : Editor
                 setting.singleElementRatio *= ratio;
                 setting.doubleElementRatio *= ratio;
             }
-
             serializedObject.ApplyModifiedProperties();
+
+
+            int ratioSum = 0;
+            for (int i = 0; i < 7; i++)
+            {
+                ratioSum += setting.tetrisSpawnSet.typeRatio[i];
+            }
+
+            if (ratioSum != 100)
+            {
+                EditorGUILayout.HelpBox($"총 합이 100이 되어야 합니다. 현재{ratioSum}", MessageType.Error);
+            }
+            else
+            {
+                serializedObject.ApplyModifiedProperties();
+            }
         }
 
         if (setting.timeLimit < 0)

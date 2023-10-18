@@ -66,15 +66,3 @@ public class PreViewSystem
     }
 
 }
-
-public struct TetrisSpawnSetting
-{
-    public float singleElementRatio;
-    public float doubleElementRatio;
-
-    public TetrisSpawnSetting(float singleRadio, float doubleRatio)
-    {
-        singleElementRatio = singleRadio;
-        doubleElementRatio = doubleRatio;
-    }
-}

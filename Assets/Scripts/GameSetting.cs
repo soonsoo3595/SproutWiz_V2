@@ -12,6 +12,10 @@ public class GameSetting : ScriptableObject
 
     public int timeLimit = 10;
 
+    // 미리보기 세팅
+    public float DistanceFromHand = 500f;
+    public float DistanceFromTetris_x = 0f;
+    public float DistanceFromTetris_y = 0f;
 
     // 테트리스 속성 혼합 세팅
     public bool mixBlockEnable = false;
@@ -24,6 +28,8 @@ public class GameSetting : ScriptableObject
     public GrowPointSet equal = new GrowPointSet(1, 100f);
     public GrowPointSet disadvantage = new GrowPointSet(1, 100f);
     public GrowPointSet irrelevant = new GrowPointSet(-1, 60f);
+
+    public TetrisSpawnSet tetrisSpawnSet = new TetrisSpawnSet();
 
 
 }
@@ -40,4 +46,15 @@ public class GrowPointSet
     }
 }
 
+public class TetrisSpawnSet
+{
+    public int[] typeRatio = new int[7];
 
+    public float singleElementRatio = 1f;
+    public float doubleElementRatio = 0f;
+
+    public TetrisSpawnSet()
+    {
+    }
+
+}
