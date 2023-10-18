@@ -81,6 +81,7 @@ public class TileFactory : MonoBehaviour
 
     private void Equal(Order order)
     {
+        //GridManager.Instance.GetSetting().equal.growPoint;
         order.GetTile().growPoint = GrowPoint.Harvest;
     }
 

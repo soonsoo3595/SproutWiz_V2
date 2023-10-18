@@ -10,7 +10,7 @@ public class GameSettingEditor : Editor
 
         GameSetting setting = (GameSetting)target;
 
-        EditorGUILayout.LabelField("게임 세팅", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("게임 세팅 (실행 중 변경 불가)", EditorStyles.boldLabel);
         setting.GridMapWidth = EditorGUILayout.IntSlider("맵 가로 사이즈", setting.GridMapWidth, 1, 10);
         setting.GridMapHeight = EditorGUILayout.IntSlider("맵 세로 사이즈", setting.GridMapHeight, 1, 10);
 
@@ -77,9 +77,7 @@ public class GameSettingEditor : Editor
                 setting.singleElementRatio *= ratio;
                 setting.doubleElementRatio *= ratio;
             }
-            serializedObject.ApplyModifiedProperties();
-
-
+           
             int ratioSum = 0;
             for (int i = 0; i < 7; i++)
             {
@@ -90,10 +88,8 @@ public class GameSettingEditor : Editor
             {
                 EditorGUILayout.HelpBox($"총 합이 100이 되어야 합니다. 현재{ratioSum}", MessageType.Error);
             }
-            else
-            {
-                serializedObject.ApplyModifiedProperties();
-            }
+
+            serializedObject.ApplyModifiedProperties();
         }
 
         if (setting.timeLimit < 0)

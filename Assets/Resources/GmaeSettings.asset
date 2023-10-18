@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridMapWidth: 5
   GridMapHeight: 5
+  timeLimit: 60
+  DistanceFromHand: 0
+  DistanceFromTetris_x: 18
+  DistanceFromTetris_y: -40
   mixBlockEnable: 1
-  singleElementRatio: 0.24570277
-  doubleElementRatio: 0.7542972
+  singleElementRatio: 0.64876026
+  doubleElementRatio: 0.35123974
