@@ -13,6 +13,11 @@ public class Timer : MonoBehaviour
     public float totalTime = 80f;
     public bool isPaused = false;
 
+    private void Awake()
+    {
+        totalTime = GridManager.Instance.GetSetting().timeLimit;
+    }
+
     private IEnumerator RunTimer()
     {
         while(remainTime > 0f)

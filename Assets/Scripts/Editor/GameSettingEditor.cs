@@ -10,9 +10,12 @@ public class GameSettingEditor : Editor
 
         GameSetting setting = (GameSetting)target;
 
-        EditorGUILayout.LabelField("맵 사이즈", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("게임 세팅", EditorStyles.boldLabel);
         setting.GridMapWidth = EditorGUILayout.IntSlider("맵 가로 사이즈", setting.GridMapWidth, 1, 10);
         setting.GridMapHeight = EditorGUILayout.IntSlider("맵 세로 사이즈", setting.GridMapHeight, 1, 10);
+
+        setting.timeLimit = EditorGUILayout.IntField("시간 제한", setting.timeLimit);
+
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("테트리스 스폰 속성", EditorStyles.boldLabel);
@@ -20,6 +23,34 @@ public class GameSettingEditor : Editor
         setting.singleElementRatio = EditorGUILayout.Slider("단일 속성 비율", setting.singleElementRatio, 0f, 1f);
         setting.doubleElementRatio = EditorGUILayout.Slider("혼합 속성 비율", setting.doubleElementRatio, 0f, 1f);
 
+
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("성장 포인트 설정", EditorStyles.boldLabel);
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("속성 관계", EditorStyles.boldLabel, GUILayout.Width(100));
+        EditorGUILayout.LabelField("성장 변동치", EditorStyles.boldLabel, GUILayout.Width(100));
+        EditorGUILayout.LabelField("확률", EditorStyles.boldLabel, GUILayout.Width(100));
+        EditorGUILayout.LabelField("성장 변동치", EditorStyles.boldLabel, GUILayout.Width(100));
+        EditorGUILayout.LabelField("확률", EditorStyles.boldLabel, GUILayout.Width(100));
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("같은 속성", GUILayout.Width(100));
+        setting.equal.growPoint = EditorGUILayout.IntField(setting.equal.growPoint, GUILayout.Width(100));
+        setting.equal.percentage = EditorGUILayout.FloatField(setting.equal.percentage, GUILayout.Width(100));
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("무관 속성", GUILayout.Width(100));
+        setting.irrelevant.growPoint = EditorGUILayout.IntField(setting.irrelevant.growPoint, GUILayout.Width(100));
+        setting.irrelevant.percentage = EditorGUILayout.FloatField(setting.irrelevant.percentage, GUILayout.Width(100));
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("취약 속성", GUILayout.Width(100));
+        setting.disadvantage.growPoint = EditorGUILayout.IntField(setting.disadvantage.growPoint, GUILayout.Width(100));
+        setting.disadvantage.percentage = EditorGUILayout.FloatField(setting.disadvantage.percentage, GUILayout.Width(100));
+        EditorGUILayout.EndHorizontal();
 
         float totalProbability = 1f;
         
@@ -34,6 +65,11 @@ public class GameSettingEditor : Editor
             }
 
             serializedObject.ApplyModifiedProperties();
+        }
+
+        if (setting.timeLimit < 0)
+        {
+            EditorGUILayout.HelpBox("시간 제한은 0보다 커야 합니다.", MessageType.Warning);
         }
 
         if (GUI.changed)
