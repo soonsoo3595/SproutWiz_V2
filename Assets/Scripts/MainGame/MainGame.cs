@@ -45,7 +45,7 @@ public class MainGame : MonoBehaviour
 
     public void Retry()
     {
-        GridManager.Instance.ClearGrid();
+        GridManager.clearGrid();
 
         gameOverPopup.SetActive(false);
         
@@ -69,4 +69,5 @@ public class MainGame : MonoBehaviour
             blind.SetActive(true);
         }
     }
+
 }

@@ -19,6 +19,9 @@ public class GridManager : MonoBehaviour
     public delegate void RemoveUnitOnGridTile(GridPosition position, TileUnit unit);
     static public RemoveUnitOnGridTile removeUnitOnGridTile;
 
+    public delegate void ClearGrid();
+    static public ClearGrid clearGrid;
+
     void Awake()
     {
         if (Instance == null)
@@ -35,7 +38,10 @@ public class GridManager : MonoBehaviour
 
         gridSystem = new GridSystem(gameSetting.GridMapWidth, gameSetting.GridMapHeight);
         gridSystem.CreateDebugObjcet(gridDebugObjectPrefab, debugObjectContainer);
+
+        clearGrid += gridSystem.ResetGridTile;
     }
+
 
     public void AddUnitAtGridPosition(GridPosition gridPosition, TileUnit unit)
     {
@@ -84,5 +90,5 @@ public class GridManager : MonoBehaviour
 
     public GameSetting GetSetting() => gameSetting;
 
-    public void ClearGrid() => gridSystem.ClearGridSystem();
+    
 }

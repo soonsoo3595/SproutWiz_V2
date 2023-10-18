@@ -99,17 +99,13 @@ public class GridSystem
         return CheckOnGrid(GetGridPosition(position));
     }
 
-    public void ClearGridSystem()
+    public void ResetGridTile()
     {
-        gridTileArray = new GridTile[width, height];
-        levelData = new LevelData(width, height);
+        levelData.ResetData(width, height);
 
-        for (int x = 0; x < width; x++)
+        foreach(GridTile gridTile in gridTileArray)
         {
-            for (int y = 0; y < height; y++)
-            {
-                gridTileArray[x, y] = new GridTile(new GridPosition(x, y));
-            }
+            gridTile.ClearTileUnit();
         }
     }
 }

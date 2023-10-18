@@ -23,9 +23,9 @@ public class TetrisViewPanel : MonoBehaviour
     private void Start()
     {
         SetTetrisToAllSlot();
-        RelocateTetris();
 
         LevelData.applyTetris += UpdateTetrisSlot;
+        GridManager.clearGrid += ResetAllSlot;
     }
 
     private void OnDestroy()
@@ -39,6 +39,19 @@ public class TetrisViewPanel : MonoBehaviour
         {
             AddNewTetris();
         }
+
+        RelocateTetris();
+    }
+
+    private void ResetAllSlot()
+    {
+        foreach (Transform tetris in tetrisList)
+        {
+            Destroy(tetris.gameObject);
+        }
+
+        tetrisList.Clear();
+        SetTetrisToAllSlot();
     }
 
     private void UpdateTetrisSlot(TetrisObject tetrisObject)

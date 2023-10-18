@@ -47,4 +47,9 @@ public class GridTile
     {
         return units;
     }
+
+    public void ClearTileUnit()
+    {
+        units.Clear();
+    }
 }

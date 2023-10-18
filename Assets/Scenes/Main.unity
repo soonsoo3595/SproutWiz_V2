@@ -1648,7 +1648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainGame: {fileID: 371425298}
   slider: {fileID: 1159730896}
-  totalTime: 80
+  totalTime: 10
   isPaused: 0
 --- !u!114 &1159730896
 MonoBehaviour:

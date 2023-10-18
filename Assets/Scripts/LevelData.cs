@@ -58,4 +58,16 @@ public class LevelData
         return tileDataArray[gridPosition.x, gridPosition.y];
     }
 
+    public void ResetData(int width, int height)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                tileDataArray[x, y].InitTile();
+                changeTileData(new GridPosition(x, y));
+            }
+        }
+    }
+
 }

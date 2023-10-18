@@ -12,6 +12,7 @@ public class TetrisObject : MonoBehaviour
     {
         isAttackedMouse = false;
         units = GetComponentsInChildren<TetrisUnit>();
+
     }
 
     private void Update()
@@ -37,7 +38,6 @@ public class TetrisObject : MonoBehaviour
     {
         if (CheckAllUnitOnGrid())
         {
-
             LevelData.applyTetris(this);
             Destroy(gameObject);
         }
@@ -52,9 +52,11 @@ public class TetrisObject : MonoBehaviour
     {
         if (!isAttackedMouse) return;
 
-        Vector2 newPos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+        Vector2 newPos = Camera.main.ScreenToWorldPoint(
+            new Vector2(Input.mousePosition.x, Input.mousePosition.y));
 
         transform.position = newPos;
+        transform.localPosition += new Vector3(0, 500);
     }
 
     private bool CheckAllUnitOnGrid()
