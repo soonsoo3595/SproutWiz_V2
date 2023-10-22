@@ -13,8 +13,10 @@ public class LevelData
     public static ChangeTileData changeTileData;
 
     public delegate void CheckAchieveGoal();
-
     public static CheckAchieveGoal checkAchieveGoal;
+
+    public delegate void AddHarvestScore(int count);
+    public static AddHarvestScore addHarvestScore;
     
     public LevelData(int width, int height) 
     {
@@ -41,15 +43,18 @@ public class LevelData
     {
         List<TetrisUnit> units = tetrisObject.GetUnitList();
 
+        int count = 0;
+
         foreach (TetrisUnit unit in units)
         {
             TileData tile = GetData(unit.GetGridPosition());
-            TileFactory.Instance.MakeOrder(tile, unit);
+            if (TileFactory.Instance.MakeOrder(tile, unit)) count++;
 
             // 값 갱신이 없으면 실행하지 말아야함.
             changeTileData(unit.GetGridPosition());
         }
-
+        
+        addHarvestScore(count);
         checkAchieveGoal();
     }
 
