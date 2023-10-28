@@ -20,7 +20,12 @@ public class MainGame : MonoBehaviour
     public GameObject gameOverPopup;
 
     public Button retryBtn;
-    
+
+    [Header("System")]
+    public ScoreSystem scoreSystem;
+    public FeverSystem feverSystem;
+
+
     void Awake()
     {
         pauseBtn.onClick.AddListener(ClickPause);
@@ -51,7 +56,10 @@ public class MainGame : MonoBehaviour
         
         stage.InitStage();
         goalContainer.UpdateContainer();
-        
+
+        scoreSystem.InitScore();
+        feverSystem.InitFever();
+
         timer.ResetTimer();
         StartGame();
     }
