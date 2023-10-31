@@ -10,22 +10,23 @@ public class FeverSystem : MonoBehaviour
     public Button feverBtn;
     public Image disable;
     public Text remainTime;
-
-    public delegate void FeverEnd();
+    public GameObject feverImage;
 
     public float feverTime = 10f;
     public float reuseTime = 40f;
+    public float fisrtReuseTime = 35f;
 
     void Start()
     {
         feverBtn.onClick.AddListener(StartFever);
-        DisableFeverBtn(30f);
+        DisableFeverBtn(fisrtReuseTime);
     }
 
     void StartFever()
     {
         mainGame.scoreSystem.StartFever();
         DisableFeverBtn(reuseTime);
+        feverImage.SetActive(true);
 
         Invoke("EndFever", feverTime);
     }
@@ -33,6 +34,7 @@ public class FeverSystem : MonoBehaviour
     public void EndFever()
     {
         mainGame.scoreSystem.EndFever();
+        feverImage.SetActive(false);
     }
 
     void DisableFeverBtn(float reuseTime)
@@ -61,6 +63,6 @@ public class FeverSystem : MonoBehaviour
 
     public void InitFever()
     {
-        DisableFeverBtn(30f);
+        DisableFeverBtn(fisrtReuseTime);
     }
 }
