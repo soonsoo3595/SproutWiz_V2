@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 876a177d6e3f2e340bb614ea46a78fd9, type: 3}
   m_Name: SpriteSetting
   m_EditorClassIdentifier: 
-  SeedSprite: {fileID: 0}
+  Seed: {fileID: 21300000, guid: adc45b04ea959b8418332b96ab459371, type: 3}
+  FireGrowth: {fileID: 21300000, guid: b75007f4b8c89d040b4568ed66abf2d9, type: 3}
+  WaterGrowth: {fileID: 21300000, guid: 149d4d3ca7820ab488b8d4759c443b33, type: 3}
+  GrassGrowth: {fileID: 21300000, guid: c5c1006c7e280864fbe67f6fa2213226, type: 3}

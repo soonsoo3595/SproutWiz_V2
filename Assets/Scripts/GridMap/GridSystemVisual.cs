@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Text;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class GridSystemVisual : MonoBehaviour
 {
     [SerializeField] private Transform gridTilePrefab;
+    [SerializeField] private SpriteSetting SpriteSet;
 
     private Transform[,] tileVisuals;
 
@@ -40,7 +42,7 @@ public class GridSystemVisual : MonoBehaviour
 
         Element targetElement = GridManager.Instance.GetTileData(position).GetElement();
 
-        visual.SetTileColor(ElementColor(targetElement));
+        visual.SetCropSptire(CropSprite(targetElement));
     }
 
     private void AddUnit(GridPosition position, TileUnit unit)
@@ -126,6 +128,29 @@ public class GridSystemVisual : MonoBehaviour
         }
 
         result.a = 0.5f;
+
+        return result;
+    }
+
+    private Sprite CropSprite(Element element)
+    {
+        Sprite result = null;
+
+        switch (element.GetElementType())
+        {
+            case ElementType.None:
+                result = SpriteSet.Seed;
+                break;
+            case ElementType.Fire:
+                result = SpriteSet.FireGrowth;
+                break;
+            case ElementType.Water:
+                result = SpriteSet.WaterGrowth;
+                break;
+            case ElementType.Grass:
+                result = SpriteSet.GrassGrowth;
+                break;
+        }
 
         return result;
     }
