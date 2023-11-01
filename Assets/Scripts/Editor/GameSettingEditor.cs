@@ -19,8 +19,8 @@ public class GameSettingEditor : Editor
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("스크롤 미리보기 세팅", EditorStyles.boldLabel);
         setting.DistanceFromHand = EditorGUILayout.Slider("손과 테트리스 이격", setting.DistanceFromHand, 0f, 1000f);
-        setting.DistanceFromTetris_x = EditorGUILayout.Slider("이미지 이격 x", setting.DistanceFromTetris_x, -1000f, 1000f);
-        setting.DistanceFromTetris_y = EditorGUILayout.Slider("이미지 이격 y", setting.DistanceFromTetris_y, -1000f, 1000f);
+        setting.DistanceFromTetris_x = EditorGUILayout.Slider("이미지 이격 x", setting.DistanceFromTetris_x, -3f, 3f);
+        setting.DistanceFromTetris_y = EditorGUILayout.Slider("이미지 이격 y", setting.DistanceFromTetris_y, -3f, 3f);
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("테트리스 스폰 속성", EditorStyles.boldLabel);

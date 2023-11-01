@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TetrisObject : MonoBehaviour
@@ -7,13 +8,23 @@ public class TetrisObject : MonoBehaviour
     [SerializeField]
     private bool isAttackedMouse;
     private TetrisUnit[] units;
+    private Transform[] visuals;
 
     private void Awake()
     {
         isAttackedMouse = false;
         units = GetComponentsInChildren<TetrisUnit>();
-
+        visuals = new Transform[units.Length];
     }
+
+    private void Start()
+    {
+        for (int i = 0; i < units.Length; i++)
+        {
+            visuals[i] = units[i].GetComponentInChildren<SpriteRenderer>().transform;
+        }
+    }
+
 
     private void Update()
     {
@@ -26,7 +37,7 @@ public class TetrisObject : MonoBehaviour
 
         if (isAttackedMouse)
         {
-            transform.localScale = new Vector3(257f, 257f, 257f);
+            EnableSeparation();
         }
         else
         {
@@ -39,12 +50,38 @@ public class TetrisObject : MonoBehaviour
         if (CheckAllUnitOnGrid())
         {
             LevelData.applyTetris(this);
+
             Destroy(gameObject);
+
+            //MiniGameController.Instance.ExecuteMiniGame();
         }
         else
         {
-            transform.localScale = new Vector3(50f, 50f, 50f);
-            transform.localPosition = Vector3.zero;
+            DisableSeparation();
+        }
+    }
+
+    private void EnableSeparation()
+    {
+        transform.localScale = new Vector3(257f, 257f, 257f);
+
+        foreach (Transform visual in visuals)
+        {
+            visual.position += new Vector3(
+                GridManager.Instance.GetSetting().DistanceFromTetris_x,
+                GridManager.Instance.GetSetting().DistanceFromTetris_y
+                );
+        }
+    }
+
+    private void DisableSeparation()
+    {
+        transform.localScale = new Vector3(50f, 50f, 50f);
+        transform.localPosition = Vector3.zero;
+
+        foreach (Transform visual in visuals)
+        {
+            visual.localPosition = new Vector3(0, 0);
         }
     }
 
