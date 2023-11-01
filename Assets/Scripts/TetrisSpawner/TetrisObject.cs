@@ -50,7 +50,10 @@ public class TetrisObject : MonoBehaviour
         if (CheckAllUnitOnGrid())
         {
             LevelData.applyTetris(this);
+
             Destroy(gameObject);
+
+            MiniGameController.Instance.ExecuteMiniGame();
         }
         else
         {

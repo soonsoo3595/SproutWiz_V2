@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -63,9 +64,15 @@ public class GridSystemVisual : MonoBehaviour
             return 0.5f;
         }
 
+        if(!(unit is TetrisUnit))
+        {
+            return result;
+        }
 
         TetrisUnit tetrisUnit = unit as TetrisUnit;
-        ElementRelation relation = GridManager.Instance.GetTileData(position).GetElement().GetElementRelation(tetrisUnit.GetElement());
+
+        Element element = GridManager.Instance.GetTileData(position).GetElement();
+        ElementRelation relation = element.GetElementRelation(tetrisUnit.GetElement());
 
         switch (relation)
         {
@@ -78,6 +85,9 @@ public class GridSystemVisual : MonoBehaviour
             case ElementRelation.Irrelevant:
                 result = 0.5f;
                 break;
+            default:
+                result = 0.1f;
+                break;
         }
 
         return result;
@@ -87,7 +97,7 @@ public class GridSystemVisual : MonoBehaviour
     {
         if (!GridManager.Instance.CheckOnGrid(position)) return;
 
-        GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
+        //GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
 
         List<TileUnit> units = GridManager.Instance.GetUnitListAtGridPosition(position);
         if (units.Count > 1) return;
