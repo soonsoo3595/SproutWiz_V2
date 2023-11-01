@@ -53,7 +53,7 @@ public class TetrisObject : MonoBehaviour
 
             Destroy(gameObject);
 
-            MiniGameController.Instance.ExecuteMiniGame();
+            //MiniGameController.Instance.ExecuteMiniGame();
         }
         else
         {
