@@ -25,15 +25,16 @@ public class GameSetting : ScriptableObject
 
 
     // 속성관계에 따른 성장치 세팅
-    public GrowPointSet equal = new GrowPointSet(1, 100f);
-    public GrowPointSet disadvantage = new GrowPointSet(1, 100f);
-    public GrowPointSet irrelevant = new GrowPointSet(-1, 60f);
+    public GrowPointSet equal;
+    public GrowPointSet disadvantage;
+    public GrowPointSet irrelevant;
 
-    public TetrisSpawnSet tetrisSpawnSet = new TetrisSpawnSet();
+    public TetrisSpawnSet tetrisSpawnSet;
 
 
 }
 
+[System.Serializable]
 public class GrowPointSet
 {
     public int growPoint;
@@ -46,6 +47,7 @@ public class GrowPointSet
     }
 }
 
+[System.Serializable]
 public class TetrisSpawnSet
 {
     public int[] typeRatio = new int[7];
