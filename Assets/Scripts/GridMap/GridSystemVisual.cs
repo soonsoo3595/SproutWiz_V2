@@ -40,9 +40,12 @@ public class GridSystemVisual : MonoBehaviour
     {
         GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
 
-        Element targetElement = GridManager.Instance.GetTileData(position).GetElement();
+        TileData targetTile = GridManager.Instance.GetTileData(position);
 
-        visual.SetCropSptire(CropSprite(targetElement));
+        Element targetElement = targetTile.GetElement();
+        GrowPoint growPoint = targetTile.growPoint;
+
+        visual.SetCropSptire(CropSprite(targetElement, growPoint));
     }
 
     private void AddUnit(GridPosition position, TileUnit unit)
@@ -51,60 +54,57 @@ public class GridSystemVisual : MonoBehaviour
 
         GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
 
-        visual.SetAlpha(ElementRelationColor(position, unit));
-    }
-
-    private float ElementRelationColor(GridPosition position, TileUnit unit)
-    {
-        float result = 0f;
-
-        if(GridManager.Instance.GetTileData(position).GetElement().GetElementType() == ElementType.None)
-        {
-            GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
-
-            visual.SetTileColor(Color.black);
-            return 0.5f;
-        }
-
-        if(!(unit is TetrisUnit))
-        {
-            return result;
-        }
-
+        // TODO: 다른 타입 유형일 경우 처리 필요.
         TetrisUnit tetrisUnit = unit as TetrisUnit;
-
         Element element = GridManager.Instance.GetTileData(position).GetElement();
         ElementRelation relation = element.GetElementRelation(tetrisUnit.GetElement());
+
+        if (element.GetElementType() == ElementType.None)
+        {
+            visual.SetOutLineColor(Color.white);
+            visual.SetOutLineAlpha(1f);
+        }
+
 
         switch (relation)
         {
             case ElementRelation.Equal:
-                result = 0.5f;
+                visual.SetOutLineColor(ElementColor(element));
                 break;
             case ElementRelation.Disadvantage:
-                result = 0.05f;
+                visual.SetOutLineColor(Color.black);
                 break;
             case ElementRelation.Irrelevant:
-                result = 0.5f;
+                //visual.SetOutLineAlpha(0f);
                 break;
             default:
-                result = 0.1f;
                 break;
         }
-
-        return result;
     }
 
     private void RemoveUnit(GridPosition position, TileUnit unit)
     {
         if (!GridManager.Instance.CheckOnGrid(position)) return;
 
-        //GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
-
         List<TileUnit> units = GridManager.Instance.GetUnitListAtGridPosition(position);
         if (units.Count > 1) return;
 
-        ChangeSprite(position);
+
+        GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
+
+        // TODO: 다른 타입 유형일 경우 처리 필요.
+        TetrisUnit tetrisUnit = unit as TetrisUnit;
+        Element element = GridManager.Instance.GetTileData(position).GetElement();
+        ElementRelation relation = element.GetElementRelation(tetrisUnit.GetElement());
+
+
+
+        visual.SetOutLineColor(ElementColor(element));
+
+        if (element.GetElementType() == ElementType.None)
+        {
+            visual.SetOutLineAlpha(0f);
+        }
     }
 
     private Color ElementColor(Element element)
@@ -127,12 +127,12 @@ public class GridSystemVisual : MonoBehaviour
                 break;
         }
 
-        result.a = 0.5f;
-
         return result;
     }
 
-    private Sprite CropSprite(Element element)
+
+    // TODO: 수확물 딜레이 처리 필요.
+    private Sprite CropSprite(Element element, GrowPoint growPoint)
     {
         Sprite result = null;
 

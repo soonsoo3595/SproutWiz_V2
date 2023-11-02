@@ -11,7 +11,7 @@ public class SpriteSetting : ScriptableObject
     public Sprite WaterGrowth;
     public Sprite GrassGrowth;
 
-    //public Sprite FireHarvest;
-    //public Sprite WaterHarvest;
-    //public Sprite GrassHarvest;
+    public Sprite FireHarvest;
+    public Sprite WaterHarvest;
+    public Sprite GrassHarvest;
 }

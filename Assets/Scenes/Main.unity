@@ -1936,6 +1936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridTilePrefab: {fileID: 4673398527413725348, guid: 759e7da6040179a4f98e43fd85b71d48, type: 3}
+  SpriteSet: {fileID: 11400000, guid: 5d7bfc98b8b4a9b4987af1ccbf480b32, type: 2}
 --- !u!4 &1259978849
 Transform:
   m_ObjectHideFlags: 0

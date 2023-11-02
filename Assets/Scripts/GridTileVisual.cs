@@ -19,18 +19,19 @@ public class GridTileVisual : MonoBehaviour
         outLineSprite = outLine.GetComponent<SpriteRenderer>();
     }
 
-    public void SetTileColor(Color newColor)
-    {
-        outLineSprite.color = newColor;
-    }
-
     public void SetCropSptire(Sprite sprite)
     {
         cropSprite.sprite = sprite;
     }
 
+
+    public void SetOutLineColor(Color newColor)
+    {
+        outLineSprite.color = newColor;
+    }
+
     // 속성 유불리 임시 표시용
-    public void SetAlpha(float alpha)
+    public void SetOutLineAlpha(float alpha)
     {
         Color color = outLineSprite.color;
         
