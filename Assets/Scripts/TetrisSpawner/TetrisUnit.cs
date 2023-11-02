@@ -26,8 +26,6 @@ public class TetrisUnit : TileUnit
 
     protected override void MoveGridPosition(GridPosition newGridPosition)
     {
-        //base.MoveGridPosition(newGridPosition);
-
         bool isMoveInGrid = GridManager.Instance.CheckOnGrid(newGridPosition);
         bool isEmptyTile = false;
         

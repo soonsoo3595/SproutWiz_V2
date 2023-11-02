@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,7 +31,6 @@ public class GridTileVisual : MonoBehaviour
         outLineSprite.color = newColor;
     }
 
-    // 속성 유불리 임시 표시용
     public void SetOutLineAlpha(float alpha)
     {
         Color color = outLineSprite.color;
@@ -38,5 +38,28 @@ public class GridTileVisual : MonoBehaviour
         color.a = alpha;
         
         outLineSprite.color = color;
+    }
+
+
+    public void PlayAnim(GrowPoint growPoint)
+    {
+        if(growPoint == GrowPoint.Seed)
+        {
+            PlayAnimSeed();
+        }
+        else if(growPoint == GrowPoint.Harvest)
+        {
+            PlayAnimHarvest();
+        }
+    }
+
+    public void PlayAnimSeed()
+    {
+        
+    }
+
+    public void PlayAnimHarvest()
+    {
+
     }
 }

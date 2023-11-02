@@ -91,13 +91,7 @@ public class GridSystemVisual : MonoBehaviour
 
 
         GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
-
-        // TODO: 다른 타입 유형일 경우 처리 필요.
-        TetrisUnit tetrisUnit = unit as TetrisUnit;
         Element element = GridManager.Instance.GetTileData(position).GetElement();
-        ElementRelation relation = element.GetElementRelation(tetrisUnit.GetElement());
-
-
 
         visual.SetOutLineColor(ElementColor(element));
 
