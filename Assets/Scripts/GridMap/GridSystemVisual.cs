@@ -61,21 +61,25 @@ public class GridSystemVisual : MonoBehaviour
 
         if (element.GetElementType() == ElementType.None)
         {
-            visual.SetOutLineColor(Color.white);
-            visual.SetOutLineAlpha(1f);
+            visual.SetOutLineColor(Color.black);
+
+            visual.ResetTileColor();
         }
 
 
         switch (relation)
         {
             case ElementRelation.Equal:
-                visual.SetOutLineColor(ElementColor(element));
+                visual.SetTileColor(ElementColor(element));
+                //visual.SetOutLineColor(ElementColor(element));
                 break;
             case ElementRelation.Disadvantage:
-                visual.SetOutLineColor(Color.black);
+                visual.SetTileColor(Color.black);
+                //visual.SetOutLineColor(Color.black);
                 break;
             case ElementRelation.Irrelevant:
-                //visual.SetOutLineAlpha(0f);
+                //visual.ResetTileColor();
+
                 break;
             default:
                 break;
@@ -93,10 +97,13 @@ public class GridSystemVisual : MonoBehaviour
         GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
         Element element = GridManager.Instance.GetTileData(position).GetElement();
 
-        visual.SetOutLineColor(ElementColor(element));
+        visual.SetTileColor(ElementColor(element));
+        //visual.SetOutLineColor(ElementColor(element));
 
-        if (element.GetElementType() == ElementType.None)
+        if (element.GetElementType() == ElementType.None) 
         {
+            visual.ResetTileColor();
+
             visual.SetOutLineAlpha(0f);
         }
     }
@@ -114,7 +121,7 @@ public class GridSystemVisual : MonoBehaviour
                 result = Color.red;
                 break;
             case ElementType.Water:
-                result = Color.blue;
+                result = Color.cyan;
                 break;
             case ElementType.Grass:
                 result = Color.green;

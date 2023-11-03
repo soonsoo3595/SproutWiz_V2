@@ -20,6 +20,17 @@ public class GridTileVisual : MonoBehaviour
         outLineSprite = outLine.GetComponent<SpriteRenderer>();
     }
 
+    public void SetTileColor(Color newColor)
+    {
+        tileSprite.color = newColor;
+    }
+
+    public void ResetTileColor()
+    {
+        tileSprite.color = Color.white;
+    }
+
+
     public void SetCropSptire(Sprite sprite)
     {
         cropSprite.sprite = sprite;
