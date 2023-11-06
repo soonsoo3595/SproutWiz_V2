@@ -98,7 +98,7 @@ public class GridSystemVisual : MonoBehaviour
         Element element = GridManager.Instance.GetTileData(position).GetElement();
 
         visual.SetTileColor(ElementColor(element));
-        //visual.SetOutLineColor(ElementColor(element));
+        visual.SetOutLineColor(ElementColor(element));
 
         if (element.GetElementType() == ElementType.None) 
         {

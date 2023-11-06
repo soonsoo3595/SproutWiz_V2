@@ -30,7 +30,6 @@ public class GridTileVisual : MonoBehaviour
         tileSprite.color = Color.white;
     }
 
-
     public void SetCropSptire(Sprite sprite)
     {
         cropSprite.sprite = sprite;
