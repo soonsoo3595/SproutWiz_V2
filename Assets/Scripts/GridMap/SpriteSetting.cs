@@ -14,4 +14,13 @@ public class SpriteSetting : ScriptableObject
     public Sprite FireHarvest;
     public Sprite WaterHarvest;
     public Sprite GrassHarvest;
+
+
+    public Transform TEST_FireGrowth;
+    public Transform TEST_WaterGrowth;
+    public Transform TEST_GrassGrowth;
+
+    public Transform TEST_FireHarvest;
+    public Transform TEST_WaterHarvest;
+    public Transform TEST_GrassHarvest;
 }
