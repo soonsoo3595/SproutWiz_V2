@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 5572290149800366868}
   - component: {fileID: 2611021397597658438}
   m_Layer: 0
-  m_Name: "\uBD88\uC0C8\uC2F9"
+  m_Name: FireGrowth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

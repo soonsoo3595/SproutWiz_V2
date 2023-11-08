@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 8243137301358209123}
   - component: {fileID: 5880149622278535851}
   m_Layer: 0
-  m_Name: "\uBD882"
+  m_Name: FireHarvest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

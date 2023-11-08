@@ -75,10 +75,10 @@ public class GridSystemVisual : MonoBehaviour
                 break;
             case ElementRelation.Disadvantage:
                 visual.SetTileColor(Color.black);
-                //visual.SetOutLineColor(Color.black);
+                visual.SetOutLineColor(Color.black);
                 break;
             case ElementRelation.Irrelevant:
-                //visual.ResetTileColor();
+                visual.SetOutLineColor(Color.black);
 
                 break;
             default:
