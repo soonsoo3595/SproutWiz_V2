@@ -9,7 +9,6 @@ public class MainGame : MonoBehaviour
     public Button pauseBtn;
 
     public GameObject blind;
-
     
     [Header("Stage")]
     public Stage stage;
@@ -20,7 +19,16 @@ public class MainGame : MonoBehaviour
     public GameObject gameOverPopup;
 
     public Button retryBtn;
-    
+
+    [Header("CountDown")]
+    public GameObject countDown;
+    public Text countDownTxt;
+
+    [Header("System")]
+    public ScoreSystem scoreSystem;
+    public FeverSystem feverSystem;
+
+
     void Awake()
     {
         pauseBtn.onClick.AddListener(ClickPause);
@@ -29,18 +37,43 @@ public class MainGame : MonoBehaviour
 
     void Start()
     {
-        // 스테이지 세팅
         StartGame();
     }
 
+
     public void StartGame()
     {
-        timer.StartTimer();
+        StartCoroutine(GameStart());
     }
 
     public void EndGame()
     {
         gameOverPopup.SetActive(true);
+    }
+
+    public IEnumerator GameStart()
+    {
+        blind.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+        countDown.SetActive(true);
+
+        float countDownTime = 3f;
+
+        while(countDownTime > 0f)
+        {
+            countDownTime -= Time.deltaTime;
+            countDownTxt.text = Mathf.CeilToInt(countDownTime).ToString();
+            yield return null;
+        }
+
+        countDownTxt.text = "Game Start!";
+        yield return new WaitForSeconds(1.5f);
+
+        countDown.SetActive(false);
+        blind.SetActive(false);
+
+        timer.StartTimer();
     }
 
     public void Retry()
@@ -51,7 +84,10 @@ public class MainGame : MonoBehaviour
         
         stage.InitStage();
         goalContainer.UpdateContainer();
-        
+
+        scoreSystem.InitScore();
+        feverSystem.InitFever();
+
         timer.ResetTimer();
         StartGame();
     }

@@ -10,7 +10,8 @@ public class TileFactory : MonoBehaviour
     public delegate void Harvest(TileData tile);
 
     public static Harvest harvest;
-    
+
+    private bool isHarvested = false;
 
     private void Awake()
     {
@@ -25,10 +26,14 @@ public class TileFactory : MonoBehaviour
         }
     }
 
-    public void MakeOrder(TileData tile, TetrisUnit unit)
+    public bool MakeOrder(TileData tile, TetrisUnit unit)
     {
+        isHarvested = false;
+
         Order order = new Order(tile, unit);
         ClassifyOrder(order);
+
+        return isHarvested;
     }
 
     private void ClassifyOrder(Order order)
@@ -94,6 +99,8 @@ public class TileFactory : MonoBehaviour
     {
         if (order.GetTile().growPoint == GrowPoint.Harvest)
         {
+            isHarvested = true;
+
             harvest(order.GetTile());
             order.GetTile().InitTile();
         }
