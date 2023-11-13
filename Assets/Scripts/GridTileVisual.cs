@@ -74,7 +74,7 @@ public class GridTileVisual : MonoBehaviour
 
     public void PlayAnimHarvest()
     {
-
+        CropAnim.SetTrigger("Harvest");
     }
 
     public void AnimDepressIs(bool param)

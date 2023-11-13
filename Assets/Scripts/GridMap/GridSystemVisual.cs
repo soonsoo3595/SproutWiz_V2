@@ -46,6 +46,11 @@ public class GridSystemVisual : MonoBehaviour
         GrowPoint growPoint = targetTile.growPoint;
 
         visual.SetCropSptire(CropSprite(targetElement, growPoint));
+        if(growPoint == GrowPoint.Harvest)
+        {
+            visual.PlayAnimHarvest();
+
+        }
     }
 
     private void AddUnit(GridPosition position, TileUnit unit)
@@ -139,21 +144,40 @@ public class GridSystemVisual : MonoBehaviour
     {
         Sprite result = null;
 
-        switch (element.GetElementType())
+        if(growPoint == GrowPoint.Growth)
         {
-            case ElementType.None:
-                result = SpriteSet.Seed;
-                break;
-            case ElementType.Fire:
-                result = SpriteSet.FireGrowth;
-                break;
-            case ElementType.Water:
-                result = SpriteSet.WaterGrowth;
-                break;
-            case ElementType.Grass:
-                result = SpriteSet.GrassGrowth;
-                break;
+            switch (element.GetElementType())
+            {
+                case ElementType.None:
+                    //result = SpriteSet.Seed;
+                    break;
+                case ElementType.Fire:
+                    result = SpriteSet.FireGrowth;
+                    break;
+                case ElementType.Water:
+                    result = SpriteSet.WaterGrowth;
+                    break;
+                case ElementType.Grass:
+                    result = SpriteSet.GrassGrowth;
+                    break;
+            }
         }
+        else if(growPoint == GrowPoint.Harvest)
+        {
+            switch (element.GetElementType())
+            {
+                case ElementType.Fire:
+                    result = SpriteSet.FireHarvest;
+                    break;
+                case ElementType.Water:
+                    result = SpriteSet.WaterHarvest;
+                    break;
+                case ElementType.Grass:
+                    result = SpriteSet.GrassHarvest;
+                    break;
+            }
+        }
+       
 
         return result;
     }

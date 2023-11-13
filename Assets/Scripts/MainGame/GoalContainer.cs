@@ -73,6 +73,7 @@ public class GoalContainer : MonoBehaviour
             goalObjectList[i].goalData.count = Mathf.Clamp(goalObjectList[i].goalData.count - 1, 0, 99);
             UpdateText(goalObjectList[i]);
         }
+
     }
 
     public void IsAchieveGoal()
