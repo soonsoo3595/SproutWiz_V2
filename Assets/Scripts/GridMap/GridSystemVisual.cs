@@ -74,12 +74,13 @@ public class GridSystemVisual : MonoBehaviour
                 //visual.SetOutLineColor(ElementColor(element));
                 break;
             case ElementRelation.Disadvantage:
-                visual.SetTileColor(Color.black);
+                visual.SetTileColor(new Color(0.5f, 0.6f, 0.55f));
                 visual.SetOutLineColor(Color.black);
+
+                visual.AnimDepressIs(true);
                 break;
             case ElementRelation.Irrelevant:
                 visual.SetOutLineColor(Color.black);
-
                 break;
             default:
                 break;
@@ -99,6 +100,7 @@ public class GridSystemVisual : MonoBehaviour
 
         visual.SetTileColor(ElementColor(element));
         visual.SetOutLineColor(ElementColor(element));
+        visual.AnimDepressIs(false);
 
         if (element.GetElementType() == ElementType.None) 
         {

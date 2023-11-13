@@ -13,11 +13,15 @@ public class GridTileVisual : MonoBehaviour
     SpriteRenderer cropSprite;
     SpriteRenderer outLineSprite;
 
+    Animator CropAnim;
+
     private void Awake()
     {
         tileSprite = tileVisual.GetComponent<SpriteRenderer>();
         cropSprite = cropVisual.GetComponent<SpriteRenderer>();
         outLineSprite = outLine.GetComponent<SpriteRenderer>();
+
+        CropAnim = cropSprite.GetComponent<Animator>();
     }
 
     public void SetTileColor(Color newColor)
@@ -71,5 +75,10 @@ public class GridTileVisual : MonoBehaviour
     public void PlayAnimHarvest()
     {
 
+    }
+
+    public void AnimDepressIs(bool param)
+    {
+        CropAnim.SetBool("OnNegative", param);
     }
 }
