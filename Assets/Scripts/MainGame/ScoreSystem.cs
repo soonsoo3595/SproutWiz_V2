@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class ScoreSystem : MonoBehaviour
 {
     private int score;
-    private bool isFever;
 
     public MainGame mainGame;
     public Text scoreTxt;
@@ -26,19 +25,15 @@ public class ScoreSystem : MonoBehaviour
 
     private void AddScore(int score) 
     {
-        if (isFever)
+        if (mainGame.isFeverOn)
             score *= 2;
 
         this.score += score;
         UpdateScoreText();
     }
 
-    public void StartFever() => isFever = true;
-    public void EndFever() => isFever = false;
-
     public void InitScore()
     {
-        isFever = false;
         score = 0;
         UpdateScoreText();
     }
@@ -51,5 +46,6 @@ public class ScoreSystem : MonoBehaviour
 
         Debug.Log(count + "°³ ¼öÈ®ÇØ¼­ " + curScore + "Á¡ È¹µæ");
         AddScore(curScore);
+        mainGame.feverSystem.IncreaseGauge(count);
     }
 }

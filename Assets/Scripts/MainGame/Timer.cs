@@ -22,7 +22,7 @@ public class Timer : MonoBehaviour
     {
         while(remainTime > 0f)
         {
-            if(!isPaused)
+            if(!mainGame.isPaused)
             {
                 remainTime -= Time.deltaTime;
 
@@ -36,23 +36,12 @@ public class Timer : MonoBehaviour
             }
         }
         
-        // 타이머 종료 시 아래의 코드 실행
         mainGame.EndGame();
     }
 
     private void UpdateTimerUI()
     {
         slider.value = remainTime / totalTime;
-    }
-
-    public void PauseTimer()
-    {
-        isPaused = true;
-    }
-
-    public void ResumeTimer()
-    {
-        isPaused = false;
     }
 
     public void ResetTimer()

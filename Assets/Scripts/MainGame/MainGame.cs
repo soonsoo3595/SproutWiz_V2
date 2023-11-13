@@ -28,6 +28,11 @@ public class MainGame : MonoBehaviour
     public ScoreSystem scoreSystem;
     public FeverSystem feverSystem;
 
+    [Header("Status")]
+    public bool isPaused = false;
+    public bool isGameOver = false;
+    public bool isFeverOn = false;
+    public bool skipReady = false;
 
     void Awake()
     {
@@ -40,70 +45,73 @@ public class MainGame : MonoBehaviour
         StartGame();
     }
 
-
     public void StartGame()
     {
-        StartCoroutine(GameStart());
+        StartCoroutine(Ready());
     }
 
     public void EndGame()
     {
+        isGameOver = true;
+        feverSystem.EndFever();
         gameOverPopup.SetActive(true);
     }
 
-    public IEnumerator GameStart()
+    public IEnumerator Ready()
     {
-        blind.SetActive(true);
-
-        yield return new WaitForSeconds(1f);
-        countDown.SetActive(true);
-
-        float countDownTime = 3f;
-
-        while(countDownTime > 0f)
+        if(!skipReady)
         {
-            countDownTime -= Time.deltaTime;
-            countDownTxt.text = Mathf.CeilToInt(countDownTime).ToString();
-            yield return null;
+            blind.SetActive(true);
+
+            yield return new WaitForSeconds(1f);
+            countDown.SetActive(true);
+
+            float countDownTime = 3f;
+
+            while (countDownTime > 0f)
+            {
+                countDownTime -= Time.deltaTime;
+                countDownTxt.text = Mathf.CeilToInt(countDownTime).ToString();
+                yield return null;
+            }
+
+            countDownTxt.text = "Game Start!";
+            yield return new WaitForSeconds(1.5f);
+
+            countDown.SetActive(false);
+            blind.SetActive(false);
         }
 
-        countDownTxt.text = "Game Start!";
-        yield return new WaitForSeconds(1.5f);
-
-        countDown.SetActive(false);
-        blind.SetActive(false);
-
         timer.StartTimer();
+        feverSystem.StartFever();
+        isGameOver = false;
     }
 
     public void Retry()
     {
-        GridManager.clearGrid();
+        ResetGame();
 
         gameOverPopup.SetActive(false);
         
+        StartGame();
+    }
+
+    public void ResetGame()
+    {
+        GridManager.clearGrid();
+
         stage.InitStage();
         goalContainer.UpdateContainer();
 
         scoreSystem.InitScore();
-        feverSystem.InitFever();
 
         timer.ResetTimer();
-        StartGame();
     }
 
     void ClickPause()
     {
-        if(timer.isPaused)
-        {
-            timer.ResumeTimer();
-            blind.SetActive(false);
-        }
-        else
-        {
-            timer.PauseTimer();
-            blind.SetActive(true);
-        }
+        isPaused = !isPaused;
+        blind.SetActive(isPaused);
     }
 
 }

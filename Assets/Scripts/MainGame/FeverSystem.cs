@@ -9,40 +9,81 @@ public class FeverSystem : MonoBehaviour
     public MainGame mainGame;
     public Button feverBtn;
     public Image disable;
-    public Text remainTime;
     public GameObject feverImage;
 
     public float feverTime = 10f;
-    public float reuseTime = 40f;
-    public float fisrtReuseTime = 35f;
+    public List<int> gaugeList;
+    public float maxFeverGauge = 60f;
+
+    private float feverGauge = 0f;
+    public float FeverGauge
+    {
+        get => feverGauge;
+        set
+        {
+            feverGauge = value;
+            disable.fillAmount = feverGauge / maxFeverGauge;
+        }
+    }
 
     void Start()
     {
-        feverBtn.onClick.AddListener(StartFever);
-        DisableFeverBtn(fisrtReuseTime);
+        feverBtn.onClick.AddListener(FeverOn);
     }
 
-    void StartFever()
+    public void FeverOn()
     {
-        mainGame.scoreSystem.StartFever();
-        DisableFeverBtn(reuseTime);
+        mainGame.isFeverOn = true;
         feverImage.SetActive(true);
 
-        Invoke("EndFever", feverTime);
+        feverBtn.interactable = false;
+
+        Invoke("FeverOff", feverTime);
+    }
+
+    public void FeverOff()
+    {
+        if(mainGame.isGameOver) return;
+
+        mainGame.isFeverOn = false;
+        feverImage.SetActive(false);
+        StartFever();
+    }
+
+    public void StartFever()
+    {
+        FeverGauge = 0f;
+        StartCoroutine(FillFeverGauge());
     }
 
     public void EndFever()
     {
-        mainGame.scoreSystem.EndFever();
+        mainGame.isFeverOn = false;
         feverImage.SetActive(false);
-    }
-
-    void DisableFeverBtn(float reuseTime)
-    {
         feverBtn.interactable = false;
-        StartCoroutine(CoolTimeFever(reuseTime));
+        StopAllCoroutines();
     }
 
+    IEnumerator FillFeverGauge()
+    {
+        while (FeverGauge < maxFeverGauge)
+        {
+            if (mainGame.isPaused)
+            {
+                yield return null;
+            }
+            else
+            {
+                FeverGauge += 0.1f;
+
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+
+        feverBtn.interactable = true;
+    }
+
+    /* 쿨타임(시간) -> 스택으로 변동 
     IEnumerator CoolTimeFever(float coolTime)
     {
         while(coolTime > 0.0f)
@@ -60,9 +101,10 @@ public class FeverSystem : MonoBehaviour
 
         feverBtn.interactable = true;
     }
+    */
 
-    public void InitFever()
+    public void IncreaseGauge(int count)
     {
-        DisableFeverBtn(fisrtReuseTime);
+        FeverGauge += gaugeList[count - 1];
     }
 }
