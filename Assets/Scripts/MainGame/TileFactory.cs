@@ -103,7 +103,7 @@ public class TileFactory : MonoBehaviour
 
             harvest(order.GetTile());
 
-            //order.GetTile().InitTile();
+            order.GetTile().InitTile();
         }
     }
 
