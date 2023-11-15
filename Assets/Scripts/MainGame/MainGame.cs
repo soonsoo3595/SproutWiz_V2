@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static LevelData;
 
 public class MainGame : MonoBehaviour
 {
@@ -55,6 +56,9 @@ public class MainGame : MonoBehaviour
         isGameOver = true;
         feverSystem.EndFever();
         gameOverPopup.SetActive(true);
+
+        GridManager.clearGrid();
+        LevelData.changeTileData(new GridPosition(-1, -1));
     }
 
     public IEnumerator Ready()

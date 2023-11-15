@@ -60,7 +60,14 @@ public class TetrisViewPanel : MonoBehaviour
         RelocateTetris();
     }
 
+    public void ReRoll()
+    {
+        TetrisObject tetrisObject = ViewSlots[0].GetComponentInChildren<TetrisObject>();
 
+        UpdateTetrisSlot(tetrisObject);
+
+        Destroy(tetrisObject.gameObject);
+    }
 
     private void ReplaceTetris(TetrisObject tetrisObject)
     {

@@ -84,4 +84,14 @@ public class GridPosition : IEquatable<GridPosition>
     {
         return a.x <= b.x && a.y <= b.y;
     }
+
+    public static bool operator ==(GridPosition a, (int x, int y) b)
+    {
+        return a.x == b.x && a.y == b.y;
+    }
+
+    public static bool operator !=(GridPosition a, (int x, int y) b)
+    {
+        return !(a.x == b.x && a.y == b.y);
+    }
 }
