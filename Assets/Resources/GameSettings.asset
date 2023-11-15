@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridMapWidth: 5
   GridMapHeight: 5
-  timeLimit: 10
+  timeLimit: 60
   DistanceFromHand: 298
   DistanceFromTetris_x: 0.66
   DistanceFromTetris_y: 0.91
