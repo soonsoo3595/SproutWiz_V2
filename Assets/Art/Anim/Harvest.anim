@@ -372,9 +372,9 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.56666666
-    functionName: AnimationEndEvent
+    functionName: HarvestAnimEnd
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: 01aa981a096a84a4d822966b86bcfd97, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

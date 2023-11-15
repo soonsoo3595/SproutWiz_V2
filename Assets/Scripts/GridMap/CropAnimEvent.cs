@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CropAnimEvent : MonoBehaviour
 {
-   public void AnimationEndEvent()
+   public void HarvestAnimEnd()
    {
        
 
