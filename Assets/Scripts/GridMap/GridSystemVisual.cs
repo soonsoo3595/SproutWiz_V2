@@ -32,7 +32,28 @@ public class GridSystemVisual : MonoBehaviour
     // 타일값 갱신 이후 호출되야 함.
     private void UpdateVisual(GridPosition position)
     {
+        // 시간 종료후 타일 비주얼 업데이트 용..
+        if(position == (-1, -1))
+        {
+            UpdataAllVisuals();
+            Debug.Log("모든 타일 비주얼 업데이트!");
+
+            return;
+        }
+
         ChangeSprite(position);
+    }
+
+    private void UpdataAllVisuals()
+    {
+        for (int x = 0; x < GridManager.Instance.GetWidth(); x++)
+        {
+            for (int y = 0; y < GridManager.Instance.GetHeight(); y++)
+            {
+                GridPosition position = new GridPosition(x, y);
+                ChangeSprite(position);
+            }
+        }
     }
 
     // 타일이 아니라 작물 이미지 변경으로 교체 필요.
@@ -45,11 +66,15 @@ public class GridSystemVisual : MonoBehaviour
         Element targetElement = targetTile.GetElement();
         GrowPoint growPoint = targetTile.growPoint;
 
+        // TODO: 타일, 아웃라인 컬러 부분 전체적으로 함수 추출 필요.
         visual.SetCropSptire(CropSprite(targetElement, growPoint));
-        if(growPoint == GrowPoint.Harvest)
+        visual.ResetTileColor();
+        visual.SetOutLineAlpha(0f);
+
+        // TODO: 애니메이션 기능은 가능하면 분리 예정.
+        if (growPoint == GrowPoint.Harvest)
         {
             visual.PlayAnimHarvest();
-
         }
     }
 

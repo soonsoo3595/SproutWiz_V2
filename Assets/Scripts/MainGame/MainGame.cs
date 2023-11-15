@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static LevelData;
 
 public class MainGame : MonoBehaviour
 {
@@ -49,6 +50,9 @@ public class MainGame : MonoBehaviour
     public void EndGame()
     {
         gameOverPopup.SetActive(true);
+
+        GridManager.clearGrid();
+        LevelData.changeTileData(new GridPosition(-1, -1));
     }
 
     public IEnumerator GameStart()
@@ -78,8 +82,6 @@ public class MainGame : MonoBehaviour
 
     public void Retry()
     {
-        GridManager.clearGrid();
-
         gameOverPopup.SetActive(false);
         
         stage.InitStage();
