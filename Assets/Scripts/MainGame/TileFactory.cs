@@ -7,10 +7,6 @@ public class TileFactory : MonoBehaviour
 {
     public static TileFactory Instance { get; private set; }
 
-    public delegate void Harvest(TileData tile);
-
-    public static Harvest harvest;
-
     private bool isHarvested = false;
 
     private void Awake()
@@ -101,7 +97,7 @@ public class TileFactory : MonoBehaviour
         {
             isHarvested = true;
 
-            harvest(order.GetTile());
+            EventManager.harvest(order.GetTile());
 
             order.GetTile().InitTile();
         }

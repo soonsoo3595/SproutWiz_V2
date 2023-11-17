@@ -14,8 +14,8 @@ public class GoalContainer : MonoBehaviour
     
     void Start()
     {
-        TileFactory.harvest += AfterHarvest;
-        LevelData.checkAchieveGoal += IsAchieveGoal;
+        EventManager.harvest += UpdateGoal;
+        EventManager.afterApplyTetris += IsAchieveGoal;
 
         UpdateContainer();
     }
@@ -63,7 +63,7 @@ public class GoalContainer : MonoBehaviour
         goal.text.text = $"x{goal.goalData.count}";
     }
     
-    private void AfterHarvest(TileData tile)
+    private void UpdateGoal(TileData tile)
     {
         Element element = tile.GetElement();
 

@@ -21,7 +21,7 @@ public class FeverSystem : MonoBehaviour
         get => feverGauge;
         set
         {
-            feverGauge = value;
+            feverGauge = Mathf.Clamp(value, 0, maxFeverGauge);
             disable.fillAmount = feverGauge / maxFeverGauge;
         }
     }
@@ -29,6 +29,8 @@ public class FeverSystem : MonoBehaviour
     void Start()
     {
         feverBtn.onClick.AddListener(FeverOn);
+
+        EventManager.harvestCount += IncreaseGauge;
     }
 
     public void FeverOn()
@@ -105,6 +107,8 @@ public class FeverSystem : MonoBehaviour
 
     public void IncreaseGauge(int count)
     {
+        if (count == 0) return;
+
         FeverGauge += gaugeList[count - 1];
     }
 }

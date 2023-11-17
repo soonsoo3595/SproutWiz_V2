@@ -12,12 +12,6 @@ public class LevelData
     public delegate void ChangeTileData(GridPosition gridPosition);
     public static ChangeTileData changeTileData;
 
-    public delegate void CheckAchieveGoal();
-    public static CheckAchieveGoal checkAchieveGoal;
-
-    public delegate void AddHarvestScore(int count);
-    public static AddHarvestScore addHarvestScore;
-    
     public LevelData(int width, int height) 
     {
         InitGridData(width, height);
@@ -53,9 +47,9 @@ public class LevelData
             // 값 갱신이 없으면 실행하지 말아야함.
             changeTileData(unit.GetGridPosition());
         }
-        
-        addHarvestScore(count);
-        checkAchieveGoal();
+
+        EventManager.harvestCount(count);
+        EventManager.afterApplyTetris();
     }
 
     public TileData GetData(GridPosition gridPosition)
