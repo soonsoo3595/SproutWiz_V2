@@ -6,6 +6,7 @@ using static LevelData;
 
 public class MainGame : MonoBehaviour
 {
+    [Header("Timer")]
     public Timer timer;
     public Button pauseBtn;
 
@@ -26,8 +27,10 @@ public class MainGame : MonoBehaviour
     public Text countDownTxt;
 
     [Header("System")]
-    public ScoreSystem scoreSystem;
+    public RewardSystem scoreSystem;
     public FeverSystem feverSystem;
+    public ReRollSystem rerollSystem;
+    public GameRecord gameRecord;
 
     [Header("Status")]
     public bool isPaused = false;
@@ -39,6 +42,8 @@ public class MainGame : MonoBehaviour
     {
         pauseBtn.onClick.AddListener(ClickPause);
         retryBtn.onClick.AddListener(Retry);
+
+        gameRecord = new GameRecord();
     }
 
     void Start()

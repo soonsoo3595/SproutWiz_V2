@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreSystem : MonoBehaviour
+public class RewardSystem : MonoBehaviour
 {
     public MainGame mainGame;
     public GameObject combo;
@@ -50,17 +50,21 @@ public class ScoreSystem : MonoBehaviour
         int curScore = normalHarvestScore * count + multiHarvestScore[count];
 
         Debug.Log(count + "°³ ¼öÈ®ÇØ¼­ " + curScore + "Á¡ È¹µæ");
-        StartCoroutine(PrintCombo(count));
+
+        mainGame.gameRecord.harvestCount += count;
+        StartCoroutine(MultiHarvest(count));
         AddScore(curScore);
     }
 
-    IEnumerator PrintCombo(int count)
+    IEnumerator MultiHarvest(int count)
     {
         if (count <= 1) yield break;
 
         combo.SetActive(true);
         
         Text comboTxt = combo.GetComponentInChildren<Text>();
+
+        mainGame.gameRecord.multiHarvestCount++;
 
         switch(count)
         {

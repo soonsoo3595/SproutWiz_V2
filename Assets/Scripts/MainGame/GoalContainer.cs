@@ -91,6 +91,7 @@ public class GoalContainer : MonoBehaviour
 
         if (!flag) return;
 
+        mainGame.gameRecord.achieveGoalCount++;
         PlayAnimation();
         mainGame.stage.NextStage();
         UpdateContainer();

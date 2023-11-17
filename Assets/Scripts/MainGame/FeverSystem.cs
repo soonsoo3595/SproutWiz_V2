@@ -37,6 +37,7 @@ public class FeverSystem : MonoBehaviour
     {
         mainGame.isFeverOn = true;
         feverImage.SetActive(true);
+        mainGame.gameRecord.feverCount++;
 
         feverBtn.interactable = false;
 
@@ -84,26 +85,6 @@ public class FeverSystem : MonoBehaviour
 
         feverBtn.interactable = true;
     }
-
-    /* 쿨타임(시간) -> 스택으로 변동 
-    IEnumerator CoolTimeFever(float coolTime)
-    {
-        while(coolTime > 0.0f)
-        {
-            coolTime -= Time.deltaTime;
-
-            disable.fillAmount = coolTime / reuseTime;
-
-            string t = TimeSpan.FromSeconds(coolTime).ToString("s\\:ff");
-            string[] tokens = t.Split(':');
-            remainTime.text = string.Format("{0}", tokens[0]);
-
-            yield return new WaitForFixedUpdate();
-        }
-
-        feverBtn.interactable = true;
-    }
-    */
 
     public void IncreaseGauge(int count)
     {

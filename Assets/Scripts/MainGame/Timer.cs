@@ -6,12 +6,19 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
     private float remainTime = 0f;
-
+    public float RemainTime
+    {
+        get { return remainTime; } 
+        set
+        {
+            remainTime = value;
+            slider.value = remainTime / totalTime;
+        }
+    }
 
     public MainGame mainGame;
     public Slider slider;
     public float totalTime = 80f;
-    public bool isPaused = false;
 
     private void Awake()
     {
@@ -20,13 +27,11 @@ public class Timer : MonoBehaviour
 
     private IEnumerator RunTimer()
     {
-        while(remainTime > 0f)
+        while(RemainTime > 0f)
         {
             if(!mainGame.isPaused)
             {
-                remainTime -= Time.deltaTime;
-
-                UpdateTimerUI();
+                RemainTime -= Time.deltaTime;
 
                 yield return null;
             }
@@ -38,22 +43,15 @@ public class Timer : MonoBehaviour
         
         mainGame.EndGame();
     }
-
-    private void UpdateTimerUI()
-    {
-        slider.value = remainTime / totalTime;
-    }
-
+    
     public void ResetTimer()
     {
-        remainTime = totalTime;
-        UpdateTimerUI();
+        RemainTime = totalTime;
     }
 
     public void StartTimer()
     {
-        remainTime = totalTime;
-        UpdateTimerUI();
+        RemainTime = totalTime;
         StartCoroutine(RunTimer());
     }
 
