@@ -11,6 +11,8 @@ public class GridSystemVisual : MonoBehaviour
 
     private Transform[,] tileVisuals;
 
+    private Color DefualtOutLineColor;
+
     private void Start()
     {
         tileVisuals = new Transform[GridManager.Instance.GetWidth(), GridManager.Instance.GetHeight()];
@@ -23,6 +25,8 @@ public class GridSystemVisual : MonoBehaviour
                 tileVisuals[x,y] = Instantiate(gridTilePrefab, GridManager.Instance.GetWorldPosition(gridPosition), Quaternion.identity, this.transform);
             }
         }
+
+        DefualtOutLineColor = Color.white;
 
         LevelData.changeTileData += UpdateVisual;
         GridManager.addUnitOnGridTile += AddUnit;
@@ -91,7 +95,8 @@ public class GridSystemVisual : MonoBehaviour
 
         if (element.GetElementType() == ElementType.None)
         {
-            visual.SetOutLineColor(Color.black);
+            visual.SetOutLineColor(DefualtOutLineColor);
+            visual.SetOutLineAlpha(0.5f);
 
             visual.ResetTileColor();
         }
@@ -101,16 +106,19 @@ public class GridSystemVisual : MonoBehaviour
         {
             case ElementRelation.Equal:
                 visual.SetTileColor(ElementColor(element));
-                //visual.SetOutLineColor(ElementColor(element));
+                visual.SetOutLineColor(DefualtOutLineColor);
+                visual.SetOutLineAlpha(1f);
                 break;
             case ElementRelation.Disadvantage:
                 visual.SetTileColor(new Color(0.5f, 0.6f, 0.55f));
-                visual.SetOutLineColor(Color.black);
+                visual.SetOutLineColor(DefualtOutLineColor);
+                visual.SetOutLineAlpha(1f);
 
                 visual.AnimDepressIs(true);
                 break;
             case ElementRelation.Irrelevant:
-                visual.SetOutLineColor(Color.black);
+                visual.SetOutLineColor(DefualtOutLineColor);
+                visual.SetOutLineAlpha(0.5f);
                 break;
             default:
                 break;
@@ -130,6 +138,7 @@ public class GridSystemVisual : MonoBehaviour
 
         visual.SetTileColor(ElementColor(element));
         visual.SetOutLineColor(ElementColor(element));
+        visual.SetOutLineAlpha(0.5f);
         visual.AnimDepressIs(false);
 
         if (element.GetElementType() == ElementType.None) 
