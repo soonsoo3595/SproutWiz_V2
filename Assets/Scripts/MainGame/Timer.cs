@@ -22,11 +22,12 @@ public class Timer : MonoBehaviour
 
     private void Awake()
     {
-        // totalTime = GridManager.Instance.GetSetting().timeLimit;
+        //totalTime = GridManager.Instance.GetSetting().timeLimit;
     }
 
     private void Start()
     {
+        totalTime = GridManager.Instance.GetSetting().timeLimit;
         EventManager.resetMainGame += ResetTimer;
     }
 
