@@ -7,6 +7,9 @@ public class SpriteSetting : ScriptableObject
 {
     public Sprite Seed;
 
+    public Sprite DefaultTile;
+    public Sprite LockTile;
+
     public Sprite FireGrowth;
     public Sprite WaterGrowth;
     public Sprite GrassGrowth;

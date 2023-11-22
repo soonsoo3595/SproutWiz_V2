@@ -11,6 +11,8 @@ public class GridSystemVisual : MonoBehaviour
 
     private Transform[,] tileVisuals;
 
+    private Color DefualtOutLineColor;
+
     private void Start()
     {
         tileVisuals = new Transform[GridManager.Instance.GetWidth(), GridManager.Instance.GetHeight()];
@@ -24,6 +26,8 @@ public class GridSystemVisual : MonoBehaviour
             }
         }
 
+        DefualtOutLineColor = Color.white;
+
         LevelData.changeTileData += UpdateVisual;
         GridManager.addUnitOnGridTile += AddUnit;
         GridManager.removeUnitOnGridTile += RemoveUnit;
@@ -32,7 +36,6 @@ public class GridSystemVisual : MonoBehaviour
     // 타일값 갱신 이후 호출되야 함.
     private void UpdateVisual(GridPosition position)
     {
-        // 시간 종료후 타일 비주얼 업데이트 용..
         if(position == (-1, -1))
         {
             UpdataAllVisuals();
@@ -56,10 +59,24 @@ public class GridSystemVisual : MonoBehaviour
         }
     }
 
-    // 타일이 아니라 작물 이미지 변경으로 교체 필요.
+
     private void ChangeSprite(GridPosition position)
     {
         GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
+
+        if (!GridManager.Instance.CheckDeployableGrid(position))
+        {
+            visual.SetCropSptire(SpriteSet.LockTile);
+            //visual.SetTileSptire(SpriteSet.LockTile);
+
+            return;
+        }
+        else
+        {
+            visual.SetCropSptire(null);
+        }
+
+
 
         TileData targetTile = GridManager.Instance.GetTileData(position);
 
@@ -76,6 +93,10 @@ public class GridSystemVisual : MonoBehaviour
         {
             visual.PlayAnimHarvest();
         }
+        else
+        {
+            visual.ResetAnimation();
+        }
     }
 
     private void AddUnit(GridPosition position, TileUnit unit)
@@ -91,7 +112,8 @@ public class GridSystemVisual : MonoBehaviour
 
         if (element.GetElementType() == ElementType.None)
         {
-            visual.SetOutLineColor(Color.black);
+            visual.SetOutLineColor(DefualtOutLineColor);
+            visual.SetOutLineAlpha(0.5f);
 
             visual.ResetTileColor();
         }
@@ -101,16 +123,19 @@ public class GridSystemVisual : MonoBehaviour
         {
             case ElementRelation.Equal:
                 visual.SetTileColor(ElementColor(element));
-                //visual.SetOutLineColor(ElementColor(element));
+                visual.SetOutLineColor(DefualtOutLineColor);
+                visual.SetOutLineAlpha(1f);
                 break;
             case ElementRelation.Disadvantage:
                 visual.SetTileColor(new Color(0.5f, 0.6f, 0.55f));
-                visual.SetOutLineColor(Color.black);
+                visual.SetOutLineColor(DefualtOutLineColor);
+                visual.SetOutLineAlpha(1f);
 
                 visual.AnimDepressIs(true);
                 break;
             case ElementRelation.Irrelevant:
-                visual.SetOutLineColor(Color.black);
+                visual.SetOutLineColor(DefualtOutLineColor);
+                visual.SetOutLineAlpha(0.5f);
                 break;
             default:
                 break;
@@ -130,6 +155,7 @@ public class GridSystemVisual : MonoBehaviour
 
         visual.SetTileColor(ElementColor(element));
         visual.SetOutLineColor(ElementColor(element));
+        visual.SetOutLineAlpha(0.5f);
         visual.AnimDepressIs(false);
 
         if (element.GetElementType() == ElementType.None) 

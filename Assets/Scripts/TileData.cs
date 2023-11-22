@@ -9,7 +9,7 @@ public class TileData
     private Element element;
 
     public GrowPoint growPoint;
-    
+
     public TileData(GridPosition gridPosition)
     {
         this.gridPosition = gridPosition;

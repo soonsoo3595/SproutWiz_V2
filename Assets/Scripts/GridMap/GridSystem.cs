@@ -99,6 +99,25 @@ public class GridSystem
         return CheckOnGrid(GetGridPosition(position));
     }
 
+    public bool CheckDeployableGrid(GridPosition gridPosition)
+    {
+        return gridTileArray[gridPosition.x, gridPosition.y].GetDeployable();
+    }
+    
+    // TODO: 이런 방식 말고 TileData로 처리하는 방식 생각해 바야함.
+    public void SetDeployableGrid(GridPosition gridPosition, bool state)
+    {
+        gridTileArray[gridPosition.x, gridPosition.y].SetDeployable(state);
+    }
+
+    public void ResetDeployableGrid()
+    {
+        foreach (GridTile gridTile in gridTileArray)
+        {
+            gridTile.SetDeployable(true);
+        }
+    }
+
     public void ResetGridTile()
     {
         levelData.ResetData(width, height);

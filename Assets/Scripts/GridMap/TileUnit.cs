@@ -5,9 +5,12 @@ public class TileUnit : MonoBehaviour
     private GridPosition gridPosition;
     private bool onGrid;
 
+    private bool isDeployable;
+
     private void Awake()
     {
         onGrid = false;
+        isDeployable = false;
     }
 
     private void Start()
@@ -20,6 +23,7 @@ public class TileUnit : MonoBehaviour
         if (onGrid)
         {
             CheckMoveGridPosition();
+            CheckDeployableGrid();
         }
         else
         {
@@ -77,12 +81,26 @@ public class TileUnit : MonoBehaviour
 
         if (GridManager.Instance.CheckOnGrid(gridPosition))
             GridManager.Instance.AddUnitAtGridPosition(gridPosition, this);
+
+        CheckDeployableGrid();
+    }
+
+    private void CheckDeployableGrid()
+    {
+        if (!onGrid) return;
+
+        isDeployable = GridManager.Instance.CheckDeployableGrid(gridPosition);
     }
 
 
     public bool GetOnGrid()
     {
         return onGrid;
+    }
+
+    public bool GetDeployable()
+    {
+        return isDeployable;
     }
 
     public GridPosition GetGridPosition()

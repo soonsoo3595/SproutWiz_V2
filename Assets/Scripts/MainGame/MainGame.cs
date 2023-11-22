@@ -71,6 +71,7 @@ public class MainGame : MonoBehaviour
 
         GridManager.clearGrid();
         LevelData.changeTileData(new GridPosition(-1, -1));
+        GridManager.Instance.ResetDeployableGrid();
     }
 
     public IEnumerator Ready()

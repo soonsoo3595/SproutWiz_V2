@@ -81,6 +81,11 @@ public class TileFactory : MonoBehaviour
     private void DisAdvantage(Order order)
     {
         order.GetTile().InitTile();
+
+        GridPosition gridPosition = order.GetUnit().GetGridPosition();
+
+        GridManager.Instance.SetDeployableGrid(gridPosition, false);
+        LevelData.changeTileData(gridPosition);
     }
 
     private void FinishOrder(Order order)
@@ -91,8 +96,15 @@ public class TileFactory : MonoBehaviour
 
             EventManager.harvest(order.GetTile());
 
-            order.GetTile().InitTile();
+            StartCoroutine(InitTileDelayed(order, 0.35f));
         }
     }
 
+    private IEnumerator InitTileDelayed(Order order, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        order.GetTile().InitTile();
+        LevelData.changeTileData(order.GetUnit().GetGridPosition());
+    }
 }

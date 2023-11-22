@@ -37,7 +37,7 @@ public class GridManager : MonoBehaviour
         }
 
         gridSystem = new GridSystem(gameSetting.GridMapWidth, gameSetting.GridMapHeight);
-        gridSystem.CreateDebugObjcet(gridDebugObjectPrefab, debugObjectContainer);
+        //gridSystem.CreateDebugObjcet(gridDebugObjectPrefab, debugObjectContainer);
 
         clearGrid += gridSystem.ResetGridTile;
     }
@@ -85,6 +85,14 @@ public class GridManager : MonoBehaviour
     public bool CheckOnGrid(GridPosition gridPosition) => gridSystem.CheckOnGrid(gridPosition);
 
     public bool CheckOnGrid(Vector3 position) => gridSystem.CheckOnGrid(position);
+
+
+    public bool CheckDeployableGrid(GridPosition gridPosition) => gridSystem.CheckDeployableGrid(gridPosition);
+
+    public void SetDeployableGrid(GridPosition gridPosition, bool state) => gridSystem.SetDeployableGrid(gridPosition, state);
+
+    public void ResetDeployableGrid() => gridSystem.ResetDeployableGrid();
+
 
     public TileData GetTileData(GridPosition position) => gridSystem.GetTileData(position);
 
