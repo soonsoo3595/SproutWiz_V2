@@ -19,5 +19,25 @@ public class GameRecord
         rerollCount = 0;
     }
 
+    public List<int> GetRecord()
+    {
+        List<int> record = new List<int>();
 
+        record.Add(harvestCount);
+        record.Add(multiHarvestCount);
+        record.Add(achieveGoalCount);
+        record.Add(feverCount);
+        record.Add(rerollCount);
+
+        return record;
+    }
+
+    public void InitRecord()
+    {
+        harvestCount = 0;
+        multiHarvestCount = 0;
+        achieveGoalCount = 0;
+        feverCount = 0;
+        rerollCount = 0;
+    }
 }

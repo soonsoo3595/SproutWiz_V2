@@ -11,15 +11,7 @@ public class TileFactory : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+        Instance = this;
     }
 
     public bool MakeOrder(TileData tile, TetrisUnit unit)

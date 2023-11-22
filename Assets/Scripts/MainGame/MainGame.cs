@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 using static LevelData;
+using TMPro;
 
 public class MainGame : MonoBehaviour
 {
@@ -19,12 +21,16 @@ public class MainGame : MonoBehaviour
     
     [Header("GameOver")] 
     public GameObject gameOverPopup;
+    public GameObject title;
+    public TextMeshProUGUI[] records;
+    public GameObject score;
+    public GameObject buttons;
 
     public Button retryBtn;
 
     [Header("CountDown")]
     public GameObject countDown;
-    public Text countDownTxt;
+    public TextMeshProUGUI countDownTxt;
 
     [Header("System")]
     public RewardSystem scoreSystem;
@@ -60,7 +66,8 @@ public class MainGame : MonoBehaviour
     {
         isGameOver = true;
         feverSystem.EndFever();
-        gameOverPopup.SetActive(true);
+        
+        StartCoroutine(GameOver());
 
         GridManager.clearGrid();
         LevelData.changeTileData(new GridPosition(-1, -1));
@@ -91,9 +98,39 @@ public class MainGame : MonoBehaviour
             blind.SetActive(false);
         }
 
+        isGameOver = false;
+
         timer.StartTimer();
         feverSystem.StartFever();
-        isGameOver = false;
+
+    }
+
+    IEnumerator GameOver()
+    {
+        gameOverPopup.SetActive(true);
+
+        List<int> gameRecords = gameRecord.GetRecord();
+
+        for (int i = 0; i < records.Length; i++)
+        {
+            for(int j = 0; j <= gameRecords[i]; j++)
+            {
+                string formattedNumber = j.ToString("0000");
+                records[i].text = formattedNumber;
+
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+
+        for(int i = 0; i <= scoreSystem.Score; i += 10)
+        {
+            string scoreText = "Score\n" + i.ToString("N0");
+            score.GetComponent<TextMeshProUGUI>().text = scoreText;
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        yield return null;
     }
 
     public void Retry()
@@ -112,9 +149,9 @@ public class MainGame : MonoBehaviour
         stage.InitStage();
         goalContainer.UpdateContainer();
 
-        scoreSystem.InitScore();
+        EventManager.resetMainGame();
 
-        timer.ResetTimer();
+        gameRecord.InitRecord();
     }
 
     void ClickPause()

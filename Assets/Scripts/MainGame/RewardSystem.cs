@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +9,7 @@ public class RewardSystem : MonoBehaviour
 {
     public MainGame mainGame;
     public GameObject combo;
-    public Text scoreTxt;
+    public TextMeshProUGUI scoreTxt;
 
     private int score;
     public int Score
@@ -17,7 +18,7 @@ public class RewardSystem : MonoBehaviour
         set
         {
             score = value;
-            UpdateScoreText();
+            scoreTxt.text = $"{score}";
         }
     }
 
@@ -28,10 +29,10 @@ public class RewardSystem : MonoBehaviour
     void Start()
     {
         InitScore();
-        EventManager.harvestCount += Harvest;
-    }
 
-    private void UpdateScoreText() => scoreTxt.text = $"Score : {Score}";
+        EventManager.harvestCount += Harvest;
+        EventManager.resetMainGame += InitScore;
+    }
 
     private void AddScore(int score) 
     {
@@ -52,8 +53,9 @@ public class RewardSystem : MonoBehaviour
         Debug.Log(count + "°³ ¼öÈ®ÇØ¼­ " + curScore + "Á¡ È¹µæ");
 
         mainGame.gameRecord.harvestCount += count;
+
         StartCoroutine(MultiHarvest(count));
-        AddScore(curScore);
+        AddScore(curScore); 
     }
 
     IEnumerator MultiHarvest(int count)
@@ -62,7 +64,7 @@ public class RewardSystem : MonoBehaviour
 
         combo.SetActive(true);
         
-        Text comboTxt = combo.GetComponentInChildren<Text>();
+        TextMeshProUGUI comboTxt = combo.GetComponentInChildren<TextMeshProUGUI>();
 
         mainGame.gameRecord.multiHarvestCount++;
 

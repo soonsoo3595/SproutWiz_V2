@@ -8,7 +8,6 @@ public class ReRollSystem : MonoBehaviour
 {
     public Button rerollBtn;
     public Image disable;
-    public Text remainTime;
 
     public MainGame mainGame;
     public TetrisViewPanel tetrisViewPanel;
@@ -29,6 +28,8 @@ public class ReRollSystem : MonoBehaviour
     private void Start()
     {
         rerollBtn.onClick.AddListener(ReRoll);
+
+        EventManager.resetMainGame += RetryGame;
     }
 
     private void ReRoll()
@@ -39,7 +40,7 @@ public class ReRollSystem : MonoBehaviour
         StartCoolTime();
     }
 
-    public void StartCoolTime()
+    private void StartCoolTime()
     {
         rerollBtn.interactable = false;
         CoolTime = 0f;
@@ -48,7 +49,7 @@ public class ReRollSystem : MonoBehaviour
 
     public void RetryGame()
     {
-        CoolTime = 0f;
+        CoolTime = reuseTime;
         rerollBtn.interactable = true;
     }
 
@@ -65,10 +66,6 @@ public class ReRollSystem : MonoBehaviour
             else
             {
                 CoolTime += Time.deltaTime;
-
-                string t = TimeSpan.FromSeconds(CoolTime).ToString("s\\:ff");
-                string[] tokens = t.Split(':');
-                remainTime.text = string.Format("{0}", tokens[0]);
 
                 yield return new WaitForFixedUpdate();
             }

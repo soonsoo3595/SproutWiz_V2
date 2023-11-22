@@ -12,4 +12,7 @@ public static class EventManager
 
     public delegate void AfterApplyTetris();
     public static AfterApplyTetris afterApplyTetris;
+
+    public delegate void ResetMainGame();
+    public static ResetMainGame resetMainGame;
 }

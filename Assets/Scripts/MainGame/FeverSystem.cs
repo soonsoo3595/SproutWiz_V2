@@ -31,6 +31,7 @@ public class FeverSystem : MonoBehaviour
         feverBtn.onClick.AddListener(FeverOn);
 
         EventManager.harvestCount += IncreaseGauge;
+        EventManager.resetMainGame += RetryGame;
     }
 
     public void FeverOn()
@@ -64,13 +65,19 @@ public class FeverSystem : MonoBehaviour
         mainGame.isFeverOn = false;
         feverImage.SetActive(false);
         feverBtn.interactable = false;
-        StopAllCoroutines();
+    }
+
+    public void RetryGame()
+    {
+        FeverGauge = 0f;
     }
 
     IEnumerator FillFeverGauge()
     {
         while (FeverGauge < maxFeverGauge)
         {
+            if(mainGame.isGameOver) yield break;
+
             if (mainGame.isPaused)
             {
                 yield return null;

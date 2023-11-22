@@ -12,17 +12,22 @@ public class Timer : MonoBehaviour
         set
         {
             remainTime = value;
-            slider.value = remainTime / totalTime;
+            timebar.fillAmount = remainTime / totalTime;
         }
     }
 
     public MainGame mainGame;
-    public Slider slider;
+    public Image timebar;
     public float totalTime = 80f;
 
     private void Awake()
     {
-        totalTime = GridManager.Instance.GetSetting().timeLimit;
+        // totalTime = GridManager.Instance.GetSetting().timeLimit;
+    }
+
+    private void Start()
+    {
+        EventManager.resetMainGame += ResetTimer;
     }
 
     private IEnumerator RunTimer()
