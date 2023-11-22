@@ -86,6 +86,14 @@ public class GridManager : MonoBehaviour
 
     public bool CheckOnGrid(Vector3 position) => gridSystem.CheckOnGrid(position);
 
+
+    public bool CheckDeployableGrid(GridPosition gridPosition) => gridSystem.CheckDeployableGrid(gridPosition);
+
+    public void SetDeployableGrid(GridPosition gridPosition, bool state) => gridSystem.SetDeployableGrid(gridPosition, state);
+
+    public void ResetDeployableGrid() => gridSystem.ResetDeployableGrid();
+
+
     public TileData GetTileData(GridPosition position) => gridSystem.GetTileData(position);
 
     public GameSetting GetSetting() => gameSetting;

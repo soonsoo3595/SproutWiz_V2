@@ -94,6 +94,8 @@ public class GoalContainer : MonoBehaviour
         PlayAnimation();
         mainGame.stage.NextStage();
         UpdateContainer();
+
+        GridManager.Instance.ResetDeployableGrid();
     }
 
     private void PlayAnimation()

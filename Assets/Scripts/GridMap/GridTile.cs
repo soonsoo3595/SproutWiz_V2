@@ -7,11 +7,14 @@ public class GridTile
     private GridPosition gridPosition;
     private List<TileUnit> units;
 
+    private bool isDeployable;
 
     public GridTile(GridPosition gridPosition)
     {
         this.gridPosition = gridPosition;
         units = new List<TileUnit>();
+
+        isDeployable = true;
     }
 
     public override string ToString()
@@ -51,5 +54,15 @@ public class GridTile
     public void ClearTileUnit()
     {
         units.Clear();
+    }
+
+    public void SetDeployable(bool state)
+    {
+        isDeployable = state;
+    }
+
+    public bool GetDeployable()
+    {
+        return isDeployable;
     }
 }

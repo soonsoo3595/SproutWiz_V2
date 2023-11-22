@@ -47,7 +47,7 @@ public class TetrisObject : MonoBehaviour
 
     private void ReleaseDrag()
     {
-        if (CheckAllUnitOnGrid())
+        if (CheckAllUnitOnGrid() && CheckAllUnitDeployable())
         {
             LevelData.applyTetris(this);
 
@@ -105,6 +105,17 @@ public class TetrisObject : MonoBehaviour
 
         return true;
     }
+
+    private bool CheckAllUnitDeployable()
+    {
+        foreach (TetrisUnit unit in units)
+        {
+            if (!unit.GetDeployable()) return false;
+        }
+
+        return true;
+    }
+
 
     public void SetUnitState(int unitNumber, Element element)
     {

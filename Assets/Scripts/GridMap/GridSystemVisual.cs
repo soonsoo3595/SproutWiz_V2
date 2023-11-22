@@ -36,7 +36,6 @@ public class GridSystemVisual : MonoBehaviour
     // 타일값 갱신 이후 호출되야 함.
     private void UpdateVisual(GridPosition position)
     {
-        // 시간 종료후 타일 비주얼 업데이트 용..
         if(position == (-1, -1))
         {
             UpdataAllVisuals();
@@ -60,10 +59,17 @@ public class GridSystemVisual : MonoBehaviour
         }
     }
 
-    // 타일이 아니라 작물 이미지 변경으로 교체 필요.
+
     private void ChangeSprite(GridPosition position)
     {
         GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
+
+        if (!GridManager.Instance.CheckDeployableGrid(position))
+        {
+            visual.SetCropSptire(null);
+            return;
+        }
+
 
         TileData targetTile = GridManager.Instance.GetTileData(position);
 
