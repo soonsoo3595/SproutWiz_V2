@@ -80,6 +80,10 @@ public class GridSystemVisual : MonoBehaviour
         {
             visual.PlayAnimHarvest();
         }
+        else
+        {
+            visual.ResetAnimation();
+        }
     }
 
     private void AddUnit(GridPosition position, TileUnit unit)

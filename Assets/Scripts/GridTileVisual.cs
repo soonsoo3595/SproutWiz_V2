@@ -8,6 +8,7 @@ public class GridTileVisual : MonoBehaviour
     [SerializeField] private Transform tileVisual;
     [SerializeField] private Transform cropVisual;
     [SerializeField] private Transform outLine;
+    [SerializeField] private Animator animator;
 
     SpriteRenderer tileSprite;
     SpriteRenderer cropSprite;
@@ -71,7 +72,8 @@ public class GridTileVisual : MonoBehaviour
     {
         
     }
-
+    
+    // trigger로 함수이름변경 필요.
     public void PlayAnimHarvest()
     {
         CropAnim.SetTrigger("Harvest");
@@ -80,5 +82,11 @@ public class GridTileVisual : MonoBehaviour
     public void AnimDepressIs(bool param)
     {
         CropAnim.SetBool("OnNegative", param);
+    }
+
+
+    public void ResetAnimation()
+    {
+        
     }
 }

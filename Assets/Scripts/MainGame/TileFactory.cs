@@ -103,8 +103,16 @@ public class TileFactory : MonoBehaviour
 
             harvest(order.GetTile());
 
-            order.GetTile().InitTile();
+            //order.GetTile().InitTile();
+            StartCoroutine(InitTileDelayed(order, 0.35f));
         }
     }
 
+    private IEnumerator InitTileDelayed(Order order, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        order.GetTile().InitTile();
+        LevelData.changeTileData(order.GetUnit().GetGridPosition());
+    }
 }
