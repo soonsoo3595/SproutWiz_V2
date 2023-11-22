@@ -66,9 +66,16 @@ public class GridSystemVisual : MonoBehaviour
 
         if (!GridManager.Instance.CheckDeployableGrid(position))
         {
-            visual.SetCropSptire(null);
+            visual.SetCropSptire(SpriteSet.LockTile);
+            //visual.SetTileSptire(SpriteSet.LockTile);
+
             return;
         }
+        else
+        {
+            visual.SetCropSptire(null);
+        }
+
 
 
         TileData targetTile = GridManager.Instance.GetTileData(position);

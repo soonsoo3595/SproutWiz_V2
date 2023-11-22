@@ -37,7 +37,7 @@ public class GridManager : MonoBehaviour
         }
 
         gridSystem = new GridSystem(gameSetting.GridMapWidth, gameSetting.GridMapHeight);
-        gridSystem.CreateDebugObjcet(gridDebugObjectPrefab, debugObjectContainer);
+        //gridSystem.CreateDebugObjcet(gridDebugObjectPrefab, debugObjectContainer);
 
         clearGrid += gridSystem.ResetGridTile;
     }

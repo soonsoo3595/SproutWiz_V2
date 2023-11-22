@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: SpriteSetting
   m_EditorClassIdentifier: 
   Seed: {fileID: 21300000, guid: adc45b04ea959b8418332b96ab459371, type: 3}
-  FireGrowth: {fileID: 21300000, guid: c4022587b051ff64f95b9b1b45328261, type: 3}
-  WaterGrowth: {fileID: 21300000, guid: 63114df168aebea4e96a1b1394412d19, type: 3}
-  GrassGrowth: {fileID: 21300000, guid: a9ecf60e73c974142bab43f0310f1e08, type: 3}
+  DefaultTile: {fileID: 21300000, guid: 1b55c5dd88287ac46ae33555a28b13c6, type: 3}
+  LockTile: {fileID: 21300000, guid: 29bca458226d619449904696562ed537, type: 3}
+  FireGrowth: {fileID: 21300000, guid: 67f22b22181b014499621ad39dd310c5, type: 3}
+  WaterGrowth: {fileID: 21300000, guid: 8076b9554dbeb7041a8a5ce0d4fb4076, type: 3}
+  GrassGrowth: {fileID: 21300000, guid: f51ebfec5b4222f49b70bcea5ccf966a, type: 3}
   FireHarvest: {fileID: 21300000, guid: b75007f4b8c89d040b4568ed66abf2d9, type: 3}
   WaterHarvest: {fileID: 21300000, guid: 149d4d3ca7820ab488b8d4759c443b33, type: 3}
   GrassHarvest: {fileID: 21300000, guid: c5c1006c7e280864fbe67f6fa2213226, type: 3}

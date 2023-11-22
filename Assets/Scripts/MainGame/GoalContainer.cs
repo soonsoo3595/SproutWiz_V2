@@ -96,6 +96,7 @@ public class GoalContainer : MonoBehaviour
         UpdateContainer();
 
         GridManager.Instance.ResetDeployableGrid();
+        LevelData.changeTileData(new GridPosition(-1, -1));
     }
 
     private void PlayAnimation()

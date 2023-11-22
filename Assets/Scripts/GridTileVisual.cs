@@ -30,6 +30,11 @@ public class GridTileVisual : MonoBehaviour
         tileSprite.color = newColor;
     }
 
+    public void SetTileSptire(Sprite sprite)
+    {
+        tileSprite.sprite = sprite;
+    }
+
     public void ResetTileColor()
     {
         tileSprite.color = Color.white;
