@@ -59,18 +59,18 @@ public class MainGame : MonoBehaviour
 
     public void StartGame()
     {
+        isGameOver = false;
         StartCoroutine(Ready());
     }
 
     public void EndGame()
     {
         isGameOver = true;
-        feverSystem.EndFever();
+        feverSystem.GameOver();
         
         StartCoroutine(GameOver());
 
-        GridManager.clearGrid();
-        LevelData.changeTileData(new GridPosition(-1, -1));
+        EventManager.changeTileData(new GridPosition(-1, -1));
         GridManager.Instance.ResetDeployableGrid();
     }
 
@@ -99,11 +99,8 @@ public class MainGame : MonoBehaviour
             blind.SetActive(false);
         }
 
-        isGameOver = false;
-
         timer.StartTimer();
-        feverSystem.StartFever();
-
+        feverSystem.StartCoolTime();
     }
 
     IEnumerator GameOver()
@@ -143,16 +140,12 @@ public class MainGame : MonoBehaviour
         StartGame();
     }
 
-    public void ResetGame()
+    private void ResetGame()
     {
-        GridManager.clearGrid();
-
         stage.InitStage();
         goalContainer.UpdateContainer();
 
         EventManager.resetMainGame();
-
-        gameRecord.InitRecord();
     }
 
     void ClickPause()

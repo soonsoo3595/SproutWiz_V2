@@ -6,17 +6,11 @@ public class LevelData
 {
     private TileData[,] tileDataArray;
 
-    public delegate void ApplyTetris(TetrisObject tetrisObject);
-    public static ApplyTetris applyTetris;
-
-    public delegate void ChangeTileData(GridPosition gridPosition);
-    public static ChangeTileData changeTileData;
-
     public LevelData(int width, int height) 
     {
         InitGridData(width, height);
 
-        applyTetris += SetTileData;
+        EventManager.applyTetris += SetTileData;
     }
 
     private void InitGridData(int width, int height)
@@ -45,7 +39,7 @@ public class LevelData
             if (TileFactory.Instance.MakeOrder(tile, unit)) count++;
 
             // 값 갱신이 없으면 실행하지 말아야함.
-            changeTileData(unit.GetGridPosition());
+            EventManager.changeTileData(unit.GetGridPosition());
         }
 
         EventManager.harvestCount(count);
@@ -64,7 +58,7 @@ public class LevelData
             for (int y = 0; y < height; y++)
             {
                 tileDataArray[x, y].InitTile();
-                changeTileData(new GridPosition(x, y));
+                EventManager.changeTileData(new GridPosition(x, y));
             }
         }
     }

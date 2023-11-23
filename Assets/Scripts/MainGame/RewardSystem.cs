@@ -34,14 +34,8 @@ public class RewardSystem : MonoBehaviour
         EventManager.resetMainGame += InitScore;
     }
 
-    private void AddScore(int score) 
-    {
-        if (mainGame.isFeverOn)
-            score *= 2;
-
-        Score += score;
-    }
-
+    private void AddScore(int score) => Score += score;
+    
     public void InitScore() => Score = 0;
     
     public void Harvest(int count)
@@ -49,6 +43,8 @@ public class RewardSystem : MonoBehaviour
         if (count == 0) return;
 
         int curScore = normalHarvestScore * count + multiHarvestScore[count];
+
+        if(mainGame.isFeverOn) curScore *= 2;
 
         Debug.Log(count + "°³ ¼öÈ®ÇØ¼­ " + curScore + "Á¡ È¹µæ");
 

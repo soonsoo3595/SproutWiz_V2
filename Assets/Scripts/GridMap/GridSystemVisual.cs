@@ -28,9 +28,9 @@ public class GridSystemVisual : MonoBehaviour
 
         DefualtOutLineColor = Color.white;
 
-        LevelData.changeTileData += UpdateVisual;
-        GridManager.addUnitOnGridTile += AddUnit;
-        GridManager.removeUnitOnGridTile += RemoveUnit;
+        EventManager.changeTileData += UpdateVisual;
+        EventManager.addUnitOnGridTile += AddUnit;
+        EventManager.removeUnitOnGridTile += RemoveUnit;
     }
 
     // 타일값 갱신 이후 호출되야 함.

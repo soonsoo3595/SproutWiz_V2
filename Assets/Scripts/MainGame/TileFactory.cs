@@ -85,7 +85,7 @@ public class TileFactory : MonoBehaviour
         GridPosition gridPosition = order.GetUnit().GetGridPosition();
 
         GridManager.Instance.SetDeployableGrid(gridPosition, false);
-        LevelData.changeTileData(gridPosition);
+        EventManager.changeTileData(gridPosition);
     }
 
     private void FinishOrder(Order order)
@@ -94,7 +94,7 @@ public class TileFactory : MonoBehaviour
         {
             isHarvested = true;
 
-            EventManager.harvest(order.GetTile());
+            EventManager.tileHarvest(order.GetTile());
 
             StartCoroutine(InitTileDelayed(order, 0.35f));
         }
@@ -105,6 +105,6 @@ public class TileFactory : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         order.GetTile().InitTile();
-        LevelData.changeTileData(order.GetUnit().GetGridPosition());
+        EventManager.changeTileData(order.GetUnit().GetGridPosition());
     }
 }

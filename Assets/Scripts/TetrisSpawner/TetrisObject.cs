@@ -49,7 +49,7 @@ public class TetrisObject : MonoBehaviour
     {
         if (CheckAllUnitOnGrid() && CheckAllUnitDeployable())
         {
-            LevelData.applyTetris(this);
+            EventManager.applyTetris(this);
 
             Destroy(gameObject);
 

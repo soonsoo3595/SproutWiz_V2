@@ -38,10 +38,9 @@ public class FeverSystem : MonoBehaviour
     {
         mainGame.isFeverOn = true;
         feverImage.SetActive(true);
-        mainGame.gameRecord.feverCount++;
-
         feverBtn.interactable = false;
 
+        mainGame.gameRecord.feverCount++;
         Invoke("FeverOff", feverTime);
     }
 
@@ -51,16 +50,16 @@ public class FeverSystem : MonoBehaviour
 
         mainGame.isFeverOn = false;
         feverImage.SetActive(false);
-        StartFever();
+        StartCoolTime();
     }
 
-    public void StartFever()
+    public void StartCoolTime()
     {
         FeverGauge = 0f;
-        StartCoroutine(FillFeverGauge());
+        StartCoroutine(CoolDown());
     }
 
-    public void EndFever()
+    public void GameOver()
     {
         mainGame.isFeverOn = false;
         feverImage.SetActive(false);
@@ -72,9 +71,9 @@ public class FeverSystem : MonoBehaviour
         FeverGauge = 0f;
     }
 
-    IEnumerator FillFeverGauge()
+    IEnumerator CoolDown()
     {
-        while (FeverGauge < maxFeverGauge)
+        while (FeverGauge <= maxFeverGauge)
         {
             if(mainGame.isGameOver) yield break;
 

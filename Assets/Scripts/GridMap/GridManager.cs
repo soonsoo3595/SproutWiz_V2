@@ -12,16 +12,6 @@ public class GridManager : MonoBehaviour
 
     private GridSystem gridSystem;
 
-
-    public delegate void AddUnitOnGridTile(GridPosition position, TileUnit unit);
-    static public AddUnitOnGridTile addUnitOnGridTile;
-
-    public delegate void RemoveUnitOnGridTile(GridPosition position, TileUnit unit);
-    static public RemoveUnitOnGridTile removeUnitOnGridTile;
-
-    public delegate void ClearGrid();
-    static public ClearGrid clearGrid;
-
     void Awake()
     {
         if (Instance == null)
@@ -39,7 +29,7 @@ public class GridManager : MonoBehaviour
         gridSystem = new GridSystem(gameSetting.GridMapWidth, gameSetting.GridMapHeight);
         //gridSystem.CreateDebugObjcet(gridDebugObjectPrefab, debugObjectContainer);
 
-        clearGrid += gridSystem.ResetGridTile;
+        EventManager.resetMainGame += gridSystem.ResetGridTile;
     }
 
 
@@ -47,7 +37,7 @@ public class GridManager : MonoBehaviour
     {
         GridTile gridObject = gridSystem.GetGridTile(gridPosition);
 
-        addUnitOnGridTile(gridPosition, unit);
+        EventManager.addUnitOnGridTile(gridPosition, unit);
 
         gridObject.AddUnit(unit);
     }
@@ -62,7 +52,7 @@ public class GridManager : MonoBehaviour
     {
         GridTile gridObject = gridSystem.GetGridTile(gridPosition);
 
-        removeUnitOnGridTile(gridPosition, unit);
+        EventManager.removeUnitOnGridTile(gridPosition, unit);
 
         gridObject.RemoveUnit(unit);
     }

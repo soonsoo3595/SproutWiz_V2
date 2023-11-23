@@ -24,8 +24,8 @@ public class TetrisViewPanel : MonoBehaviour
     {
         SetTetrisToAllSlot();
 
-        LevelData.applyTetris += UpdateTetrisSlot;
-        GridManager.clearGrid += ResetAllSlot;
+        EventManager.applyTetris += UpdateTetrisSlot;
+        EventManager.resetMainGame += ResetAllSlot;
     }
 
     private void OnDestroy()

@@ -14,7 +14,7 @@ public class GoalContainer : MonoBehaviour
     
     void Start()
     {
-        EventManager.harvest += UpdateGoal;
+        EventManager.tileHarvest += UpdateGoal;
         EventManager.afterApplyTetris += IsAchieveGoal;
 
         UpdateContainer();
@@ -97,7 +97,7 @@ public class GoalContainer : MonoBehaviour
         UpdateContainer();
 
         GridManager.Instance.ResetDeployableGrid();
-        LevelData.changeTileData(new GridPosition(-1, -1));
+        EventManager.changeTileData(new GridPosition(-1, -1));
     }
 
     private void PlayAnimation()

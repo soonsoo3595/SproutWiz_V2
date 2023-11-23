@@ -20,11 +20,6 @@ public class Timer : MonoBehaviour
     public Image timebar;
     public float totalTime = 80f;
 
-    private void Awake()
-    {
-        //totalTime = GridManager.Instance.GetSetting().timeLimit;
-    }
-
     private void Start()
     {
         totalTime = GridManager.Instance.GetSetting().timeLimit;
@@ -49,16 +44,16 @@ public class Timer : MonoBehaviour
         
         mainGame.EndGame();
     }
+    public void StartTimer()
+    {
+        RemainTime = totalTime;
+        StartCoroutine(RunTimer());
+    }
     
     public void ResetTimer()
     {
         RemainTime = totalTime;
     }
 
-    public void StartTimer()
-    {
-        RemainTime = totalTime;
-        StartCoroutine(RunTimer());
-    }
 
 }

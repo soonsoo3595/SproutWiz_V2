@@ -17,6 +17,8 @@ public class GameRecord
         achieveGoalCount = 0;
         feverCount = 0;
         rerollCount = 0;
+
+        EventManager.resetMainGame += InitRecord;
     }
 
     public List<int> GetRecord()
