@@ -40,12 +40,25 @@ public class SoundEffect : MonoBehaviour
 
         if(isContain)
         {
-            audioSource.PlayOneShot(clip);
+            if (clip != null)
+                audioSource.PlayOneShot(clip);
+            else
+                Debug.Log(str + " 소리가 없습니다");
         }
         else
         {
             Debug.Log("No clip");
         }
+    }
+
+    public bool IsPlaying()
+    {
+        return audioSource.isPlaying;
+    }
+
+    public void Stop()
+    {
+        audioSource.Stop();
     }
 
     private void Allocate()
@@ -59,8 +72,8 @@ public class SoundEffect : MonoBehaviour
         audioClips.Add("fever", feverClip);
         audioClips.Add("reroll", rerollClip);
         audioClips.Add("clearGoal", clearGoalClip);
-        audioClips.Add("doublecombo", doublecomboClip);
-        audioClips.Add("triplecombo", triplecomboClip);
+        audioClips.Add("double", doublecomboClip);
+        audioClips.Add("triple", triplecomboClip);
         audioClips.Add("quadruple", quadrupleClip);
         audioClips.Add("gameover", gameoverClip);
         audioClips.Add("click", clickClip);
