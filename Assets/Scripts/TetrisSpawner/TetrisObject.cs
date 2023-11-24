@@ -49,6 +49,9 @@ public class TetrisObject : MonoBehaviour
     {
         if (CheckAllUnitOnGrid() && CheckAllUnitDeployable())
         {
+            GameManager.Instance.soundEffect.Stop();
+            GameManager.Instance.soundEffect.PlayOneShotSoundEffect("drop");
+
             EventManager.applyTetris(this);
 
             Destroy(gameObject);
@@ -88,6 +91,9 @@ public class TetrisObject : MonoBehaviour
     private void FollowingMousePoint(bool isAttackedMouse)
     {
         if (!isAttackedMouse) return;
+        
+        if(!GameManager.Instance.soundEffect.IsPlaying())
+            GameManager.Instance.soundEffect.PlayOneShotSoundEffect("drag");
 
         Vector2 newPos = Camera.main.ScreenToWorldPoint(
             new Vector2(Input.mousePosition.x, Input.mousePosition.y));

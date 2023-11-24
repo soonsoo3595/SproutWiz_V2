@@ -13,7 +13,7 @@ public enum ElementType { None, Fire, Water, Grass }
 
 public enum ElementRelation { Disadvantage, Equal, Irrelevant }
 
-public enum GoalType {A, B, C}
+public enum GoalType {None, A, B, C, D}
 
 public enum ButtonType { Popup, Back }
 

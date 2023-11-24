@@ -14,11 +14,10 @@ public class MainGame : MonoBehaviour
 
     public GameObject blind;
     
-    [Header("Stage")]
-    public Stage stage;
-
+    [Header("Goal")]
+    public GoalMaker goalMaker;
     public GoalContainer goalContainer;
-    
+
     [Header("GameOver")] 
     public GameObject gameOverPopup;
     public GameObject title;
@@ -85,12 +84,16 @@ public class MainGame : MonoBehaviour
 
             float countDownTime = 3f;
 
+            GameManager.Instance.soundEffect.PlayOneShotSoundEffect("countdownStart");
+
             while (countDownTime > 0f)
             {
                 countDownTime -= Time.deltaTime;
                 countDownTxt.text = Mathf.CeilToInt(countDownTime).ToString();
                 yield return null;
             }
+
+            GameManager.Instance.soundEffect.PlayOneShotSoundEffect("countdownEnd");
 
             countDownTxt.text = "Game Start!";
             yield return new WaitForSeconds(1.5f);
@@ -101,10 +104,13 @@ public class MainGame : MonoBehaviour
 
         timer.StartTimer();
         feverSystem.StartCoolTime();
+        goalContainer.UpdateContainer();
     }
 
     IEnumerator GameOver()
     {
+        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("gameover");
+
         gameOverPopup.SetActive(true);
 
         List<int> gameRecords = gameRecord.GetRecord();
@@ -122,10 +128,10 @@ public class MainGame : MonoBehaviour
 
         for(int i = 0; i <= scoreSystem.Score; i += 10)
         {
-            string scoreText = "Score\n" + i.ToString("N0");
+            string scoreText = i.ToString("N0");
             score.GetComponent<TextMeshProUGUI>().text = scoreText;
 
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.001f);
         }
 
         yield return null;
@@ -142,9 +148,6 @@ public class MainGame : MonoBehaviour
 
     private void ResetGame()
     {
-        stage.InitStage();
-        goalContainer.UpdateContainer();
-
         EventManager.resetMainGame();
     }
 

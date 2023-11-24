@@ -92,6 +92,8 @@ public class TileFactory : MonoBehaviour
     {
         if (order.GetTile().growPoint == GrowPoint.Harvest)
         {
+            GameManager.Instance.soundEffect.PlayOneShotSoundEffect("harvest");
+
             isHarvested = true;
 
             EventManager.tileHarvest(order.GetTile());

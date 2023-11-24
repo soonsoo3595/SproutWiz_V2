@@ -18,7 +18,7 @@ public class RewardSystem : MonoBehaviour
         set
         {
             score = value;
-            scoreTxt.text = $"{score}";
+            scoreTxt.text = score.ToString("N0");
         }
     }
 
@@ -67,12 +67,15 @@ public class RewardSystem : MonoBehaviour
         switch(count)
         {
             case 2:
+                GameManager.Instance.soundEffect.PlayOneShotSoundEffect("double");
                 comboTxt.text = "Good!";
                 break;
             case 3:
+                GameManager.Instance.soundEffect.PlayOneShotSoundEffect("triple");
                 comboTxt.text = "Nice!";
                 break;
             case 4:
+                GameManager.Instance.soundEffect.PlayOneShotSoundEffect("quadruple");
                 comboTxt.text = "Excellent!";
                 break;
         }

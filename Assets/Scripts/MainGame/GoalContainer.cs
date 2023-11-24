@@ -3,86 +3,75 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
 
 public class GoalContainer : MonoBehaviour
 {
-    public Sprite[] elementSprites;
     public MainGame mainGame;
+    public GoalMaker goalMaker;
 
-    public List<Goal> goalObjectList;
-    private List<GoalData> goalDataList;
-    
+    public List<GameObject> goalObjects;
+    private List<Goal> goalList;
+
     void Start()
     {
         EventManager.tileHarvest += UpdateGoal;
         EventManager.afterApplyTetris += IsAchieveGoal;
+        EventManager.resetMainGame += RetryGame;
 
-        UpdateContainer();
+        // UpdateContainer();
     }
 
     public void UpdateContainer()
     {
         Deactivation();
-        GetGoal();
+        goalList = goalMaker.GetGoalList();
         
-        for(int i = 0; i < goalDataList.Count; i++)
+        for(int i = 0; i < goalList.Count; i++)
         {
-            goalObjectList[i].gameObject.SetActive(true);
-            Goal goalObject = goalObjectList[i];
-            goalObject.goalData.SetData(goalDataList[i].element, goalDataList[i].count);
+            int index = (int)goalList[i].element - 1;
+            goalObjects[index].SetActive(true);
 
-            goalObject.image.sprite = elementSprites[(int)(goalObject.goalData.element.GetElementType()) - 1];
-            goalObject.text.text = $"x{goalObject.goalData.count}";
+            goalObjects[index].GetComponentInChildren<TextMeshProUGUI>().text = $"{goalList[i].count}";
         }
     }
 
-    public void Deactivation()
-    {
-        for (int i = 0; i < goalObjectList.Count; i++)
-        {
-            goalObjectList[i].gameObject.SetActive(false);
-        }
-    }
     
-    private void GetGoal()
+    public void RetryGame()
     {
-        Stage stage = mainGame.stage;
-        
-        stage.SetStage();
-        goalDataList = stage.goalList;
-        goalDataList.Sort(SortGoal);
-    }
-    
-    private int SortGoal(GoalData op1, GoalData op2)
-    {
-        return op1.element.GetElementType() < op2.element.GetElementType() ? -1 : 1;
+        Deactivation();
+        goalMaker.InitStage();
     }
 
-    private void UpdateText(Goal goal)
+    private void Deactivation()
     {
-        goal.text.text = $"x{goal.goalData.count}";
+        for (int i = 0; i < goalObjects.Count; i++)
+        {
+            goalObjects[i].SetActive(false);
+        }
     }
-    
+
     private void UpdateGoal(TileData tile)
     {
-        Element element = tile.GetElement();
+        ElementType element = tile.GetElement().GetElementType();
 
-        for (int i = 0; i < goalDataList.Count; i++)
+        for(int i = 0; i < goalList.Count; i++)
         {
-            if (goalObjectList[i].goalData.element != element) continue;
-            goalObjectList[i].goalData.count = Mathf.Clamp(goalObjectList[i].goalData.count - 1, 0, 99);
-            UpdateText(goalObjectList[i]);
-        }
+            if (goalList[i].element != element) continue;
+            goalList[i].count = Mathf.Clamp(goalList[i].count - 1, 0, 99);
 
+            int index = (int)element - 1;
+            goalObjects[index].GetComponentInChildren<TextMeshProUGUI>().text = $"{goalList[i].count}";
+        }
     }
 
     public void IsAchieveGoal()
     {
         bool flag = true;
         
-        for (int i = 0; i < goalDataList.Count; i++)
+        for (int i = 0; i < goalList.Count; i++)
         {
-            if (goalObjectList[i].goalData.count > 0)
+            if (goalList[i].count > 0)
             {
                 flag = false;
                 break;
@@ -91,9 +80,11 @@ public class GoalContainer : MonoBehaviour
 
         if (!flag) return;
 
+        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("clearGoal");
+
         mainGame.gameRecord.achieveGoalCount++;
         PlayAnimation();
-        mainGame.stage.NextStage();
+        mainGame.goalMaker.NextStage();
         UpdateContainer();
 
         GridManager.Instance.ResetDeployableGrid();
