@@ -7,11 +7,15 @@ using UnityEngine.UIElements;
 
 public class TetrisUnit : TileUnit
 {
+    [SerializeField] SpriteRenderer unitSprite;
+    [SerializeField] SpriteSetting SpriteSet;
+
     Element element;
 
     private void Start()
     {
         SetBlockColor();
+        unitSprite.transform.rotation = Quaternion.identity;
     }
 
     public void SetUnitState(Element element)
@@ -50,26 +54,19 @@ public class TetrisUnit : TileUnit
 
     private void SetBlockColor()
     {
-        Color blockColor = new Color();
-
         switch (element.GetElementType())
         {
             case ElementType.None:
-                blockColor = Color.white;
                 break;
             case ElementType.Fire:
-                blockColor = Color.red;
+                unitSprite.sprite = SpriteSet.FireTetris;
                 break;
             case ElementType.Water:
-                blockColor = Color.blue;
+                unitSprite.sprite = SpriteSet.WaterTetris;
                 break;
             case ElementType.Grass:
-                blockColor = Color.green;
+                unitSprite.sprite = SpriteSet.GrassTetris;
                 break;
         }
-
-        blockColor.a *= 0.7f;
-
-        GetComponentInChildren<SpriteRenderer>().color = blockColor;
     }
 }

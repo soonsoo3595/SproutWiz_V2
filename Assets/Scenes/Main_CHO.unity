@@ -802,7 +802,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a02c80cc312e6c1448343298265c64d3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 10147e296796bb948abffa7b355cba1c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5131,7 +5131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ApplyAfter: 2
   m_ChannelMask: 1
-  m_Gain: 1
+  m_Gain: 0.09
   m_Use2DDistance: 1
   m_UseCameraSpace: 1
   m_ReactionSettings:

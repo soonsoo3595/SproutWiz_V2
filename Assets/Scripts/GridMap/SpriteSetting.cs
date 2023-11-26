@@ -18,4 +18,8 @@ public class SpriteSetting : ScriptableObject
     public Sprite WaterHarvest;
     public Sprite GrassHarvest;
 
+    public Sprite FireTetris;
+    public Sprite WaterTetris;
+    public Sprite GrassTetris;
+
 }

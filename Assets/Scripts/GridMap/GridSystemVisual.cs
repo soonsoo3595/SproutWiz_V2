@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
 using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -74,7 +75,6 @@ public class GridSystemVisual : MonoBehaviour
         {
             visual.SetCropSptire(SpriteSet.LockTile);
             //visual.SetTileSptire(SpriteSet.LockTile);
-
             return;
         }
         else
@@ -91,7 +91,7 @@ public class GridSystemVisual : MonoBehaviour
 
         // TODO: 타일, 아웃라인 컬러 부분 전체적으로 함수 추출 필요.
         visual.SetCropSptire(CropSprite(targetElement, growPoint));
-        visual.ResetTileColor();
+        visual.SetTileColor(ElementColor(targetElement));
         visual.SetOutLineAlpha(0f);
 
         // TODO: 애니메이션 기능은 가능하면 분리 예정.
