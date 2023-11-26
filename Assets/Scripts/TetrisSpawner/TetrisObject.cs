@@ -80,7 +80,7 @@ public class TetrisObject : MonoBehaviour
     private void DisableSeparation()
     {
         transform.localScale = InSlotScale;
-        //transform.localPosition = Vector3.zero;
+        transform.localPosition = Vector3.zero;
 
         foreach (Transform visual in visuals)
         {

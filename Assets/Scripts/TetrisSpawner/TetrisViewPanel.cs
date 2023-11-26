@@ -119,15 +119,15 @@ public class TetrisViewPanel : MonoBehaviour
         }
         else if (rotation <= 0.5f)
         {
-            newTetris.Rotate(new Vector3(0f, 0f, 90f));
+            newTetris.rotation = Quaternion.Euler(0f, 0f, 90f);
         }
         else if (rotation <= 0.75f)
         {
-            newTetris.Rotate(new Vector3(0f, 0f, 180f));
+            newTetris.rotation = Quaternion.Euler(0f, 0f, 180f);
         }
         else
         {
-            newTetris.Rotate(new Vector3(0f, 0f, 270f));
+            newTetris.rotation = Quaternion.Euler(0f, 0f, 270f);
         }
     }
 
