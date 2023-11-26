@@ -3420,7 +3420,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 393.759, y: 0}
+  m_AnchoredPosition: {x: 393.759, y: 30.499954}
   m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1214303302
@@ -4987,7 +4987,6 @@ MonoBehaviour:
   - {fileID: 1888629045}
   - {fileID: 496028788}
   - {fileID: 1693020151}
-  TetrisSize: 50
 --- !u!114 &1733921892
 MonoBehaviour:
   m_ObjectHideFlags: 0

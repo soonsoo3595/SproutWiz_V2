@@ -11,6 +11,7 @@ public class TetrisObject : MonoBehaviour
     private Transform[] visuals;
 
     readonly Vector3 InSlotScale = new Vector3(50f, 50f, 50f);
+    readonly Vector3 InSlotBigScale = new Vector3(65f, 65f, 65f);
     readonly Vector3 InFieldScale = new Vector3(257f, 257f, 257f);
 
     private void Awake()
@@ -26,6 +27,8 @@ public class TetrisObject : MonoBehaviour
         {
             visuals[i] = units[i].GetComponentInChildren<SpriteRenderer>().transform;
         }
+
+        SetScale();
     }
 
 
@@ -79,12 +82,24 @@ public class TetrisObject : MonoBehaviour
 
     private void DisableSeparation()
     {
-        transform.localScale = InSlotScale;
+        SetScale();
         transform.localPosition = Vector3.zero;
 
         foreach (Transform visual in visuals)
         {
             visual.localPosition = new Vector3(0, 0);
+        }
+    }
+
+    public void SetScale()
+    {
+        if (transform.parent.GetComponent<SpawnBox>())
+        {
+            transform.localScale = InSlotBigScale;
+        }
+        else
+        {
+            transform.localScale = InSlotScale;
         }
     }
 

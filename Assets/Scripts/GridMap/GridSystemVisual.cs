@@ -98,6 +98,7 @@ public class GridSystemVisual : MonoBehaviour
         if (growPoint == GrowPoint.Harvest)
         {
             visual.PlayAnimHarvest();
+            visual.PlayEffect(targetElement.GetElementType());
         }
         else
         {
@@ -115,6 +116,10 @@ public class GridSystemVisual : MonoBehaviour
         TetrisUnit tetrisUnit = unit as TetrisUnit;
         Element element = GridManager.Instance.GetTileData(position).GetElement();
         ElementRelation relation = element.GetElementRelation(tetrisUnit.GetElement());
+
+
+        TetrisObject tetris = tetrisUnit.transform.parent.GetComponent<TetrisObject>();
+
 
         if (element.GetElementType() == ElementType.None)
         {

@@ -9,6 +9,7 @@ public class GridTileVisual : MonoBehaviour
     [SerializeField] private Transform cropVisual;
     [SerializeField] private Transform outLine;
     [SerializeField] private Animator animator;
+    [SerializeField] private GridTileEffecter effectObject;
 
     SpriteRenderer tileSprite;
     SpriteRenderer cropSprite;
@@ -89,9 +90,15 @@ public class GridTileVisual : MonoBehaviour
         CropAnim.SetBool("OnNegative", param);
     }
 
-
     public void ResetAnimation()
     {
         
+    }
+
+
+    // Effect
+    public void PlayEffect(ElementType element)
+    {
+        effectObject.PlayEffect(element);
     }
 }

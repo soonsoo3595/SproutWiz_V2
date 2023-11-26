@@ -14,7 +14,7 @@ public class TetrisUnit : TileUnit
 
     private void Start()
     {
-        SetBlockColor();
+        SetBlockSprite();
         unitSprite.transform.rotation = Quaternion.identity;
     }
 
@@ -52,7 +52,7 @@ public class TetrisUnit : TileUnit
     }
 
 
-    private void SetBlockColor()
+    private void SetBlockSprite()
     {
         switch (element.GetElementType())
         {

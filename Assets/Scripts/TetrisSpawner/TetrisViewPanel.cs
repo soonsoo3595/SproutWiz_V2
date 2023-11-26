@@ -6,9 +6,6 @@ public class TetrisViewPanel : MonoBehaviour
     [SerializeField]
     private List<RectTransform> ViewSlots;
 
-    [SerializeField]
-    private float TetrisSize = 50;
-
     private List<Transform> tetrisList;
 
     private PreViewSystem preViewSystem;
@@ -83,7 +80,7 @@ public class TetrisViewPanel : MonoBehaviour
         {
             tetris.SetParent(ViewSlots[count]);
             SetDefaultSize(tetris);
-
+            
             count++;
         }
     }
@@ -95,8 +92,9 @@ public class TetrisViewPanel : MonoBehaviour
 
     private void SetDefaultSize(Transform tetris)
     {
-        tetris.localScale = new Vector3(TetrisSize, TetrisSize);
         tetris.localPosition = Vector3.zero;
+
+        tetris.GetComponent<TetrisObject>().SetScale();
     }
 
 
