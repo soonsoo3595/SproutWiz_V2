@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using System.Text;
 using UnityEditor.Build.Content;
@@ -22,7 +23,12 @@ public class GridSystemVisual : MonoBehaviour
             for (int y = 0; y < GridManager.Instance.GetHeight(); y++)
             {
                 GridPosition gridPosition = new GridPosition(x, y);
-                tileVisuals[x,y] = Instantiate(gridTilePrefab, GridManager.Instance.GetWorldPosition(gridPosition), Quaternion.identity, this.transform);
+
+                Vector3 InitPosition = GridManager.Instance.GetWorldPosition(gridPosition);
+                InitPosition.z = this.transform.localPosition.z;
+
+                tileVisuals[x,y] = Instantiate(gridTilePrefab, InitPosition, Quaternion.identity, this.transform);
+                
             }
         }
 

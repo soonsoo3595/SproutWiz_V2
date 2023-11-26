@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class RewardSystem : MonoBehaviour
 {
@@ -25,13 +26,17 @@ public class RewardSystem : MonoBehaviour
     [Header("Score")]
     public int normalHarvestScore = 100;
     public List<int> multiHarvestScore;
-    
+
+    private CinemachineImpulseSource impulseSource;
+
     void Start()
     {
         InitScore();
 
         EventManager.harvestCount += Harvest;
         EventManager.resetMainGame += InitScore;
+
+        impulseSource = FindObjectOfType<CinemachineImpulseSource>();
     }
 
     private void AddScore(int score) 
@@ -80,6 +85,8 @@ public class RewardSystem : MonoBehaviour
                 comboTxt.text = "Excellent!";
                 break;
         }
+
+        impulseSource.GenerateImpulse();
 
         yield return new WaitForSeconds(1f);
 

@@ -10,6 +10,9 @@ public class TetrisObject : MonoBehaviour
     private TetrisUnit[] units;
     private Transform[] visuals;
 
+    readonly Vector3 InSlotScale = new Vector3(50f, 50f, 50f);
+    readonly Vector3 InFieldScale = new Vector3(257f, 257f, 257f);
+
     private void Awake()
     {
         isAttackedMouse = false;
@@ -63,7 +66,7 @@ public class TetrisObject : MonoBehaviour
 
     private void EnableSeparation()
     {
-        transform.localScale = new Vector3(257f, 257f, 257f);
+        transform.localScale = InFieldScale;
 
         foreach (Transform visual in visuals)
         {
@@ -76,8 +79,8 @@ public class TetrisObject : MonoBehaviour
 
     private void DisableSeparation()
     {
-        transform.localScale = new Vector3(50f, 50f, 50f);
-        transform.localPosition = Vector3.zero;
+        transform.localScale = InSlotScale;
+        //transform.localPosition = Vector3.zero;
 
         foreach (Transform visual in visuals)
         {
@@ -89,8 +92,8 @@ public class TetrisObject : MonoBehaviour
     {
         if (!isAttackedMouse) return;
 
-        Vector2 newPos = Camera.main.ScreenToWorldPoint(
-            new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+        Vector3 newPos = Camera.main.ScreenToWorldPoint(
+            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
 
         transform.position = newPos;
         transform.localPosition += new Vector3(0, GridManager.Instance.GetSetting().DistanceFromHand);
