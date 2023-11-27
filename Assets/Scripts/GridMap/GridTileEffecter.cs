@@ -35,20 +35,27 @@ public class GridTileEffecter : MonoBehaviour
 
     public void PlayDeadEffect(ElementType element)
     {
-        ParticleSystem.MainModule particle = DeadEffect.GetComponent<ParticleSystem>().main;
+        ParticleSystem particleSystem = DeadEffect.GetComponent<ParticleSystem>();
+        MainModule particleModule = particleSystem.main;
+
+        particleSystem.gameObject.SetActive(true);
 
         switch (element)
         {
             case ElementType.Fire:
-                particle.startColor = Color.red;
+                particleModule.startColor = Color.red;
                 break;
             case ElementType.Water:
-                particle.startColor = Color.blue;
+                particleModule.startColor = Color.blue;
                 break;
             case ElementType.Grass:
-                particle.startColor = Color.green;
+                particleModule.startColor = Color.green;
                 break;
-        } 
+            default:
+                particleModule.startColor = Color.black;
+                break;
+        }
+       
     }
 
 }

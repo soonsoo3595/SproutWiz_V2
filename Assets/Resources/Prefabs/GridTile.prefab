@@ -596,6 +596,10 @@ PrefabInstance:
       value: 0.23921566
       objectReference: {fileID: 0}
     - target: {fileID: 4380479541975601372, guid: b5f3fe57cc1293448a9911c2564ac0f2, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4380479541975601372, guid: b5f3fe57cc1293448a9911c2564ac0f2, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -698,6 +702,10 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1203737185226241568, guid: 1133eea8c8df7bd429f442fe70e31822, type: 3}
+      propertyPath: clearBehavior
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3068389273752034386, guid: 1133eea8c8df7bd429f442fe70e31822, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -763,6 +771,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3068389273752034389, guid: 1133eea8c8df7bd429f442fe70e31822, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3068389273752034389, guid: 1133eea8c8df7bd429f442fe70e31822, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -816,6 +828,10 @@ PrefabInstance:
     - target: {fileID: 4379424882917074091, guid: b90df347938fe18499f73ac3a1596561, type: 3}
       propertyPath: playOnAwake
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6043025642847786732, guid: b90df347938fe18499f73ac3a1596561, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6043025642847786732, guid: b90df347938fe18499f73ac3a1596561, type: 3}
       propertyPath: m_Materials.Array.size
@@ -1011,6 +1027,10 @@ PrefabInstance:
     - target: {fileID: 1590960486903307280, guid: 3edcf66e7516f3c45beba8f3e6497867, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1590960486903307282, guid: 3edcf66e7516f3c45beba8f3e6497867, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1590960486903307282, guid: 3edcf66e7516f3c45beba8f3e6497867, type: 3}
       propertyPath: m_Materials.Array.size

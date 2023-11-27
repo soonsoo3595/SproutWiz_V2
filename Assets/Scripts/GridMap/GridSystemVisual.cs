@@ -90,6 +90,7 @@ public class GridSystemVisual : MonoBehaviour
         if (!GridManager.Instance.CheckDeployableGrid(position))
         {
             visual.SetCropSptire(SpriteSet.LockTile);
+            visual.PlayDeadEffect(targetElement.GetElementType());
 
             return;
         }
@@ -103,8 +104,6 @@ public class GridSystemVisual : MonoBehaviour
         visual.SetCropSptire(CropSprite(targetElement, growPoint));
         visual.SetTileColor(ElementColor(targetElement));
         visual.SetOutLineAlpha(0f);
-
-
     }
 
     private void AddUnit(GridPosition position, TileUnit unit)
