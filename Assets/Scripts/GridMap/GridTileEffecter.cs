@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class GridTileEffecter : MonoBehaviour
 {
@@ -8,7 +9,9 @@ public class GridTileEffecter : MonoBehaviour
     [SerializeField] GameObject WaterHarvest;
     [SerializeField] GameObject GrassHarvest;
 
-    public void PlayEffect(ElementType element)
+    [SerializeField] GameObject DeadEffect;
+
+    public void PlayHarvestEffect(ElementType element)
     {
         switch (element)
         {
@@ -28,6 +31,24 @@ public class GridTileEffecter : MonoBehaviour
                 GrassHarvest.SetActive(true);
                 break;
         }
+    }
+
+    public void PlayDeadEffect(ElementType element)
+    {
+        ParticleSystem.MainModule particle = DeadEffect.GetComponent<ParticleSystem>().main;
+
+        switch (element)
+        {
+            case ElementType.Fire:
+                particle.startColor = Color.red;
+                break;
+            case ElementType.Water:
+                particle.startColor = Color.blue;
+                break;
+            case ElementType.Grass:
+                particle.startColor = Color.green;
+                break;
+        } 
     }
 
 }

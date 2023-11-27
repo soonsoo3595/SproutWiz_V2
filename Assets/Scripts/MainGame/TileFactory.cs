@@ -9,6 +9,8 @@ public class TileFactory : MonoBehaviour
 
     private bool isHarvested = false;
 
+    readonly private float harvestInitDelayTime = 0.35f;
+
     private void Awake()
     {
         Instance = this;
@@ -96,7 +98,7 @@ public class TileFactory : MonoBehaviour
 
             EventManager.harvest(order.GetTile());
 
-            StartCoroutine(InitTileDelayed(order, 0.35f));
+            StartCoroutine(InitTileDelayed(order, harvestInitDelayTime));
         }
     }
 

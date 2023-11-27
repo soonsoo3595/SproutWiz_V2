@@ -62,22 +62,6 @@ public class GridTileVisual : MonoBehaviour
     }
 
 
-    public void PlayAnim(GrowPoint growPoint)
-    {
-        if(growPoint == GrowPoint.Seed)
-        {
-            PlayAnimSeed();
-        }
-        else if(growPoint == GrowPoint.Harvest)
-        {
-            PlayAnimHarvest();
-        }
-    }
-
-    public void PlayAnimSeed()
-    {
-        
-    }
     
     // trigger로 함수이름변경 필요.
     public void PlayAnimHarvest()
@@ -97,8 +81,13 @@ public class GridTileVisual : MonoBehaviour
 
 
     // Effect
-    public void PlayEffect(ElementType element)
+    public void PlayHarvestEffect(ElementType element)
     {
-        effectObject.PlayEffect(element);
+        effectObject.PlayHarvestEffect(element);
+    }
+
+    public void PlayDeadEffect(ElementType element)
+    {
+        effectObject.PlayDeadEffect(element);
     }
 }

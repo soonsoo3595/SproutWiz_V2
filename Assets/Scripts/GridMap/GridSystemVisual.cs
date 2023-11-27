@@ -71,10 +71,26 @@ public class GridSystemVisual : MonoBehaviour
     {
         GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
 
+        TileData targetTile = GridManager.Instance.GetTileData(position);
+
+        Element targetElement = targetTile.GetElement();
+        GrowPoint growPoint = targetTile.growPoint;
+
+        // TODO: 애니메이션 기능은 가능하면 분리 예정.
+        if (growPoint == GrowPoint.Harvest)
+        {
+            visual.PlayAnimHarvest();
+            visual.PlayHarvestEffect(targetElement.GetElementType());
+        }
+        else
+        {
+            visual.ResetAnimation();
+        }
+
         if (!GridManager.Instance.CheckDeployableGrid(position))
         {
             visual.SetCropSptire(SpriteSet.LockTile);
-            //visual.SetTileSptire(SpriteSet.LockTile);
+
             return;
         }
         else
@@ -83,26 +99,12 @@ public class GridSystemVisual : MonoBehaviour
         }
 
 
-        TileData targetTile = GridManager.Instance.GetTileData(position);
-
-        Element targetElement = targetTile.GetElement();
-        GrowPoint growPoint = targetTile.growPoint;
-
         // TODO: 타일, 아웃라인 컬러 부분 전체적으로 함수 추출 필요.
         visual.SetCropSptire(CropSprite(targetElement, growPoint));
         visual.SetTileColor(ElementColor(targetElement));
         visual.SetOutLineAlpha(0f);
 
-        // TODO: 애니메이션 기능은 가능하면 분리 예정.
-        if (growPoint == GrowPoint.Harvest)
-        {
-            visual.PlayAnimHarvest();
-            visual.PlayEffect(targetElement.GetElementType());
-        }
-        else
-        {
-            visual.ResetAnimation();
-        }
+
     }
 
     private void AddUnit(GridPosition position, TileUnit unit)
