@@ -10,13 +10,14 @@ public class TetrisObject : MonoBehaviour
     private TetrisUnit[] units;
     private Transform[] visuals;
 
-    readonly Vector3 InSlotScale = new Vector3(50f, 50f, 50f);
-    readonly Vector3 InSlotBigScale = new Vector3(65f, 65f, 65f);
-    readonly Vector3 InFieldScale = new Vector3(257f, 257f, 257f);
+    readonly private Vector3 InSlotScale = new Vector3(50f, 50f, 50f);
+    readonly private Vector3 InSlotBigScale = new Vector3(65f, 65f, 65f);
+    readonly private Vector3 InFieldScale = new Vector3(257f, 257f, 257f);
 
     private void Awake()
     {
         isAttackedMouse = false;
+
         units = GetComponentsInChildren<TetrisUnit>();
         visuals = new Transform[units.Length];
     }
@@ -124,11 +125,14 @@ public class TetrisObject : MonoBehaviour
         return true;
     }
 
-    private bool CheckAllUnitDeployable()
+    public bool CheckAllUnitDeployable()
     {
         foreach (TetrisUnit unit in units)
         {
-            if (!unit.GetDeployable()) return false;
+            if (!unit.GetDeployable())
+            {
+                return false;
+            }
         }
 
         return true;
