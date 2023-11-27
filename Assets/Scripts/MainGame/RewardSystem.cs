@@ -22,6 +22,8 @@ public class RewardSystem : MonoBehaviour
         }
     }
 
+    public int gold;
+
     [Header("Score")]
     public int normalHarvestScore = 100;
     public List<int> multiHarvestScore;

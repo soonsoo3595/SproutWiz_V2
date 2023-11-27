@@ -37,9 +37,9 @@ public class GoalMaker : MonoBehaviour
     // private int elementCount;
     private int goalTypeCount;
 
-    private Queue<ElementType> prevElements;
-    private GoalType prevType;
-    public int currentStage;
+    private ElementType prevElement;
+    private GoalType prevGoal;
+    private int currentStage;
 
     private float r;    // 계수 r
     [SerializeField] private float minB, maxB;   // 계수 B의 최소값, 최대값
@@ -47,20 +47,15 @@ public class GoalMaker : MonoBehaviour
     private void Awake()
     {
         goalList = new List<Goal>();
-        prevElements = new Queue<ElementType>();
+        goalTypeCount = (int)GoalType.D;
 
-        prevType = GoalType.None;
-
-        currentStage = 1;
-
-        goalTypeCount = 4;
-        // elementCount = 3;
+        InitStage();
     }
 
     public void InitStage()
     {
-        goalList.Clear();
-
+        prevElement = ElementType.None;
+        prevGoal = GoalType.None;
         currentStage = 1;
     }
     
@@ -100,11 +95,11 @@ public class GoalMaker : MonoBehaviour
 
     private void Process()
     {
-        GoalType curType = RandomType();
+        GoalType curGoal = RandomType();
 
-        if (curType != prevType) prevElements.Clear();
+        if (curGoal != prevGoal) prevElement = ElementType.None;
 
-        switch(curType)
+        switch(curGoal)
         {
             case GoalType.A:
                 TypeA();
@@ -121,17 +116,18 @@ public class GoalMaker : MonoBehaviour
         }
     }
 
-    private List<ElementType> GetDifferentElement(int count)
+    private ElementType GetDifferentElement()
     {
+        /*
         List<ElementType> elements = new List<ElementType>();
-
+    
         if (prevElements.Count > 0)
         {
             while (prevElements.Count > 0)
             {
                 List<int> list = new List<int>(3) { 1, 2, 3 };
                 list.Remove((int)prevElements.Dequeue());
-
+    
                 int rand = Random.Range(0, list.Count);
                 elements.Add((ElementType)list[rand]);
             }
@@ -141,51 +137,51 @@ public class GoalMaker : MonoBehaviour
             while(count > 0)
             {
                 List<int> list = new List<int>(3) { 1, 2, 3 };
-
+    
                 int rand = Random.Range(0, list.Count);
                 elements.Add((ElementType)list[rand]);
-
+    
                 list.RemoveAt(rand);
                 count--;
             }
         }
-
         return elements;
+        */
+        List<ElementType> elements = new List<ElementType>(3) { ElementType.Fire, ElementType.Water, ElementType.Grass};
+        elements.Remove(prevElement);
+
+        int rand = Random.Range(0, elements.Count);
+
+        return elements[rand];
     }
 
     private void TypeA()
     {
-        prevType = GoalType.A;
+        prevGoal = GoalType.A;
+        ElementType target = GetDifferentElement();
+        prevElement = target;
 
-        List<ElementType> elements = GetDifferentElement(1);
-        
-        for(int i = 0; i < elements.Count; i++)
-        {
-            prevElements.Enqueue(elements[i]);
-
-            Goal goal = new Goal(elements[i], (int)math.round(r));
-            goalList.Add(goal);
-        }
+        Goal goal = new Goal(target, (int)math.round(r));
+        goalList.Add(goal);
     }
 
     private void TypeB()
     {
-        prevType = GoalType.B;
+        prevGoal = GoalType.B;
 
-        List<ElementType> elements = GetDifferentElement(2);
-
-        for (int i = 0; i < elements.Count; i++)
+        for (int i = 0; i < 2; i++)
         {
-            prevElements.Enqueue(elements[i]);
+            ElementType target = GetDifferentElement();
+            prevElement = target;
 
-            Goal goal = new Goal(elements[i], (int)math.round(r));
+            Goal goal = new Goal(target, (int)math.round(r));
             goalList.Add(goal);
         }
     }
 
     private void TypeC()
     {
-        prevType = GoalType.C;
+        prevGoal = GoalType.C;
 
         for (int i = 0; i < 3; i++)
         {
@@ -197,17 +193,16 @@ public class GoalMaker : MonoBehaviour
     
     private void TypeD()
     {
-        prevType = GoalType.D;
+        prevGoal = GoalType.D;
 
         List<float> coefficients = new List<float>(2) { 0.75f, 1.5f };
 
-        List<ElementType> elements = GetDifferentElement(2);
-
-        for (int i = 0; i < elements.Count; i++)
+        for (int i = 0; i < 2; i++)
         {
-            prevElements.Enqueue(elements[i]);
+            ElementType target = GetDifferentElement();
+            prevElement = target;
 
-            Goal goal = new Goal(elements[i], (int)math.round(coefficients[i] * r));
+            Goal goal = new Goal(target, (int)math.round(coefficients[i] * r));
             goalList.Add(goal);
         }
     }

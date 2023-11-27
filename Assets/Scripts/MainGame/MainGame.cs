@@ -15,7 +15,6 @@ public class MainGame : MonoBehaviour
     public GameObject blind;
     
     [Header("Goal")]
-    public GoalMaker goalMaker;
     public GoalContainer goalContainer;
 
     [Header("GameOver")] 

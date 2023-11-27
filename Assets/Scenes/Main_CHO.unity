@@ -256,6 +256,7 @@ GameObject:
   - component: {fileID: 43470076}
   - component: {fileID: 43470075}
   - component: {fileID: 43470078}
+  - component: {fileID: 43470079}
   m_Layer: 5
   m_Name: Fever
   m_TagString: Untagged
@@ -303,13 +304,13 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -323,7 +324,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 43470076}
   m_OnClick:
     m_PersistentCalls:
@@ -385,6 +386,23 @@ MonoBehaviour:
   feverTime: 10
   gaugeList: 01000000020000000400000006000000
   maxFeverGauge: 60
+--- !u!114 &43470079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43470073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7deffbe2d8a52e64ea22d1373286d935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beforeClick: {fileID: 21300000, guid: 9d047bcb27fc3b34aad4b3b310c262ab, type: 3}
+  afterClick: {fileID: 21300000, guid: 9ced1d8edee9fb54d86cfa5b39330e98, type: 3}
+  skillpad: {fileID: 43470076}
+  bar: {fileID: 2008481900}
+  icon: {fileID: 387838385}
 --- !u!1 &51673916
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,7 +688,7 @@ GameObject:
   - component: {fileID: 186797941}
   - component: {fileID: 186797942}
   m_Layer: 5
-  m_Name: BottomUI
+  m_Name: SkillUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1194,7 +1212,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef492c3b94c9ba4cbd78df7792ef4cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentStage: 0
   minB: -0.2
   maxB: 0.2
 --- !u!1 &295584465
@@ -1631,7 +1648,6 @@ MonoBehaviour:
   timer: {fileID: 406239959}
   pauseBtn: {fileID: 2011937079}
   blind: {fileID: 1935636531}
-  goalMaker: {fileID: 279601989}
   goalContainer: {fileID: 185047897}
   gameOverPopup: {fileID: 862388857}
   title: {fileID: 0}
@@ -1686,7 +1702,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &372340704
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2175,6 +2191,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2388159320531640845, guid: 8b136b960a338b94f88b85a3b2384071, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 707aa9d1776bd67429af21d8ccd487f6, type: 2}
+    - target: {fileID: 2388159320531640845, guid: 8b136b960a338b94f88b85a3b2384071, type: 3}
       propertyPath: m_fontColor.b
       value: 1
       objectReference: {fileID: 0}
@@ -2184,6 +2204,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2388159320531640845, guid: 8b136b960a338b94f88b85a3b2384071, type: 3}
       propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2388159320531640845, guid: 8b136b960a338b94f88b85a3b2384071, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7457105831347244869, guid: 8b136b960a338b94f88b85a3b2384071, type: 3}
@@ -2236,7 +2260,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1014846751}
   - {fileID: 1498438624}
   m_Father: {fileID: 861016961}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2647,7 +2670,7 @@ GameObject:
   - component: {fileID: 751927686}
   - component: {fileID: 751927685}
   m_Layer: 5
-  m_Name: Disable
+  m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2943,81 +2966,6 @@ RectTransform:
   m_AnchoredPosition: {x: 400, y: -160}
   m_SizeDelta: {x: 800, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1014846750
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1014846751}
-  - component: {fileID: 1014846753}
-  - component: {fileID: 1014846752}
-  m_Layer: 5
-  m_Name: Img
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1014846751
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1014846750}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 548443007}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -252.5, y: 0}
-  m_SizeDelta: {x: 233, y: 97}
-  m_Pivot: {x: 0.5, y: 0}
---- !u!114 &1014846752
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1014846750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 51d40a26aabf20c47a9f7152ccfe1347, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1014846753
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1014846750}
-  m_CullTransparentMesh: 1
 --- !u!1 &1022055385
 GameObject:
   m_ObjectHideFlags: 0
@@ -3672,6 +3620,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2388159320531640845, guid: 8b136b960a338b94f88b85a3b2384071, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 707aa9d1776bd67429af21d8ccd487f6, type: 2}
+    - target: {fileID: 2388159320531640845, guid: 8b136b960a338b94f88b85a3b2384071, type: 3}
       propertyPath: m_fontColor.b
       value: 1
       objectReference: {fileID: 0}
@@ -3681,6 +3633,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2388159320531640845, guid: 8b136b960a338b94f88b85a3b2384071, type: 3}
       propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2388159320531640845, guid: 8b136b960a338b94f88b85a3b2384071, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7457105831347244869, guid: 8b136b960a338b94f88b85a3b2384071, type: 3}
@@ -4036,7 +3992,7 @@ MonoBehaviour:
   m_text: 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 707aa9d1776bd67429af21d8ccd487f6, type: 2}
-  m_sharedMaterial: {fileID: 7098829852959767516, guid: 707aa9d1776bd67429af21d8ccd487f6, type: 2}
+  m_sharedMaterial: {fileID: -2196542281449719292, guid: 707aa9d1776bd67429af21d8ccd487f6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4464,6 +4420,7 @@ MonoBehaviour:
   mainGame: {fileID: 371425298}
   combo: {fileID: 1022055385}
   scoreTxt: {fileID: 1465106300}
+  gold: 0
   normalHarvestScore: 100
   multiHarvestScore: 00000000000000009600000090010000bc020000
 --- !u!224 &1486860404 stripped
@@ -4503,11 +4460,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 548443007}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 505, y: 0}
-  m_Pivot: {x: 1, y: 0.5}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1498438625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4528,24 +4485,24 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1200G
+  m_text: Gold\t1200G
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 707aa9d1776bd67429af21d8ccd487f6, type: 2}
-  m_sharedMaterial: {fileID: 7098829852959767516, guid: 707aa9d1776bd67429af21d8ccd487f6, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 666a20c33489f0d44ae6ba35416148e6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
     rgba: 4290438143
-  m_fontColor: {r: 1, g: 0.8901961, b: 0.7294118, a: 1}
-  m_enableVertexGradient: 0
+  m_fontColor: {r: 1, g: 0.89019614, b: 0.7294118, a: 1}
+  m_enableVertexGradient: 1
   m_colorMode: 3
   m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+    topLeft: {r: 1, g: 0.9098039, b: 0.5882353, a: 1}
+    topRight: {r: 1, g: 0.78039217, b: 0, a: 1}
+    bottomLeft: {r: 0.9372549, g: 0.63529414, b: 0.2784314, a: 1}
+    bottomRight: {r: 0.8039216, g: 0.5254902, b: 0.2, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -5110,7 +5067,7 @@ MonoBehaviour:
   m_text: Good
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 707aa9d1776bd67429af21d8ccd487f6, type: 2}
-  m_sharedMaterial: {fileID: 7098829852959767516, guid: 707aa9d1776bd67429af21d8ccd487f6, type: 2}
+  m_sharedMaterial: {fileID: 0}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5173,7 +5130,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1845936491
@@ -5189,6 +5146,7 @@ GameObject:
   - component: {fileID: 1845936495}
   - component: {fileID: 1845936494}
   - component: {fileID: 1845936497}
+  - component: {fileID: 1845936498}
   m_Layer: 5
   m_Name: Reroll
   m_TagString: Untagged
@@ -5236,13 +5194,13 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -5316,6 +5274,23 @@ MonoBehaviour:
   mainGame: {fileID: 371425298}
   tetrisViewPanel: {fileID: 1733921891}
   reuseTime: 60
+--- !u!114 &1845936498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845936491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7deffbe2d8a52e64ea22d1373286d935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beforeClick: {fileID: 21300000, guid: 9d047bcb27fc3b34aad4b3b310c262ab, type: 3}
+  afterClick: {fileID: 21300000, guid: ae0503ab6f9c09347a831cd663a37b1d, type: 3}
+  skillpad: {fileID: 1845936495}
+  bar: {fileID: 751927683}
+  icon: {fileID: 1998438091}
 --- !u!1 &1862025050
 GameObject:
   m_ObjectHideFlags: 0
@@ -5392,7 +5367,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 1
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -5691,7 +5666,7 @@ GameObject:
   - component: {fileID: 2008481902}
   - component: {fileID: 2008481903}
   m_Layer: 5
-  m_Name: Disable
+  m_Name: Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5963,6 +5938,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2388159320531640845, guid: 8b136b960a338b94f88b85a3b2384071, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 707aa9d1776bd67429af21d8ccd487f6, type: 2}
+    - target: {fileID: 2388159320531640845, guid: 8b136b960a338b94f88b85a3b2384071, type: 3}
       propertyPath: m_fontColor.b
       value: 1
       objectReference: {fileID: 0}
@@ -5977,6 +5956,10 @@ PrefabInstance:
     - target: {fileID: 2388159320531640845, guid: 8b136b960a338b94f88b85a3b2384071, type: 3}
       propertyPath: m_fontColor32.rgba
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2388159320531640845, guid: 8b136b960a338b94f88b85a3b2384071, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7457105831347244869, guid: 8b136b960a338b94f88b85a3b2384071, type: 3}
       propertyPath: m_Name

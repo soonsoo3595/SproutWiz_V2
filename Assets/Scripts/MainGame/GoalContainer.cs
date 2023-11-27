@@ -84,7 +84,7 @@ public class GoalContainer : MonoBehaviour
 
         mainGame.gameRecord.achieveGoalCount++;
         PlayAnimation();
-        mainGame.goalMaker.NextStage();
+        goalMaker.NextStage();
         UpdateContainer();
 
         GridManager.Instance.ResetDeployableGrid();
