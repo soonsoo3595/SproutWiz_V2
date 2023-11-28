@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.shlifedev.ugs": "file:C:/Users/soonsoo3595/Downloads/uni-google-sheets-main/src",
     "com.unity.collab-proxy": "2.0.5",
     "com.unity.device-simulator.devices": "1.0.0",
     "com.unity.feature.2d": "2.0.0",

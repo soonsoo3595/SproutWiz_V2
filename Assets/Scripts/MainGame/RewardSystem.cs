@@ -34,6 +34,8 @@ public class RewardSystem : MonoBehaviour
 
         EventManager.harvestCount += Harvest;
         EventManager.resetMainGame += InitScore;
+
+        normalHarvestScore += (int)DataManager.dataMap["NormalHarvest"].level1;
     }
 
     private void AddScore(int score) => Score += score;
