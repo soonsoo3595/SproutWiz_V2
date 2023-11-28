@@ -55,5 +55,8 @@ public class Timer : MonoBehaviour
         RemainTime = totalTime;
     }
 
-
+    public void AddTime(float time)
+    {
+        RemainTime = Mathf.Clamp(RemainTime + time, 0, totalTime);
+    }
 }

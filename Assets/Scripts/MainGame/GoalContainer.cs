@@ -87,6 +87,7 @@ public class GoalContainer : MonoBehaviour
         goalMaker.NextStage();
         UpdateContainer();
 
+        mainGame.timer.AddTime(10f);
         GridManager.Instance.ResetDeployableGrid();
         EventManager.changeTileData(new GridPosition(-1, -1));
     }
