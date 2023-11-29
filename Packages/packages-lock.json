@@ -1,12 +1,13 @@
 {
   "dependencies": {
     "com.shlifedev.ugs": {
-      "version": "file:C:/Users/soonsoo3595/Downloads/uni-google-sheets-main/src",
+      "version": "1.0.8",
       "depth": 0,
-      "source": "local",
+      "source": "registry",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "2.0.0"
-      }
+      },
+      "url": "https://package.openupm.com"
     },
     "com.unity.2d.animation": {
       "version": "9.0.3",
@@ -183,8 +184,8 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.nuget.newtonsoft-json": {
-      "version": "3.2.1",
-      "depth": 1,
+      "version": "2.0.0",
+      "depth": 0,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"

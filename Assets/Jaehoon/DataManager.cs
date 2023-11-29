@@ -14,10 +14,12 @@ public class DataManager : MonoBehaviour
 
     void Start()
     {
+        
         foreach (var value in DefaultTable.Data.DataList)
         {
             dataMap.Add(value.strValue, value);
         }
+        
         // var dataFromMap = DefaultTable.Data.DataMap[0];
         // Debug.Log("dataFromMap : " + dataFromMap.index + ", " + dataFromMap.level1 + "," + dataFromMap.level2);
     }
