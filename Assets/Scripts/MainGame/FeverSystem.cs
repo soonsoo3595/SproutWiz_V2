@@ -73,7 +73,7 @@ public class FeverSystem : MonoBehaviour
 
     IEnumerator CoolDown()
     {
-        while (FeverGauge <= maxFeverGauge)
+        while (FeverGauge < maxFeverGauge)
         {
             if(mainGame.isGameOver) yield break;
 
@@ -83,6 +83,7 @@ public class FeverSystem : MonoBehaviour
             }
             else
             {
+                Debug.Log(FeverGauge);
                 FeverGauge += 0.1f;
 
                 yield return new WaitForSeconds(0.1f);
