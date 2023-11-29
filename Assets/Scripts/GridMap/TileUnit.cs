@@ -87,7 +87,11 @@ public class TileUnit : MonoBehaviour
 
     private void CheckDeployableGrid()
     {
-        if (!onGrid) return;
+        if (!onGrid)
+        {
+            isDeployable = false;
+            return;
+        }
 
         isDeployable = GridManager.Instance.CheckDeployableGrid(gridPosition);
     }

@@ -10,9 +10,14 @@ public class TetrisObject : MonoBehaviour
     private TetrisUnit[] units;
     private Transform[] visuals;
 
+    readonly private Vector3 InSlotScale = new Vector3(50f, 50f, 50f);
+    readonly private Vector3 InSlotBigScale = new Vector3(65f, 65f, 65f);
+    readonly private Vector3 InFieldScale = new Vector3(257f, 257f, 257f);
+
     private void Awake()
     {
         isAttackedMouse = false;
+
         units = GetComponentsInChildren<TetrisUnit>();
         visuals = new Transform[units.Length];
     }
@@ -23,6 +28,8 @@ public class TetrisObject : MonoBehaviour
         {
             visuals[i] = units[i].GetComponentInChildren<SpriteRenderer>().transform;
         }
+
+        SetScale();
     }
 
 
@@ -66,7 +73,7 @@ public class TetrisObject : MonoBehaviour
 
     private void EnableSeparation()
     {
-        transform.localScale = new Vector3(257f, 257f, 257f);
+        transform.localScale = InFieldScale;
 
         foreach (Transform visual in visuals)
         {
@@ -79,12 +86,24 @@ public class TetrisObject : MonoBehaviour
 
     private void DisableSeparation()
     {
-        transform.localScale = new Vector3(50f, 50f, 50f);
+        SetScale();
         transform.localPosition = Vector3.zero;
 
         foreach (Transform visual in visuals)
         {
             visual.localPosition = new Vector3(0, 0);
+        }
+    }
+
+    public void SetScale()
+    {
+        if (transform.parent.GetComponent<SpawnBox>())
+        {
+            transform.localScale = InSlotBigScale;
+        }
+        else
+        {
+            transform.localScale = InSlotScale;
         }
     }
 
@@ -95,8 +114,8 @@ public class TetrisObject : MonoBehaviour
         if(!GameManager.Instance.soundEffect.IsPlaying())
             GameManager.Instance.soundEffect.PlayOneShotSoundEffect("drag");
 
-        Vector2 newPos = Camera.main.ScreenToWorldPoint(
-            new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+        Vector3 newPos = Camera.main.ScreenToWorldPoint(
+            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
 
         transform.position = newPos;
         transform.localPosition += new Vector3(0, GridManager.Instance.GetSetting().DistanceFromHand);
@@ -112,11 +131,14 @@ public class TetrisObject : MonoBehaviour
         return true;
     }
 
-    private bool CheckAllUnitDeployable()
+    public bool CheckAllUnitDeployable()
     {
         foreach (TetrisUnit unit in units)
         {
-            if (!unit.GetDeployable()) return false;
+            if (!unit.GetDeployable())
+            {
+                return false;
+            }
         }
 
         return true;

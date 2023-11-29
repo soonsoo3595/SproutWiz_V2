@@ -21,3 +21,6 @@ MonoBehaviour:
   FireHarvest: {fileID: 21300000, guid: b75007f4b8c89d040b4568ed66abf2d9, type: 3}
   WaterHarvest: {fileID: 21300000, guid: 149d4d3ca7820ab488b8d4759c443b33, type: 3}
   GrassHarvest: {fileID: 21300000, guid: c5c1006c7e280864fbe67f6fa2213226, type: 3}
+  FireTetris: {fileID: 21300000, guid: 6c19d9542f6bcaf48ba80ec81c1a0160, type: 3}
+  WaterTetris: {fileID: 21300000, guid: 50bbff5d4d82f0946b477ed55d3be0d8, type: 3}
+  GrassTetris: {fileID: 21300000, guid: 9d471f24f9a703649b6332b1d46f30ec, type: 3}

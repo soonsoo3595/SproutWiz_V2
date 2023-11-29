@@ -1,5 +1,8 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Linq;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,7 +13,8 @@ public class GridSystemVisual : MonoBehaviour
 
     private Transform[,] tileVisuals;
 
-    private Color DefualtOutLineColor;
+    readonly private Color DefualtOutLineColor = Color.white;
+    readonly private Color DisadvantageTileColor = new Color(0.5f, 0.6f, 0.55f);
 
     private void Start()
     {
@@ -21,9 +25,15 @@ public class GridSystemVisual : MonoBehaviour
             for (int y = 0; y < GridManager.Instance.GetHeight(); y++)
             {
                 GridPosition gridPosition = new GridPosition(x, y);
-                tileVisuals[x,y] = Instantiate(gridTilePrefab, GridManager.Instance.GetWorldPosition(gridPosition), Quaternion.identity, this.transform);
+
+                Vector3 InitPosition = GridManager.Instance.GetWorldPosition(gridPosition);
+                InitPosition.z = this.transform.localPosition.z;
+
+                tileVisuals[x,y] = Instantiate(gridTilePrefab, InitPosition, Quaternion.identity, this.transform);
+                
             }
         }
+        UpdataAllVisuals();
 
         DefualtOutLineColor = Color.white;
 
@@ -63,10 +73,26 @@ public class GridSystemVisual : MonoBehaviour
     {
         GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
 
+        TileData targetTile = GridManager.Instance.GetTileData(position);
+
+        Element targetElement = targetTile.GetElement();
+        GrowPoint growPoint = targetTile.growPoint;
+
+        // TODO: 애니메이션 기능은 가능하면 분리 예정.
+        if (growPoint == GrowPoint.Harvest)
+        {
+            visual.PlayAnimHarvest();
+            visual.PlayHarvestEffect(targetElement.GetElementType());
+        }
+        else
+        {
+            visual.ResetAnimation();
+        }
+
         if (!GridManager.Instance.CheckDeployableGrid(position))
         {
             visual.SetCropSptire(SpriteSet.LockTile);
-            //visual.SetTileSptire(SpriteSet.LockTile);
+            visual.PlayDeadEffect(targetElement.GetElementType());
 
             return;
         }
@@ -76,26 +102,10 @@ public class GridSystemVisual : MonoBehaviour
         }
 
 
-
-        TileData targetTile = GridManager.Instance.GetTileData(position);
-
-        Element targetElement = targetTile.GetElement();
-        GrowPoint growPoint = targetTile.growPoint;
-
         // TODO: 타일, 아웃라인 컬러 부분 전체적으로 함수 추출 필요.
         visual.SetCropSptire(CropSprite(targetElement, growPoint));
-        visual.ResetTileColor();
+        visual.SetTileColor(ElementColor(targetElement));
         visual.SetOutLineAlpha(0f);
-
-        // TODO: 애니메이션 기능은 가능하면 분리 예정.
-        if (growPoint == GrowPoint.Harvest)
-        {
-            visual.PlayAnimHarvest();
-        }
-        else
-        {
-            visual.ResetAnimation();
-        }
     }
 
     private void AddUnit(GridPosition position, TileUnit unit)
@@ -108,6 +118,7 @@ public class GridSystemVisual : MonoBehaviour
         TetrisUnit tetrisUnit = unit as TetrisUnit;
         Element element = GridManager.Instance.GetTileData(position).GetElement();
         ElementRelation relation = element.GetElementRelation(tetrisUnit.GetElement());
+           
 
         if (element.GetElementType() == ElementType.None)
         {
@@ -126,7 +137,7 @@ public class GridSystemVisual : MonoBehaviour
                 visual.SetOutLineAlpha(1f);
                 break;
             case ElementRelation.Disadvantage:
-                visual.SetTileColor(new Color(0.5f, 0.6f, 0.55f));
+                visual.SetTileColor(DisadvantageTileColor);
                 visual.SetOutLineColor(DefualtOutLineColor);
                 visual.SetOutLineAlpha(1f);
 
@@ -151,6 +162,7 @@ public class GridSystemVisual : MonoBehaviour
 
         GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
         Element element = GridManager.Instance.GetTileData(position).GetElement();
+
 
         visual.SetTileColor(ElementColor(element));
         visual.SetOutLineColor(ElementColor(element));
@@ -189,17 +201,20 @@ public class GridSystemVisual : MonoBehaviour
     }
 
 
-    // TODO: 수확물 딜레이 처리 필요.
     private Sprite CropSprite(Element element, GrowPoint growPoint)
     {
         Sprite result = null;
 
-        if(growPoint == GrowPoint.Growth)
+        if(growPoint == GrowPoint.Seed)
+        {
+            result = SpriteSet.Seed;
+        }
+        else if(growPoint == GrowPoint.Growth)
         {
             switch (element.GetElementType())
             {
                 case ElementType.None:
-                    //result = SpriteSet.Seed;
+                    result = SpriteSet.Seed;
                     break;
                 case ElementType.Fire:
                     result = SpriteSet.FireGrowth;

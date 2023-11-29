@@ -9,6 +9,7 @@ public class GridTileVisual : MonoBehaviour
     [SerializeField] private Transform cropVisual;
     [SerializeField] private Transform outLine;
     [SerializeField] private Animator animator;
+    [SerializeField] private GridTileEffecter effectObject;
 
     SpriteRenderer tileSprite;
     SpriteRenderer cropSprite;
@@ -61,22 +62,6 @@ public class GridTileVisual : MonoBehaviour
     }
 
 
-    public void PlayAnim(GrowPoint growPoint)
-    {
-        if(growPoint == GrowPoint.Seed)
-        {
-            PlayAnimSeed();
-        }
-        else if(growPoint == GrowPoint.Harvest)
-        {
-            PlayAnimHarvest();
-        }
-    }
-
-    public void PlayAnimSeed()
-    {
-        
-    }
     
     // trigger로 함수이름변경 필요.
     public void PlayAnimHarvest()
@@ -89,9 +74,20 @@ public class GridTileVisual : MonoBehaviour
         CropAnim.SetBool("OnNegative", param);
     }
 
-
     public void ResetAnimation()
     {
         
+    }
+
+
+    // Effect
+    public void PlayHarvestEffect(ElementType element)
+    {
+        effectObject.PlayHarvestEffect(element);
+    }
+
+    public void PlayDeadEffect(ElementType element)
+    {
+        effectObject.PlayDeadEffect(element);
     }
 }
