@@ -38,6 +38,7 @@ public class RewardSystem : MonoBehaviour
         EventManager.harvestCount += Harvest;
         EventManager.resetMainGame += InitScore;
 
+        // TODO : FindObject 수정 필요.
         impulseSource = FindObjectOfType<CinemachineImpulseSource>();
 
         // 삭제예정.

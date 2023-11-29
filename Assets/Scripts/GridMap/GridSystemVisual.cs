@@ -35,8 +35,6 @@ public class GridSystemVisual : MonoBehaviour
         }
         UpdataAllVisuals();
 
-        DefualtOutLineColor = Color.white;
-
         EventManager.changeTileData += UpdateVisual;
         EventManager.addUnitOnGridTile += AddUnit;
         EventManager.removeUnitOnGridTile += RemoveUnit;
