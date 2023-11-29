@@ -40,9 +40,6 @@ public class RewardSystem : MonoBehaviour
 
         // TODO : FindObject 수정 필요.
         impulseSource = FindObjectOfType<CinemachineImpulseSource>();
-
-        // 삭제예정.
-        normalHarvestScore += (int)DataManager.dataMap["NormalHarvest"].level1;
     }
 
     private void AddScore(int score) => Score += score;
@@ -52,6 +49,8 @@ public class RewardSystem : MonoBehaviour
     public void Harvest(int count)
     {
         if (count == 0) return;
+
+        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("harvest");
 
         int curScore = normalHarvestScore * count + multiHarvestScore[count];
 

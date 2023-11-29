@@ -154,6 +154,15 @@ public class MainGame : MonoBehaviour
     {
         isPaused = !isPaused;
         blind.SetActive(isPaused);
+
+        if(isPaused)
+        {
+            GameManager.Instance.soundEffect.Pause();
+        }
+        else
+        {
+            GameManager.Instance.soundEffect.Resume();
+        }
     }
 
 }

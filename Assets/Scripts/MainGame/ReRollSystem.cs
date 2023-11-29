@@ -34,6 +34,7 @@ public class ReRollSystem : MonoBehaviour
 
     private void ReRoll()
     {
+        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("rerollClip");
         mainGame.gameRecord.rerollCount++;
 
         tetrisViewPanel.ReRoll();

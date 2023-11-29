@@ -9,13 +9,17 @@ public class FeverSystem : MonoBehaviour
     public MainGame mainGame;
     public Button feverBtn;
     public Image disable;
-    public GameObject feverImage;
+    // public GameObject feverImage;
+    public Animator feverAnim;
 
     public float feverTime = 10f;
     public List<int> gaugeList;
     public float maxFeverGauge = 60f;
 
+    private float animationDuration = 0f;
+    private float animationSpeed = 0f;
     private float feverGauge = 0f;
+
     public float FeverGauge
     {
         get => feverGauge;
@@ -32,24 +36,27 @@ public class FeverSystem : MonoBehaviour
 
         EventManager.harvestCount += IncreaseGauge;
         EventManager.resetMainGame += RetryGame;
+
+        #region 애니메이션 부분
+        animationDuration = feverAnim.GetCurrentAnimatorStateInfo(0).length;
+        animationSpeed = animationDuration / feverTime;
+        feverAnim.speed = 0f;
+        #endregion
     }
 
     public void FeverOn()
     {
+        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("feverClick");
         mainGame.isFeverOn = true;
-        feverImage.SetActive(true);
         feverBtn.interactable = false;
 
         mainGame.gameRecord.feverCount++;
-        Invoke("FeverOff", feverTime);
+        StartCoroutine(PlayAnimation());
     }
 
     public void FeverOff()
     {
-        if(mainGame.isGameOver) return;
-
         mainGame.isFeverOn = false;
-        feverImage.SetActive(false);
         StartCoolTime();
     }
 
@@ -62,7 +69,6 @@ public class FeverSystem : MonoBehaviour
     public void GameOver()
     {
         mainGame.isFeverOn = false;
-        feverImage.SetActive(false);
         feverBtn.interactable = false;
     }
 
@@ -83,7 +89,6 @@ public class FeverSystem : MonoBehaviour
             }
             else
             {
-                Debug.Log(FeverGauge);
                 FeverGauge += 0.1f;
 
                 yield return new WaitForSeconds(0.1f);
@@ -91,6 +96,27 @@ public class FeverSystem : MonoBehaviour
         }
 
         feverBtn.interactable = true;
+    }
+
+    IEnumerator PlayAnimation()
+    {
+        feverAnim.speed = animationSpeed;
+        feverAnim.Play("Fever", 0, 0f);
+
+        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("fever");
+
+        while(feverAnim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+        {
+            if(mainGame.isGameOver) yield break;
+
+            if (mainGame.isPaused) yield return null;
+            else yield return new WaitForFixedUpdate();
+        }
+
+        feverAnim.speed = 0f;
+        feverAnim.Play("Fever", 0, 0f);
+
+        FeverOff();
     }
 
     public void IncreaseGauge(int count)

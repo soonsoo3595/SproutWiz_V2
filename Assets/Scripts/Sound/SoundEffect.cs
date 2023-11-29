@@ -11,9 +11,9 @@ public class SoundEffect : MonoBehaviour
     [Header("MainGame")]
     public AudioClip countdownStartClip;
     public AudioClip countdownEndClip;
-    public AudioClip dragClip;
     public AudioClip dropClip;
     public AudioClip harvestClip;
+    public AudioClip feverClickClip;
     public AudioClip feverClip;
     public AudioClip rerollClip;
     public AudioClip clearGoalClip;
@@ -61,14 +61,30 @@ public class SoundEffect : MonoBehaviour
         audioSource.Stop();
     }
 
+    public void Pause()
+    {
+        if (audioSource.isPlaying)
+        {
+            audioSource.Pause();
+        }
+    }
+
+    public void Resume()
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.UnPause();
+        }
+    }
+
     private void Allocate()
     {
         // MainGame
         audioClips.Add("countdownStart", countdownStartClip);
         audioClips.Add("countdownEnd", countdownEndClip);
-        audioClips.Add("drag", dragClip);
         audioClips.Add("drop", dropClip);
         audioClips.Add("harvest", harvestClip);
+        audioClips.Add("feverClick", feverClickClip);
         audioClips.Add("fever", feverClip);
         audioClips.Add("reroll", rerollClip);
         audioClips.Add("clearGoal", clearGoalClip);
