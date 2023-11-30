@@ -387,7 +387,7 @@ MonoBehaviour:
   audioSource: {fileID: 43470080}
   feverTime: 10
   gaugeList: 01000000020000000400000006000000
-  maxFeverGauge: 30
+  maxFeverGauge: 60
 --- !u!114 &43470079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1748,18 +1748,11 @@ MonoBehaviour:
   blind: {fileID: 1935636531}
   goalContainer: {fileID: 185047897}
   gameOverPopup: {fileID: 862388857}
-  records:
-  - {fileID: 1171001198}
-  - {fileID: 312001475}
-  - {fileID: 367384894}
-  score: {fileID: 1622787306}
-  buttons: {fileID: 444095831}
-  retryBtn: {fileID: 1305435290}
   countDown: {fileID: 1917941393}
   countDownTxt: {fileID: 1333716453}
   scoreSystem: {fileID: 1486342624}
   feverSystem: {fileID: 43470078}
-  rerollSystem: {fileID: 1845936497}
+  rerollSystem: {fileID: 1845936499}
   isPaused: 0
   isGameOver: 0
   isFeverOn: 0
@@ -1984,7 +1977,7 @@ MonoBehaviour:
   audioSource: {fileID: 406239960}
   mainGame: {fileID: 371425298}
   timebar: {fileID: 719531787}
-  totalTime: 30
+  totalTime: 60
 --- !u!82 &406239960
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3206,6 +3199,7 @@ GameObject:
   - component: {fileID: 861016961}
   - component: {fileID: 861016963}
   - component: {fileID: 861016962}
+  - component: {fileID: 861016964}
   m_Layer: 5
   m_Name: Bg
   m_TagString: Untagged
@@ -3274,6 +3268,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 861016960}
   m_CullTransparentMesh: 1
+--- !u!114 &861016964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861016960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 861016962}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &862388857
 GameObject:
   m_ObjectHideFlags: 0
@@ -3332,6 +3370,7 @@ MonoBehaviour:
   scoreTxt: {fileID: 1622787308}
   retryBtn: {fileID: 1305435290}
   homeBtn: {fileID: 29311110}
+  skipBtn: {fileID: 861016964}
 --- !u!1 &864473381
 GameObject:
   m_ObjectHideFlags: 0
@@ -5800,7 +5839,7 @@ GameObject:
   - component: {fileID: 1845936496}
   - component: {fileID: 1845936495}
   - component: {fileID: 1845936494}
-  - component: {fileID: 1845936497}
+  - component: {fileID: 1845936499}
   - component: {fileID: 1845936498}
   m_Layer: 5
   m_Name: Reroll
@@ -5912,23 +5951,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1845936491}
   m_CullTransparentMesh: 1
---- !u!114 &1845936497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1845936491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6bea0c02da204b4a943d152f694638f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rerollBtn: {fileID: 1845936494}
-  disable: {fileID: 751927685}
-  mainGame: {fileID: 371425298}
-  tetrisViewPanel: {fileID: 1733921891}
-  reuseTime: 60
 --- !u!114 &1845936498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5946,6 +5968,23 @@ MonoBehaviour:
   skillpad: {fileID: 1845936495}
   bar: {fileID: 751927683}
   icon: {fileID: 1998438091}
+--- !u!114 &1845936499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845936491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af4a2ad47782f9a44af8e90ea6480489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rerollBtn: {fileID: 1845936494}
+  disable: {fileID: 751927685}
+  mainGame: {fileID: 371425298}
+  tetrisViewPanel: {fileID: 1733921891}
+  reuseTime: 60
 --- !u!1 &1862025050
 GameObject:
   m_ObjectHideFlags: 0

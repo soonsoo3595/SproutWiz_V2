@@ -12,14 +12,23 @@ public class GameOver : MonoBehaviour
     public TextMeshProUGUI scoreTxt;
     public Button retryBtn;
     public Button homeBtn;
+    public Button skipBtn;
+
+    private List<int> gameRecords;
+    private int score;
+    private bool isSkipped = false;
 
     private void Start()
     {
         retryBtn.onClick.AddListener(Retry);
+        skipBtn.onClick.AddListener(Skip);
     }
 
     private void OnEnable()
     {
+        gameRecords = mainGame.gameRecord.GetRecord();
+        score = mainGame.scoreSystem.Score;
+
         StartCoroutine(ShowResult());
     }
 
@@ -37,13 +46,28 @@ public class GameOver : MonoBehaviour
         }
 
         scoreTxt.text = "0";
+        isSkipped = false;
+    }
+
+    private void Skip()
+    {
+        if (isSkipped) return;
+
+        StopAllCoroutines();
+
+        for(int i = 0; i < records.Length; i++)
+        {
+            string formattedNumber = gameRecords[i].ToString("0000");
+            records[i].text = formattedNumber;
+        }
+
+        scoreTxt.text = score.ToString("N0");
+
+        isSkipped = true;
     }
 
     IEnumerator ShowResult()
     {
-        List<int> gameRecords = mainGame.gameRecord.GetRecord();
-        int score = mainGame.scoreSystem.Score;
-
         for (int i = 0; i < records.Length; i++)
         {
             for (int j = 0; j <= gameRecords[i]; j++)
@@ -51,7 +75,7 @@ public class GameOver : MonoBehaviour
                 string formattedNumber = j.ToString("0000");
                 records[i].text = formattedNumber;
 
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.01f);
             }
         }
 
@@ -60,16 +84,14 @@ public class GameOver : MonoBehaviour
             string scoreText = i.ToString("N0");
             scoreTxt.text = scoreText;
 
-            if (score - i > 1000)
-                i += 1000;
-            else if (score - i > 100)
+            if (score - i > 100)
                 i += 100;
             else if (score - i > 10)
                 i += 10;
             else
                 i++;
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.01f);
         }
 
         yield return null;

@@ -14,9 +14,9 @@ public class ReRollSystem : MonoBehaviour
 
     public float reuseTime = 60f;
 
-    private float coolTime = 0f;   
+    private float coolTime = 0f;
     public float CoolTime
-    { 
+    {
         get => coolTime;
         set
         {
@@ -34,7 +34,7 @@ public class ReRollSystem : MonoBehaviour
 
     private void ReRoll()
     {
-        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("rerollClip");
+        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("reroll");
         mainGame.gameRecord.rerollCount++;
 
         tetrisViewPanel.ReRoll();
@@ -56,11 +56,11 @@ public class ReRollSystem : MonoBehaviour
 
     IEnumerator CoolDown()
     {
-        while(CoolTime <= reuseTime)
+        while (CoolTime <= reuseTime)
         {
-            if(mainGame.isGameOver) yield break;
+            if (mainGame.isGameOver) yield break;
 
-            if(mainGame.isPaused)
+            if (mainGame.isPaused)
             {
                 yield return null;
             }
@@ -71,8 +71,7 @@ public class ReRollSystem : MonoBehaviour
                 yield return new WaitForFixedUpdate();
             }
         }
-    
+
         rerollBtn.interactable = true;
     }
-
 }

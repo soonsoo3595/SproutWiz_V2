@@ -19,11 +19,6 @@ public class MainGame : MonoBehaviour
 
     [Header("GameOver")] 
     public GameObject gameOverPopup;
-    public TextMeshProUGUI[] records;
-    public GameObject score;
-    public GameObject buttons;
-
-    public Button retryBtn;
 
     [Header("CountDown")]
     public GameObject countDown;
@@ -44,8 +39,6 @@ public class MainGame : MonoBehaviour
     void Awake()
     {
         pauseBtn.onClick.AddListener(ClickPause);
-        retryBtn.onClick.AddListener(Retry);
-
         gameRecord = new GameRecord();
     }
 
@@ -110,7 +103,7 @@ public class MainGame : MonoBehaviour
         ResetGame();
 
         gameOverPopup.SetActive(false);
-        
+
         StartGame();
     }
 

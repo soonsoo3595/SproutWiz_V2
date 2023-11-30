@@ -15,6 +15,6 @@ public class BtnSFX : MonoBehaviour
 
     public void PlaySFX()
     {
-        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("clickClip");
+        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("click");
     }
 }
