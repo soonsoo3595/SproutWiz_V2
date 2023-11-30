@@ -9,8 +9,8 @@ public class FeverSystem : MonoBehaviour
     public MainGame mainGame;
     public Button feverBtn;
     public Image disable;
-    // public GameObject feverImage;
     public Animator feverAnim;
+    public AudioSource audioSource;
 
     public float feverTime = 10f;
     public List<int> gaugeList;
@@ -51,7 +51,7 @@ public class FeverSystem : MonoBehaviour
         feverBtn.interactable = false;
 
         mainGame.gameRecord.feverCount++;
-        StartCoroutine(PlayAnimation());
+        StartCoroutine(DuringFever());
     }
 
     public void FeverOff()
@@ -98,23 +98,28 @@ public class FeverSystem : MonoBehaviour
         feverBtn.interactable = true;
     }
 
-    IEnumerator PlayAnimation()
+    IEnumerator DuringFever()
     {
         feverAnim.speed = animationSpeed;
         feverAnim.Play("Fever", 0, 0f);
-
-        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("fever");
+        audioSource.Play();
 
         while(feverAnim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
         {
-            if(mainGame.isGameOver) yield break;
+            if(mainGame.isGameOver) break;
 
-            if (mainGame.isPaused) yield return null;
+            if (mainGame.isPaused)
+            {
+                feverAnim.speed = 0f;
+                yield return null;
+                feverAnim.speed = animationSpeed;
+            }
             else yield return new WaitForFixedUpdate();
         }
 
         feverAnim.speed = 0f;
         feverAnim.Play("Fever", 0, 0f);
+        audioSource.Stop();
 
         FeverOff();
     }

@@ -10,7 +10,6 @@ public class SoundEffect : MonoBehaviour
 
     [Header("MainGame")]
     public AudioClip countdownStartClip;
-    public AudioClip countdownEndClip;
     public AudioClip dropClip;
     public AudioClip harvestClip;
     public AudioClip feverClickClip;
@@ -81,7 +80,6 @@ public class SoundEffect : MonoBehaviour
     {
         // MainGame
         audioClips.Add("countdownStart", countdownStartClip);
-        audioClips.Add("countdownEnd", countdownEndClip);
         audioClips.Add("drop", dropClip);
         audioClips.Add("harvest", harvestClip);
         audioClips.Add("feverClick", feverClickClip);

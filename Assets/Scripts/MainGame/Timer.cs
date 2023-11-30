@@ -16,6 +16,7 @@ public class Timer : MonoBehaviour
         }
     }
 
+    public AudioSource audioSource;
     public MainGame mainGame;
     public Image timebar;
     public float totalTime = 80f;
@@ -30,6 +31,15 @@ public class Timer : MonoBehaviour
     {
         while(RemainTime > 0f)
         {
+            if(RemainTime > 5f && audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+            else if(RemainTime < 5f && !audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
+
             if(!mainGame.isPaused)
             {
                 RemainTime -= Time.deltaTime;
@@ -41,7 +51,8 @@ public class Timer : MonoBehaviour
                 yield return null;
             }
         }
-        
+
+        audioSource.Stop();
         mainGame.EndGame();
     }
     public void StartTimer()

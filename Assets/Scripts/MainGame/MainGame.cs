@@ -19,7 +19,6 @@ public class MainGame : MonoBehaviour
 
     [Header("GameOver")] 
     public GameObject gameOverPopup;
-    public GameObject title;
     public TextMeshProUGUI[] records;
     public GameObject score;
     public GameObject buttons;
@@ -63,10 +62,12 @@ public class MainGame : MonoBehaviour
 
     public void EndGame()
     {
+        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("gameover");
+
         isGameOver = true;
         feverSystem.GameOver();
-        
-        StartCoroutine(GameOver());
+
+        gameOverPopup.SetActive(true);
 
         EventManager.changeTileData(new GridPosition(-1, -1));
         GridManager.Instance.ResetDeployableGrid();
@@ -92,8 +93,6 @@ public class MainGame : MonoBehaviour
                 yield return null;
             }
 
-            GameManager.Instance.soundEffect.PlayOneShotSoundEffect("countdownEnd");
-
             countDownTxt.text = "Game Start!";
             yield return new WaitForSeconds(1.5f);
 
@@ -104,36 +103,6 @@ public class MainGame : MonoBehaviour
         timer.StartTimer();
         feverSystem.StartCoolTime();
         goalContainer.UpdateContainer();
-    }
-
-    IEnumerator GameOver()
-    {
-        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("gameover");
-
-        gameOverPopup.SetActive(true);
-
-        List<int> gameRecords = gameRecord.GetRecord();
-
-        for (int i = 0; i < records.Length; i++)
-        {
-            for(int j = 0; j <= gameRecords[i]; j++)
-            {
-                string formattedNumber = j.ToString("0000");
-                records[i].text = formattedNumber;
-
-                yield return new WaitForSeconds(0.1f);
-            }
-        }
-
-        for(int i = 0; i <= scoreSystem.Score; i += 10)
-        {
-            string scoreText = i.ToString("N0");
-            score.GetComponent<TextMeshProUGUI>().text = scoreText;
-
-            yield return new WaitForSeconds(0.001f);
-        }
-
-        yield return null;
     }
 
     public void Retry()
@@ -158,10 +127,14 @@ public class MainGame : MonoBehaviour
         if(isPaused)
         {
             GameManager.Instance.soundEffect.Pause();
+            feverSystem.audioSource.Pause();
+            timer.audioSource.Play();
         }
         else
         {
             GameManager.Instance.soundEffect.Resume();
+            feverSystem.audioSource.UnPause();
+            timer.audioSource.UnPause();
         }
     }
 
