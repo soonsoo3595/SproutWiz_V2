@@ -10,9 +10,9 @@ public class TetrisObject : MonoBehaviour
     private TetrisUnit[] units;
     private Transform[] visuals;
 
-    readonly private Vector3 InSlotScale = new Vector3(50f, 50f, 50f);
-    readonly private Vector3 InSlotBigScale = new Vector3(65f, 65f, 65f);
-    readonly private Vector3 InFieldScale = new Vector3(257f, 257f, 257f);
+    readonly private Vector3 InSlotScale = new Vector2(50f, 50f);
+    readonly private Vector3 InSlotBigScale = new Vector2(65f, 65f);
+    readonly private Vector3 InFieldScale = new Vector2(253f, 253f);
 
     private void Awake()
     {
