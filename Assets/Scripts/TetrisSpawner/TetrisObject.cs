@@ -10,8 +10,8 @@ public class TetrisObject : MonoBehaviour
     private TetrisUnit[] units;
     private Transform[] visuals;
 
-    readonly private Vector3 InSlotScale = new Vector2(50f, 50f);
-    readonly private Vector3 InSlotBigScale = new Vector2(65f, 65f);
+    readonly private Vector3 InSlotScale = new Vector2(45f, 45f);
+    readonly private Vector3 InSlotBigScale = new Vector2(75f, 75f);
     readonly private Vector3 InFieldScale = new Vector2(253f, 253f);
 
     private void Awake()
@@ -115,10 +115,13 @@ public class TetrisObject : MonoBehaviour
             GameManager.Instance.soundEffect.PlayOneShotSoundEffect("drag");
 
         Vector3 newPos = Camera.main.ScreenToWorldPoint(
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f));
+            new Vector3(
+                Mathf.Round(Input.mousePosition.x * 10f) / 10f,
+                Mathf.Round(Input.mousePosition.y * 10f) / 10f, 
+                transform.position.z));
 
         transform.position = newPos;
-        transform.localPosition += new Vector3(0, GridManager.Instance.GetSetting().DistanceFromHand);
+        transform.localPosition += new Vector3(0, GridManager.Instance.GetSetting().DistanceFromHand, 0);
     }
 
     private bool CheckAllUnitOnGrid()

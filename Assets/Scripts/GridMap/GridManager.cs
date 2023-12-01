@@ -12,12 +12,12 @@ public class GridManager : MonoBehaviour
 
     private GridSystem gridSystem;
 
+
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -27,11 +27,12 @@ public class GridManager : MonoBehaviour
         }
 
         gridSystem = new GridSystem(gameSetting.GridMapWidth, gameSetting.GridMapHeight);
+
+        // 디버스 오브젝트.
         //gridSystem.CreateDebugObjcet(gridDebugObjectPrefab, debugObjectContainer);
 
         EventManager.resetMainGame += gridSystem.ResetGridTile;
     }
-
 
     public void AddUnitAtGridPosition(GridPosition gridPosition, TileUnit unit)
     {
