@@ -16,8 +16,8 @@ MonoBehaviour:
   GridMapHeight: 5
   timeLimit: 60
   DistanceFromHand: 298
-  DistanceFromTetris_x: 0.66
-  DistanceFromTetris_y: 0.91
+  DistanceFromTetris_x: 0.6
+  DistanceFromTetris_y: 0.9
   mixBlockEnable: 1
   singleElementRatio: 0.49149594
   doubleElementRatio: 0.50850403

@@ -89,13 +89,15 @@ public class GridSystemVisual : MonoBehaviour
 
         if (!GridManager.Instance.CheckDeployableGrid(position))
         {
-            visual.SetCropSptire(SpriteSet.LockTile);
+            visual.SetCropSptire(SpriteSet.LockObject);
+            visual.SetTileSptire(SpriteSet.LockTile);
             visual.PlayDeadEffect(targetElement.GetElementType());
 
             return;
         }
         else
         {
+            visual.SetTileSptire(SpriteSet.DefaultTile);
             visual.SetCropSptire(null);
         }
 

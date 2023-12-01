@@ -9,6 +9,7 @@ public class SpriteSetting : ScriptableObject
 
     public Sprite DefaultTile;
     public Sprite LockTile;
+    public Sprite LockObject;
 
     public Sprite FireGrowth;
     public Sprite WaterGrowth;
