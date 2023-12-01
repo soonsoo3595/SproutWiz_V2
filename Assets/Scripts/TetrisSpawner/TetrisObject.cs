@@ -110,9 +110,6 @@ public class TetrisObject : MonoBehaviour
     private void FollowingMousePoint(bool isAttackedMouse)
     {
         if (!isAttackedMouse) return;
-        
-        if(!GameManager.Instance.soundEffect.IsPlaying())
-            GameManager.Instance.soundEffect.PlayOneShotSoundEffect("drag");
 
         Vector3 newPos = Camera.main.ScreenToWorldPoint(
             new Vector3(

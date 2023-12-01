@@ -40,9 +40,6 @@ public class RewardSystem : MonoBehaviour
 
         // TODO : FindObject 수정 필요.
         impulseSource = FindObjectOfType<CinemachineImpulseSource>();
-
-        // 삭제예정.
-        normalHarvestScore += (int)DataManager.dataMap["NormalHarvest"].level1;
     }
 
     private void AddScore(int score) => Score += score;
@@ -52,6 +49,8 @@ public class RewardSystem : MonoBehaviour
     public void Harvest(int count)
     {
         if (count == 0) return;
+
+        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("harvest");
 
         int curScore = normalHarvestScore * count + multiHarvestScore[count];
 
@@ -69,32 +68,25 @@ public class RewardSystem : MonoBehaviour
     {
         if (count <= 1) yield break;
 
-        combo.SetActive(true);
-        
-        TextMeshProUGUI comboTxt = combo.GetComponentInChildren<TextMeshProUGUI>();
-
         mainGame.gameRecord.multiHarvestCount++;
+
+        combo.GetComponent<ComboEffect>().Play(count);
 
         switch(count)
         {
             case 2:
                 GameManager.Instance.soundEffect.PlayOneShotSoundEffect("double");
-                comboTxt.text = "Good!";
                 break;
             case 3:
                 GameManager.Instance.soundEffect.PlayOneShotSoundEffect("triple");
-                comboTxt.text = "Nice!";
                 break;
             case 4:
                 GameManager.Instance.soundEffect.PlayOneShotSoundEffect("quadruple");
-                comboTxt.text = "Excellent!";
                 break;
         }
 
         impulseSource.GenerateImpulse();
 
         yield return new WaitForSeconds(1f);
-
-        combo.SetActive(false);
     }
 }
