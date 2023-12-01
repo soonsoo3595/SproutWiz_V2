@@ -12,7 +12,6 @@ public class SoundEffect : MonoBehaviour
     public AudioClip countdownStartClip;
     public AudioClip dropClip;
     public AudioClip harvestClip;
-    public AudioClip feverClickClip;
     public AudioClip rerollClip;
     public AudioClip clearGoalClip;
     public AudioClip doublecomboClip;
@@ -81,7 +80,6 @@ public class SoundEffect : MonoBehaviour
         audioClips.Add("countdownStart", countdownStartClip);
         audioClips.Add("drop", dropClip);
         audioClips.Add("harvest", harvestClip);
-        audioClips.Add("feverClick", feverClickClip);
         audioClips.Add("reroll", rerollClip);
         audioClips.Add("clearGoal", clearGoalClip);
         audioClips.Add("double", doublecomboClip);

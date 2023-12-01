@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 268768542}
   - component: {fileID: 268768544}
   - component: {fileID: 268768545}
+  - component: {fileID: 268768546}
   m_Layer: 5
   m_Name: Bg
   m_TagString: Untagged
@@ -309,7 +310,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 268768542}
   m_OnClick:
     m_PersistentCalls:
@@ -327,6 +328,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSceneName: Main_CHO
+--- !u!114 &268768546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268768540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf77f78dc032e4d4b89f8873bbc05b0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &448876196
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,8 +681,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
+    rgba: 3988836
+  m_fontColor: {r: 0.3907751, g: 0.8679245, b: 0.23335704, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

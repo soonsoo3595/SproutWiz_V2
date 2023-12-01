@@ -89,7 +89,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -186,8 +186,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmClips:
-  - {fileID: 8300000, guid: 7017f9ada7b522448988d7784099cb28, type: 3}
-  - {fileID: 8300000, guid: 5d143fbb76a5cd4468756bbc1669e7c4, type: 3}
+  - {fileID: 8300000, guid: cc04a63db1ed2fb4eaceec37dd290599, type: 3}
+  - {fileID: 8300000, guid: 8ee869240fb6a434d98d39a1c16816f7, type: 3}
 --- !u!1 &4795223278451943143
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,7 +231,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 91f043ceacc2d944088a23198b3663af, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6bd1841b059998546bc3f4aebd959f02, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -329,18 +329,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb51cf6d35d209d40bbdec2829587149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdownStartClip: {fileID: 8300000, guid: 6f3c5ebcf3e305d439d1a7858ad9b65c, type: 3}
-  dropClip: {fileID: 8300000, guid: 308e638d61485db49ac94187f7b81f42, type: 3}
-  harvestClip: {fileID: 8300000, guid: 1b0067b312d96774a8d7968461bfaf27, type: 3}
-  feverClickClip: {fileID: 8300000, guid: 1b0067b312d96774a8d7968461bfaf27, type: 3}
-  feverClip: {fileID: 0}
-  rerollClip: {fileID: 0}
-  clearGoalClip: {fileID: 0}
-  doublecomboClip: {fileID: 0}
-  triplecomboClip: {fileID: 0}
-  quadrupleClip: {fileID: 0}
-  gameoverClip: {fileID: 0}
-  clickClip: {fileID: 0}
+  countdownStartClip: {fileID: 8300000, guid: 610905b95e3d6584f992e3a0dd3e36f0, type: 3}
+  dropClip: {fileID: 8300000, guid: 91980f00c0107d24d91ef36f2e939c76, type: 3}
+  harvestClip: {fileID: 8300000, guid: 93a5b2f16598a4b4b8e0f3f36e74440c, type: 3}
+  rerollClip: {fileID: 8300000, guid: 3449192996436a241b507f3e68c1cb91, type: 3}
+  clearGoalClip: {fileID: 8300000, guid: 09ae5474f2eaa5548b327bfb9f1d8cb0, type: 3}
+  doublecomboClip: {fileID: 8300000, guid: 369fb033043db334a8b72c386ac2a21c, type: 3}
+  triplecomboClip: {fileID: 8300000, guid: 29ce25f25207cbd43b8a23cb7cb01a38, type: 3}
+  quadrupleClip: {fileID: 8300000, guid: 952d65c78653f2647ad3bdf8dfc7df7e, type: 3}
+  gameoverClip: {fileID: 8300000, guid: e8975c8b3dfc8fd4eb2e899bb46966c1, type: 3}
+  clickClip: {fileID: 8300000, guid: 1563b2df1c25c5f4bacb369ddcd59627, type: 3}
 --- !u!1 &7102482637582708589
 GameObject:
   m_ObjectHideFlags: 0

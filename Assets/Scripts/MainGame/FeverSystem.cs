@@ -46,7 +46,6 @@ public class FeverSystem : MonoBehaviour
 
     public void FeverOn()
     {
-        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("feverClick");
         mainGame.isFeverOn = true;
         feverBtn.interactable = false;
 

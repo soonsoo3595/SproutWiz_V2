@@ -75,7 +75,7 @@ public class MainGame : MonoBehaviour
             yield return new WaitForSeconds(1f);
             countDown.SetActive(true);
 
-            float countDownTime = 3f;
+            float countDownTime = 2f;
 
             GameManager.Instance.soundEffect.PlayOneShotSoundEffect("countdownStart");
 
