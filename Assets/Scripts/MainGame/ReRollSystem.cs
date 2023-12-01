@@ -56,7 +56,7 @@ public class ReRollSystem : MonoBehaviour
 
     IEnumerator CoolDown()
     {
-        while (CoolTime <= reuseTime)
+        while (CoolTime < reuseTime)
         {
             if (mainGame.isGameOver) yield break;
 

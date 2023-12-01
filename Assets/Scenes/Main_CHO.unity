@@ -21427,7 +21427,7 @@ MonoBehaviour:
   isPaused: 0
   isGameOver: 0
   isFeverOn: 0
-  skipReady: 1
+  skipReady: 0
 --- !u!4 &371425299
 Transform:
   m_ObjectHideFlags: 0
