@@ -68,6 +68,7 @@ public class MainGame : MonoBehaviour
         
         StartCoroutine(GameOver());
 
+        EventManager.timeOver();
         EventManager.changeTileData(new GridPosition(-1, -1));
         GridManager.Instance.ResetDeployableGrid();
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EventManager;
 
 public static class EventManager
 {
@@ -15,6 +16,9 @@ public static class EventManager
 
     public delegate void ResetMainGame();
     public static ResetMainGame resetMainGame;
+
+    public delegate void TimeOver();
+    public static TimeOver timeOver;
 
     public delegate void ApplyTetris(TetrisObject tetrisObject);
     public static ApplyTetris applyTetris;
