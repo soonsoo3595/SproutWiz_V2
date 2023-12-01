@@ -484,6 +484,14 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 5805772894834119630, guid: 5aed305e16db9774d84f533e4e81b0bb, type: 3}
+      propertyPath: bgmClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8ee869240fb6a434d98d39a1c16816f7, type: 3}
+    - target: {fileID: 5805772894834119630, guid: 5aed305e16db9774d84f533e4e81b0bb, type: 3}
+      propertyPath: bgmClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: cc04a63db1ed2fb4eaceec37dd290599, type: 3}
     - target: {fileID: 7102482637582708589, guid: 5aed305e16db9774d84f533e4e81b0bb, type: 3}
       propertyPath: m_Name
       value: GameManager
