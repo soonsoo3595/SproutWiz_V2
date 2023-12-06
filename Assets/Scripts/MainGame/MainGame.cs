@@ -122,7 +122,7 @@ public class MainGame : MonoBehaviour
         {
             GameManager.Instance.soundEffect.Pause();
             feverSystem.audioSource.Pause();
-            timer.audioSource.Play();
+            timer.audioSource.Pause();
         }
         else
         {

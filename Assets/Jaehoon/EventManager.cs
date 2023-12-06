@@ -5,6 +5,7 @@ using static EventManager;
 
 public static class EventManager
 {
+    #region MainGameEvent
     public delegate void TileHarvest(TileData tile);        // 타일에 있는 식물 수확 시
     public static TileHarvest tileHarvest;
 
@@ -31,4 +32,18 @@ public static class EventManager
 
     public delegate void RemoveUnitOnGridTile(GridPosition position, TileUnit unit);
     static public RemoveUnitOnGridTile removeUnitOnGridTile;
+    #endregion
+
+    public static void ClearEvents()
+    {
+        tileHarvest = null;
+        harvestCount = null;
+        afterApplyTetris = null;
+        resetMainGame = null;
+        timeOver = null;
+        applyTetris = null;
+        changeTileData = null;
+        addUnitOnGridTile = null;
+        removeUnitOnGridTile = null;
+    }
 }

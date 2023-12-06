@@ -22,6 +22,7 @@ public class GameOver : MonoBehaviour
     {
         retryBtn.onClick.AddListener(Retry);
         skipBtn.onClick.AddListener(Skip);
+        homeBtn.onClick.AddListener(() => EventManager.ClearEvents());
     }
 
     private void OnEnable()

@@ -53,7 +53,8 @@ public class GridManager : MonoBehaviour
     {
         GridTile gridObject = gridSystem.GetGridTile(gridPosition);
 
-        EventManager.removeUnitOnGridTile(gridPosition, unit);
+        if(EventManager.removeUnitOnGridTile != null)
+            EventManager.removeUnitOnGridTile(gridPosition, unit);
 
         gridObject.RemoveUnit(unit);
     }
