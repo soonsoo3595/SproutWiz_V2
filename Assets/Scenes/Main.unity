@@ -1689,7 +1689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910034350009f2445ba60c65ccb8c3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1961457950}
   mainGame: {fileID: 371425298}
   timebar: {fileID: 719531787}
   totalTime: 20
@@ -5481,11 +5481,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1845936491}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6bea0c02da204b4a943d152f694638f, type: 3}
+  m_Script: {fileID: 11500000, guid: af4a2ad47782f9a44af8e90ea6480489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rerollBtn: {fileID: 1845936494}
-  disable: {fileID: 751927685}
+  disable: {fileID: 1845936495}
   mainGame: {fileID: 371425298}
   tetrisViewPanel: {fileID: 1733921891}
   reuseTime: 60
@@ -5794,6 +5794,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1935636531}
   m_CullTransparentMesh: 1
+--- !u!82 &1961457950 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4546047373858828251, guid: 5aed305e16db9774d84f533e4e81b0bb, type: 3}
+  m_PrefabInstance: {fileID: 4944160615820891467}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1998438091
 GameObject:
   m_ObjectHideFlags: 0

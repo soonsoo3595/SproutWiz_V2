@@ -28,7 +28,7 @@ public class GridManager : MonoBehaviour
 
         gridSystem = new GridSystem(gameSetting.GridMapWidth, gameSetting.GridMapHeight);
 
-        // 디버스 오브젝트.
+        // 디버그 오브젝트.
         //gridSystem.CreateDebugObjcet(gridDebugObjectPrefab, debugObjectContainer);
 
         EventManager.resetMainGame += gridSystem.ResetGridTile;
