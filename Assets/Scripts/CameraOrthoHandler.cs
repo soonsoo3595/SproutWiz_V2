@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class CameraOrthoHandler : MonoBehaviour
 {
-    readonly float screenRatiolimit = 2.7f;
-    readonly float gridmapWorldSize = 5f;
+    readonly float screenRatiolimit = 2.4f;
+    readonly float gridmapWorldSize = 6f;
 
     [SerializeField] RectTransform middleUI;
     CinemachineVirtualCamera virtualCamera;
@@ -18,7 +18,7 @@ public class CameraOrthoHandler : MonoBehaviour
 
         float screenRatio = (float)Screen.height / Screen.width;
 
-        if (screenRatio < screenRatiolimit)
+        if (screenRatio > screenRatiolimit)
         {
             virtualCamera.m_Lens.OrthographicSize = (gridmapWorldSize * screenRatiolimit) / 2;
         }
@@ -31,7 +31,7 @@ public class CameraOrthoHandler : MonoBehaviour
 
         Vector3 separationWorldSpace =
             Camera.main.ScreenToWorldPoint(new Vector3(0f, Screen.height, 0f))
-            - Camera.main.ScreenToWorldPoint(new Vector3(0f, safeArea.height - safeArea.y, 0f));
+            - Camera.main.ScreenToWorldPoint(new Vector3(0f, safeArea.height + safeArea.y * 2, 0f));
 
 
         if(separationY > 0)
