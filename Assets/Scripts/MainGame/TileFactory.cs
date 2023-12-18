@@ -71,7 +71,7 @@ public class TileFactory : MonoBehaviour
     // 확률 추가할 경우 이 밑 함수들 만지면 될 듯
     private void Irrelevant(Order order)
     {
-        order.GetTile().growPoint = GrowPoint.Harvest;
+        // order.GetTile().growPoint = GrowPoint.Harvest;
     }
 
     private void Equal(Order order)

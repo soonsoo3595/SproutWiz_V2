@@ -10,12 +10,15 @@ public class GameOver : MonoBehaviour
 
     public TextMeshProUGUI[] records;
     public TextMeshProUGUI scoreTxt;
+    public TextMeshProUGUI goldTxt;
+
     public Button retryBtn;
     public Button homeBtn;
     public Button skipBtn;
 
     private List<int> gameRecords;
     private int score;
+    private int gold;
     private bool isSkipped = false;
 
     private void Start()
@@ -28,7 +31,8 @@ public class GameOver : MonoBehaviour
     private void OnEnable()
     {
         gameRecords = mainGame.gameRecord.GetRecord();
-        score = mainGame.scoreSystem.Score;
+        score = mainGame.rewardSystem.Score;
+        gold = mainGame.rewardSystem.gold;
 
         StartCoroutine(ShowResult());
     }
@@ -47,6 +51,7 @@ public class GameOver : MonoBehaviour
         }
 
         scoreTxt.text = "0";
+        goldTxt.text = "G";
         isSkipped = false;
     }
 
@@ -63,12 +68,15 @@ public class GameOver : MonoBehaviour
         }
 
         scoreTxt.text = score.ToString("N0");
+        goldTxt.text = $"{gold}G";
 
         isSkipped = true;
     }
 
     IEnumerator ShowResult()
     {
+        goldTxt.text = $"{gold}G";
+
         for (int i = 0; i < records.Length; i++)
         {
             for (int j = 0; j <= gameRecords[i]; j++)
@@ -94,7 +102,7 @@ public class GameOver : MonoBehaviour
 
             yield return new WaitForSeconds(0.01f);
         }
-
+        
         yield return null;
     }
 }

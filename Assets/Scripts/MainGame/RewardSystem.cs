@@ -33,18 +33,30 @@ public class RewardSystem : MonoBehaviour
 
     void Start()
     {
-        InitScore();
+        Init();
 
         EventManager.harvestCount += Harvest;
-        EventManager.resetMainGame += InitScore;
+        EventManager.resetMainGame += Init;
 
         // TODO : FindObject 수정 필요.
         impulseSource = FindObjectOfType<CinemachineImpulseSource>();
     }
 
-    private void AddScore(int score) => Score += score;
+    public void AddScore(int score)
+    {
+        Score += score;
+    }
     
-    public void InitScore() => Score = 0;
+    public void AddGold(int gold)
+    {
+        this.gold += gold;
+    }
+
+    public void Init()
+    {
+        Score = 0;
+        gold = 0;
+    }
     
     public void Harvest(int count)
     {
@@ -54,8 +66,7 @@ public class RewardSystem : MonoBehaviour
 
         int curScore = normalHarvestScore * count + multiHarvestScore[count];
 
-        if(mainGame.isFeverOn) curScore *= 2;
-
+        if (mainGame.isFeverOn) curScore *= 2;
         Debug.Log(count + "개 수확해서 " + curScore + "점 획득");
 
         mainGame.gameRecord.harvestCount += count;

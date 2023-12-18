@@ -25,7 +25,7 @@ public class MainGame : MonoBehaviour
     public TextMeshProUGUI countDownTxt;
 
     [Header("System")]
-    public RewardSystem scoreSystem;
+    public RewardSystem rewardSystem;
     public FeverSystem feverSystem;
     public ReRollSystem rerollSystem;
     public GameRecord gameRecord;

@@ -13,22 +13,25 @@ public class GoalContainer : MonoBehaviour
     public List<GameObject> goalObjects;
     private List<Goal> goalList;
 
+    private int totalGoalCount;
+
     void Start()
     {
         EventManager.tileHarvest += UpdateGoal;
         EventManager.afterApplyTetris += IsAchieveGoal;
         EventManager.resetMainGame += RetryGame;
-
-        // UpdateContainer();
     }
 
     public void UpdateContainer()
     {
         Deactivation();
+        totalGoalCount = 0;
         goalList = goalMaker.GetGoalList();
         
         for(int i = 0; i < goalList.Count; i++)
         {
+            totalGoalCount += goalList[i].count;
+
             int index = (int)goalList[i].element - 1;
             goalObjects[index].SetActive(true);
 
@@ -68,7 +71,7 @@ public class GoalContainer : MonoBehaviour
     public void IsAchieveGoal()
     {
         bool flag = true;
-        
+
         for (int i = 0; i < goalList.Count; i++)
         {
             if (goalList[i].count > 0)
@@ -82,6 +85,8 @@ public class GoalContainer : MonoBehaviour
 
         GameManager.Instance.soundEffect.PlayOneShotSoundEffect("clearGoal");
 
+        mainGame.rewardSystem.AddGold(totalGoalCount * 100);
+        mainGame.rewardSystem.AddScore(totalGoalCount * 50);
         mainGame.gameRecord.achieveGoalCount++;
         PlayAnimation();
         goalMaker.NextStage();
