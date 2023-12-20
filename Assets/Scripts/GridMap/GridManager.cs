@@ -7,8 +7,6 @@ public class GridManager : MonoBehaviour
     public static GridManager Instance { get; private set; }
 
     [SerializeField] private GameSetting gameSetting;
-    [SerializeField] private Transform gridDebugObjectPrefab;
-    [SerializeField] private Transform debugObjectContainer;
 
     private GridSystem gridSystem;
 
@@ -27,9 +25,6 @@ public class GridManager : MonoBehaviour
         }
 
         gridSystem = new GridSystem(gameSetting.GridMapWidth, gameSetting.GridMapHeight);
-
-        // 디버그 오브젝트.
-        //gridSystem.CreateDebugObjcet(gridDebugObjectPrefab, debugObjectContainer);
 
         EventManager.resetMainGame += gridSystem.ResetGridTile;
     }
@@ -53,7 +48,7 @@ public class GridManager : MonoBehaviour
     {
         GridTile gridObject = gridSystem.GetGridTile(gridPosition);
 
-        if(EventManager.removeUnitOnGridTile != null)
+        //if(EventManager.removeUnitOnGridTile != null)
             EventManager.removeUnitOnGridTile(gridPosition, unit);
 
         gridObject.RemoveUnit(unit);

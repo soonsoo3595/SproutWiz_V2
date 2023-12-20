@@ -6,7 +6,7 @@ using UnityEngine;
 public class CameraOrthoHandler : MonoBehaviour
 {
     readonly float screenRatiolimit = 2.4f;
-    readonly float gridmapWorldSize = 6f;
+    readonly float targetWorldSize = 6f;
 
     [SerializeField] RectTransform middleUI;
     CinemachineVirtualCamera virtualCamera;
@@ -20,7 +20,7 @@ public class CameraOrthoHandler : MonoBehaviour
 
         if (screenRatio > screenRatiolimit)
         {
-            virtualCamera.m_Lens.OrthographicSize = (gridmapWorldSize * screenRatiolimit) / 2;
+            virtualCamera.m_Lens.OrthographicSize = (targetWorldSize * screenRatio) / 2;
         }
 
 
