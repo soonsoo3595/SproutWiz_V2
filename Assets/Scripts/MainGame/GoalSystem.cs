@@ -64,7 +64,7 @@ public class GoalSystem : MonoBehaviour
 
         mainGame.rewardSystem.AddGold(totalGoalCount * goalGold);
         mainGame.rewardSystem.AddScore(totalGoalCount * goalScore);
-        mainGame.gameRecord.achieveGoalCount++;
+        // mainGame.gameRecord.achieveGoalCount++;
         PlayAnimation();
         goalMaker.NextStage();
         UpdateContainer();

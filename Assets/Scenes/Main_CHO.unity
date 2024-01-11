@@ -21373,6 +21373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 371425299}
   - component: {fileID: 371425298}
+  - component: {fileID: 371425300}
   m_Layer: 0
   m_Name: MainGame
   m_TagString: Untagged
@@ -21395,13 +21396,14 @@ MonoBehaviour:
   blind: {fileID: 1935636531}
   pauseBtn: {fileID: 2011937079}
   timer: {fileID: 406239959}
-  goalSystem: {fileID: 0}
+  goalSystem: {fileID: 185047897}
   gameOverPopup: {fileID: 862388857}
   countDown: {fileID: 1917941393}
   countDownTxt: {fileID: 1333716453}
   rewardSystem: {fileID: 1486342624}
   manaCollector: {fileID: 43470078}
   rerollSystem: {fileID: 1845936499}
+  gameRecord: {fileID: 371425300}
   isPaused: 0
   isGameOver: 0
   isMagicOn: 0
@@ -21424,6 +21426,20 @@ Transform:
   - {fileID: 155350519}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &371425300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371425297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 262094a0fc1e7074fbea46167d1f4ef6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainGame: {fileID: 371425298}
+  nameList: []
 --- !u!1 &372340703
 GameObject:
   m_ObjectHideFlags: 0
