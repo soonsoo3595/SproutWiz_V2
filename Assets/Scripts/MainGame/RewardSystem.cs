@@ -23,20 +23,21 @@ public class RewardSystem : MonoBehaviour
         }
     }
 
-    public int gold;
+    public int Gold;
 
-    [Header("Score")]
-    public int normalHarvestScore = 100;
-    public List<int> multiHarvestScore;
+    private int harvestScore;
+    private List<int> multiHarvestScore = new List<int> { 0, 0, 0, 0, 0 };
+    private float magicEffect;
 
     private CinemachineImpulseSource impulseSource;
 
     void Start()
     {
-        Init();
+        InitReward();
+        Assign();
 
         EventManager.harvestCount += Harvest;
-        EventManager.resetMainGame += Init;
+        EventManager.resetMainGame += InitReward;
 
         // TODO : FindObject 수정 필요.
         impulseSource = FindObjectOfType<CinemachineImpulseSource>();
@@ -49,13 +50,12 @@ public class RewardSystem : MonoBehaviour
     
     public void AddGold(int gold)
     {
-        this.gold += gold;
+        Gold += gold;
     }
 
-    public void Init()
+    public void InitReward()
     {
-        Score = 0;
-        gold = 0;
+        Score = 0; Gold = 0;
     }
     
     public void Harvest(int count)
@@ -64,22 +64,53 @@ public class RewardSystem : MonoBehaviour
 
         GameManager.Instance.soundEffect.PlayOneShotSoundEffect("harvest");
 
-        int curScore = normalHarvestScore * count + multiHarvestScore[count];
+        int plusScore = harvestScore * count + multiHarvestScore[count];
+        if (mainGame.isMagicOn)
+        {
+            float magicScore = plusScore * magicEffect;
+            plusScore = (int)magicScore;
+        }
 
-        if (mainGame.isFeverOn) curScore *= 2;
-        Debug.Log(count + "개 수확해서 " + curScore + "점 획득");
+        Debug.Log(count + "개 수확해서 " + plusScore + "점 획득");
+        AddScore(plusScore); 
 
-        mainGame.gameRecord.harvestCount += count;
+        // mainGame.gameRecord.harvestCount += count;
 
         StartCoroutine(MultiHarvest(count));
-        AddScore(curScore); 
     }
+
+    private void Assign()
+    {
+        #region 일반 수확 점수 계산
+        {
+            int level = DataManager.playerData.level_HarvestScore;
+            harvestScore = DataManager.GameData.harvestScore + DataManager.GameData.upgrade_HarvestScore[level];
+        }
+        #endregion
+
+        #region 멀티 수확 점수 계산
+        {
+            int level = DataManager.playerData.level_MultiHarvestScore;
+            multiHarvestScore[2] = DataManager.GameData.multiHarvestScore[2] + DataManager.GameData.upgrade_DoubleHarvestScore[level];
+            multiHarvestScore[3] = DataManager.GameData.multiHarvestScore[3] + DataManager.GameData.upgrade_TripleHarvestScore[level];
+            multiHarvestScore[4] = DataManager.GameData.multiHarvestScore[4] + DataManager.GameData.upgrade_QuadraHarvestScore[level];
+        }
+        #endregion
+
+        #region 햇빛마법 효과(점수 보너스)
+        {
+            int level = DataManager.playerData.level_SunshineMagicEffect;
+            magicEffect = DataManager.GameData.sunshineMagicEffect + DataManager.GameData.upgrade_sunshineMagicEffect[level];
+        }
+        #endregion
+    }
+
 
     IEnumerator MultiHarvest(int count)
     {
         if (count <= 1) yield break;
 
-        mainGame.gameRecord.multiHarvestCount++;
+        // mainGame.gameRecord.multiHarvestCount++;
 
         combo.GetComponent<ComboEffect>().Play(count);
 

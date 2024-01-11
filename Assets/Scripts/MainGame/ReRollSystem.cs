@@ -6,36 +6,47 @@ using UnityEngine.UI;
 
 public class ReRollSystem : MonoBehaviour
 {
+    public MainGame mainGame;
     public Button rerollBtn;
     public Image disable;
-
-    public MainGame mainGame;
     public TetrisViewPanel tetrisViewPanel;
 
-    public float reuseTime = 60f;
-
+    private int rerollCount = 0;
+    private float chargeTime;
     private float coolTime = 0f;
     public float CoolTime
     {
         get => coolTime;
         set
         {
-            coolTime = Mathf.Clamp(value, 0, reuseTime);
-            disable.fillAmount = coolTime / reuseTime;
+            coolTime = Mathf.Clamp(value, 0, chargeTime);
+            disable.fillAmount = coolTime / chargeTime;
         }
     }
 
-    private void Start()
+    void Start()
     {
         rerollBtn.onClick.AddListener(ReRoll);
 
+        Assign();
+    }
+
+    private void Assign()
+    {
+        {
+            int level = DataManager.playerData.level_ReduceCastingCancel;
+            chargeTime = DataManager.GameData.castingCancelChargeTime - DataManager.GameData.reduce_CastingCancel[level];
+        }
+
+        #region 이벤트 등록
         EventManager.resetMainGame += RetryGame;
+        #endregion
     }
 
     private void ReRoll()
     {
         GameManager.Instance.soundEffect.PlayOneShotSoundEffect("reroll");
-        mainGame.gameRecord.rerollCount++;
+        rerollCount++;
 
         tetrisViewPanel.ReRoll();
         StartCoolTime();
@@ -50,13 +61,14 @@ public class ReRollSystem : MonoBehaviour
 
     public void RetryGame()
     {
-        CoolTime = reuseTime;
+        CoolTime = chargeTime;
+        rerollCount = 0;
         rerollBtn.interactable = true;
     }
 
     IEnumerator CoolDown()
     {
-        while (CoolTime < reuseTime)
+        while (CoolTime < chargeTime)
         {
             if (mainGame.isGameOver) yield break;
 

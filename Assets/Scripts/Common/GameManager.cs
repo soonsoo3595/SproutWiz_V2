@@ -21,11 +21,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        DataManager.LoadData();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

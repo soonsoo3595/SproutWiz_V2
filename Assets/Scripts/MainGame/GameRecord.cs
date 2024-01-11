@@ -2,44 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameRecord
+public class GameRecord : MonoBehaviour
 {
-    public int harvestCount;
-    public int multiHarvestCount;
-    public int achieveGoalCount;
-    public int feverCount;
-    public int rerollCount;
+    [SerializeField] private MainGame mainGame;
 
-    public GameRecord()
+    public List<string> nameList;
+    public Dictionary<string, int> dict = new Dictionary<string, int>();
+
+    void Start()
     {
-        harvestCount = 0;
-        multiHarvestCount = 0;
-        achieveGoalCount = 0;
-        feverCount = 0;
-        rerollCount = 0;
-
-        EventManager.resetMainGame += InitRecord;
+        Assign();
     }
 
     public List<int> GetRecord()
     {
-        List<int> record = new List<int>();
+        List<int> list = new List<int>();
 
-        record.Add(harvestCount);
-        record.Add(multiHarvestCount);
-        record.Add(achieveGoalCount);
-        record.Add(feverCount);
-        record.Add(rerollCount);
+        foreach (var name in nameList)
+        {
+            list.Add(dict[name]);
+        }
 
-        return record;
+        return list;
     }
 
-    public void InitRecord()
+    private void Init()
     {
-        harvestCount = 0;
-        multiHarvestCount = 0;
-        achieveGoalCount = 0;
-        feverCount = 0;
-        rerollCount = 0;
+        foreach (var name in nameList)
+        {
+            dict[name] = 0;
+        }
+    }
+
+    private void Assign()
+    {
+        foreach(var name in nameList)
+        {
+            dict.Add(name, 0);
+        }
+
+        EventManager.resetMainGame += Init;
     }
 }

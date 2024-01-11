@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using static LevelData;
 using TMPro;
 
 public class MainGame : MonoBehaviour
 {
-    [Header("Timer")]
-    public Timer timer;
+    public GameObject blind;
     public Button pauseBtn;
 
-    public GameObject blind;
+    [Header("Timer")]
+    public Timer timer;
     
     [Header("Goal")]
-    public GoalContainer goalContainer;
+    public GoalSystem goalSystem;
 
     [Header("GameOver")] 
     public GameObject gameOverPopup;
@@ -26,50 +25,57 @@ public class MainGame : MonoBehaviour
 
     [Header("System")]
     public RewardSystem rewardSystem;
-    public FeverSystem feverSystem;
+    public ManaCollector manaCollector;
     public ReRollSystem rerollSystem;
     public GameRecord gameRecord;
 
     [Header("Status")]
     public bool isPaused = false;
     public bool isGameOver = false;
-    public bool isFeverOn = false;
+    public bool isMagicOn = false;
     public bool skipReady = false;
 
     void Awake()
     {
         pauseBtn.onClick.AddListener(ClickPause);
-        gameRecord = new GameRecord();
     }
 
     void Start()
     {
-        StartGame();
+        GameStart();
     }
 
-    public void StartGame()
+    public void GameStart()
     {
         isGameOver = false;
         StartCoroutine(Ready());
     }
 
-    public void EndGame()
+    public void GameEnd()
     {
         GameManager.Instance.soundEffect.PlayOneShotSoundEffect("gameover");
 
         isGameOver = true;
-        feverSystem.GameOver();
 
         gameOverPopup.SetActive(true);
 
-        EventManager.timeOver();
+        // EventManager.mainGameOver();
         EventManager.changeTileData(new GridPosition(-1, -1));
         GridManager.Instance.ResetDeployableGrid();
     }
 
-    public IEnumerator Ready()
+    public void Retry()
     {
-        if(!skipReady)
+        EventManager.resetMainGame();
+
+        gameOverPopup.SetActive(false);
+
+        GameStart();
+    }
+
+    private IEnumerator Ready()
+    {
+        if (!skipReady)
         {
             blind.SetActive(true);
 
@@ -95,25 +101,10 @@ public class MainGame : MonoBehaviour
         }
 
         timer.StartTimer();
-        feverSystem.StartCoolTime();
-        goalContainer.UpdateContainer();
+        goalSystem.UpdateContainer();
     }
 
-    public void Retry()
-    {
-        ResetGame();
-
-        gameOverPopup.SetActive(false);
-
-        StartGame();
-    }
-
-    private void ResetGame()
-    {
-        EventManager.resetMainGame();
-    }
-
-    void ClickPause()
+    private void ClickPause()
     {
         isPaused = !isPaused;
         blind.SetActive(isPaused);
@@ -121,13 +112,13 @@ public class MainGame : MonoBehaviour
         if(isPaused)
         {
             GameManager.Instance.soundEffect.Pause();
-            feverSystem.audioSource.Pause();
+            manaCollector.audioSource.Pause();
             timer.audioSource.Pause();
         }
         else
         {
             GameManager.Instance.soundEffect.Resume();
-            feverSystem.audioSource.UnPause();
+            manaCollector.audioSource.UnPause();
             timer.audioSource.UnPause();
         }
     }
