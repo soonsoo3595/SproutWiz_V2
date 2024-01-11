@@ -8,15 +8,17 @@ public class GameOver : MonoBehaviour
 {
     public MainGame mainGame;
 
+    [Header("Text")]
     public TextMeshProUGUI[] records;
     public TextMeshProUGUI scoreTxt;
     public TextMeshProUGUI goldTxt;
 
+    [Header("Button")]
     public Button retryBtn;
     public Button homeBtn;
     public Button skipBtn;
 
-    private List<int> gameRecords;
+    private List<int> gameRecords = new List<int>();
     private int score;
     private int gold;
     private bool isSkipped = false;
@@ -26,20 +28,21 @@ public class GameOver : MonoBehaviour
         retryBtn.onClick.AddListener(Retry);
         skipBtn.onClick.AddListener(Skip);
         homeBtn.onClick.AddListener(() => EventManager.ClearEvents());
+
+        EventManager.resetMainGame += Init;
     }
 
     private void OnEnable()
     {
         gameRecords = mainGame.gameRecord.GetRecord();
         score = mainGame.rewardSystem.Score;
-        gold = mainGame.rewardSystem.gold;
+        gold = mainGame.rewardSystem.Gold;
 
         StartCoroutine(ShowResult());
     }
 
     private void Retry()
     {
-        Init();
         mainGame.Retry();
     }
 

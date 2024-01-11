@@ -5,7 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 
-public class GoalContainer : MonoBehaviour
+public class GoalSystem : MonoBehaviour
 {
     public MainGame mainGame;
     public GoalMaker goalMaker;
@@ -14,12 +14,12 @@ public class GoalContainer : MonoBehaviour
     private List<Goal> goalList;
 
     private int totalGoalCount;
+    private int goalScore;
+    private int goalGold;
 
     void Start()
     {
-        EventManager.tileHarvest += UpdateGoal;
-        EventManager.afterApplyTetris += IsAchieveGoal;
-        EventManager.resetMainGame += RetryGame;
+        Assign();
     }
 
     public void UpdateContainer()
@@ -38,12 +38,53 @@ public class GoalContainer : MonoBehaviour
             goalObjects[index].GetComponentInChildren<TextMeshProUGUI>().text = $"{goalList[i].count}";
         }
     }
-
     
     public void RetryGame()
     {
         Deactivation();
         goalMaker.InitStage();
+    }
+
+    public void IsAchieveGoal()
+    {
+        bool flag = true;
+
+        for (int i = 0; i < goalList.Count; i++)
+        {
+            if (goalList[i].count > 0)
+            {
+                flag = false;
+                break;
+            }
+        }
+
+        if (!flag) return;
+
+        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("clearGoal");
+
+        mainGame.rewardSystem.AddGold(totalGoalCount * goalGold);
+        mainGame.rewardSystem.AddScore(totalGoalCount * goalScore);
+        mainGame.gameRecord.achieveGoalCount++;
+        PlayAnimation();
+        goalMaker.NextStage();
+        UpdateContainer();
+
+        mainGame.timer.AddTime(10f);
+        GridManager.Instance.ResetDeployableGrid();
+        EventManager.changeTileData(new GridPosition(-1, -1));
+    }
+
+    private void Assign()
+    {
+        goalScore = DataManager.GameData.goalScore;
+        goalGold = DataManager.GameData.goalGold;
+
+        #region 이벤트 등록
+        EventManager.tileHarvest += UpdateGoal;
+        EventManager.afterApplyTetris += IsAchieveGoal;
+        EventManager.resetMainGame += RetryGame;
+        #endregion
+
     }
 
     private void Deactivation()
@@ -66,35 +107,6 @@ public class GoalContainer : MonoBehaviour
             int index = (int)element - 1;
             goalObjects[index].GetComponentInChildren<TextMeshProUGUI>().text = $"{goalList[i].count}";
         }
-    }
-
-    public void IsAchieveGoal()
-    {
-        bool flag = true;
-
-        for (int i = 0; i < goalList.Count; i++)
-        {
-            if (goalList[i].count > 0)
-            {
-                flag = false;
-                break;
-            }
-        }
-
-        if (!flag) return;
-
-        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("clearGoal");
-
-        mainGame.rewardSystem.AddGold(totalGoalCount * 100);
-        mainGame.rewardSystem.AddScore(totalGoalCount * 50);
-        mainGame.gameRecord.achieveGoalCount++;
-        PlayAnimation();
-        goalMaker.NextStage();
-        UpdateContainer();
-
-        mainGame.timer.AddTime(10f);
-        GridManager.Instance.ResetDeployableGrid();
-        EventManager.changeTileData(new GridPosition(-1, -1));
     }
 
     private void PlayAnimation()

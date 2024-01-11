@@ -22,7 +22,7 @@ public class TetrisViewPanel : MonoBehaviour
         SetTetrisToAllSlot();
 
         EventManager.applyTetris += UpdateTetrisSlot;
-        EventManager.timeOver += ResetAllSlot;
+        EventManager.resetMainGame += ResetAllSlot;
     }
 
     private void OnDestroy()

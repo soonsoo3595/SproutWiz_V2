@@ -283,10 +283,9 @@ GameObject:
   - component: {fileID: 43470076}
   - component: {fileID: 43470075}
   - component: {fileID: 43470078}
-  - component: {fileID: 43470079}
   - component: {fileID: 43470080}
   m_Layer: 5
-  m_Name: Fever
+  m_Name: ManaCollector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -408,30 +407,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainGame: {fileID: 371425298}
-  feverBtn: {fileID: 43470075}
   disable: {fileID: 2008481903}
-  feverAnim: {fileID: 1266335989}
+  magicAnim: {fileID: 1266335989}
   audioSource: {fileID: 43470080}
-  feverTime: 10
-  gaugeList: 01000000020000000400000006000000
-  maxFeverGauge: 60
---- !u!114 &43470079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 43470073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7deffbe2d8a52e64ea22d1373286d935, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  beforeClick: {fileID: 21300000, guid: 9d047bcb27fc3b34aad4b3b310c262ab, type: 3}
-  afterClick: {fileID: 21300000, guid: 9ced1d8edee9fb54d86cfa5b39330e98, type: 3}
-  skillpad: {fileID: 43470076}
-  bar: {fileID: 2008481900}
-  icon: {fileID: 387838385}
 --- !u!82 &43470080
 AudioSource:
   m_ObjectHideFlags: 0
@@ -21414,19 +21392,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d73707f00c1cf6439a76116701d6bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: {fileID: 406239959}
-  pauseBtn: {fileID: 2011937079}
   blind: {fileID: 1935636531}
-  goalContainer: {fileID: 185047897}
+  pauseBtn: {fileID: 2011937079}
+  timer: {fileID: 406239959}
+  goalSystem: {fileID: 0}
   gameOverPopup: {fileID: 862388857}
   countDown: {fileID: 1917941393}
   countDownTxt: {fileID: 1333716453}
   rewardSystem: {fileID: 1486342624}
-  feverSystem: {fileID: 43470078}
+  manaCollector: {fileID: 43470078}
   rerollSystem: {fileID: 1845936499}
   isPaused: 0
   isGameOver: 0
-  isFeverOn: 0
+  isMagicOn: 0
   skipReady: 0
 --- !u!4 &371425299
 Transform:
@@ -21645,10 +21623,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 910034350009f2445ba60c65ccb8c3f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 406239960}
   mainGame: {fileID: 371425298}
+  audioSource: {fileID: 406239960}
   timebar: {fileID: 719531787}
-  totalTime: 60
 --- !u!82 &406239960
 AudioSource:
   m_ObjectHideFlags: 0
@@ -39656,9 +39633,7 @@ MonoBehaviour:
   mainGame: {fileID: 371425298}
   combo: {fileID: 1022055385}
   scoreTxt: {fileID: 1465106300}
-  gold: 0
-  normalHarvestScore: 100
-  multiHarvestScore: 00000000000000009600000090010000bc020000
+  Gold: 0
 --- !u!224 &1486860404 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 380919934543715019, guid: 8b136b960a338b94f88b85a3b2384071, type: 3}
@@ -70360,11 +70335,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4a2ad47782f9a44af8e90ea6480489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainGame: {fileID: 371425298}
   rerollBtn: {fileID: 1845936494}
   disable: {fileID: 751927685}
-  mainGame: {fileID: 371425298}
   tetrisViewPanel: {fileID: 1733921891}
-  reuseTime: 15
 --- !u!1 &1862025050
 GameObject:
   m_ObjectHideFlags: 0

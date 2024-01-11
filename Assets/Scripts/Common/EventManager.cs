@@ -9,17 +9,17 @@ public static class EventManager
     public delegate void TileHarvest(TileData tile);        // 타일에 있는 식물 수확 시
     public static TileHarvest tileHarvest;
 
-    public delegate void HarvestCount(int count);
+    public delegate void HarvestCount(int count);           // 식물 수확 시 몇 개 수확했는지 필요할 때 
     public static HarvestCount harvestCount;
 
-    public delegate void AfterApplyTetris();
+    public delegate void AfterApplyTetris();                // 테트리스 놓았을 때 
     public static AfterApplyTetris afterApplyTetris;
 
-    public delegate void ResetMainGame();
-    public static ResetMainGame resetMainGame;
+    public delegate void ResetMainGame();                   // 게임 재시작 시 타이머, 점수 등 값 초기화
+    public static ResetMainGame resetMainGame;  
 
-    public delegate void TimeOver();
-    public static TimeOver timeOver;
+    public delegate void MainGameOver();
+    public static MainGameOver mainGameOver;
 
     public delegate void ApplyTetris(TetrisObject tetrisObject);
     public static ApplyTetris applyTetris;
@@ -40,7 +40,7 @@ public static class EventManager
         harvestCount = null;
         afterApplyTetris = null;
         resetMainGame = null;
-        timeOver = null;
+        mainGameOver = null;
         applyTetris = null;
         changeTileData = null;
         addUnitOnGridTile = null;
