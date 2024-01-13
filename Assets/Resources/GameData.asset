@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cafd05cab2d919479699d02a0753e3a, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  timeLimit: 30
+  timeLimit: 80
   harvestScore: 100
   multiHarvestScore: 00000000000000009600000090010000bc020000
   goalScore: 50

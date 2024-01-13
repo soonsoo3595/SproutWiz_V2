@@ -59,7 +59,7 @@ public class MainGame : MonoBehaviour
 
         gameOverPopup.SetActive(true);
 
-        // EventManager.mainGameOver();
+        EventManager.mainGameOver();
         EventManager.changeTileData(new GridPosition(-1, -1));
         GridManager.Instance.ResetDeployableGrid();
     }

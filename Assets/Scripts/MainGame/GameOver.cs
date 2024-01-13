@@ -26,7 +26,7 @@ public class GameOver : MonoBehaviour
     private void Start()
     {
         retryBtn.onClick.AddListener(Retry);
-        skipBtn.onClick.AddListener(Skip);
+        // skipBtn.onClick.AddListener(Skip);
         homeBtn.onClick.AddListener(() => EventManager.ClearEvents());
 
         EventManager.resetMainGame += Init;
@@ -38,7 +38,7 @@ public class GameOver : MonoBehaviour
         score = mainGame.rewardSystem.Score;
         gold = mainGame.rewardSystem.Gold;
 
-        StartCoroutine(ShowResult());
+        // StartCoroutine(ShowResult());
     }
 
     private void Retry()
