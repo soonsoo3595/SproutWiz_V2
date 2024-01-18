@@ -34,6 +34,11 @@ public class SoundBGM : MonoBehaviour
 
     private void PlayBGM(int index)
     {
+        if(index < 0 || index >= bgmClips.Length)
+        {
+            return;
+        }
+
         audioSource.clip = bgmClips[index];
         audioSource.Play();
     }

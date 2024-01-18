@@ -15,9 +15,13 @@ public static class DataManager
     }
 
     public static PlayerData playerData = new PlayerData();
+    public static SkillLibrary skillLibrary = ScriptableObject.CreateInstance<SkillLibrary>();
 
     public static void LoadData()
     {
         gameData = Resources.Load<GameData>("GameData");
+        skillLibrary = Resources.Load<SkillLibrary>("SkillLibrary");
+
+        Debug.Log("GameData Load Complete");
     }
 }

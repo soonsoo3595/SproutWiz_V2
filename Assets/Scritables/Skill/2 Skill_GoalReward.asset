@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235e6d71277dbb84fab07c1e876c2efd, type: 3}
+  m_Name: 2 Skill_GoalReward
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 0}
+  category: 0
+  type: 2
+  title: "\uAC19\uC740 \uBAA9\uD45C \uB2E4\uB978 \uBCF4\uC0C1"
+  preDesc: "\uBAA9\uD45C \uB2EC\uC131 \uC2DC \uC810\uC218 \uD68D\uB4DD\uB7C9"
+  sufDesc: "% \uC99D\uAC00"
+  effectList:
+  - effect:
+    - 0.05
+    - 0.07
+    - 0.1
+    - 0.14
+    - 0.2
+  costs: e80300001405000040060000d0070000c4090000

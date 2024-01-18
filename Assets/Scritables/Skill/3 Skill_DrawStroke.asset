@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235e6d71277dbb84fab07c1e876c2efd, type: 3}
+  m_Name: 3 Skill_DrawStroke
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 0}
+  category: 1
+  type: 3
+  title: "\uD55C\uBD93\uADF8\uB9AC\uAE30"
+  preDesc: "\uBBF8\uB2C8\uAC8C\uC784 '\uB9C8\uB098 \uB9E5 \uAC10\uC9C0' \uC131\uACF5
+    \uC2DC \uC810\uC218 \uC99D\uAC00"
+  sufDesc: 
+  effectList:
+  - effect:
+    - 80
+    - 95
+    - 110
+    - 130
+    - 150
+  - effect:
+    - 120
+    - 150
+    - 190
+    - 230
+    - 275
+  - effect:
+    - 180
+    - 220
+    - 260
+    - 320
+    - 380
+  costs: b0040000780500004006000008070000d0070000

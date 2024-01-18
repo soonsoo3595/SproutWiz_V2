@@ -76,8 +76,8 @@ public class GoalSystem : MonoBehaviour
 
     private void Assign()
     {
-        goalScore = DataManager.GameData.goalScore;
-        goalGold = DataManager.GameData.goalGold;
+        goalScore = DataManager.GameData.GoalScore;
+        goalGold = DataManager.GameData.GoalGold;
 
         #region 이벤트 등록
         EventManager.tileHarvest += UpdateGoal;

@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326cac8f161cd1446b2af4ac39a3156a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSceneName: Main_CHO
+  moveSceneName: 1 Main_CHO
 --- !u!114 &268768546
 MonoBehaviour:
   m_ObjectHideFlags: 0

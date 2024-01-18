@@ -16,3 +16,26 @@ public enum ElementRelation { Disadvantage, Equal, Irrelevant }
 public enum GoalType {None, A, B, C, D}
 
 public enum ButtonType { Popup, Back }
+
+public enum SkillCategoryType
+{
+    Farm,
+    MiniGame,
+    Utility
+}
+
+public enum SkillType
+{
+    Harvest,
+    MultiHarvest,
+    GoalReward,
+    DrawStroke,
+    CarvingStone,
+    HuntBird,
+    MiniGameGoldReward,
+    ScrollMastery,
+    ManaEfficiency,
+    Overclock,
+    SunshineMagicMastery,
+    EquipMastery
+}

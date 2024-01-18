@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235e6d71277dbb84fab07c1e876c2efd, type: 3}
+  m_Name: 8 Skill_ManaEfficiency
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 0}
+  category: 2
+  type: 8
+  title: "\uB9C8\uB098 \uD6A8\uC728 \uAC1C\uC120"
+  preDesc: "\uB9C8\uB098 \uC751\uC9D1\uAE30 \uD65C\uC131\uD654\uB97C \uC704\uD55C
+    \uC694\uAD6C \uC2A4\uD0DD"
+  sufDesc: " \uAC10\uC18C"
+  effectList:
+  - effect:
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+  costs: 58020000bc0200002003000084030000e8030000

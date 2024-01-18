@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235e6d71277dbb84fab07c1e876c2efd, type: 3}
+  m_Name: 9 Skill_Overclock
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 0}
+  category: 2
+  type: 9
+  title: "\uC624\uBC84\uD074\uB7ED"
+  preDesc: "\uB9C8\uB098 \uC751\uC9D1\uAE30\uC758 \uD587\uBE5B \uC9C0\uC18D\uC2DC\uAC04 "
+  sufDesc: "\uCD08 \uC99D\uAC00"
+  effectList:
+  - effect:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+  costs: bc020000e80300007805000008070000fc080000

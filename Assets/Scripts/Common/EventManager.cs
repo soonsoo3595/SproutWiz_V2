@@ -34,6 +34,11 @@ public static class EventManager
     static public RemoveUnitOnGridTile removeUnitOnGridTile;
     #endregion
 
+    #region CraftShopEvent
+    public delegate void SetSkillInfoPopup(SkillType skillType);
+    public static SetSkillInfoPopup setSkillInfoPopup;
+    #endregion
+
     public static void ClearEvents()
     {
         tileHarvest = null;

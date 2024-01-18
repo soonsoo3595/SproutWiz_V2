@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
+using System.Runtime.InteropServices;
 
 public class RewardSystem : MonoBehaviour
 {
@@ -83,24 +84,50 @@ public class RewardSystem : MonoBehaviour
     {
         #region 일반 수확 점수 계산
         {
-            int level = DataManager.playerData.level_HarvestScore;
-            harvestScore = DataManager.GameData.harvestScore + DataManager.GameData.upgrade_HarvestScore[level];
+            int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.Harvest);
+            harvestScore = DataManager.GameData.HarvestScore;
+
+            if (level != 0)
+            {
+                harvestScore += (int)DataManager.skillLibrary.GetEffect(SkillType.Harvest, level);
+            }
+
+            Debug.Log("재배 효율 레벨 : " + level + ", 수확 시 점수 : " + harvestScore);
         }
         #endregion
 
         #region 멀티 수확 점수 계산
         {
-            int level = DataManager.playerData.level_MultiHarvestScore;
-            multiHarvestScore[2] = DataManager.GameData.multiHarvestScore[2] + DataManager.GameData.upgrade_DoubleHarvestScore[level];
-            multiHarvestScore[3] = DataManager.GameData.multiHarvestScore[3] + DataManager.GameData.upgrade_TripleHarvestScore[level];
-            multiHarvestScore[4] = DataManager.GameData.multiHarvestScore[4] + DataManager.GameData.upgrade_QuadraHarvestScore[level];
+            int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.MultiHarvest);
+
+            for(int i = 2; i <= 4; i++)
+            {
+                multiHarvestScore[i] = DataManager.GameData.MultiHarvestScore[i];
+            }
+
+            if(level != 0)
+            {
+                for(int i = 2; i <= 4; i++)
+                {
+                    multiHarvestScore[i] += (int)DataManager.skillLibrary.GetEffect(SkillType.MultiHarvest, i - 2, level); 
+                }
+            }
+
+            Debug.Log("멀티 수확 레벨 : " + level + ", 2개 수확 시 : " + multiHarvestScore[2] + ", 3개 수확 시 : " + multiHarvestScore[3] + ", 4개 수확 시 : " + multiHarvestScore[4]);
         }
         #endregion
 
         #region 햇빛마법 효과(점수 보너스)
         {
-            int level = DataManager.playerData.level_SunshineMagicEffect;
-            magicEffect = DataManager.GameData.sunshineMagicEffect + DataManager.GameData.upgrade_sunshineMagicEffect[level];
+            int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.SunshineMagicMastery);
+            magicEffect = DataManager.GameData.SunshineMagicEffect;
+
+            if(level != 0)
+            {
+                magicEffect = DataManager.skillLibrary.GetEffect(SkillType.SunshineMagicMastery, level);
+            }
+
+            Debug.Log("햇빛 마법 마스터리 레벨 : " + level + ", 햇빛 마법 활성화 보너스 : " + magicEffect);
         }
         #endregion
     }

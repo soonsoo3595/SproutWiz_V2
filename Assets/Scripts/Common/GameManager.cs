@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     [Header("Audio")]
     public SoundEffect soundEffect;
 
-    // Start is called before the first frame update
     void Awake()
     {
         if (Instance == null)
@@ -25,4 +24,22 @@ public class GameManager : MonoBehaviour
         DataManager.LoadData();
     }
 
+    void Update()
+    {
+        if(Input.GetKeyUp(KeyCode.Escape))
+        {
+            if(BackMgr.instance != null && BackMgr.instance.st.Count > 0)
+            {
+                BackMgr.instance.Pop();
+            }
+            else
+            {
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit();
+#endif
+            }
+        }
+    }
 }

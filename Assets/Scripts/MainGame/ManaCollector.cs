@@ -61,15 +61,15 @@ public class ManaCollector : MonoBehaviour
     {
         #region 햇빛마법 시간
         {
-            int level = DataManager.playerData.level_SunshineMagicTime;
-            magicTime = DataManager.GameData.sunshineMagicTime + DataManager.GameData.upgrade_sunshineMagicEffect[level];
-        }
-        #endregion
+            int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.Overclock);
+            magicTime = DataManager.GameData.SunshineMagicTime;
 
-        #region 햇빛마법 효과
-        {
-            int level = DataManager.playerData.level_ReduceManaCollectorMaxMana;
-            maxMana = DataManager.GameData.manaCollectorMaxMana + DataManager.GameData.reduce_ManaCollectorMaxMana[level];
+            if (level != 0)
+            {
+                magicTime += DataManager.skillLibrary.GetEffect(SkillType.Overclock, level);
+            }
+
+            Debug.Log("오버클럭 레벨 : " + level + ", 마법 시간 : " + magicTime);
         }
         #endregion
 
@@ -81,15 +81,22 @@ public class ManaCollector : MonoBehaviour
 
         #region 마나 응집기 최대 스택
         {
-            int level = DataManager.playerData.level_ReduceManaCollectorMaxMana;
-            maxMana = DataManager.GameData.manaCollectorMaxMana - DataManager.GameData.reduce_ManaCollectorMaxMana[level];
+            int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.ManaEfficiency);
+            maxMana = DataManager.GameData.ManaCollectorMaxMana;
+
+            if (level != 0)
+            {
+                maxMana -= (int)DataManager.skillLibrary.GetEffect(SkillType.ManaEfficiency, level);
+            }
+
+            Debug.Log("마나 효율 개선 레벨 : " + level + ", 최대 스택 : " + maxMana);
         }
         #endregion
 
         #region 수확 시 획득하는 스택
         {
-            normalHarvestMana = DataManager.GameData.manaCollectorHarvestMana;
-            multiHarvestMana = DataManager.GameData.manaCollectorMultiHarvestMana;
+            normalHarvestMana = DataManager.GameData.ManaCollectorHarvestMana;
+            multiHarvestMana = DataManager.GameData.ManaCollectorMultiHarvestMana;
         }
         #endregion
 

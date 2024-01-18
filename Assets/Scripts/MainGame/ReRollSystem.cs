@@ -34,8 +34,15 @@ public class ReRollSystem : MonoBehaviour
     private void Assign()
     {
         {
-            int level = DataManager.playerData.level_ReduceCastingCancel;
-            chargeTime = DataManager.GameData.castingCancelChargeTime - DataManager.GameData.reduce_CastingCancel[level];
+            int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.ScrollMastery);
+            chargeTime = DataManager.GameData.CastingCancelChargeTime;
+
+            if (level != 0)
+            {
+                chargeTime -= DataManager.skillLibrary.GetEffect(SkillType.ScrollMastery, level);
+            }
+
+            Debug.Log("스크롤 마스터리 레벨 : " + level + ", 충전 시간 : " + chargeTime);
         }
 
         #region 이벤트 등록

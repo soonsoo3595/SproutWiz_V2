@@ -23,7 +23,7 @@ public class Timer : MonoBehaviour
 
     private void Start()
     {
-        timeLimit = DataManager.GameData.timeLimit;
+        timeLimit = DataManager.GameData.TimeLimit;
         EventManager.resetMainGame += ResetTimer;
     }
 

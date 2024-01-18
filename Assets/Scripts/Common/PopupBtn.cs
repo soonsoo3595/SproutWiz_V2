@@ -44,4 +44,10 @@ public class PopupBtn : MonoBehaviour
     {
         popup.SetActive(false);
     }
+
+    public void Register(GameObject popup, GameObject back)
+    {
+        this.popup = popup;
+        this.back = back;
+    }
 }

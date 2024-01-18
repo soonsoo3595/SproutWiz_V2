@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235e6d71277dbb84fab07c1e876c2efd, type: 3}
+  m_Name: 1 Skill_MultiHarvest
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 0}
+  category: 0
+  type: 1
+  title: "\uBA40\uD2F0\uC758 \uB2EC\uC778"
+  preDesc: "\uB2E4\uC911 \uC218\uD655 \uC810\uC218 \uD68D\uB4DD\uB7C9 \uC99D\uAC00"
+  sufDesc: 
+  effectList:
+  - effect:
+    - 10
+    - 25
+    - 40
+    - 55
+    - 70
+  - effect:
+    - 40
+    - 75
+    - 110
+    - 150
+    - 200
+  - effect:
+    - 200
+    - 240
+    - 280
+    - 320
+    - 360
+  costs: 20030000e803000014050000a4060000d0070000
