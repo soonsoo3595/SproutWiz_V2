@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
     [Header("Audio")]
     public SoundEffect soundEffect;
 
+    [Header("For Debug")]
+    public bool isDebugMode;
+    public int debugGold;
+
     void Awake()
     {
         if (Instance == null)
@@ -22,6 +26,14 @@ public class GameManager : MonoBehaviour
         }
 
         DataManager.LoadData();
+    }
+
+    void Start()
+    {
+        if(isDebugMode)
+        {
+            DataManager.playerData.gold = debugGold;
+        }
     }
 
     void Update()

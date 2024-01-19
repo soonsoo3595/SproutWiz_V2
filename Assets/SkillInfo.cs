@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,13 +8,14 @@ public class SkillInfo : MonoBehaviour
     public TextMeshProUGUI title;
     public TextMeshProUGUI description;
 
-    public void SetInfo(SkillType skillType)
+    public void SetPopup(SkillType skillType)
     {
         Skill skill = DataManager.skillLibrary.Get(skillType);
 
         logo.sprite = skill.sprite;
         title.text = skill.title;
 
+        #region 스킬 설명 부분(길어서 region 처리)
         description.text = skill.preDesc;
 
         string effect = "";
@@ -81,6 +80,7 @@ public class SkillInfo : MonoBehaviour
 
         description.text += effect;
         description.text += skill.sufDesc;
+        #endregion
     }    
 
 }

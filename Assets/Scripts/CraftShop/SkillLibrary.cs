@@ -57,4 +57,11 @@ public class SkillLibrary : ScriptableObject
 
         return maxLevel;
     }
+
+    public int GetCost(SkillType skillType, int level)
+    {
+        Skill skill = Get(skillType);
+
+        return skill.costs[level];
+    }
 }

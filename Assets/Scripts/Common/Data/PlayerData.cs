@@ -35,7 +35,7 @@ public class PlayerData
 
         for(int i = 0; i < Enum.GetValues(typeof(SkillType)).Length; i++)
         {
-            skillLevels.Add(1);
+            skillLevels.Add(0);
         }
     }
 }

@@ -1,39 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CraftShop : MonoBehaviour
 {
+    [Header("UI")]
+    public TextMeshProUGUI goldTxt;
+
     [Header("Object")]
     public List<GameObject> skillCategory;
     public GameObject skillPrefab;
 
     [Header("Popup")]
     public SkillInfo skillInfo;
-    public GameObject upgradePopup;
-    public GameObject upgradeBack;
+    public SkillUpgrade skillUpgrade;
+    public GameObject skillUpgradePopup;
+    public GameObject skillUpgradeBack;
     public GameObject skillInfoPopup;
     public GameObject skillInfoBack;
 
 
     void Start()
     {
+        UpdateGold();
         StartCoroutine(Init());
     }
 
     void OnEnable()
     {
-        EventManager.setSkillInfoPopup += skillInfo.SetInfo;
+        EventManager.setSkillInfo += skillInfo.SetPopup;
+        EventManager.setSkillUpgrade += skillUpgrade.SetPopup;
+        EventManager.updateUI += UpdateGold;
     }
 
     void OnDisable()
     {
-        EventManager.setSkillInfoPopup -= skillInfo.SetInfo;
+        EventManager.setSkillInfo -= skillInfo.SetPopup;
+        EventManager.setSkillUpgrade -= skillUpgrade.SetPopup;
+        EventManager.updateUI -= UpdateGold;
     }
 
-    public void ShowPopup()
+    public void UpdateGold()
     {
-
+        goldTxt.text = DataManager.playerData.gold.ToString("N0");
     }
 
 
@@ -48,11 +58,13 @@ public class CraftShop : MonoBehaviour
 
         foreach(var skill in skills)
         {
-            GameObject skillElement = Instantiate(skillPrefab);
-            skillElement.transform.SetParent(skillCategory[(int)skill.category].transform, false); 
+            GameObject skillObject = Instantiate(skillPrefab);
+            SkillElement skillElement = skillObject.GetComponent<SkillElement>();
+            skillObject.transform.SetParent(skillCategory[(int)skill.category].transform, false); 
 
-            skillElement.GetComponent<PopupBtn>().Register(skillInfoPopup, skillInfoBack);
-            skillElement.GetComponent<SkillElement>().SetSkill(skill);
+            skillObject.GetComponent<PopupBtn>().Register(skillInfoPopup, skillInfoBack);
+            skillElement.upgradeBtn.GetComponent<PopupBtn>().Register(skillUpgradePopup, skillUpgradeBack);
+            skillElement.SetSkill(skill);
         }
 
         yield return null;
