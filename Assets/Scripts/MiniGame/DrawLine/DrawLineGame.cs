@@ -1,20 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+
+// TODO : 오브젝트 풀링 방식으로 교체 고려.
 
 public class DrawLineGame : MonoBehaviour, IMiniGame
 {
     [SerializeField] Transform startPointPrefab;
     [SerializeField] Transform midPointPrefab;
+    [SerializeField] RectTransform CanvasWorldSpace;
 
     GridPosition[] pathPointPositions;
-    GridPosition[] direction;
+    static GridPosition[] direction;
 
-    readonly int MaxPathPointCount = 5;
+    readonly static int MaxPathPointCount = 5;
 
-    Transform startPoint;
+    Transform[] drawPointsObject;
+    int pathLength;
 
+
+    // 드래그 이벤트 관련.
+    bool isDrag = false;
+    int CurrentDragSequence = 0;
 
     private void Awake()
     {
@@ -29,8 +38,9 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
     {
         Debug.Log("한 붓 그리기 실행!");
 
-        int pathLength = Random.Range(2, MaxPathPointCount);
+        pathLength = Random.Range(2, MaxPathPointCount);
         pathPointPositions = new GridPosition[pathLength + 1];
+        drawPointsObject = new Transform[pathLength + 1];
 
         GridPosition startGridPosition = SelectStartPoint();
         Vector3 startPointWorldPos = GridManager.Instance.GetWorldPosition(startGridPosition);
@@ -38,7 +48,9 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
 
         pathPointPositions[0] = startGridPosition;
 
-        startPoint = Instantiate(startPointPrefab, startPointWorldPos, Quaternion.identity);
+        drawPointsObject[0] = Instantiate(startPointPrefab, startPointWorldPos, Quaternion.identity, CanvasWorldSpace);
+        StartPoint startPoint = drawPointsObject[0].GetComponent<StartPoint>();
+        startPoint.SetMaster(this);
 
         Debug.Log($"pathLength = {pathLength}");
         Debug.Log($"startPoint = {startGridPosition.x}, {startGridPosition.y}");
@@ -82,12 +94,14 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
             Vector3 spawnPointWorldPos = GridManager.Instance.GetWorldPosition(pathPointPositions[i]);
             spawnPointWorldPos.z = 10;
 
-            Instantiate(midPointPrefab, spawnPointWorldPos, Quaternion.identity);
+            drawPointsObject[i] = Instantiate(midPointPrefab, spawnPointWorldPos, Quaternion.identity, CanvasWorldSpace);
+            
+            DrawPoint drawPoint = drawPointsObject[i].GetComponent<DrawPoint>();
+            drawPoint.DrawLine(pathPointPositions[i - 1], pathPointPositions[i]);
+            drawPoint.SetMaster(this);
 
-            Debug.Log($"MidPoint : {pathPointPositions[i].x}, {pathPointPositions[i].y}");
+            Debug.Log($"MidPoint : {pathPointPositions[i]}");
         }
-
-        startPoint.GetComponent<StartPoint>().DrawLine(pathPointPositions[0], pathPointPositions[1]);
     }
 
     private GridPosition SelectStartPoint()
@@ -101,11 +115,6 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
         return new GridPosition(x, y);
     }
 
-    private void SearchNextPoint()
-    {
-
-    }
-
     private bool IsDuplicated(GridPosition position)
     {
         for(int i = 0; i < pathPointPositions.Length; i++)
@@ -117,5 +126,64 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
         }
 
         return false;
+    }
+
+    public void SetIsDrag(bool isDrag)
+    {
+        this.isDrag = isDrag;
+
+        if(isDrag)
+        {
+
+        }
+        else
+        {
+            if(CurrentDragSequence == pathLength)
+            {
+                Debug.Log($"DrawGame Success");
+            }
+            else
+            {
+                Debug.Log($"DrawGame Fail");
+            }
+        }
+
+        CurrentDragSequence = 0;
+    }
+
+    public void EnterDrawPoint(GridPosition position)
+    {
+        if(position.Equals(pathPointPositions[CurrentDragSequence]))
+        {
+            Debug.Log($"EnterDrawPoint : {CurrentDragSequence}");
+
+            if(CurrentDragSequence == pathLength)
+            {
+                CurrentDragSequence++;
+                Debug.Log($"Enter Last DrawPoint : {CurrentDragSequence}");
+            }
+        }
+    }
+
+    public void ExitDrawPoint(GridPosition position)
+    {
+        if (position.Equals(pathPointPositions[CurrentDragSequence]))
+        {
+            CurrentDragSequence++;
+            Debug.Log($"DrawGame Process : {CurrentDragSequence}");
+        }
+        else
+        {
+            CurrentDragSequence = 0;
+        }
+    }
+
+
+    public void Exit()
+    {
+        for(int i = 0; i< pathLength; i++)
+        {
+            Destroy(drawPointsObject[i].gameObject);
+        }
     }
 }

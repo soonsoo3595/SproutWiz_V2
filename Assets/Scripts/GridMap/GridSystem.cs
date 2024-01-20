@@ -68,7 +68,7 @@ public class GridSystem
         }
         else
         {
-            Debug.Log($"Out Of Grid  {gridPosition}");
+            //Debug.Log($"Out Of Grid  {gridPosition}");
             return OutOfGrid;
         }
 

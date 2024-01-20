@@ -17,3 +17,9 @@ public enum GoalType {None, A, B, C, D}
 
 public enum ButtonType { Popup, Back }
 
+public enum EMinigameType
+{
+    DrawLine,
+    Griffin,
+    Meteor
+}

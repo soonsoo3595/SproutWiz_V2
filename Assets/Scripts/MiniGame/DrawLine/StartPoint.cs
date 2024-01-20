@@ -1,22 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Timeline;
 
-public class StartPoint : MonoBehaviour
+public class StartPoint : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 {
-    LineRenderer lineRenderer;
+    DrawLineGame Master;
 
-    private void Awake()
+
+    public void SetMaster(DrawLineGame Master)
     {
-        lineRenderer = GetComponent<LineRenderer>();
+        this.Master = Master;
     }
 
-    public void DrawLine(GridPosition start, GridPosition end)
+    public void OnBeginDrag(PointerEventData eventData)
     {
-        Vector3 startPos = new Vector3(start.x, start.y, 10);
-        Vector3 endPos = new Vector3(end.x, end.y, 10);
-
-        lineRenderer.SetPosition(0, startPos);
-        lineRenderer.SetPosition(1, endPos);
+        Master.SetIsDrag(true);
+        Debug.Log("StartPoint OnBeginDrag");
     }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        Master.SetIsDrag(false);
+        Debug.Log("StartPoint OnEndDrag");
+    }
+
 }

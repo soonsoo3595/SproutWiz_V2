@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class MiniGameController : MonoBehaviour
 {
+    public static MiniGameController Instance { get; private set; }
+
     [SerializeField] DrawLineGame drawLineGame;
 
     Queue<IMiniGame> miniGameQueue;
 
-    public static MiniGameController Instance { get; private set; }
-
+   
     private void Awake()
     {
         if (Instance == null)
@@ -18,20 +19,12 @@ public class MiniGameController : MonoBehaviour
         }
         else
         {
-            Debug.Log("MiniGmaeController already exist");
+            Debug.LogWarning("MiniGmaeController already exist");
             Destroy(gameObject);
             return;
         }
 
-
         miniGameQueue = new Queue<IMiniGame>();
-
-    }
-
-    private void Start()
-    {
-        //miniGameQueue.Enqueue(new DrawLineGame());
-
     }
 
     public void AddMiniGameQueue(EMinigameType type)
@@ -58,13 +51,16 @@ public class MiniGameController : MonoBehaviour
         IMiniGame miniGame = miniGameQueue.Dequeue();
         miniGame.Excute();
 
-        Debug.Log("미니게임 실행");
+        // TODO: 상수 추출 필요.
+        StartCoroutine(ExitMiniGameAfter(miniGame, 15f));
+    }
+
+    IEnumerator ExitMiniGameAfter(IMiniGame miniGame, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        miniGame.Exit();
     }
 }
 
-public enum EMinigameType
-{
-    DrawLine,
-    Griffin,
-    Meteor
-}
+

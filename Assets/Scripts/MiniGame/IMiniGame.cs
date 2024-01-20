@@ -5,4 +5,6 @@ using UnityEngine;
 public interface IMiniGame
 {
     void Excute();
+
+    void Exit();
 }
