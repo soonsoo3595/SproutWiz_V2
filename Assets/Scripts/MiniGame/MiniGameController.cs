@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class MiniGameController : MonoBehaviour
 {
-    [SerializeField] private Transform minigameUnit;
+    [SerializeField] DrawLineGame drawLineGame;
 
-
-    Queue<MiniGameBase> MiniGameQueue;
+    Queue<IMiniGame> miniGameQueue;
 
     public static MiniGameController Instance { get; private set; }
 
@@ -16,7 +15,6 @@ public class MiniGameController : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            // DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -26,31 +24,47 @@ public class MiniGameController : MonoBehaviour
         }
 
 
-        MiniGameQueue = new Queue<MiniGameBase>();
+        miniGameQueue = new Queue<IMiniGame>();
 
     }
 
     private void Start()
     {
-        MiniGameQueue.Enqueue(new Tornado());
+        //miniGameQueue.Enqueue(new DrawLineGame());
 
+    }
+
+    public void AddMiniGameQueue(EMinigameType type)
+    {
+        switch(type)
+        {
+            case EMinigameType.DrawLine:
+                miniGameQueue.Enqueue(drawLineGame);
+                Debug.Log("미니게임 대기 큐에 한붓그리기 추가");
+                break;
+            default: 
+                break;
+        }
     }
 
     public void ExecuteMiniGame()
     {
-        if(MiniGameQueue.Count <= 0)
+        if(miniGameQueue.Count <= 0)
         {
             Debug.Log("대기중인 미니게임이 없습니다!");
             return;
         }
 
+        IMiniGame miniGame = miniGameQueue.Dequeue();
+        miniGame.Excute();
 
-        MiniGameBase miniGame = MiniGameQueue.Dequeue();
-        GridPosition[] AffectPositions = miniGame.Execute();
-
-        foreach (GridPosition position in AffectPositions)
-        {
-            Instantiate(minigameUnit, GridManager.Instance.GetWorldPosition(position), Quaternion.identity);
-        }
+        Debug.Log("미니게임 실행");
     }
+}
+
+public enum EMinigameType
+{
+    DrawLine,
+    Griffin,
+    Meteor
 }

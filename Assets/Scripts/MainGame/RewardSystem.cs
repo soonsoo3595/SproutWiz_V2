@@ -25,6 +25,8 @@ public class RewardSystem : MonoBehaviour
 
     public int gold;
 
+    private int MiniGameScore;
+
     [Header("Score")]
     public int normalHarvestScore = 100;
     public List<int> multiHarvestScore;
@@ -42,10 +44,26 @@ public class RewardSystem : MonoBehaviour
         impulseSource = FindObjectOfType<CinemachineImpulseSource>();
     }
 
-    private void AddScore(int score) => Score += score;
-    
-    public void InitScore() => Score = 0;
-    
+    private void AddScore(int score)
+    {
+        Score += score;
+
+        MiniGameScore += score;
+
+        if (MiniGameScore / 3000 >= 1)
+        {
+            MiniGameScore -= 3000;
+            MiniGameController.Instance.AddMiniGameQueue(EMinigameType.DrawLine);
+            MiniGameController.Instance.ExecuteMiniGame();
+        }
+    }
+
+    public void InitScore()
+    {
+        Score = 0;
+        MiniGameScore = 0;
+    }
+
     public void Harvest(int count)
     {
         if (count == 0) return;

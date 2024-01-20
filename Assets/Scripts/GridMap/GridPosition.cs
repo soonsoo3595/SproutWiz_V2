@@ -35,7 +35,7 @@ public class GridPosition : IEquatable<GridPosition>
 
     public static bool operator ==(GridPosition a, GridPosition b)
     {
-        return a.x == b.x && a.y == b.y;
+        return (a.x == b.x) && (a.y == b.y);
     }
 
     public static bool operator !=(GridPosition a, GridPosition b)
