@@ -58,7 +58,6 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
         for (int j = 1; j < pathLength; j++)
         {
             GridPosition preGridPosition = pathPointPositions[j - 1];
-            GridPosition nextGridPosition = new GridPosition(-1, -1);
 
             List<GridPosition> validPositions = new List<GridPosition>();
 
@@ -75,7 +74,7 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
                     continue;
 
 
-                nextGridPosition = new GridPosition(nextPosX, nextPosY);
+                GridPosition nextGridPosition = new GridPosition(nextPosX, nextPosY);
 
                 if (IsDuplicated(nextGridPosition))
                     continue;
