@@ -12,7 +12,7 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
     [SerializeField] Transform midPointPrefab;
     [SerializeField] RectTransform CanvasWorldSpace;
 
-    GridPosition[] pathPointPositions;
+    List<GridPosition> pathPointPositions;
     static GridPosition[] direction;
 
     readonly static int MaxPathPointCount = 5;
@@ -39,14 +39,14 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
         Debug.Log("한 붓 그리기 실행!");
 
         pathLength = Random.Range(2, MaxPathPointCount);
-        pathPointPositions = new GridPosition[pathLength + 1];
-        drawPointsObject = new Transform[pathLength + 1];
+        pathPointPositions = new List<GridPosition>();
+        drawPointsObject = new Transform[pathLength];
 
         GridPosition startGridPosition = SelectStartPoint();
         Vector3 startPointWorldPos = GridManager.Instance.GetWorldPosition(startGridPosition);
         startPointWorldPos.z = 10;
 
-        pathPointPositions[0] = startGridPosition;
+        pathPointPositions.Add(startGridPosition);
 
         drawPointsObject[0] = Instantiate(startPointPrefab, startPointWorldPos, Quaternion.identity, CanvasWorldSpace);
         StartPoint startPoint = drawPointsObject[0].GetComponent<StartPoint>();
@@ -57,13 +57,14 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
 
         for (int j = 1; j < pathLength; j++)
         {
-            GridPosition preGridPosition = pathPointPositions[j - 1];
+            GridPosition preGridPosition = pathPointPositions[pathPointPositions.Count - 1];
 
             List<GridPosition> validPositions = new List<GridPosition>();
-
+            
             // 4방향 중 유효한 블록이 몇 개인지 체크
             for (int i = 0; i < 4; i++)
             {
+                Debug.Log($"4방향 체크 시작");
                 int nextPosX = preGridPosition.x + direction[i].x;
                 int nextPosY = preGridPosition.y + direction[i].y;
 
@@ -80,15 +81,18 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
                     continue;
 
                 validPositions.Add(nextGridPosition);
+                Debug.Log($"validPositions Add = {nextGridPosition.x}, {nextGridPosition.y}");
             }
 
             // 유효한 방향 중 랜덤 선택
             int randomDirection = Random.Range(0, validPositions.Count);
 
-            pathPointPositions[j] = validPositions[randomDirection];
+            pathPointPositions.Add(validPositions[randomDirection]);
+
+            Debug.Log($"{j}번째 선택된 좌표 = {validPositions[randomDirection].x}, {validPositions[randomDirection].y}");
         }
 
-        for(int i = 1; i < pathLength; i++)
+        for(int i = 1; i < pathPointPositions.Count; i++)
         {
             Vector3 spawnPointWorldPos = GridManager.Instance.GetWorldPosition(pathPointPositions[i]);
             spawnPointWorldPos.z = 10;
@@ -96,7 +100,7 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
             drawPointsObject[i] = Instantiate(midPointPrefab, spawnPointWorldPos, Quaternion.identity, CanvasWorldSpace);
             
             DrawPoint drawPoint = drawPointsObject[i].GetComponent<DrawPoint>();
-            drawPoint.DrawLine(pathPointPositions[i - 1], pathPointPositions[i]);
+            //drawPoint.DrawLine(pathPointPositions[i - 1], pathPointPositions[i]);
             drawPoint.SetMaster(this);
 
             Debug.Log($"MidPoint : {pathPointPositions[i]}");
@@ -116,12 +120,11 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
 
     private bool IsDuplicated(GridPosition position)
     {
-        for(int i = 0; i < pathPointPositions.Length; i++)
+        Debug.Log($"중복 체크 시작. 현재 길이 : {pathPointPositions.Count}");
+
+        if (pathPointPositions.Contains(position))
         {
-            if (pathPointPositions.Equals(position))
-            {
-                return true;
-            }
+            return true;
         }
 
         return false;

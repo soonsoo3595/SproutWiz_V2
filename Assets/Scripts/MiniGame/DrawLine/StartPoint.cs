@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Timeline;
 
-public class StartPoint : MonoBehaviour, IBeginDragHandler, IEndDragHandler
+public class StartPoint : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     DrawLineGame Master;
 
@@ -17,13 +17,15 @@ public class StartPoint : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     public void OnBeginDrag(PointerEventData eventData)
     {
         Master.SetIsDrag(true);
-        Debug.Log("StartPoint OnBeginDrag");
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         Master.SetIsDrag(false);
-        Debug.Log("StartPoint OnEndDrag");
     }
 
+    public void OnDrag(PointerEventData eventData)
+    {
+        
+    }
 }

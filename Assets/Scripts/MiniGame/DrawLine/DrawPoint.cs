@@ -36,11 +36,12 @@ public class DrawPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Debug.Log("마우스 포인터 진입");
         Master.EnterDrawPoint(gridPosition);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Master.ExitDrawPoint(gridPosition);
+        //Master.ExitDrawPoint(gridPosition);
     }
 }
