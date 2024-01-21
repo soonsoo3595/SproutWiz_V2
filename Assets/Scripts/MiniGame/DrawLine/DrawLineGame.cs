@@ -100,7 +100,7 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
             drawPointsObject[i] = Instantiate(midPointPrefab, spawnPointWorldPos, Quaternion.identity, CanvasWorldSpace);
             
             DrawPoint drawPoint = drawPointsObject[i].GetComponent<DrawPoint>();
-            //drawPoint.DrawLine(pathPointPositions[i - 1], pathPointPositions[i]);
+            drawPoint.DrawLine(pathPointPositions[i - 1], pathPointPositions[i]);
             drawPoint.SetMaster(this);
 
             Debug.Log($"MidPoint : {pathPointPositions[i]}");
@@ -143,6 +143,7 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
             if(CurrentDragSequence == pathLength)
             {
                 Debug.Log($"DrawGame Success");
+                //Exit();
             }
             else
             {
@@ -150,36 +151,27 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
             }
         }
 
-        CurrentDragSequence = 0;
+        CurrentDragSequence = 1;
     }
 
     public void EnterDrawPoint(GridPosition position)
     {
-        if(position.Equals(pathPointPositions[CurrentDragSequence]))
-        {
-            Debug.Log($"EnterDrawPoint : {CurrentDragSequence}");
+        Debug.Log($"CurrentDragSequence : {CurrentDragSequence}");
+        Debug.Log($"Compair Position : {pathPointPositions[CurrentDragSequence]} <-> {position}");
 
-            if(CurrentDragSequence == pathLength)
-            {
-                CurrentDragSequence++;
-                Debug.Log($"Enter Last DrawPoint : {CurrentDragSequence}");
-            }
-        }
-    }
-
-    public void ExitDrawPoint(GridPosition position)
-    {
         if (position.Equals(pathPointPositions[CurrentDragSequence]))
         {
+            if (CurrentDragSequence == pathLength - 1)
+            {
+                Debug.Log($"Enter Last DrawPoint : {CurrentDragSequence} / {pathLength - 1}");
+                Exit();
+            }
+
+            Debug.Log($"CurrentDragSequence : {CurrentDragSequence} / {pathLength - 1}");
+
             CurrentDragSequence++;
-            Debug.Log($"DrawGame Process : {CurrentDragSequence}");
-        }
-        else
-        {
-            CurrentDragSequence = 0;
         }
     }
-
 
     public void Exit()
     {
