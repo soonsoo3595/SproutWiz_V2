@@ -32,22 +32,26 @@ public class Goal
 
 public class GoalMaker : MonoBehaviour
 {
-    [HideInInspector] private List<Goal> goalList;
-
-    // private int elementCount;
-    private int goalTypeCount;
-
+    private List<Goal> goalList;
     private ElementType prevElement;
     private GoalType prevGoal;
+
     private int currentStage;
+    private int goalTypeCount;
 
     private float r;    // 계수 r
     [SerializeField] private float minB, maxB;   // 계수 B의 최소값, 최대값
 
-    private void Awake()
+    private void Start()
     {
-        goalList = new List<Goal>();
-        goalTypeCount = (int)GoalType.D;
+        goalList = new List<Goal>
+        {
+            new Goal(ElementType.Fire, 0),
+            new Goal(ElementType.Water, 0),
+            new Goal(ElementType.Grass, 0)
+        };
+
+        goalTypeCount = Enum.GetValues(typeof(GoalType)).Length;
 
         InitStage();
     }
@@ -61,11 +65,13 @@ public class GoalMaker : MonoBehaviour
     
     public List<Goal> GetGoalList()
     {
-        goalList.Clear();
+        for(int i = 0; i < goalList.Count; i++)
+        {
+            goalList[i].count = 0;
+        }
 
         CalcualteExpression();
         Process();
-        goalList.Sort(SortGoal);
 
         return goalList;
     }
@@ -88,7 +94,7 @@ public class GoalMaker : MonoBehaviour
 
     private GoalType RandomType()
     {
-        int rand = currentStage == 1 ? 1 : Random.Range(1, goalTypeCount + 1);
+        int rand = currentStage == 1 ? 1 : Random.Range(1, goalTypeCount);
 
         return (GoalType)rand;
     }
@@ -161,8 +167,7 @@ public class GoalMaker : MonoBehaviour
         ElementType target = GetDifferentElement();
         prevElement = target;
 
-        Goal goal = new Goal(target, (int)math.round(r));
-        goalList.Add(goal);
+        goalList[(int)target - 1].count = (int)math.round(r);
     }
 
     private void TypeB()
@@ -174,8 +179,7 @@ public class GoalMaker : MonoBehaviour
             ElementType target = GetDifferentElement();
             prevElement = target;
 
-            Goal goal = new Goal(target, (int)math.round(r));
-            goalList.Add(goal);
+            goalList[(int)target - 1].count = (int)math.round(r);
         }
     }
 
@@ -186,8 +190,8 @@ public class GoalMaker : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             ElementType element = (ElementType)(i + 1);
-            Goal goal = new Goal(element, (int)math.round(r));
-            goalList.Add(goal);
+
+            goalList[(int)element - 1].count = (int)math.round(r);
         }
     }
     
@@ -202,8 +206,7 @@ public class GoalMaker : MonoBehaviour
             ElementType target = GetDifferentElement();
             prevElement = target;
 
-            Goal goal = new Goal(target, (int)math.round(coefficients[i] * r));
-            goalList.Add(goal);
+            goalList[(int)target - 1].count = (int)math.round(coefficients[i] * r);
         }
     }
 

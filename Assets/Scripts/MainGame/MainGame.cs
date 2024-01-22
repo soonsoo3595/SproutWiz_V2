@@ -37,7 +37,7 @@ public class MainGame : MonoBehaviour
 
     void Awake()
     {
-        pauseBtn.onClick.AddListener(ClickPause);
+        pauseBtn.onClick.AddListener(Pause);
     }
 
     void Start()
@@ -104,7 +104,7 @@ public class MainGame : MonoBehaviour
         goalSystem.UpdateContainer();
     }
 
-    private void ClickPause()
+    private void Pause()
     {
         isPaused = !isPaused;
         blind.SetActive(isPaused);
