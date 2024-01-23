@@ -26,7 +26,7 @@ public class MainGame : MonoBehaviour
     [Header("System")]
     public RewardSystem rewardSystem;
     public ManaCollector manaCollector;
-    public ReRollSystem rerollSystem;
+    public CastingCancel castingCancel;
     public GameRecord gameRecord;
 
     [Header("Status")]
@@ -101,6 +101,7 @@ public class MainGame : MonoBehaviour
         }
 
         timer.StartTimer();
+        castingCancel.ChargeStart();
         goalSystem.UpdateContainer();
     }
 

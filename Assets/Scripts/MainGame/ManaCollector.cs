@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class ManaCollector : MonoBehaviour
 {
     public MainGame mainGame;
-    public Image disable;
+    public Image energy;
+    public Image energy_light;
     public Animator magicAnim;
     public AudioSource audioSource;
 
@@ -27,7 +28,17 @@ public class ManaCollector : MonoBehaviour
         set
         {
             mana = Mathf.Clamp(value, 0, maxMana);
-            disable.fillAmount = (float)mana / (float)maxMana;
+            energy.fillAmount = (float)mana / (float)maxMana;
+
+            if(energy.fillAmount >= 0.5f)
+            {
+                energy_light.gameObject.SetActive(true);
+                energy_light.color = new Color(1f, 1f, 1f, energy.fillAmount);
+            }
+            else
+            {
+                energy_light.gameObject.SetActive(false);
+            }
         }
     }
 
