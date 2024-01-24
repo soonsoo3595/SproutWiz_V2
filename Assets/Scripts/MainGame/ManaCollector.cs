@@ -30,15 +30,18 @@ public class ManaCollector : MonoBehaviour
             mana = Mathf.Clamp(value, 0, maxMana);
             energy.fillAmount = (float)mana / (float)maxMana;
 
-            if(energy.fillAmount >= 0.5f)
-            {
-                energy_light.gameObject.SetActive(true);
-                energy_light.color = new Color(1f, 1f, 1f, energy.fillAmount);
-            }
-            else
-            {
-                energy_light.gameObject.SetActive(false);
-            }
+            energy_light.gameObject.SetActive(true);
+            energy_light.color = new Color(1f, 1f, 1f, energy.fillAmount);
+
+            // if (energy.fillAmount >= 0.5f)
+            // {
+            //     energy_light.gameObject.SetActive(true);
+            //     energy_light.color = new Color(1f, 1f, 1f, energy.fillAmount);
+            // }
+            // else
+            // {
+            //     energy_light.gameObject.SetActive(false);
+            // }
         }
     }
 

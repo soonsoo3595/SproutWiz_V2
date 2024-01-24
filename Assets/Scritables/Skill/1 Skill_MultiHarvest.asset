@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 235e6d71277dbb84fab07c1e876c2efd, type: 3}
   m_Name: 1 Skill_MultiHarvest
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: fe9565ecf620e91458a02cd461719bf3, type: 3}
   category: 0
   type: 1
   title: "\uBA40\uD2F0\uC758 \uB2EC\uC778"
