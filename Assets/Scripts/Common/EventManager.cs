@@ -35,11 +35,8 @@ public static class EventManager
     #endregion
 
     #region CraftShopEvent
-    public delegate void SetSkillInfoPopup(SkillType skillType);
+    public delegate void SetSkillInfoPopup(SkillElement skillElement);
     public static SetSkillInfoPopup setSkillInfo;
-
-    public delegate void SetSkillUpgradePopup(SkillType skillType, SkillElement skillElement);
-    public static SetSkillUpgradePopup setSkillUpgrade;
 
     public delegate void UpdateUI();
     public static UpdateUI updateUI;

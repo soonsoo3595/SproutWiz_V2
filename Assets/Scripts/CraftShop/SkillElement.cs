@@ -11,19 +11,18 @@ public class SkillElement : MonoBehaviour
     public Image image;
     public TextMeshProUGUI title;
     public List<GameObject> levelIcon;
-    public TextMeshProUGUI upgradeBtnText;
-    public Button upgradeBtn;
 
     [Header("Data")]
     public SkillType skillType;
 
     private int maxLevel;
+    private Color transparent = new Color(1f, 1f, 1f, 0f);
+    private Color opaque = new Color(1f, 1f, 1f, 1f);
 
     private void Start()
     {
         Button btn = GetComponent<Button>();
         btn.onClick.AddListener(InfoClick);
-        upgradeBtn.onClick.AddListener(UpgradeClick);
     }
 
     public void SetSkill(Skill skill)
@@ -35,8 +34,6 @@ public class SkillElement : MonoBehaviour
         maxLevel = DataManager.skillLibrary.GetMaxLevel(skillType);
         int curLevel = DataManager.skillLibrary.GetCurrentLevel(skillType);
 
-        SetButton(curLevel);
-
         for(int i = 0; i < maxLevel; i++)
         {
             SetIcon(i, i < curLevel);
@@ -47,47 +44,37 @@ public class SkillElement : MonoBehaviour
     {
         int curLevel = DataManager.skillLibrary.GetCurrentLevel(skillType);
 
-        SetButton(curLevel);
-
-        StartCoroutine(GreyToGreen(curLevel - 1));
+        StartCoroutine(UpgradeAnimation(curLevel - 1));
     }
 
     private void SetIcon(int idx, bool isOn)
     {
         levelIcon[idx].SetActive(true);
 
-        Image image = levelIcon[idx].GetComponent<Image>();
+        GameObject gameObject = levelIcon[idx].transform.GetChild(0).gameObject;
 
         if(isOn)
         {
-            image.color = Color.green;
+            gameObject.SetActive(true);
         }
         else
         {
-            image.color = Color.grey;
+            gameObject.SetActive(false);
         }
     }
 
-    private void SetButton(int curLevel)
-    {
-        if(curLevel == maxLevel)
-        {
-            upgradeBtnText.text = "최대 레벨 도달";
-            upgradeBtn.interactable = false;
-        }
-        else
-        {
-            upgradeBtnText.text = $"{DataManager.skillLibrary.GetCost(skillType, curLevel)}G";
-            upgradeBtn.interactable = true;
-        }
-    }
+    
 
-    IEnumerator GreyToGreen(int idx)
+    IEnumerator UpgradeAnimation(int idx)
     {
-        Image image = levelIcon[idx].GetComponent<Image>();
+        GameObject gameObject = levelIcon[idx].transform.GetChild(0).gameObject;
+        Image image = gameObject.GetComponent<Image>();
 
         float time = 0f;
         float duration = 1f;
+
+        gameObject.SetActive(true);
+        image.color = transparent;
 
         while (time < duration)
         {
@@ -95,7 +82,7 @@ public class SkillElement : MonoBehaviour
 
             float lerpFactor = Mathf.Clamp01(time / duration);
 
-            Color lerpedColor = Color.Lerp(Color.gray, Color.green, lerpFactor);
+            Color lerpedColor = Color.Lerp(transparent, opaque, lerpFactor);
 
             image.color = lerpedColor;
 
@@ -105,11 +92,6 @@ public class SkillElement : MonoBehaviour
 
     private void InfoClick()
     {
-        EventManager.setSkillInfo?.Invoke(skillType);
-    }
-
-    private void UpgradeClick()
-    {
-        EventManager.setSkillUpgrade?.Invoke(skillType, this);
+        EventManager.setSkillInfo?.Invoke(this);
     }
 }

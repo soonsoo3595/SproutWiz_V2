@@ -4,12 +4,22 @@ using UnityEngine.UI;
 
 public class SkillInfo : MonoBehaviour
 {
+    [Header("Object")]
     public Image logo;
     public TextMeshProUGUI title;
     public TextMeshProUGUI description;
+    public Button upgradeBtn;
+    public SkillUpgrade upgradePopup;
+    public Sprite[] buttonSprites;
 
-    public void SetPopup(SkillType skillType)
+    private SkillType skillType;
+    private int maxLevel;
+
+    public void SetPopup(SkillElement skillElement)
     {
+        skillType = skillElement.skillType;
+        maxLevel = DataManager.skillLibrary.GetMaxLevel(skillType);
+
         Skill skill = DataManager.skillLibrary.Get(skillType);
 
         logo.sprite = skill.sprite;
@@ -20,21 +30,21 @@ public class SkillInfo : MonoBehaviour
 
         string effect = "";
 
-        if(skillType == SkillType.MultiHarvest || skillType == SkillType.DrawStroke)
+        if (skillType == SkillType.MultiHarvest || skillType == SkillType.DrawStroke)
         {
             effect += "\n";
-            for(int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
-                if(skillType == SkillType.MultiHarvest)
+                if (skillType == SkillType.MultiHarvest)
                 {
                     effect += $"{i + 2}°³ : ";
                 }
-                else if(skillType == SkillType.DrawStroke)
+                else if (skillType == SkillType.DrawStroke)
                 {
                     effect += $"{i + 3}°³ : ";
                 }
 
-                for(int j = 1; j <= DataManager.skillLibrary.GetMaxLevel(skillType); j++)
+                for (int j = 1; j <= DataManager.skillLibrary.GetMaxLevel(skillType); j++)
                 {
                     if (j == DataManager.skillLibrary.GetCurrentLevel(skillType))
                     {
@@ -68,7 +78,7 @@ public class SkillInfo : MonoBehaviour
                 }
 
                 float effectValue = DataManager.skillLibrary.GetEffect(skillType, i);
-                if(effectValue < 1f)    effectValue *= 100f;
+                if (effectValue < 1f) effectValue *= 100f;
                 effect += effectValue;
                 effect += "</color>";
 
@@ -81,6 +91,28 @@ public class SkillInfo : MonoBehaviour
         description.text += effect;
         description.text += skill.sufDesc;
         #endregion
-    }    
 
+        SetButton();
+
+        upgradePopup.Assign(skillElement);
+    }
+
+    private void SetButton()
+    {
+        TextMeshProUGUI upgradeBtnText = upgradeBtn.GetComponentInChildren<TextMeshProUGUI>();
+        int curLevel = DataManager.skillLibrary.GetCurrentLevel(skillType);
+
+        if (curLevel == maxLevel)
+        {
+            upgradeBtn.GetComponent<Image>().sprite = buttonSprites[1];
+            upgradeBtnText.text = "";
+            upgradeBtn.interactable = false;
+        }
+        else
+        {
+            upgradeBtn.GetComponent<Image>().sprite = buttonSprites[0];
+            upgradeBtnText.text = $"{DataManager.skillLibrary.GetCost(skillType, curLevel)}G";
+            upgradeBtn.interactable = true;
+        }
+    }
 }

@@ -18,11 +18,19 @@ public class SkillUpgrade : MonoBehaviour
         btn.onClick.AddListener(Upgrade);
     }
 
-    public void SetPopup(SkillType skillType, SkillElement skillElement)
+    void OnEnable()
     {
-        this.skillType = skillType;
-        this.skillElement = skillElement;
+        SetPopup();
+    }
 
+    public void Assign(SkillElement skillElement)
+    {
+        skillType = skillElement.skillType;
+        this.skillElement = skillElement;
+    }
+
+    public void SetPopup()
+    {
         Skill skill = DataManager.skillLibrary.Get(skillType);
         upgradeCost = skill.costs[DataManager.skillLibrary.GetCurrentLevel(skillType)];
 

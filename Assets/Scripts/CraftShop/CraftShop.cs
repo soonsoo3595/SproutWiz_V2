@@ -16,7 +16,6 @@ public class CraftShop : MonoBehaviour
     public SkillInfo skillInfo;
     public SkillUpgrade skillUpgrade;
     public GameObject skillUpgradePopup;
-    public GameObject skillUpgradeBack;
     public GameObject skillInfoPopup;
     public GameObject skillInfoBack;
 
@@ -30,14 +29,12 @@ public class CraftShop : MonoBehaviour
     void OnEnable()
     {
         EventManager.setSkillInfo += skillInfo.SetPopup;
-        EventManager.setSkillUpgrade += skillUpgrade.SetPopup;
         EventManager.updateUI += UpdateGold;
     }
 
     void OnDisable()
     {
         EventManager.setSkillInfo -= skillInfo.SetPopup;
-        EventManager.setSkillUpgrade -= skillUpgrade.SetPopup;
         EventManager.updateUI -= UpdateGold;
     }
 
@@ -45,7 +42,6 @@ public class CraftShop : MonoBehaviour
     {
         goldTxt.text = DataManager.playerData.gold.ToString("N0");
     }
-
 
     private IEnumerator Init()
     {
@@ -63,7 +59,6 @@ public class CraftShop : MonoBehaviour
             skillObject.transform.SetParent(skillCategory[(int)skill.category].transform, false); 
 
             skillObject.GetComponent<PopupBtn>().Register(skillInfoPopup, skillInfoBack);
-            skillElement.upgradeBtn.GetComponent<PopupBtn>().Register(skillUpgradePopup, skillUpgradeBack);
             skillElement.SetSkill(skill);
         }
 

@@ -22,12 +22,5 @@ public class Skill : ScriptableObject
     public List<SkillEffect> effectList;
 
     public List<int> costs;
-
-    public string GetEffectString(int level)
-    {
-        string effect = "";
-
-
-        return effect;
-    }
+    
 }
