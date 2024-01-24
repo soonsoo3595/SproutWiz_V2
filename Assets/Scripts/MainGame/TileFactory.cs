@@ -55,7 +55,7 @@ public class TileFactory : MonoBehaviour
         switch (element.GetElementRelation(unit.GetElement()))
         {
             case ElementRelation.Irrelevant:
-                Irrelevant(order);
+                //Irrelevant(order);
                 break;
             case ElementRelation.Equal:
                 Equal(order);

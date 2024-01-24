@@ -47,6 +47,17 @@ public class RewardSystem : MonoBehaviour
     public void AddScore(int score)
     {
         Score += score;
+
+        // 미니게임 발동 조건 체크.
+        // TODO: 한번만 체크할 수 있게 변경해야함.
+        if (Score >= 3000)
+        {
+            MiniGameController.Instance.ActivateMiniGame(EMinigameType.DrawLine, mainGame.timer.GetRunTime());
+        }
+        if (Score >= 4000)
+        {
+            MiniGameController.Instance.ActivateMiniGame(EMinigameType.Griffon, mainGame.timer.GetRunTime());
+        }
     }
     
     public void AddGold(int gold)

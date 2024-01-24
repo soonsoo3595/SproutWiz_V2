@@ -155,6 +155,7 @@ public class GridSystemVisual : MonoBehaviour
     {
         if (!GridManager.Instance.CheckOnGrid(position)) return;
 
+        // TODO: 다음칸에 블록이 있는지 확인하는 과정인데 다른 방식으로 체크하는걸 생각해 봐야할듯.
         List<TileUnit> units = GridManager.Instance.GetUnitListAtGridPosition(position);
         if (units.Count > 1) return;
 

@@ -35,7 +35,16 @@ public class GridPosition : IEquatable<GridPosition>
 
     public static bool operator ==(GridPosition a, GridPosition b)
     {
-        return a.x == b.x && a.y == b.y;
+        // 두 객체 모두 null인 경우 true를 반환
+        if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
+            return true;
+
+        // 하나의 객체만 null인 경우 false를 반환
+        if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
+            return false;
+
+
+        return (a.x == b.x) && (a.y == b.y);
     }
 
     public static bool operator !=(GridPosition a, GridPosition b)

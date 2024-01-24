@@ -4,53 +4,78 @@ using UnityEngine;
 
 public class MiniGameController : MonoBehaviour
 {
-    [SerializeField] private Transform minigameUnit;
-
-
-    Queue<MiniGameBase> MiniGameQueue;
-
     public static MiniGameController Instance { get; private set; }
+
+    [SerializeField] DrawLineGame drawLineGame;
+    [SerializeField] GriffonGame griffonGame;
+    [SerializeField] Timer Timer;
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            // DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Debug.Log("MiniGmaeController already exist");
+            Debug.LogWarning("MiniGmaeController already exist");
             Destroy(gameObject);
             return;
         }
-
-
-        MiniGameQueue = new Queue<MiniGameBase>();
-
     }
 
-    private void Start()
+    public void ExecuteMiniGame(IMiniGame miniGame)
     {
-        MiniGameQueue.Enqueue(new Tornado());
-
-    }
-
-    public void ExecuteMiniGame()
-    {
-        if(MiniGameQueue.Count <= 0)
+        if(!miniGame.IsActivate)
         {
-            Debug.Log("대기중인 미니게임이 없습니다!");
+            Debug.Log("미니게임 비활성화 상태!");
             return;
-        }
+        }    
 
+        miniGame.Excute();
 
-        MiniGameBase miniGame = MiniGameQueue.Dequeue();
-        GridPosition[] AffectPositions = miniGame.Execute();
+        // TODO: 상수 추출 필요.
+        StartCoroutine(ExitMiniGameAfter(miniGame, 15f));
+    }
 
-        foreach (GridPosition position in AffectPositions)
+    IEnumerator ExitMiniGameAfter(IMiniGame miniGame, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        ExitMiniGame(miniGame);
+    }
+
+    public void ExitMiniGame(IMiniGame miniGame)
+    {
+        if (!miniGame.IsRunnig)
+            return;
+
+        miniGame.Exit();
+
+        Timer.ScheduleGame(miniGame.GetNextExcuteTime() + Timer.GetRunTime(), miniGame);
+    }
+
+    public void ActivateMiniGame(EMinigameType type, float runTime)
+    {
+        // TODO: 인터페이스로 추출.
+        switch (type)
         {
-            Instantiate(minigameUnit, GridManager.Instance.GetWorldPosition(position), Quaternion.identity);
+            case EMinigameType.DrawLine:
+                if (drawLineGame.GetAcivate()) return;
+
+                Timer.ScheduleGame(drawLineGame.GetNextExcuteTime() + runTime, drawLineGame);
+                drawLineGame.Activate(runTime);
+                break;
+            case EMinigameType.Griffon:
+                if (griffonGame.GetAcivate()) return;
+
+                Timer.ScheduleGame(griffonGame.GetNextExcuteTime() + runTime, griffonGame);
+                griffonGame.Activate(runTime);
+                break;
+            default:
+                break;
         }
     }
 }
+
+

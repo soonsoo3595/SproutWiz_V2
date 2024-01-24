@@ -32432,8 +32432,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSetting: {fileID: 11400000, guid: fc95992759bb09742881d40d43056267, type: 2}
-  gridDebugObjectPrefab: {fileID: 3750986870174246637, guid: a61bc7b13371d644d860f658ea961484, type: 3}
-  debugObjectContainer: {fileID: 1411381683}
 --- !u!4 &628541588
 Transform:
   m_ObjectHideFlags: 0
@@ -39431,37 +39429,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 371425299}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1411381682
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1411381683}
-  m_Layer: 0
-  m_Name: DebugObjects
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1411381683
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1411381682}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1465106298
 GameObject:
@@ -120781,7 +120748,6 @@ SceneRoots:
   - {fileID: 1862025054}
   - {fileID: 1259978849}
   - {fileID: 628541588}
-  - {fileID: 1411381683}
   - {fileID: 266883926}
   - {fileID: 371425299}
   - {fileID: 1515204206}

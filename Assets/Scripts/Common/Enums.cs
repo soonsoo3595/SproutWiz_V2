@@ -39,3 +39,10 @@ public enum SkillType
     SunshineMagicMastery,
     EquipMastery
 }
+
+public enum EMinigameType
+{
+    DrawLine,
+    Griffon,
+    Meteor
+}
