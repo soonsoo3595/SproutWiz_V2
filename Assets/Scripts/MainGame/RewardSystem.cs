@@ -25,8 +25,6 @@ public class RewardSystem : MonoBehaviour
 
     public int gold;
 
-    private int MiniGameScore;
-
     [Header("Score")]
     public int normalHarvestScore = 100;
     public List<int> multiHarvestScore;
@@ -47,21 +45,23 @@ public class RewardSystem : MonoBehaviour
     private void AddScore(int score)
     {
         Score += score;
+        
 
-        MiniGameScore += score;
-
-        if (MiniGameScore / 3000 >= 1)
+        // 미니게임 발동 조건 체크.
+        // TODO: 한번만 체크할 수 있게 변경해야함.
+        if (Score >= 3000)
         {
-            MiniGameScore -= 3000;
-            MiniGameController.Instance.AddMiniGameQueue(EMinigameType.DrawLine);
-            MiniGameController.Instance.ExecuteMiniGame();
+            //MiniGameController.Instance.AddMiniGameQueue(EMinigameType.DrawLine);
+            //MiniGameController.Instance.ExecuteMiniGame();
+
+            MiniGameController.Instance.ActivateMiniGame(EMinigameType.DrawLine, mainGame.timer.GetRunTime());
+            
         }
     }
 
     public void InitScore()
     {
         Score = 0;
-        MiniGameScore = 0;
     }
 
     public void Harvest(int count)

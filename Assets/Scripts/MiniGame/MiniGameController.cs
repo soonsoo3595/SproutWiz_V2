@@ -7,10 +7,8 @@ public class MiniGameController : MonoBehaviour
     public static MiniGameController Instance { get; private set; }
 
     [SerializeField] DrawLineGame drawLineGame;
+    [SerializeField] Timer Timer;
 
-    Queue<IMiniGame> miniGameQueue;
-
-   
     private void Awake()
     {
         if (Instance == null)
@@ -23,32 +21,16 @@ public class MiniGameController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
-        miniGameQueue = new Queue<IMiniGame>();
     }
 
-    public void AddMiniGameQueue(EMinigameType type)
+    public void ExecuteMiniGame(IMiniGame miniGame)
     {
-        switch(type)
+        if(!miniGame.IsActivate)
         {
-            case EMinigameType.DrawLine:
-                miniGameQueue.Enqueue(drawLineGame);
-                Debug.Log("미니게임 대기 큐에 한붓그리기 추가");
-                break;
-            default: 
-                break;
-        }
-    }
-
-    public void ExecuteMiniGame()
-    {
-        if(miniGameQueue.Count <= 0)
-        {
-            Debug.Log("대기중인 미니게임이 없습니다!");
+            Debug.Log("미니게임 비활성화 상태!");
             return;
-        }
+        }    
 
-        IMiniGame miniGame = miniGameQueue.Dequeue();
         miniGame.Excute();
 
         // TODO: 상수 추출 필요.
@@ -59,7 +41,33 @@ public class MiniGameController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
+        ExitMiniGame(miniGame);
+    }
+
+    public void ExitMiniGame(IMiniGame miniGame)
+    {
+        if (!miniGame.IsRunnig)
+            return;
+
         miniGame.Exit();
+
+        Timer.ScheduleGame(drawLineGame.GetNextExcuteTime() + Timer.GetRunTime(), drawLineGame);
+    }
+
+    public void ActivateMiniGame(EMinigameType type, float runTime)
+    {
+        switch (type)
+        {
+            case EMinigameType.DrawLine:
+                if (drawLineGame.GetAcivate()) return;
+
+                Timer.ScheduleGame(drawLineGame.GetNextExcuteTime() + runTime, drawLineGame);
+                drawLineGame.Activate(runTime);
+
+                break;
+            default:
+                break;
+        }
     }
 }
 

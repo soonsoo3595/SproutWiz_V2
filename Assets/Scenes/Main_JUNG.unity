@@ -5607,6 +5607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawLineGame: {fileID: 1779556509}
+  timer: {fileID: 406239959}
 --- !u!4 &155350519
 Transform:
   m_ObjectHideFlags: 0
@@ -64975,6 +64976,9 @@ MonoBehaviour:
   startPointPrefab: {fileID: 946565926263647219, guid: 449ec74a6dc1e414d8879a9ce627c9ff, type: 3}
   midPointPrefab: {fileID: 8905141982102463943, guid: 9698e2705de7c5f4aa1ce9e76f99df99, type: 3}
   CanvasWorldSpace: {fileID: 1862025054}
+  ActivationScore: 3000
+  IntervalTime: 60
+  MinimumTerm: 20
 --- !u!1 &1799175082
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
 
 // TODO : 오브젝트 풀링 방식으로 교체 고려.
@@ -12,10 +13,16 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
     [SerializeField] Transform midPointPrefab;
     [SerializeField] RectTransform CanvasWorldSpace;
 
-    List<GridPosition> pathPointPositions;
-    static GridPosition[] direction;
+    [SerializeField] int ActivationScore = 3000;
+    [SerializeField] float IntervalTime = 60f;
+    [SerializeField] float MinimumTerm = 20f;
+
+    float RecentExcuteTimeInIntervar;
 
     readonly static int MaxPathPointCount = 5;
+    static GridPosition[] direction;
+
+    List<GridPosition> pathPointPositions;
 
     Transform[] drawPointsObject;
     int pathLength;
@@ -25,6 +32,19 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
     bool isDrag = false;
     int CurrentDragSequence = 0;
 
+    // TODO: 데이터 추출 필요
+    int IMiniGame.ActivationScore => ActivationScore;
+
+    float IMiniGame.IntervalTime => IntervalTime;
+
+    float IMiniGame.MinimumTerm => MinimumTerm;
+
+    bool isActivate;
+    bool IMiniGame.IsActivate => isActivate;
+
+    bool isRunnig;
+    bool IMiniGame.IsRunnig => isRunnig;
+
     private void Awake()
     {
         direction = new GridPosition[4];
@@ -32,6 +52,15 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
         direction[1] = new GridPosition(0, -1); // 하
         direction[2] = new GridPosition(-1, 0); // 좌
         direction[3] = new GridPosition(1, 0);  // 우
+
+        isActivate = false;
+        isRunnig = false;
+    }
+
+    private void Start()
+    {
+        RecentExcuteTimeInIntervar = Random.Range(0, IntervalTime);
+        Debug.Log($"마나맥 최초 실행시간 : {RecentExcuteTimeInIntervar}");
     }
 
     public void Excute()
@@ -64,7 +93,7 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
             // 4방향 중 유효한 블록이 몇 개인지 체크
             for (int i = 0; i < 4; i++)
             {
-                Debug.Log($"4방향 체크 시작");
+                //Debug.Log($"4방향 체크 시작");
                 int nextPosX = preGridPosition.x + direction[i].x;
                 int nextPosY = preGridPosition.y + direction[i].y;
 
@@ -81,7 +110,7 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
                     continue;
 
                 validPositions.Add(nextGridPosition);
-                Debug.Log($"validPositions Add = {nextGridPosition.x}, {nextGridPosition.y}");
+                //Debug.Log($"validPositions Add = {nextGridPosition.x}, {nextGridPosition.y}");
             }
 
             // 유효한 방향 중 랜덤 선택
@@ -103,8 +132,10 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
             drawPoint.DrawLine(pathPointPositions[i - 1], pathPointPositions[i]);
             drawPoint.SetMaster(this);
 
-            Debug.Log($"MidPoint : {pathPointPositions[i]}");
+            //Debug.Log($"MidPoint : {pathPointPositions[i]}");
         }
+
+        isRunnig = true;
     }
 
     private GridPosition SelectStartPoint()
@@ -120,8 +151,6 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
 
     private bool IsDuplicated(GridPosition position)
     {
-        Debug.Log($"중복 체크 시작. 현재 길이 : {pathPointPositions.Count}");
-
         if (pathPointPositions.Contains(position))
         {
             return true;
@@ -156,15 +185,16 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
 
     public void EnterDrawPoint(GridPosition position)
     {
-        Debug.Log($"CurrentDragSequence : {CurrentDragSequence}");
-        Debug.Log($"Compair Position : {pathPointPositions[CurrentDragSequence]} <-> {position}");
+        //Debug.Log($"CurrentDragSequence : {CurrentDragSequence}");
+        //Debug.Log($"Compair Position : {pathPointPositions[CurrentDragSequence]} <-> {position}");
 
         if (position.Equals(pathPointPositions[CurrentDragSequence]))
         {
             if (CurrentDragSequence == pathLength - 1)
             {
                 Debug.Log($"Enter Last DrawPoint : {CurrentDragSequence} / {pathLength - 1}");
-                Exit();
+                MiniGameController.Instance.ExitMiniGame(this);
+                //Exit();
             }
 
             Debug.Log($"CurrentDragSequence : {CurrentDragSequence} / {pathLength - 1}");
@@ -175,9 +205,55 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
 
     public void Exit()
     {
-        for(int i = 0; i< pathLength; i++)
+        if (drawPointsObject.Length <= 0)
+            return;
+
+        UpdateExcuteTime();
+
+        for (int i = 0; i < pathLength; i++)
         {
             Destroy(drawPointsObject[i].gameObject);
         }
+
+        isRunnig = false;
     }
+
+    public void Activate(float activateTime)
+    {
+        if (isActivate)
+            return;
+
+        isActivate = true;
+
+        UpdateExcuteTime();
+    }
+
+    public bool GetAcivate()
+    {
+        return isActivate;
+    }
+
+    private void UpdateExcuteTime()
+    {
+        float randomExcuteTime = Random.Range(0, IntervalTime);
+
+        float term = (MinimumTerm - RecentExcuteTimeInIntervar) + randomExcuteTime;
+
+        if (term < MinimumTerm)
+        {
+            RecentExcuteTimeInIntervar = randomExcuteTime + term;
+        }
+        else
+        {
+            RecentExcuteTimeInIntervar = randomExcuteTime;
+        }
+
+        Debug.Log($"미니게임 다음 실행 시간 : {RecentExcuteTimeInIntervar}");
+    }
+
+    public float GetNextExcuteTime()
+    {
+        return RecentExcuteTimeInIntervar;
+    }
+
 }
