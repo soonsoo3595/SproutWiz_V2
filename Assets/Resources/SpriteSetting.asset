@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 876a177d6e3f2e340bb614ea46a78fd9, type: 3}
   m_Name: SpriteSetting
   m_EditorClassIdentifier: 
-  Seed: {fileID: 21300000, guid: adc45b04ea959b8418332b96ab459371, type: 3}
-  DefaultTile: {fileID: 21300000, guid: 1b55c5dd88287ac46ae33555a28b13c6, type: 3}
-  LockTile: {fileID: 21300000, guid: 29bca458226d619449904696562ed537, type: 3}
+  Seed: {fileID: 21300000, guid: 62998caabecd49b419f71c7bc5e890df, type: 3}
+  DefaultTile: {fileID: 21300000, guid: c953eee09dbff4048bcecd34c7588fa9, type: 3}
+  LockTile: {fileID: 21300000, guid: c953eee09dbff4048bcecd34c7588fa9, type: 3}
   LockObject: {fileID: 21300000, guid: cd5799173a8836241bf427222b3f8d20, type: 3}
   FireGrowth: {fileID: 21300000, guid: 67f22b22181b014499621ad39dd310c5, type: 3}
   WaterGrowth: {fileID: 21300000, guid: 8076b9554dbeb7041a8a5ce0d4fb4076, type: 3}

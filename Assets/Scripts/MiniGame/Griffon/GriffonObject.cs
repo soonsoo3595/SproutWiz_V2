@@ -46,6 +46,8 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("±×¸®ÇÉ Å¬¸¯");
+
+        Destroy(gameObject);
     }
 
 }
