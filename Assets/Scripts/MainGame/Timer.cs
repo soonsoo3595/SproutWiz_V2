@@ -26,9 +26,7 @@ public class Timer : MonoBehaviour
 
     SortedDictionary<float, IMiniGame> scedulMiniGame;
 
-    public AudioSource audioSource;
-    public MainGame mainGame;
-    public Image timebar;
+
     public float totalTime = 80f;
 
     private void Start()
