@@ -15,8 +15,8 @@ EditorBuildSettings:
     path: Assets/Scenes/0 Title.unity
     guid: f21beafbb2a75bb4caa81fb77913c4a1
   - enabled: 1
-    path: Assets/Scenes/1 Main_CHO.unity
-    guid: 0304e2f2e2c377043bdc78c5ddd4fd79
+    path: Assets/Scenes/1 Main_CHO 1.unity
+    guid: fab2207383c5ab64b9ccc1d22fb9af14
   - enabled: 1
     path: Assets/Scenes/2 CraftShop.unity
     guid: e6f7c40d666b7824db07815b1e1c3976
