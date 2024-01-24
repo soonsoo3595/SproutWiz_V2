@@ -15,4 +15,6 @@ public interface IMiniGame
     void Excute();
 
     void Exit();
+
+    float GetNextExcuteTime();
 }

@@ -20,6 +20,6 @@ public enum ButtonType { Popup, Back }
 public enum EMinigameType
 {
     DrawLine,
-    Griffin,
+    Griffon,
     Meteor
 }

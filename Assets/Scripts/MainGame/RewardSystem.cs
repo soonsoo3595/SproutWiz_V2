@@ -51,11 +51,11 @@ public class RewardSystem : MonoBehaviour
         // TODO: 한번만 체크할 수 있게 변경해야함.
         if (Score >= 3000)
         {
-            //MiniGameController.Instance.AddMiniGameQueue(EMinigameType.DrawLine);
-            //MiniGameController.Instance.ExecuteMiniGame();
-
             MiniGameController.Instance.ActivateMiniGame(EMinigameType.DrawLine, mainGame.timer.GetRunTime());
-            
+        }
+        if(Score >= 4000)
+        {
+            MiniGameController.Instance.ActivateMiniGame(EMinigameType.Griffon, mainGame.timer.GetRunTime());
         }
     }
 

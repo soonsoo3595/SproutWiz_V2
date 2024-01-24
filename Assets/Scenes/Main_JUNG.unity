@@ -5607,7 +5607,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawLineGame: {fileID: 1779556509}
-  timer: {fileID: 406239959}
+  griffonGame: {fileID: 636683840}
+  Timer: {fileID: 406239959}
 --- !u!4 &155350519
 Transform:
   m_ObjectHideFlags: 0
@@ -5622,6 +5623,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1779556508}
+  - {fileID: 636683841}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &180807496
@@ -32453,6 +32455,55 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &636683839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 636683841}
+  - component: {fileID: 636683840}
+  m_Layer: 0
+  m_Name: GriffonGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &636683840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636683839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a74cab42e3d65b4b9e5402be7821409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GriffonPrefab: {fileID: 2957365485278392914, guid: c37d9a0a42b251d40897a78f549ab4f0, type: 3}
+  CanvasWorldSpace: {fileID: 1862025054}
+  ActivationScore: 4000
+  IntervalTime: 45
+  MinimumTerm: 20
+--- !u!4 &636683841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636683839}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.1649098, y: 3.4125896, z: 1055.2974}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 155350519}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &697298089
 GameObject:
@@ -64977,7 +65028,7 @@ MonoBehaviour:
   midPointPrefab: {fileID: 8905141982102463943, guid: 9698e2705de7c5f4aa1ce9e76f99df99, type: 3}
   CanvasWorldSpace: {fileID: 1862025054}
   ActivationScore: 3000
-  IntervalTime: 60
+  IntervalTime: 30
   MinimumTerm: 20
 --- !u!1 &1799175082
 GameObject:

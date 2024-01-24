@@ -7,6 +7,7 @@ public class MiniGameController : MonoBehaviour
     public static MiniGameController Instance { get; private set; }
 
     [SerializeField] DrawLineGame drawLineGame;
+    [SerializeField] GriffonGame griffonGame;
     [SerializeField] Timer Timer;
 
     private void Awake()
@@ -51,11 +52,12 @@ public class MiniGameController : MonoBehaviour
 
         miniGame.Exit();
 
-        Timer.ScheduleGame(drawLineGame.GetNextExcuteTime() + Timer.GetRunTime(), drawLineGame);
+        Timer.ScheduleGame(miniGame.GetNextExcuteTime() + Timer.GetRunTime(), miniGame);
     }
 
     public void ActivateMiniGame(EMinigameType type, float runTime)
     {
+        // TODO: 인터페이스로 추출.
         switch (type)
         {
             case EMinigameType.DrawLine:
@@ -63,7 +65,12 @@ public class MiniGameController : MonoBehaviour
 
                 Timer.ScheduleGame(drawLineGame.GetNextExcuteTime() + runTime, drawLineGame);
                 drawLineGame.Activate(runTime);
+                break;
+            case EMinigameType.Griffon:
+                if (griffonGame.GetAcivate()) return;
 
+                Timer.ScheduleGame(griffonGame.GetNextExcuteTime() + runTime, griffonGame);
+                griffonGame.Activate(runTime);
                 break;
             default:
                 break;

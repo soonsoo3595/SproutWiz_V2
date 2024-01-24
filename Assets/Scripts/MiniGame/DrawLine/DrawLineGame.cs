@@ -118,7 +118,7 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
 
             pathPointPositions.Add(validPositions[randomDirection]);
 
-            Debug.Log($"{j}번째 선택된 좌표 = {validPositions[randomDirection].x}, {validPositions[randomDirection].y}");
+            //Debug.Log($"{j}번째 선택된 좌표 = {validPositions[randomDirection].x}, {validPositions[randomDirection].y}");
         }
 
         for(int i = 1; i < pathPointPositions.Count; i++)
@@ -194,7 +194,6 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
             {
                 Debug.Log($"Enter Last DrawPoint : {CurrentDragSequence} / {pathLength - 1}");
                 MiniGameController.Instance.ExitMiniGame(this);
-                //Exit();
             }
 
             Debug.Log($"CurrentDragSequence : {CurrentDragSequence} / {pathLength - 1}");
@@ -223,6 +222,8 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
         if (isActivate)
             return;
 
+        Debug.Log("미니게임:마나맥 조건 달성");
+
         isActivate = true;
 
         UpdateExcuteTime();
@@ -248,7 +249,7 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
             RecentExcuteTimeInIntervar = randomExcuteTime;
         }
 
-        Debug.Log($"미니게임 다음 실행 시간 : {RecentExcuteTimeInIntervar}");
+        Debug.Log($"마나맥 다음 실행 시간 : {RecentExcuteTimeInIntervar}");
     }
 
     public float GetNextExcuteTime()
