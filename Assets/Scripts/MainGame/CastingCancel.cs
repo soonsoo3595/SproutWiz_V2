@@ -109,7 +109,7 @@ public class CastingCancel : MonoBehaviour
 
     IEnumerator Charge()
     {
-        while (ChargeStack <= 3)
+        while (ChargeStack < 3)
         {
             while (Battery < chargeTime)
             {

@@ -12,54 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cafd05cab2d919479699d02a0753e3a, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  timeLimit: 80
-  harvestScore: 100
-  multiHarvestScore: 00000000000000009600000090010000bc020000
-  goalScore: 50
-  goalGold: 100
-  manaCollectorMaxMana: 100
-  manaCollectorHarvestMana: 2
-  manaCollectorMultiHarvestMana: 0000000000000000020000000400000006000000
-  sunshineMagicTime: 10
-  sunshineMagicEffect: 2
-  castingCancelChargeTime: 15
-  upgrade_HarvestScore: 000000001900000032000000500000006e00000096000000
-  cost_HarvestScore: 00000000bc020000e80300001405000040060000d0070000
-  upgrade_DoubleHarvestScore: 000000000a00000019000000280000003700000046000000
-  upgrade_TripleHarvestScore: 00000000280000004b0000006e00000096000000c8000000
-  upgrade_QuadraHarvestScore: 00000000c8000000f0000000180100004001000068010000
-  cost_MultiHarvestScore: 0000000020030000e803000014050000a4060000d0070000
-  bonusGoalScore:
-  - 0
-  - 0.05
-  - 0.07
-  - 0.1
-  - 0.14
-  - 0.2
-  cost_bonusGoalScore: 00000000e80300001405000040060000d0070000c4090000
-  reduce_CastingCancel:
-  - 0
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
-  cost_reduce_CastingCancel: 000000005802000020030000e8030000b0040000dc050000
-  reduce_ManaCollectorMaxMana: 000000000200000003000000040000000500000006000000
-  cost_reduce_ManaCollectorMaxMana: 0000000058020000bc0200002003000084030000e8030000
-  upgrade_sunshineMagicTime:
-  - 0
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
-  cost_sunshineMagicTime: 00000000bc020000e80300007805000008070000fc080000
-  upgrade_sunshineMagicEffect:
-  - 0
-  - 0.2
-  - 0.4
-  - 0.6
-  - 0.8
-  - 1
-  cost_sunshineMagicEffect: 0000000020030000b004000040060000d007000060090000
+  TimeLimit: 80
+  HarvestScore: 100
+  MultiHarvestScore: 00000000000000009600000090010000bc020000
+  GoalScore: 50
+  GoalGold: 100
+  ManaCollectorMaxMana: 100
+  ManaCollectorHarvestMana: 2
+  ManaCollectorMultiHarvestMana: 0000000000000000020000000400000006000000
+  SunshineMagicTime: 10
+  SunshineMagicEffect: 2
+  CastingCancelChargeTime: 15
