@@ -14,8 +14,6 @@ public class CraftShop : MonoBehaviour
 
     [Header("Popup")]
     public SkillInfo skillInfo;
-    public SkillUpgrade skillUpgrade;
-    public GameObject skillUpgradePopup;
     public GameObject skillInfoPopup;
     public GameObject skillInfoBack;
 
