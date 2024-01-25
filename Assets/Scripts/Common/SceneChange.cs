@@ -18,6 +18,7 @@ public class SceneChange : MonoBehaviour
 
     public void MoveScene()
     {
+        GameManager.Instance.sceneList.Push(moveScene);
         SceneManager.LoadScene((int)moveScene);
     }
 

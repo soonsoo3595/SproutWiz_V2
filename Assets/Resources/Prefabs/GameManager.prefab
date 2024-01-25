@@ -45,7 +45,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.25
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -142,8 +142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgmClips:
-  - {fileID: 8300000, guid: cc04a63db1ed2fb4eaceec37dd290599, type: 3}
   - {fileID: 8300000, guid: 8ee869240fb6a434d98d39a1c16816f7, type: 3}
+  - {fileID: 8300000, guid: cc04a63db1ed2fb4eaceec37dd290599, type: 3}
   - {fileID: 8300000, guid: 8ee869240fb6a434d98d39a1c16816f7, type: 3}
 --- !u!1 &4795223278451943143
 GameObject:

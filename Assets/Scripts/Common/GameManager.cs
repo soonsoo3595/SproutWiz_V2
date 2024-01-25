@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Audio")]
     public SoundEffect soundEffect;
+
+    [Header("Scene")]
+    public Stack<SceneType> sceneList = new Stack<SceneType>();
 
     [Header("For Debug")]
     public bool isDebugMode;
@@ -46,11 +50,25 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                if(sceneList.Count == 0) return;
+
+                if(sceneList.Peek() == SceneType.MainGame)
+                {
+                    
+                }
+                else if(sceneList.Peek() == SceneType.Town)
+                {
 #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
+                    UnityEditor.EditorApplication.isPlaying = false;
 #else
                 Application.Quit();
 #endif
+                }
+                else
+                {
+                    sceneList.Pop();
+                    SceneManager.LoadScene((int)sceneList.Peek());
+                }
             }
         }
     }
