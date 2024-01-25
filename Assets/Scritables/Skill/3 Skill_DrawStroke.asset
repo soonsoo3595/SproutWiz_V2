@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 235e6d71277dbb84fab07c1e876c2efd, type: 3}
   m_Name: 3 Skill_DrawStroke
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 8a858584906a14b449af3f7a5b10c474, type: 3}
   category: 1
   type: 3
   title: "\uD55C\uBD93\uADF8\uB9AC\uAE30"
