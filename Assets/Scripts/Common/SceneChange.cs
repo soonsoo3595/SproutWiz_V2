@@ -8,7 +8,7 @@ public class SceneChange : MonoBehaviour
 {
     Button btn;
 
-    public string moveSceneName;
+    public SceneType moveScene;
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class SceneChange : MonoBehaviour
 
     public void MoveScene()
     {
-        SceneManager.LoadScene(moveSceneName);
+        SceneManager.LoadScene((int)moveScene);
     }
 
 }

@@ -46,3 +46,11 @@ public enum EMinigameType
     Griffon,
     Meteor
 }
+
+public enum SceneType
+{
+    Title,
+    MainGame,
+    CraftShop,
+    Town
+}

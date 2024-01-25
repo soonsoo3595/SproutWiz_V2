@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326cac8f161cd1446b2af4ac39a3156a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSceneName: 2 CraftShop
+  moveScene: 2
 --- !u!114 &404335377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -841,7 +841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326cac8f161cd1446b2af4ac39a3156a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSceneName: 1 MainGame
+  moveScene: 1
 --- !u!114 &1856091070
 MonoBehaviour:
   m_ObjectHideFlags: 0
