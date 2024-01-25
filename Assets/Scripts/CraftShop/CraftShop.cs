@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using DG.Tweening;
+using UnityEngine.UI;
 
 public class CraftShop : MonoBehaviour
 {
     [Header("UI")]
     public TextMeshProUGUI goldTxt;
+    public GameObject topUI;
+    public GameObject upgradeUI;
+    public Image back;
 
     [Header("Object")]
     public List<GameObject> skillCategory;
@@ -20,8 +25,7 @@ public class CraftShop : MonoBehaviour
 
     void Start()
     {
-        UpdateGold();
-        StartCoroutine(Init());
+        StartCoroutine(EnterCraftShop());
     }
 
     void OnEnable()
@@ -62,4 +66,19 @@ public class CraftShop : MonoBehaviour
 
         yield return null;
     }
+
+    private IEnumerator EnterCraftShop()
+    {
+        topUI.SetActive(false);
+        upgradeUI.SetActive(false);
+        back.DOFade(1f, 1.5f);
+        yield return new WaitForSeconds(1.5f);
+
+        topUI.SetActive(true);
+        UpdateGold();
+        
+        upgradeUI.SetActive(true);
+        StartCoroutine(Init());
+    }
+
 }

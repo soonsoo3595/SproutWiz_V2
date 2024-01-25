@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
+using System.Net.Mime;
 
 public class SkillUpgrade : MonoBehaviour
 {
+    public GameObject notifyTxt;
     public TextMeshProUGUI content;
     public Button btn;
 
@@ -50,12 +53,12 @@ public class SkillUpgrade : MonoBehaviour
             DataManager.playerData.gold -= upgradeCost;
             DataManager.playerData.skillLevels[(int)skillType]++;
 
+            GameManager.Instance.soundEffect.PlayOneShotSoundEffect("upgrade");
             skillElement.AfterUpgrade();
             EventManager.updateUI();
         }
         else
         {
-            Debug.Log("∞ÒµÂ ∫Œ¡∑");
             return;
         }
 
