@@ -11,6 +11,8 @@ public class SkillCategory : MonoBehaviour
     {
         toggle.onValueChanged.AddListener((value) =>
         {
+            GameManager.Instance.soundEffect.PlayOneShotSoundEffect("click");
+
             for (int i = 1; i < transform.childCount; i++)
             {
                 transform.GetChild(i).gameObject.SetActive(value);

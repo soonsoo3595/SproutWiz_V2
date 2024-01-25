@@ -144,6 +144,7 @@ MonoBehaviour:
   bgmClips:
   - {fileID: 8300000, guid: cc04a63db1ed2fb4eaceec37dd290599, type: 3}
   - {fileID: 8300000, guid: 8ee869240fb6a434d98d39a1c16816f7, type: 3}
+  - {fileID: 8300000, guid: 8ee869240fb6a434d98d39a1c16816f7, type: 3}
 --- !u!1 &4795223278451943143
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +295,9 @@ MonoBehaviour:
   triplecomboClip: {fileID: 8300000, guid: 29ce25f25207cbd43b8a23cb7cb01a38, type: 3}
   quadrupleClip: {fileID: 8300000, guid: 952d65c78653f2647ad3bdf8dfc7df7e, type: 3}
   gameoverClip: {fileID: 8300000, guid: e8975c8b3dfc8fd4eb2e899bb46966c1, type: 3}
+  lockClip: {fileID: 0}
   clickClip: {fileID: 8300000, guid: 1563b2df1c25c5f4bacb369ddcd59627, type: 3}
+  upgradeClip: {fileID: 0}
 --- !u!1 &7102482637582708589
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,4 +359,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundEffect: {fileID: 9166353071790148512}
   isDebugMode: 1
-  debugGold: 100000
+  debugGold: 10000

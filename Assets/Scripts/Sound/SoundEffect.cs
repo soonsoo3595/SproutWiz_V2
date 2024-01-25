@@ -18,7 +18,11 @@ public class SoundEffect : MonoBehaviour
     public AudioClip triplecomboClip;
     public AudioClip quadrupleClip;
     public AudioClip gameoverClip;
+    public AudioClip lockClip;
     public AudioClip clickClip;
+
+    [Header("CraftShop")]
+    public AudioClip upgradeClip;
 
     private void Awake()
     {
@@ -86,7 +90,10 @@ public class SoundEffect : MonoBehaviour
         audioClips.Add("triple", triplecomboClip);
         audioClips.Add("quadruple", quadrupleClip);
         audioClips.Add("gameover", gameoverClip);
+        audioClips.Add("lock", lockClip);
         audioClips.Add("click", clickClip);
 
+        // CraftShop
+        audioClips.Add("upgrade", upgradeClip);
     }
 }

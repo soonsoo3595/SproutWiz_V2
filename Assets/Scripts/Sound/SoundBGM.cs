@@ -36,6 +36,7 @@ public class SoundBGM : MonoBehaviour
     {
         if(index < 0 || index >= bgmClips.Length)
         {
+            audioSource.Stop();
             return;
         }
 

@@ -86,6 +86,8 @@ public class TileFactory : MonoBehaviour
 
         GridPosition gridPosition = order.GetUnit().GetGridPosition();
 
+        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("lock");
+
         GridManager.Instance.SetDeployableGrid(gridPosition, false);
         EventManager.changeTileData(gridPosition);
     }
