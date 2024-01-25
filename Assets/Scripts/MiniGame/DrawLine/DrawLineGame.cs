@@ -52,13 +52,22 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
         direction[1] = new GridPosition(0, -1); // 하
         direction[2] = new GridPosition(-1, 0); // 좌
         direction[3] = new GridPosition(1, 0);  // 우
-
-        isActivate = false;
-        isRunnig = false;
     }
 
     private void Start()
     {
+        ResetParams();
+
+        EventManager.mainGameOver += Exit;
+        EventManager.resetMainGame += ResetParams;
+    }
+
+    public void ResetParams()
+    {
+        isActivate = false;
+        isRunnig = false;
+        CurrentDragSequence = 0;
+
         RecentExcuteTimeInIntervar = Random.Range(0, IntervalTime);
         Debug.Log($"마나맥 최초 실행시간 : {RecentExcuteTimeInIntervar}");
     }
@@ -172,7 +181,6 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
             if(CurrentDragSequence == pathLength)
             {
                 Debug.Log($"DrawGame Success");
-                //Exit();
             }
             else
             {
@@ -193,6 +201,9 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
             if (CurrentDragSequence == pathLength - 1)
             {
                 Debug.Log($"Enter Last DrawPoint : {CurrentDragSequence} / {pathLength - 1}");
+
+                // TODO: 성공처리
+
                 MiniGameController.Instance.ExitMiniGame(this);
             }
 

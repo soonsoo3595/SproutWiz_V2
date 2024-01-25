@@ -11,7 +11,7 @@ public class GriffonGame : MonoBehaviour, IMiniGame
     [SerializeField] float IntervalTime = 45f;
     [SerializeField] float MinimumTerm = 20f;
 
-    Transform GriffonObject;
+    Transform griffonObject;
     int SpawnedGriffonCount = 0;
 
     float RecentExcuteTimeInIntervar;
@@ -28,14 +28,21 @@ public class GriffonGame : MonoBehaviour, IMiniGame
     bool isRunnig;
     bool IMiniGame.IsRunnig => isRunnig;
 
-    private void Awake()
+    private void Start()
+    {
+        ResetParams();
+
+        EventManager.mainGameOver += Exit;
+        EventManager.resetMainGame += ResetParams;
+    }
+
+    public void ResetParams()
     {
         isActivate = false;
         isRunnig = false;
-    }
 
-    private void Start()
-    {
+        SpawnedGriffonCount = 0;
+
         RecentExcuteTimeInIntervar = Random.Range(0, IntervalTime);
         Debug.Log($"그리핀 최초 실행시간 : {RecentExcuteTimeInIntervar}");
     }
@@ -67,7 +74,7 @@ public class GriffonGame : MonoBehaviour, IMiniGame
         Vector3 startPointWorldPos = GridManager.Instance.GetWorldPosition(startGridPosition);
         startPointWorldPos.z = 10;
 
-        GriffonObject = Instantiate(GriffonPrefab, startPointWorldPos, Quaternion.identity, CanvasWorldSpace);
+        griffonObject = Instantiate(GriffonPrefab, startPointWorldPos, Quaternion.identity, CanvasWorldSpace);
 
 
         isRunnig = true;
@@ -75,8 +82,8 @@ public class GriffonGame : MonoBehaviour, IMiniGame
 
     public void Exit()
     {
-        if (GriffonObject != null)
-            Destroy(GriffonObject.gameObject);
+        if (griffonObject != null)
+            Destroy(griffonObject.gameObject);
 
         isRunnig = false;
     }

@@ -35,7 +35,8 @@ public class MiniGameController : MonoBehaviour
         miniGame.Excute();
 
         // TODO: 상수 추출 필요.
-        StartCoroutine(ExitMiniGameAfter(miniGame, 15f));
+        if(miniGame as DrawLineGame != null)
+            StartCoroutine(ExitMiniGameAfter(miniGame, 5f));
     }
 
     IEnumerator ExitMiniGameAfter(IMiniGame miniGame, float delay)

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
 using System.Runtime.InteropServices;
+using static EventManager;
 
 public class RewardSystem : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class RewardSystem : MonoBehaviour
     private List<int> multiHarvestScore = new List<int> { 0, 0, 0, 0, 0 };
     private float magicEffect;
 
+    private float griffonScore;
+
     private CinemachineImpulseSource impulseSource;
 
     void Start()
@@ -39,6 +42,7 @@ public class RewardSystem : MonoBehaviour
 
         EventManager.harvestCount += Harvest;
         EventManager.resetMainGame += InitReward;
+        EventManager.miniGameSuccess += SuccessMiniGame;
 
         // TODO : FindObject 수정 필요.
         impulseSource = FindObjectOfType<CinemachineImpulseSource>();
@@ -141,6 +145,21 @@ public class RewardSystem : MonoBehaviour
             Debug.Log("햇빛 마법 마스터리 레벨 : " + level + ", 햇빛 마법 활성화 보너스 : " + magicEffect);
         }
         #endregion
+
+        #region 그리폰 퇴치 점수
+        {
+            int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.HuntBird);
+            griffonScore = 200;
+
+            if (level != 0)
+            {
+                griffonScore = DataManager.skillLibrary.GetEffect(SkillType.HuntBird, level);
+            }
+
+            Debug.Log("그리폰(새) 퇴치 레벨 : " + level + ", 퇴치 시 점수 : " + harvestScore);
+        }
+        #endregion
+       
     }
 
 
@@ -168,5 +187,25 @@ public class RewardSystem : MonoBehaviour
         impulseSource.GenerateImpulse();
 
         yield return new WaitForSeconds(1f);
+    }
+
+    public void SuccessMiniGame(EMinigameType Type)
+    {
+        int plusScore = 0;
+
+        switch (Type)
+        {
+            case EMinigameType.DrawLine:
+
+                break;
+            case EMinigameType.Griffon:
+
+                plusScore = (int)griffonScore;
+                break;
+            default:
+                break;
+        }
+
+        AddScore(plusScore);
     }
 }

@@ -47,6 +47,9 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
     {
         Debug.Log("그리핀 클릭");
 
+        // TODO: 성공처리
+        EventManager.miniGameSuccess(EMinigameType.Griffon);
+
         Destroy(gameObject);
     }
 
