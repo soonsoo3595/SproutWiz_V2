@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class DrawPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField] Sprite activateImage;
+    [SerializeField] Sprite deactivateImage;
+
+    UnityEngine.UI.Image sourceImage;
+
     LineRenderer lineRenderer;
     DrawLineGame Master;
     GridPosition gridPosition;
@@ -18,6 +24,7 @@ public class DrawPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private void Start()
     {
         gridPosition = GridManager.Instance.GetGridPosition(transform.position);
+        sourceImage = GetComponent<UnityEngine.UI.Image>();
     }
 
     public void SetMaster(DrawLineGame Master)
@@ -36,11 +43,23 @@ public class DrawPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Master.EnterDrawPoint(gridPosition);
+        Master.EnterDrawPoint(gridPosition, this);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
 
+    }
+
+    public void SetActiveImage(bool active)
+    {
+        if(active)
+        {
+            sourceImage.sprite = activateImage;
+        }
+        else
+        {
+            sourceImage.sprite = deactivateImage;
+        }
     }
 }

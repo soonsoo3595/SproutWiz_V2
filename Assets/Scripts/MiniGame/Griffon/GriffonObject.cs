@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class GriffonObject : MonoBehaviour, IPointerClickHandler
 {
-    public Vector2 minPosition;
-    public Vector2 maxPosition;
+    private Vector2 minPosition;
+    private Vector2 maxPosition;
     public float speed = 2.0f;
 
     private Vector3 targetPosition;
+
+    private Image image;
+    private Animator animator;
+
+    [SerializeField] GameObject particleObject;
 
     void Start()
     {
@@ -18,6 +24,9 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
 
         maxPosition = GridManager.Instance.GetWorldPosition(new GridPosition(4, 4));
         minPosition = GridManager.Instance.GetWorldPosition(new GridPosition(0, 0));
+
+        image = GetComponent<Image>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -28,6 +37,16 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
         if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
         {
             SetRandomTargetPosition();
+
+            if (targetPosition.x > transform.position.x) 
+            {
+
+                image.rectTransform.localScale = new Vector3(-1, 1, 1);
+            }
+            else if (targetPosition.x < transform.position.x) 
+            {
+                image.rectTransform.localScale = new Vector3(1, 1, 1);
+            }
         }
     }
 
@@ -46,6 +65,21 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log("그리핀 클릭");
+
+        animator.SetTrigger("DeadTrigger");
+        speed = 0.5f;
+
+        particleObject.SetActive(true);
+
+        // 점수 갱신
+        EventManager.miniGameSuccess(EMinigameType.Griffon, -1);
+
+        StartCoroutine(DestroyAfterDelay(3f));
+    }
+
+    IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
 
         Destroy(gameObject);
     }

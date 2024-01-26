@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
 using System.Runtime.InteropServices;
+using static EventManager;
 
 public class RewardSystem : MonoBehaviour
 {
@@ -30,6 +31,10 @@ public class RewardSystem : MonoBehaviour
     private List<int> multiHarvestScore = new List<int> { 0, 0, 0, 0, 0 };
     private float magicEffect;
 
+    // 미니게임 점수
+    private float griffonScore;
+    private List<int> DrawStrokeScore = new List<int> { 0, 0, 0 };
+
     private CinemachineImpulseSource impulseSource;
 
     void Start()
@@ -39,6 +44,7 @@ public class RewardSystem : MonoBehaviour
 
         EventManager.harvestCount += Harvest;
         EventManager.resetMainGame += InitReward;
+        EventManager.miniGameSuccess += RewardMiniGame;
 
         // TODO : FindObject 수정 필요.
         impulseSource = FindObjectOfType<CinemachineImpulseSource>();
@@ -141,6 +147,46 @@ public class RewardSystem : MonoBehaviour
             Debug.Log("햇빛 마법 마스터리 레벨 : " + level + ", 햇빛 마법 활성화 보너스 : " + magicEffect);
         }
         #endregion
+
+        #region 마나맥 점수
+        {
+            int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.DrawStroke);
+
+            for (int i = 0; i <= 2; i++)
+            {
+                DrawStrokeScore[i] = DataManager.GameData.DrawLineScore[i];
+            }
+
+            if (level != 0)
+            {
+                for (int i = 0; i <= 2; i++)
+                {
+                    DrawStrokeScore[i] = (int)DataManager.skillLibrary.GetEffect(SkillType.DrawStroke, i, level);
+                }
+            }
+
+            DataManager.playerData.gold += DataManager.GameData.DrawLineGold;
+
+            Debug.Log("한붓그리기 레벨 : " + level + ", 점수 : " + DrawStrokeScore);
+        }
+        #endregion
+
+        #region 그리폰 퇴치 점수
+        {
+            int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.HuntBird);
+            griffonScore = DataManager.GameData.GriffonScore;
+
+            if (level != 0)
+            {
+                griffonScore = DataManager.skillLibrary.GetEffect(SkillType.HuntBird, level);
+            }
+
+            DataManager.playerData.gold += DataManager.GameData.GriffonGold;
+
+            Debug.Log("그리폰(새) 퇴치 레벨 : " + level + ", 퇴치 시 점수 : " + griffonScore);
+        }
+        #endregion
+       
     }
 
 
@@ -168,5 +214,23 @@ public class RewardSystem : MonoBehaviour
         impulseSource.GenerateImpulse();
 
         yield return new WaitForSeconds(1f);
+    }
+
+    public void RewardMiniGame(EMinigameType type, int index)
+    {
+        int plusScore = 0;
+
+        Debug.Log($"인자 index: {index}");
+
+        if (type == EMinigameType.DrawLine)
+        {
+            plusScore = DrawStrokeScore[index];
+        }
+        else if(type == EMinigameType.Griffon)
+        {
+            plusScore = (int)griffonScore;
+        }
+
+        AddScore(plusScore);
     }
 }

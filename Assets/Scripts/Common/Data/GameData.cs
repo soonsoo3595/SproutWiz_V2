@@ -28,4 +28,12 @@ public class GameData : ScriptableObject
 
     [Header("Casting Cancel")]
     public float CastingCancelChargeTime = 15f;
+
+    [Header("Mana Flow")]
+    public List<int> DrawLineScore = new List<int> { 400, 550, 800 };
+    public int DrawLineGold = 100;
+
+    [Header("Griffon")]
+    public int GriffonScore = 200;
+    public int GriffonGold = 10;
 }

@@ -23,3 +23,7 @@ MonoBehaviour:
   SunshineMagicTime: 10
   SunshineMagicEffect: 2
   CastingCancelChargeTime: 15
+  DrawLineScore: 900100002602000020030000
+  DrawLineGold: 100
+  GriffonScore: 200
+  GriffonGold: 10
