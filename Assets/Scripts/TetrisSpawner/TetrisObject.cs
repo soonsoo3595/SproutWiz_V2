@@ -30,12 +30,19 @@ public class TetrisObject : MonoBehaviour
         }
 
         SetScale();
+
+        EventManager.mainGameOver += DetachFromMouse;
     }
 
 
     private void Update()
     {
         FollowingMousePoint(isAttackedMouse);
+    }
+
+    private void DetachFromMouse()
+    {
+        AttachMouse(false);
     }
 
     public void AttachMouse(bool toggle)
