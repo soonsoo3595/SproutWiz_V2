@@ -295,9 +295,9 @@ MonoBehaviour:
   triplecomboClip: {fileID: 8300000, guid: 29ce25f25207cbd43b8a23cb7cb01a38, type: 3}
   quadrupleClip: {fileID: 8300000, guid: 952d65c78653f2647ad3bdf8dfc7df7e, type: 3}
   gameoverClip: {fileID: 8300000, guid: e8975c8b3dfc8fd4eb2e899bb46966c1, type: 3}
-  lockClip: {fileID: 0}
+  lockClip: {fileID: 8300000, guid: 04fb27dadd0791a48b1191d3786add79, type: 3}
   clickClip: {fileID: 8300000, guid: 1563b2df1c25c5f4bacb369ddcd59627, type: 3}
-  upgradeClip: {fileID: 0}
+  upgradeClip: {fileID: 8300000, guid: 12eb64a7a63b0764faf47494c3679573, type: 3}
 --- !u!1 &7102482637582708589
 GameObject:
   m_ObjectHideFlags: 0

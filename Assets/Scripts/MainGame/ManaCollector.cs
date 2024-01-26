@@ -149,10 +149,23 @@ public class ManaCollector : MonoBehaviour
     {
         magicAnim.speed = animationSpeed;
         magicAnim.Play("Fever", 0, 0f);
+
+        audioSource.volume = 1f;
         audioSource.Play();
 
-        while(magicAnim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+        float animTime = 0f;
+        bool isMagicNearlyEnd = false;
+
+        while (animTime < 1f)
         {
+            animTime = magicAnim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+
+            if(animTime >= 0.8f && !isMagicNearlyEnd)
+            {
+                StartCoroutine(SoundFadeOut());
+                isMagicNearlyEnd = true;
+            }
+
             if(mainGame.isGameOver) break;
 
             if (mainGame.isPaused)
@@ -171,4 +184,13 @@ public class ManaCollector : MonoBehaviour
         OffMagic();
     }
 
+    IEnumerator SoundFadeOut()
+    {
+        // volume이 1f에서 0f로 1초동안 서서히 줄어듦
+        while (audioSource.volume > 0f)
+        {
+            audioSource.volume -= Time.deltaTime;
+            yield return null;
+        }
+    }
 }
