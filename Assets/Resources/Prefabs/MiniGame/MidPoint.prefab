@@ -98,7 +98,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d94053f8609f0e14aadb270ec29d672f, type: 2}
+  - {fileID: 2100000, guid: 4a50c937a4d35ef418a42bf884b7e1fa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -195,3 +195,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activateImage: {fileID: 21300000, guid: dc0f1b7c3d861a44d8437f5349f1bfec, type: 3}
   deactivateImage: {fileID: 21300000, guid: f5010f091f45ab54eae160bca981aa22, type: 3}
+  activeMaterial: {fileID: 2100000, guid: eb20b042b5ec6864891f48753cab2140, type: 2}
+  deactivateMaterial: {fileID: 2100000, guid: 4a50c937a4d35ef418a42bf884b7e1fa, type: 2}

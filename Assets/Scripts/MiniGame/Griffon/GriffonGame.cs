@@ -11,6 +11,9 @@ public class GriffonGame : MonoBehaviour, IMiniGame
     [SerializeField] float IntervalTime = 45f;
     [SerializeField] float MinimumTerm = 20f;
 
+    [SerializeField] GameObject particlePrefab;
+    GameObject particleObject;
+
     Transform griffonObject;
     int SpawnedGriffonCount = 0;
 
@@ -75,7 +78,7 @@ public class GriffonGame : MonoBehaviour, IMiniGame
         startPointWorldPos.z = 10;
 
         griffonObject = Instantiate(GriffonPrefab, startPointWorldPos, Quaternion.identity, CanvasWorldSpace);
-
+        griffonObject.GetComponent<GriffonObject>().SetMaster(this);
 
         isRunnig = true;
     }
@@ -127,5 +130,21 @@ public class GriffonGame : MonoBehaviour, IMiniGame
         int y = Random.Range(0, gridSizeY);
 
         return new GridPosition(x, y);
+    }
+
+    public void PlayEffect()
+    {
+        Vector3 pos = griffonObject.transform.position;
+        pos.z = 94;
+
+        if (particleObject == null)
+        {
+            particleObject = Instantiate(particlePrefab, pos, Quaternion.identity);
+        }
+        else
+        {
+            particleObject.transform.position = pos;
+            particleObject.GetComponent<ParticleSystem>().Play();
+        }
     }
 }

@@ -16,7 +16,7 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
     private Image image;
     private Animator animator;
 
-    [SerializeField] GameObject particleObject;
+    GriffonGame Master;
 
     void Start()
     {
@@ -50,6 +50,11 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public void SetMaster(GriffonGame master)
+    {
+        Master = master;
+    }
+
     void SetRandomTargetPosition()
     {
         float randomX = Random.Range(minPosition.x, maxPosition.x);
@@ -69,10 +74,10 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
         animator.SetTrigger("DeadTrigger");
         speed = 0.5f;
 
-        particleObject.SetActive(true);
-
         // 점수 갱신
         EventManager.miniGameSuccess(EMinigameType.Griffon, -1);
+
+        Master.PlayEffect();
 
         StartCoroutine(DestroyAfterDelay(3f));
     }

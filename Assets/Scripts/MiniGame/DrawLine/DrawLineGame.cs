@@ -17,6 +17,9 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
     [SerializeField] float IntervalTime = 60f;
     [SerializeField] float MinimumTerm = 20f;
 
+    [SerializeField] GameObject EffectObjectPrefab;
+    GameObject EffectObject;
+
     float RecentExcuteTimeInIntervar;
 
     readonly static int MaxPathPointCount = 5;
@@ -185,7 +188,7 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
             else
             {
                 Debug.Log($"DrawGame Fail");
-                for (int i = 1; i <= pathLength; i++)
+                for (int i = 1; i < pathLength; i++)
                 {
                     DrawPoint point = drawPointsObject[i].GetComponent<DrawPoint>();
                     if (point != null)
@@ -193,6 +196,9 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
                         point.SetActiveImage(false);
                     }
                 }
+
+                StartPoint startPoint = drawPointsObject[0].GetComponent<StartPoint>();
+                startPoint.SetActiveImage(false);
             }
         }
 
@@ -216,8 +222,25 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
 
                 drawPointsObject[0].GetComponent<StartPoint>().PlayEffect(true);
 
-                StartCoroutine(SuccessAfterDelay(1f));
-                //MiniGameController.Instance.ExitMiniGame(this);
+                Vector3 pos = GridManager.Instance.GetWorldPosition(pathPointPositions[CurrentDragSequence]);
+                pos.z = 94;
+                if (EffectObject == null)
+                {
+                    EffectObject = Instantiate(EffectObjectPrefab, pos, Quaternion.identity);
+                }
+                else
+                {
+                    EffectObject.transform.position = pos;
+                    EffectObject.GetComponent<ParticleSystem>().Play();
+                }
+               
+
+                for (int i = 1; i < pathLength; i++)
+                {
+                    drawPointsObject[i].GetComponent<DrawPoint>().DisableImage();
+                }
+
+                StartCoroutine(SuccessAfterDelay(1f));;
             }
 
             drawPoint.SetActiveImage(true);
