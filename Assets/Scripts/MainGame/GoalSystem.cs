@@ -5,6 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
+using System.Reflection;
 
 public class GoalSystem : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class GoalSystem : MonoBehaviour
     void Start()
     {
         Assign();
+        Activate();
     }
 
     public void UpdateContainer()
@@ -101,9 +103,11 @@ public class GoalSystem : MonoBehaviour
     {
         for (int i = 0; i < onGoals.Count; i++)
         {
-            onGoals[i].SetActive(true);
+            onGoals[i].SetActive(false);
+
             offGoals[i].transform.localPosition = locations[i].transform.localPosition;
-            offGoals[i].SetActive(false);
+            offGoals[i].GetComponentInChildren<TextMeshProUGUI>().text = "";
+            offGoals[i].SetActive(true);
         }
     }
 
@@ -152,4 +156,12 @@ public class GoalSystem : MonoBehaviour
         EventManager.changeTileData(new GridPosition(-1, -1));
     }
 
+    public IEnumerator StartAnimation()
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            OnGoal(i);
+            yield return new WaitForSeconds(1f);
+        }
+    }
 }

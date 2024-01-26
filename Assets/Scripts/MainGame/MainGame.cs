@@ -7,6 +7,7 @@ using TMPro;
 
 public class MainGame : MonoBehaviour
 {
+    public GameObject startEffect;
     public GameObject blind;
 
     [Header("Pause")]
@@ -21,10 +22,6 @@ public class MainGame : MonoBehaviour
 
     [Header("GameOver")] 
     public GameObject gameOverPopup;
-
-    [Header("CountDown")]
-    public GameObject countDown;
-    public TextMeshProUGUI countDownTxt;
 
     [Header("System")]
     public RewardSystem rewardSystem;
@@ -93,7 +90,8 @@ public class MainGame : MonoBehaviour
             blind.SetActive(true);
 
             yield return new WaitForSeconds(1f);
-            countDown.SetActive(true);
+
+            goalSystem.StartCoroutine(goalSystem.StartAnimation());
 
             float countDownTime = 2f;
 
@@ -102,14 +100,11 @@ public class MainGame : MonoBehaviour
             while (countDownTime > 0f)
             {
                 countDownTime -= Time.deltaTime;
-                countDownTxt.text = Mathf.CeilToInt(countDownTime).ToString();
                 yield return null;
             }
 
-            countDownTxt.text = "Game Start!";
-            yield return new WaitForSeconds(1.5f);
+            startEffect.SetActive(true);
 
-            countDown.SetActive(false);
             blind.SetActive(false);
         }
 
