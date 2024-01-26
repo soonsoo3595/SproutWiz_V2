@@ -185,13 +185,21 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
             else
             {
                 Debug.Log($"DrawGame Fail");
+                for (int i = 1; i <= pathLength; i++)
+                {
+                    DrawPoint point = drawPointsObject[i].GetComponent<DrawPoint>();
+                    if (point != null)
+                    {
+                        point.SetActiveImage(false);
+                    }
+                }
             }
         }
 
         CurrentDragSequence = 1;
     }
 
-    public void EnterDrawPoint(GridPosition position)
+    public void EnterDrawPoint(GridPosition position, DrawPoint drawPoint)
     {
         //Debug.Log($"CurrentDragSequence : {CurrentDragSequence}");
         //Debug.Log($"Compair Position : {pathPointPositions[CurrentDragSequence]} <-> {position}");
@@ -203,18 +211,42 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
                 Debug.Log($"Enter Last DrawPoint : {CurrentDragSequence} / {pathLength - 1}");
 
                 // TODO: 성공처리
+                // pathLength - 2 이거 수정필요.
+                EventManager.miniGameSuccess(EMinigameType.DrawLine, pathLength - 2);
 
-                MiniGameController.Instance.ExitMiniGame(this);
+                drawPointsObject[0].GetComponent<StartPoint>().PlayEffect(true);
+
+                StartCoroutine(SuccessAfterDelay(1f));
+                //MiniGameController.Instance.ExitMiniGame(this);
             }
+
+            drawPoint.SetActiveImage(true);
 
             Debug.Log($"CurrentDragSequence : {CurrentDragSequence} / {pathLength - 1}");
 
             CurrentDragSequence++;
         }
+        else
+        {
+            Debug.Log($"마나맥 잘못된 순서");
+            Debug.Log($"CurrentDragSequence : {CurrentDragSequence} / {pathLength - 1}");
+
+            for(int i = 1; i <= CurrentDragSequence; i++)
+            {
+                DrawPoint point = drawPointsObject[i].GetComponent<DrawPoint>();
+                if (point != null)
+                {
+                    point.SetActiveImage(false);
+                }
+            }
+        }
     }
 
     public void Exit()
     {
+        if (drawPointsObject == null)
+            return;
+
         if (drawPointsObject.Length <= 0)
             return;
 
@@ -222,7 +254,8 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
 
         for (int i = 0; i < pathLength; i++)
         {
-            Destroy(drawPointsObject[i].gameObject);
+            if(drawPointsObject[i].gameObject != null)
+                Destroy(drawPointsObject[i].gameObject);
         }
 
         isRunnig = false;
@@ -266,6 +299,13 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
     public float GetNextExcuteTime()
     {
         return RecentExcuteTimeInIntervar;
+    }
+
+    IEnumerator SuccessAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        MiniGameController.Instance.ExitMiniGame(this);
     }
 
 }

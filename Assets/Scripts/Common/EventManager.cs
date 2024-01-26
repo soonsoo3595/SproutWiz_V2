@@ -33,7 +33,7 @@ public static class EventManager
     public delegate void RemoveUnitOnGridTile(GridPosition position, TileUnit unit);
     static public RemoveUnitOnGridTile removeUnitOnGridTile;
 
-    public delegate void MiniGameSuccess(EMinigameType type);
+    public delegate void MiniGameSuccess(EMinigameType type, int index);
     static public MiniGameSuccess miniGameSuccess;
     #endregion
 
