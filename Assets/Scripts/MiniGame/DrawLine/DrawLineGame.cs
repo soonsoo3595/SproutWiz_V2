@@ -254,7 +254,7 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
 
         for (int i = 0; i < pathLength; i++)
         {
-            if(drawPointsObject[i].gameObject != null)
+            if(drawPointsObject[i] != null)
                 Destroy(drawPointsObject[i].gameObject);
         }
 

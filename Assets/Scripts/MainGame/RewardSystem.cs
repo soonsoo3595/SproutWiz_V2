@@ -150,7 +150,7 @@ public class RewardSystem : MonoBehaviour
 
         #region ¸¶³ª¸Æ Á¡¼ö
         {
-            int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.DrawStroke);
+            int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.DrawLine);
 
             for (int i = 0; i <= 2; i++)
             {
@@ -161,7 +161,7 @@ public class RewardSystem : MonoBehaviour
             {
                 for (int i = 0; i <= 2; i++)
                 {
-                    DrawStrokeScore[i] = (int)DataManager.skillLibrary.GetEffect(SkillType.DrawStroke, i, level);
+                    DrawStrokeScore[i] = (int)DataManager.skillLibrary.GetEffect(SkillType.DrawLine, i, level);
                 }
             }
 
