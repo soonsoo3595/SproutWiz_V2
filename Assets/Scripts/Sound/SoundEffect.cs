@@ -22,6 +22,9 @@ public class SoundEffect : MonoBehaviour
     public AudioClip clickClip;
 
     [Header("CraftShop")]
+    public AudioClip griffinClip;
+
+    [Header("CraftShop")]
     public AudioClip upgradeClip;
 
     private void Awake()
@@ -92,6 +95,9 @@ public class SoundEffect : MonoBehaviour
         audioClips.Add("gameover", gameoverClip);
         audioClips.Add("lock", lockClip);
         audioClips.Add("click", clickClip);
+
+        // MiniGame
+        audioClips.Add("griffin", griffinClip);
 
         // CraftShop
         audioClips.Add("upgrade", upgradeClip);
