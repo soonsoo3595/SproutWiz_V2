@@ -23,6 +23,7 @@ public class SoundEffect : MonoBehaviour
 
     [Header("CraftShop")]
     public AudioClip griffinClip;
+    public AudioClip drawlineClip;
 
     [Header("CraftShop")]
     public AudioClip upgradeClip;
@@ -97,6 +98,7 @@ public class SoundEffect : MonoBehaviour
         audioClips.Add("click", clickClip);
 
         // MiniGame
+        audioClips.Add("drawline", drawlineClip);
         audioClips.Add("griffin", griffinClip);
 
         // CraftShop

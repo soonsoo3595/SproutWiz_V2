@@ -210,6 +210,8 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
             {
                 Debug.Log($"Enter Last DrawPoint : {CurrentDragSequence} / {pathLength - 1}");
 
+                GameManager.Instance.soundEffect.PlayOneShotSoundEffect("drawline");
+
                 // TODO: 성공처리
                 // pathLength - 2 이거 수정필요.
                 EventManager.miniGameSuccess(EMinigameType.DrawLine, pathLength - 2);
