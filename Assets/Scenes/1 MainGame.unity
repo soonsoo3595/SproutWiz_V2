@@ -924,7 +924,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7d47a11ed9040ac4395053db69d2b40a, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -22434,7 +22434,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 01c8075c5f81e2949816add5fa481650, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -56234,6 +56234,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 9166353071790148512, guid: 5aed305e16db9774d84f533e4e81b0bb, type: 3}
+      propertyPath: griffinClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 65badb836eef66c4c88235a4b6b71943, type: 3}
+    - target: {fileID: 9166353071790148512, guid: 5aed305e16db9774d84f533e4e81b0bb, type: 3}
+      propertyPath: drawlineClip
+      value: 
+      objectReference: {fileID: 8300000, guid: d82466271a7a41f48bf2d495d12f0e00, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

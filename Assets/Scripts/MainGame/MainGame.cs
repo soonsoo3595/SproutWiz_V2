@@ -105,6 +105,8 @@ public class MainGame : MonoBehaviour
 
             startEffect.SetActive(true);
 
+            yield return new WaitForSeconds(1f);
+
             blind.SetActive(false);
         }
 
