@@ -15,10 +15,8 @@ public class GameOver : MonoBehaviour
 
     [Header("Button")]
     public Button retryBtn;
-    public Button homeBtn;
     public Button skipBtn;
 
-    private List<int> gameRecords = new List<int>();
     private int score;
     private int gold;
     private bool isSkipped = false;
@@ -26,19 +24,18 @@ public class GameOver : MonoBehaviour
     private void Start()
     {
         retryBtn.onClick.AddListener(Retry);
-        // skipBtn.onClick.AddListener(Skip);
-        homeBtn.onClick.AddListener(() => EventManager.ClearEvents());
+        skipBtn.onClick.AddListener(Skip);
 
         EventManager.resetMainGame += Init;
     }
 
     private void OnEnable()
     {
-        gameRecords = mainGame.gameRecord.GetRecord();
         score = mainGame.rewardSystem.Score;
         gold = mainGame.rewardSystem.Gold;
 
-        // StartCoroutine(ShowResult());
+        SaveRecord();
+        StartCoroutine(ShowResult());
     }
 
     private void Retry()
@@ -54,7 +51,7 @@ public class GameOver : MonoBehaviour
         }
 
         scoreTxt.text = "0";
-        goldTxt.text = "G";
+        goldTxt.text = "0G";
         isSkipped = false;
     }
 
@@ -66,7 +63,7 @@ public class GameOver : MonoBehaviour
 
         for(int i = 0; i < records.Length; i++)
         {
-            string formattedNumber = gameRecords[i].ToString("0000");
+            string formattedNumber = mainGame.gameRecord.GetRecord((RecordType)i).ToString("0000");
             records[i].text = formattedNumber;
         }
 
@@ -82,7 +79,8 @@ public class GameOver : MonoBehaviour
 
         for (int i = 0; i < records.Length; i++)
         {
-            for (int j = 0; j <= gameRecords[i]; j++)
+            int record = mainGame.gameRecord.GetRecord((RecordType)i);
+            for (int j = 0; j <= record; j++)
             {
                 string formattedNumber = j.ToString("0000");
                 records[i].text = formattedNumber;
@@ -107,5 +105,10 @@ public class GameOver : MonoBehaviour
         }
         
         yield return null;
+    }
+
+    private void SaveRecord()
+    {
+        DataManager.playerData.gold += gold;
     }
 }

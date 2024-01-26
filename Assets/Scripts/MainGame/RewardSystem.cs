@@ -84,9 +84,9 @@ public class RewardSystem : MonoBehaviour
         }
 
         Debug.Log(count + "°³ ¼öÈ®ÇØ¼­ " + plusScore + "Á¡ È¹µæ");
-        AddScore(plusScore); 
+        AddScore(plusScore);
 
-        // mainGame.gameRecord.harvestCount += count;
+        mainGame.gameRecord.AddRecord(RecordType.Harvest, count);
 
         StartCoroutine(MultiHarvest(count));
     }
@@ -147,8 +147,8 @@ public class RewardSystem : MonoBehaviour
     IEnumerator MultiHarvest(int count)
     {
         if (count <= 1) yield break;
-
-        // mainGame.gameRecord.multiHarvestCount++;
+        
+        mainGame.gameRecord.AddRecord(RecordType.MultiHarvest);
 
         combo.GetComponent<ComboEffect>().Play(count);
 

@@ -8,6 +8,9 @@ using TMPro;
 public class MainGame : MonoBehaviour
 {
     public GameObject blind;
+
+    [Header("Pause")]
+    public GameObject pausePopup;
     public Button pauseBtn;
 
     [Header("Timer")]
@@ -73,6 +76,16 @@ public class MainGame : MonoBehaviour
         GameStart();
     }
 
+    public void Continue()
+    {
+        isPaused = false;
+        pausePopup.SetActive(false);
+
+        GameManager.Instance.soundEffect.Resume();
+        manaCollector.audioSource.UnPause();
+        timer.audioSource.UnPause();
+    }
+
     private IEnumerator Ready()
     {
         if (!skipReady)
@@ -107,21 +120,12 @@ public class MainGame : MonoBehaviour
 
     private void Pause()
     {
-        isPaused = !isPaused;
-        blind.SetActive(isPaused);
+        isPaused = true;
+        pausePopup.SetActive(true);
 
-        if(isPaused)
-        {
-            GameManager.Instance.soundEffect.Pause();
-            manaCollector.audioSource.Pause();
-            timer.audioSource.Pause();
-        }
-        else
-        {
-            GameManager.Instance.soundEffect.Resume();
-            manaCollector.audioSource.UnPause();
-            timer.audioSource.UnPause();
-        }
+        GameManager.Instance.soundEffect.Pause();
+        manaCollector.audioSource.Pause();
+        timer.audioSource.Pause();
     }
 
 }

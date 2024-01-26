@@ -19,6 +19,7 @@ public class GoalSystem : MonoBehaviour
 
     private int totalGoalCount;
     private int goalScore;
+    private float goalScoreBonus = 1f;
     private int goalGold;
     private bool isWaiting = false;
 
@@ -67,8 +68,11 @@ public class GoalSystem : MonoBehaviour
 
         GameManager.Instance.soundEffect.PlayOneShotSoundEffect("clearGoal");
 
+        mainGame.gameRecord.AddRecord(RecordType.ClearGoal);
         mainGame.rewardSystem.AddGold(totalGoalCount * goalGold);
-        mainGame.rewardSystem.AddScore(totalGoalCount * goalScore);
+
+        int score = (int)(totalGoalCount * goalScore * goalScoreBonus);
+        mainGame.rewardSystem.AddScore(score);
 
         mainGame.timer.AddTime(10f);
 
@@ -79,6 +83,12 @@ public class GoalSystem : MonoBehaviour
     {
         goalScore = DataManager.GameData.GoalScore;
         goalGold = DataManager.GameData.GoalGold;
+
+        {
+            int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.GoalReward);
+            goalScoreBonus += DataManager.skillLibrary.GetEffect(SkillType.GoalReward, level);
+            Debug.Log("목표 달성 시 점수 보너스 : " + goalScoreBonus);
+        }
 
         #region 이벤트 등록
         EventManager.tileHarvest += UpdateGoal;

@@ -1,13 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameRecord : MonoBehaviour
 {
-    [SerializeField] private MainGame mainGame;
-
-    public List<string> nameList;
-    public Dictionary<string, int> dict = new Dictionary<string, int>();
+    [HideInInspector] public List<int> records;
 
     void Start()
     {
@@ -16,29 +14,34 @@ public class GameRecord : MonoBehaviour
 
     public List<int> GetRecord()
     {
-        List<int> list = new List<int>();
+        return records;
+    }
 
-        foreach (var name in nameList)
-        {
-            list.Add(dict[name]);
-        }
+    public void AddRecord(RecordType type, int count = 1)
+    {
+        records[(int)type] += count;
+    }
 
-        return list;
+    public int GetRecord(RecordType type)
+    {
+        return records[(int)type];
     }
 
     private void Init()
     {
-        foreach (var name in nameList)
+        for(int i = 0; i < records.Count; i++)
         {
-            dict[name] = 0;
+            records[i] = 0;
         }
     }
 
     private void Assign()
     {
-        foreach(var name in nameList)
+        int size = Enum.GetNames(typeof(RecordType)).Length;
+
+        for(int i = 0; i < size; i++)
         {
-            dict.Add(name, 0);
+            records.Add(0);
         }
 
         EventManager.resetMainGame += Init;

@@ -29,7 +29,7 @@ public enum SkillType
     Harvest,
     MultiHarvest,
     GoalReward,
-    DrawStroke,
+    DrawLine,
     CarvingStone,
     HuntBird,
     MiniGameGoldReward,
@@ -53,4 +53,14 @@ public enum SceneType
     MainGame,
     CraftShop,
     Town
+}
+
+public enum RecordType
+{
+    Harvest,
+    MultiHarvest,
+    ClearGoal,
+    DrawLine,
+    Meteor,
+    Griffon
 }

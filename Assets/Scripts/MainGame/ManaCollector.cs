@@ -113,8 +113,6 @@ public class ManaCollector : MonoBehaviour
     private void OnMagic()
     {
         mainGame.isMagicOn = true;
-
-        // mainGame.gameRecord.feverCount++;
         StartCoroutine(ShowMagic());
     }
 
