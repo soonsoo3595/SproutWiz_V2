@@ -42,7 +42,7 @@ public static class EventManager
     public static UpdateUI updateUI;
     #endregion
 
-    public static void ClearEvents()
+    public static void ClearMainGameEvents()
     {
         tileHarvest = null;
         harvestCount = null;

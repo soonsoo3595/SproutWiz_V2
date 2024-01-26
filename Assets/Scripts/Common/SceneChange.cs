@@ -18,6 +18,11 @@ public class SceneChange : MonoBehaviour
 
     public void MoveScene()
     {
+        if(SceneManager.GetActiveScene().buildIndex == (int)SceneType.MainGame)
+        {
+            EventManager.ClearMainGameEvents();
+        }
+
         GameManager.Instance.sceneList.Push(moveScene);
         SceneManager.LoadScene((int)moveScene);
     }

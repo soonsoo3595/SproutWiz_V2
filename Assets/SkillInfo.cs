@@ -30,7 +30,7 @@ public class SkillInfo : MonoBehaviour
 
         string effect = "";
 
-        if (skillType == SkillType.MultiHarvest || skillType == SkillType.DrawStroke)
+        if (skillType == SkillType.MultiHarvest || skillType == SkillType.DrawLine)
         {
             effect += "\n";
             for (int i = 0; i < 3; i++)
@@ -39,7 +39,7 @@ public class SkillInfo : MonoBehaviour
                 {
                     effect += $"{i + 2}°³ : ";
                 }
-                else if (skillType == SkillType.DrawStroke)
+                else if (skillType == SkillType.DrawLine)
                 {
                     effect += $"{i + 3}°³ : ";
                 }
