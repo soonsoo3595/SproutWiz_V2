@@ -36,13 +36,15 @@ public class TetrisObject : MonoBehaviour
 
 
     private void Update()
-    {
-        FollowingMousePoint(isAttackedMouse);
+    { 
+        if(isAttackedMouse) 
+            FollowingMousePoint(isAttackedMouse);
     }
 
     private void DetachFromMouse()
     {
-        AttachMouse(false);
+        isAttackedMouse = false;
+        //Destroy(gameObject);
     }
 
     public void AttachMouse(bool toggle)
