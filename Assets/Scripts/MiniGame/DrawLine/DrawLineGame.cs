@@ -216,6 +216,7 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
             {
                 Debug.Log($"Enter Last DrawPoint : {CurrentDragSequence} / {pathLength - 1}");
 
+                EventManager.recordUpdate(RecordType.DrawLine);
                 GameManager.Instance.soundEffect.PlayOneShotSoundEffect("drawline");
 
                 // TODO: 성공처리

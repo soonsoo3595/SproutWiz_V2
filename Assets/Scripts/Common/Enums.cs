@@ -61,6 +61,6 @@ public enum RecordType
     MultiHarvest,
     ClearGoal,
     DrawLine,
-    Meteor,
-    Griffon
+    Griffon,
+    Meteor
 }

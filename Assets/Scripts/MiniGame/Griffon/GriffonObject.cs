@@ -71,6 +71,7 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
     {
         Debug.Log("±×¸®ÇÉ Å¬¸¯");
 
+        EventManager.recordUpdate(RecordType.Griffon);
         GameManager.Instance.soundEffect.PlayOneShotSoundEffect("griffin");
 
         animator.SetTrigger("DeadTrigger");

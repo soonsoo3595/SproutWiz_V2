@@ -15,6 +15,9 @@ public static class EventManager
     public delegate void AfterApplyTetris();                // 테트리스 놓았을 때 
     public static AfterApplyTetris afterApplyTetris;
 
+    public delegate void RecordUpdate(RecordType type, int count = 1);
+    public static RecordUpdate recordUpdate;
+
     public delegate void ResetMainGame();                   // 게임 재시작 시 타이머, 점수 등 값 초기화
     public static ResetMainGame resetMainGame;  
 
@@ -50,6 +53,7 @@ public static class EventManager
         tileHarvest = null;
         harvestCount = null;
         afterApplyTetris = null;
+        recordUpdate = null;
         resetMainGame = null;
         mainGameOver = null;
         applyTetris = null;

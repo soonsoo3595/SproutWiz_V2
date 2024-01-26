@@ -103,6 +103,8 @@ public class MainGame : MonoBehaviour
                 yield return null;
             }
 
+            yield return new WaitForSeconds(0.5f);
+
             startEffect.SetActive(true);
 
             yield return new WaitForSeconds(1f);

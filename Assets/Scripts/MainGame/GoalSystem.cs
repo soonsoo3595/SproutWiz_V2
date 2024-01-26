@@ -70,7 +70,7 @@ public class GoalSystem : MonoBehaviour
 
         GameManager.Instance.soundEffect.PlayOneShotSoundEffect("clearGoal");
 
-        mainGame.gameRecord.AddRecord(RecordType.ClearGoal);
+        EventManager.recordUpdate(RecordType.ClearGoal);
         mainGame.rewardSystem.AddGold(totalGoalCount * goalGold);
 
         int score = (int)(totalGoalCount * goalScore * goalScoreBonus);

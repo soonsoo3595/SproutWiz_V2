@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Cinemachine;
 using System.Runtime.InteropServices;
-using static EventManager;
 
 public class RewardSystem : MonoBehaviour
 {
@@ -92,7 +91,7 @@ public class RewardSystem : MonoBehaviour
         Debug.Log(count + "°³ ¼öÈ®ÇØ¼­ " + plusScore + "Á¡ È¹µæ");
         AddScore(plusScore);
 
-        mainGame.gameRecord.AddRecord(RecordType.Harvest, count);
+        EventManager.recordUpdate(RecordType.Harvest, count);
 
         StartCoroutine(MultiHarvest(count));
     }
@@ -194,7 +193,7 @@ public class RewardSystem : MonoBehaviour
     {
         if (count <= 1) yield break;
         
-        mainGame.gameRecord.AddRecord(RecordType.MultiHarvest);
+        EventManager.recordUpdate(RecordType.MultiHarvest);
 
         combo.GetComponent<ComboEffect>().Play(count);
 

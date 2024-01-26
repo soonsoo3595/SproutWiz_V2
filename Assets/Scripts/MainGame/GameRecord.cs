@@ -10,6 +10,8 @@ public class GameRecord : MonoBehaviour
     void Start()
     {
         Assign();
+
+        EventManager.recordUpdate += UpdateRecord;
     }
 
     public List<int> GetRecord()
@@ -17,7 +19,7 @@ public class GameRecord : MonoBehaviour
         return records;
     }
 
-    public void AddRecord(RecordType type, int count = 1)
+    public void UpdateRecord(RecordType type, int count = 1)
     {
         records[(int)type] += count;
     }
