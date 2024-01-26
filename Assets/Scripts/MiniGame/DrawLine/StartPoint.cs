@@ -12,8 +12,6 @@ public class StartPoint : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDr
     [SerializeField] Sprite activateImage;
     [SerializeField] Sprite deactivateImage;
 
-    [SerializeField] GameObject SuccessParticleObject;
-
     Image sourceImage;
 
     private void Start()
@@ -30,14 +28,14 @@ public class StartPoint : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDr
     {
         Master.SetIsDrag(true);
 
-        sourceImage.sprite = activateImage;
+        SetActiveImage(true);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         Master.SetIsDrag(false);
 
-        sourceImage.sprite = deactivateImage;
+        SetActiveImage(false);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -47,13 +45,27 @@ public class StartPoint : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDr
 
     public void PlayEffect(bool isSuccess)
     {
-        if(isSuccess)
+        sourceImage.enabled = false;
+
+        if (isSuccess)
         {
-            SuccessParticleObject.SetActive(true);
+
         }
         else
         {
 
+        }
+    }
+
+    public void SetActiveImage(bool Drag)
+    {
+        if(Drag)
+        {
+            sourceImage.sprite = activateImage;
+        }
+        else
+        {
+            sourceImage.sprite = deactivateImage;
         }
     }
 }

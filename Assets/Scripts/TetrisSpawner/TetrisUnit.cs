@@ -14,7 +14,7 @@ public class TetrisUnit : TileUnit
 
     private void Start()
     {
-        SetBlockSprite();
+        SetBlockSprite(false);
         unitSprite.transform.rotation = Quaternion.identity;
     }
 
@@ -52,21 +52,41 @@ public class TetrisUnit : TileUnit
     }
 
 
-    private void SetBlockSprite()
+    public void SetBlockSprite(bool isDrag)
     {
-        switch (element.GetElementType())
+        if(!isDrag)
         {
-            case ElementType.None:
-                break;
-            case ElementType.Fire:
-                unitSprite.sprite = SpriteSet.FireTetris;
-                break;
-            case ElementType.Water:
-                unitSprite.sprite = SpriteSet.WaterTetris;
-                break;
-            case ElementType.Grass:
-                unitSprite.sprite = SpriteSet.GrassTetris;
-                break;
+            switch (element.GetElementType())
+            {
+                case ElementType.None:
+                    break;
+                case ElementType.Fire:
+                    unitSprite.sprite = SpriteSet.opacityFireTetris;
+                    break;
+                case ElementType.Water:
+                    unitSprite.sprite = SpriteSet.opacityWaterTetris;
+                    break;
+                case ElementType.Grass:
+                    unitSprite.sprite = SpriteSet.opacityGrassTetris;
+                    break;
+            }
+        }
+        else
+        {
+            switch (element.GetElementType())
+            {
+                case ElementType.None:
+                    break;
+                case ElementType.Fire:
+                    unitSprite.sprite = SpriteSet.FireTetris;
+                    break;
+                case ElementType.Water:
+                    unitSprite.sprite = SpriteSet.WaterTetris;
+                    break;
+                case ElementType.Grass:
+                    unitSprite.sprite = SpriteSet.GrassTetris;
+                    break;
+            }
         }
     }
 }

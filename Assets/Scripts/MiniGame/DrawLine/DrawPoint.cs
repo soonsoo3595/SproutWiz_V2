@@ -10,6 +10,9 @@ public class DrawPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     [SerializeField] Sprite activateImage;
     [SerializeField] Sprite deactivateImage;
 
+    [SerializeField] Material activeMaterial;
+    [SerializeField] Material deactivateMaterial;
+
     UnityEngine.UI.Image sourceImage;
 
     LineRenderer lineRenderer;
@@ -56,10 +59,18 @@ public class DrawPoint : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if(active)
         {
             sourceImage.sprite = activateImage;
+            lineRenderer.material = activeMaterial;
         }
         else
         {
             sourceImage.sprite = deactivateImage;
+            lineRenderer.material = deactivateMaterial;
         }
+    }
+
+    public void DisableImage()
+    {
+        lineRenderer.enabled = false;
+        sourceImage.enabled = false;
     }
 }

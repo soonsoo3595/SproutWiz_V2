@@ -23,4 +23,7 @@ public class SpriteSetting : ScriptableObject
     public Sprite WaterTetris;
     public Sprite GrassTetris;
 
+    public Sprite opacityFireTetris;
+    public Sprite opacityWaterTetris;
+    public Sprite opacityGrassTetris;
 }

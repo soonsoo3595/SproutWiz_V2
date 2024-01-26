@@ -44,10 +44,12 @@ public class TetrisObject : MonoBehaviour
 
         if (isAttackedMouse)
         {
+            SetUnitsColor(true);
             EnableSeparation();
         }
         else
         {
+            SetUnitsColor(false);
             ReleaseDrag();
         }
     }
@@ -175,5 +177,14 @@ public class TetrisObject : MonoBehaviour
 
         return result;
     }
+
+    private void SetUnitsColor(bool drag)
+    {
+        foreach(TetrisUnit unit in units)
+        {
+            unit.SetBlockSprite(drag);
+        }
+    }
+
 
 }
