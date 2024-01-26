@@ -27716,7 +27716,7 @@ GameObject:
   - component: {fileID: 496028790}
   - component: {fileID: 496028789}
   m_Layer: 5
-  m_Name: SubSlot2
+  m_Name: SubSlot1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27808,8 +27808,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1214303301}
-  - {fileID: 1888629045}
   - {fileID: 496028788}
+  - {fileID: 1888629045}
   m_Father: {fileID: 1733921890}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -55491,7 +55491,7 @@ Canvas:
   m_OverridePixelPerfect: 1
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 938099911
   m_SortingOrder: 0
@@ -56234,14 +56234,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 9166353071790148512, guid: 5aed305e16db9774d84f533e4e81b0bb, type: 3}
-      propertyPath: griffinClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 65badb836eef66c4c88235a4b6b71943, type: 3}
-    - target: {fileID: 9166353071790148512, guid: 5aed305e16db9774d84f533e4e81b0bb, type: 3}
-      propertyPath: drawlineClip
-      value: 
-      objectReference: {fileID: 8300000, guid: d82466271a7a41f48bf2d495d12f0e00, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -76826,8 +76818,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ViewSlots:
   - {fileID: 1214303301}
-  - {fileID: 1888629045}
   - {fileID: 496028788}
+  - {fileID: 1888629045}
 --- !u!222 &1733921893
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -97408,7 +97400,7 @@ GameObject:
   - component: {fileID: 1888629047}
   - component: {fileID: 1888629046}
   m_Layer: 5
-  m_Name: SubSlot1
+  m_Name: SubSlot2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

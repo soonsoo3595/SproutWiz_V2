@@ -145,6 +145,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8ee869240fb6a434d98d39a1c16816f7, type: 3}
   - {fileID: 8300000, guid: cc04a63db1ed2fb4eaceec37dd290599, type: 3}
   - {fileID: 8300000, guid: 8ee869240fb6a434d98d39a1c16816f7, type: 3}
+  - {fileID: 8300000, guid: 8ee869240fb6a434d98d39a1c16816f7, type: 3}
 --- !u!1 &4795223278451943143
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,6 +298,8 @@ MonoBehaviour:
   gameoverClip: {fileID: 8300000, guid: e8975c8b3dfc8fd4eb2e899bb46966c1, type: 3}
   lockClip: {fileID: 8300000, guid: 04fb27dadd0791a48b1191d3786add79, type: 3}
   clickClip: {fileID: 8300000, guid: 1563b2df1c25c5f4bacb369ddcd59627, type: 3}
+  griffinClip: {fileID: 8300000, guid: 65badb836eef66c4c88235a4b6b71943, type: 3}
+  drawlineClip: {fileID: 8300000, guid: d82466271a7a41f48bf2d495d12f0e00, type: 3}
   upgradeClip: {fileID: 8300000, guid: 12eb64a7a63b0764faf47494c3679573, type: 3}
 --- !u!1 &7102482637582708589
 GameObject:
