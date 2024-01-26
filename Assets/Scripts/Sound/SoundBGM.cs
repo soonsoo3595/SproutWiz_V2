@@ -40,6 +40,11 @@ public class SoundBGM : MonoBehaviour
             return;
         }
 
+        if(audioSource.isPlaying && audioSource.clip == bgmClips[index])
+        {
+            return;
+        }
+
         audioSource.clip = bgmClips[index];
         audioSource.Play();
     }
