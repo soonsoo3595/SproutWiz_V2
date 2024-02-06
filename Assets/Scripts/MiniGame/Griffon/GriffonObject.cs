@@ -16,7 +16,9 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
     private Image image;
     private Animator animator;
 
-    GriffonGame Master;
+    private GriffonGame Master;
+
+    private bool isActive;
 
     void Start()
     {
@@ -27,6 +29,8 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
 
         image = GetComponent<Image>();
         animator = GetComponent<Animator>();
+
+        isActive = true;
     }
 
     void Update()
@@ -71,18 +75,23 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
     {
         Debug.Log("그리핀 클릭");
 
-        EventManager.recordUpdate(RecordType.Griffon);
-        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("griffin");
+        if(isActive)
+        {
+            EventManager.recordUpdate(RecordType.Griffon);
+            GameManager.Instance.soundEffect.PlayOneShotSoundEffect("griffin");
 
-        animator.SetTrigger("DeadTrigger");
-        speed = 0.5f;
+            animator.SetTrigger("DeadTrigger");
+            speed = 0.5f;
 
-        // 점수 갱신
-        EventManager.miniGameSuccess(EMinigameType.Griffon, -1);
+            // 점수 갱신
+            EventManager.miniGameSuccess(EMinigameType.Griffon, -1);
 
-        Master.PlayEffect();
+            Master.PlayEffect();
 
-        StartCoroutine(DestroyAfterDelay(3f));
+            isActive = false;
+
+            StartCoroutine(DestroyAfterDelay(3f));
+        }
     }
 
     IEnumerator DestroyAfterDelay(float delay)
