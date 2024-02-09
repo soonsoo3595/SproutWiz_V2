@@ -360,6 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2412b302770831f40a14e7c4a3e355f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundBGM: {fileID: 5805772894834119630}
   soundEffect: {fileID: 9166353071790148512}
   isDebugMode: 1
   debugGold: 10000

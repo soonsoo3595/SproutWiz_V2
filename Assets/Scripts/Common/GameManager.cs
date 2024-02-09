@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [Header("Audio")]
+    public SoundBGM soundBGM;
     public SoundEffect soundEffect;
 
     [Header("Scene")]

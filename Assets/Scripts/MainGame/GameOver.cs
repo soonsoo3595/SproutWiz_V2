@@ -40,6 +40,7 @@ public class GameOver : MonoBehaviour
 
     private void Retry()
     {
+        GameManager.Instance.soundBGM.RestartBGM();
         mainGame.Retry();
     }
 

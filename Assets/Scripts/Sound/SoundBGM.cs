@@ -32,6 +32,12 @@ public class SoundBGM : MonoBehaviour
         PlayBGM(scene.buildIndex);
     }
 
+    public void RestartBGM()
+    {
+        audioSource.Stop();
+        audioSource.Play();
+    }
+
     private void PlayBGM(int index)
     {
         if(index < 0 || index >= bgmClips.Length)
