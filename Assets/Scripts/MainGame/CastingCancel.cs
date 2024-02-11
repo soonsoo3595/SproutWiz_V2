@@ -11,6 +11,10 @@ public class CastingCancel : MonoBehaviour
     public List<Image> batteries;
     public TetrisViewPanel tetrisViewPanel;
 
+    private Color activate = new Color(1f, 1f, 1f, 1f);
+    private Color deactivate = new Color(1f, 1f, 1f, 0.5f);
+
+    private bool isCharging = false;
     private float chargeTime;
 
     private int chargeStack = 0;
@@ -29,7 +33,7 @@ public class CastingCancel : MonoBehaviour
             for (int i = 0; i < chargeStack; i++)
             {
                 batteries[i].gameObject.SetActive(true);
-                batteries[i].color = new Color(1f, 1f, 1f, 1f);
+                batteries[i].color = activate;
             }
         }
     }
@@ -45,7 +49,7 @@ public class CastingCancel : MonoBehaviour
             if (ChargeStack != 3)
             {
                 batteries[ChargeStack].gameObject.SetActive(true);
-                batteries[ChargeStack].color = new Color(1f, 1f, 1f, 0.5f);
+                batteries[ChargeStack].color = deactivate;
                 batteries[ChargeStack].fillAmount = battery / chargeTime;
             }
         }
@@ -92,7 +96,7 @@ public class CastingCancel : MonoBehaviour
 
     private void Cancel()
     {
-        if(ChargeStack == 0 || mainGame.isGameOver)
+        if(ChargeStack == 0 || isCharging || mainGame.isGameOver)
         {
             return;
         }
@@ -127,8 +131,12 @@ public class CastingCancel : MonoBehaviour
                 }
             }
 
+            isCharging = true;
+
             ChargeStack += 1;
             Battery = 0f;
+
+            isCharging = false;
         }
     }
 }
