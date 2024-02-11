@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlayerData
 {
-
     public int totalScore;    // 누적 스코어
     public int bestScore;      // 최고 기록 스코어
 
@@ -19,6 +18,10 @@ public class PlayerData
 
     // 업그레이드 레벨
     public List<int> skillLevels = new List<int>();
+
+    // 환경 설정
+    public float sfxVolume = 1.0f;
+    public float bgmVolume = 1.0f;
 
     public PlayerData()
     {

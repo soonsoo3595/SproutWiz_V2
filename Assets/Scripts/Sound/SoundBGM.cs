@@ -11,9 +11,12 @@ public class SoundBGM : MonoBehaviour
     // 1 : ≈∏¿Ã∆≤
     public AudioClip[] bgmClips;
 
+    private float originVolume;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        originVolume = audioSource.volume;
     }
 
     private void OnEnable()
@@ -30,6 +33,12 @@ public class SoundBGM : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
         PlayBGM(scene.buildIndex);
+    }
+
+    public void SetVolume(float ratio)
+    {
+        float adjustVolume = Mathf.Lerp(0.0f, originVolume, ratio);
+        audioSource.volume = adjustVolume;
     }
 
     public void RestartBGM()

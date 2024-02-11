@@ -22,6 +22,8 @@ public class ManaCollector : MonoBehaviour
     private float animationDuration = 0f;
     private float animationSpeed = 0f;
 
+    private float originVolume;
+
     public int Mana
     {
         get => mana;
@@ -40,6 +42,13 @@ public class ManaCollector : MonoBehaviour
         Assign();
 
         ResetGame();
+    }
+
+    public void SetVolume(float ratio)
+    {
+        float adjustVolme = Mathf.Lerp(0f, originVolume, ratio);
+
+        audioSource.volume = adjustVolme;
     }
 
     public void ResetGame()
@@ -63,6 +72,8 @@ public class ManaCollector : MonoBehaviour
 
     private void Assign()
     {
+        originVolume = audioSource.volume;
+
         #region 햇빛마법 시간
         {
             int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.Overclock);

@@ -29,12 +29,16 @@ public class Timer : MonoBehaviour
 
     public float totalTime = 80f;
 
+    private float originVolume;
+
     private void Start()
     {
         timeLimit = DataManager.GameData.TimeLimit;
         EventManager.resetMainGame += ResetTimer;
 
         scedulMiniGame = new SortedDictionary<float, IMiniGame>();
+
+        originVolume = audioSource.volume;
     }
 
     public void StartTimer()
@@ -54,6 +58,13 @@ public class Timer : MonoBehaviour
     public void AddTime(float time)
     {
         RemainTime = Mathf.Clamp(RemainTime + time, 0, timeLimit);
+    }
+
+    public void SetVolume(float ratio)
+    {
+        float adjustVolme = Mathf.Lerp(0f, originVolume, ratio);
+
+        audioSource.volume = adjustVolme;
     }
 
     private IEnumerator RunTimer()

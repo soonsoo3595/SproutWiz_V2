@@ -8,6 +8,8 @@ public class SoundEffect : MonoBehaviour
 
     Dictionary<string, AudioClip> audioClips = new Dictionary<string, AudioClip>();
 
+    private float originVolume;
+
     [Header("MainGame")]
     public AudioClip countdownStartClip;
     public AudioClip dropClip;
@@ -30,7 +32,8 @@ public class SoundEffect : MonoBehaviour
 
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();    
+        audioSource = GetComponent<AudioSource>();
+        originVolume = audioSource.volume;
     }
 
     private void Start()
@@ -54,6 +57,13 @@ public class SoundEffect : MonoBehaviour
         {
             Debug.Log("No clip");
         }
+    }
+
+    public void SetVolume(float ratio)
+    {
+        float adjustVolume = Mathf.Lerp(0.0f, originVolume, ratio);
+
+        audioSource.volume = adjustVolume;
     }
 
     public bool IsPlaying()
