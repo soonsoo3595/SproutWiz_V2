@@ -24,7 +24,7 @@ public class SceneChange : MonoBehaviour
         }
 
         GameManager.Instance.sceneList.Push(moveScene);
-        SceneManager.LoadScene((int)moveScene);
+        LoadingScene.LoadScene(moveScene);
     }
 
 }

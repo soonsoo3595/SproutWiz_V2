@@ -51,7 +51,8 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                if(sceneList.Count == 0) return;
+                if (sceneList.Count == 0) return;
+                if (SceneManager.GetActiveScene().buildIndex == (int)SceneType.Loading) return;
 
                 if(sceneList.Peek() == SceneType.MainGame)
                 {
@@ -68,7 +69,7 @@ public class GameManager : MonoBehaviour
                 else
                 {
                     sceneList.Pop();
-                    SceneManager.LoadScene((int)sceneList.Peek());
+                    LoadingScene.LoadScene(sceneList.Peek());
                 }
             }
         }
