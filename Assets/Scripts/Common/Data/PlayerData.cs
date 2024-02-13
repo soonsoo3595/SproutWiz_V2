@@ -23,6 +23,8 @@ public class PlayerData
     public float sfxVolume = 1.0f;
     public float bgmVolume = 1.0f;
 
+    public bool isFirstPlay = true;
+
     public PlayerData()
     {
         totalScore = 0;

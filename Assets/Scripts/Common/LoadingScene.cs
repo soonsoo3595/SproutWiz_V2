@@ -8,8 +8,6 @@ public class LoadingScene : MonoBehaviour
 {
     public static SceneType loadScene;
 
-    [SerializeField] Image image;
-
     void Start()
     {
         StartCoroutine(Loading());
@@ -30,8 +28,6 @@ public class LoadingScene : MonoBehaviour
 
         while(!asyncOperation.isDone)
         {
-            image.transform.Rotate(Vector3.forward * 360f * Time.deltaTime);
-
             yield return null;
         }
     }
