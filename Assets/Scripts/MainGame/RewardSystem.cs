@@ -91,6 +91,9 @@ public class RewardSystem : MonoBehaviour
         Debug.Log(count + "°³ ¼öÈ®ÇØ¼­ " + plusScore + "Á¡ È¹µæ");
         AddScore(plusScore);
 
+        int plusGold = count * 5;
+        AddGold(plusGold);
+
         EventManager.recordUpdate(RecordType.Harvest, count);
 
         StartCoroutine(MultiHarvest(count));
@@ -197,19 +200,25 @@ public class RewardSystem : MonoBehaviour
 
         combo.GetComponent<ComboEffect>().Play(count);
 
+        int plusGold = 0;
+
         switch(count)
         {
             case 2:
                 GameManager.Instance.soundEffect.PlayOneShotSoundEffect("double");
+                plusGold = 10;
                 break;
             case 3:
                 GameManager.Instance.soundEffect.PlayOneShotSoundEffect("triple");
+                plusGold = 25;
                 break;
             case 4:
                 GameManager.Instance.soundEffect.PlayOneShotSoundEffect("quadruple");
+                plusGold = 40;
                 break;
         }
 
+        AddGold(plusGold);
         impulseSource.GenerateImpulse();
 
         yield return new WaitForSeconds(1f);

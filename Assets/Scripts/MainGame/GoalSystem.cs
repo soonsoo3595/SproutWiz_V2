@@ -71,14 +71,18 @@ public class GoalSystem : MonoBehaviour
         GameManager.Instance.soundEffect.PlayOneShotSoundEffect("clearGoal");
 
         EventManager.recordUpdate(RecordType.ClearGoal);
-        mainGame.rewardSystem.AddGold(totalGoalCount * goalGold);
-
-        int score = (int)(totalGoalCount * goalScore * goalScoreBonus);
-        mainGame.rewardSystem.AddScore(score);
-
-        mainGame.timer.AddTime(10f);
+        GetRewards();
 
         StartCoroutine(NextGoal());
+    }
+
+    public IEnumerator StartAnimation()
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            OnGoal(i);
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     private void Assign()
@@ -98,6 +102,7 @@ public class GoalSystem : MonoBehaviour
         EventManager.resetMainGame += RetryGame;
         #endregion
     }
+
 
     private void Activate()
     {
@@ -156,12 +161,14 @@ public class GoalSystem : MonoBehaviour
         EventManager.changeTileData(new GridPosition(-1, -1));
     }
 
-    public IEnumerator StartAnimation()
+    private void GetRewards()
     {
-        for(int i = 0; i < 3; i++)
-        {
-            OnGoal(i);
-            yield return new WaitForSeconds(1f);
-        }
+        int plusScore = (int)(totalGoalCount * 10 * goalScoreBonus) + (totalGoalCount / 3 * 100);
+        mainGame.rewardSystem.AddScore(plusScore);
+
+        int plusGold = (totalGoalCount * 5) + (totalGoalCount / 3 * 50); 
+        mainGame.rewardSystem.AddGold(plusGold);
+
+        mainGame.timer.AddTime(10f);
     }
 }
