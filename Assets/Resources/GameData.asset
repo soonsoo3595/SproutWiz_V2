@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeLimit: 80
   HarvestScore: 100
-  MultiHarvestScore: 00000000000000009600000090010000bc020000
+  MultiHarvestScore: 0000000000000000960000002c010000f4010000
   GoalScore: 50
   GoalGold: 100
   ManaCollectorMaxMana: 100
