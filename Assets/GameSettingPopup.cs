@@ -9,10 +9,23 @@ public class GameSettingPopup : MonoBehaviour
     public Slider sfxSlider;
     public Slider bgmSlider;
 
+    [Header("Correction")]
+    public Toggle correctionMode;
+    [SerializeField] private GameSetting gameSetting;
+
     void OnEnable()
     {
-        sfxSlider.value = DataManager.playerData.sfxVolume;
         bgmSlider.value = DataManager.playerData.bgmVolume;
+        sfxSlider.value = DataManager.playerData.sfxVolume;
+
+        correctionMode.isOn = DataManager.playerData.isCorrectionMode;
+    }
+
+    public void SetBGMVolume(float ratio)
+    {
+        DataManager.playerData.bgmVolume = ratio;
+
+        GameManager.Instance.soundBGM.SetVolume(ratio);
     }
 
     public void SetSFXVolume(float ratio)
@@ -22,11 +35,23 @@ public class GameSettingPopup : MonoBehaviour
         GameManager.Instance.soundEffect.SetVolume(ratio);
     }
 
-    public void SetBGMVolume(float ratio)
+    public void SetCorrectionMode(bool isOn)
     {
-        DataManager.playerData.bgmVolume = ratio;
+        DataManager.playerData.isCorrectionMode = isOn;
 
-        GameManager.Instance.soundBGM.SetVolume(ratio);
+        // 하드 코딩 -> 바꿔야 함
+        if(isOn)
+        {
+            gameSetting.DistanceFromHand = 327f;
+            gameSetting.DistanceFromTetris_x = 0.47f;
+            gameSetting.DistanceFromTetris_y = 0.7f;
+        }
+        else
+        {
+            gameSetting.DistanceFromHand = 0f;
+            gameSetting.DistanceFromTetris_x = 0f;
+            gameSetting.DistanceFromTetris_y = 0f;
+        }
     }
 
 }
