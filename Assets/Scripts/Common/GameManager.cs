@@ -24,13 +24,12 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            DataManager.LoadGameData();
         }
         else if(Instance != this)
         {
             Destroy(gameObject);
         }
-
-        DataManager.LoadData();
     }
 
     void Start()
@@ -73,5 +72,11 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        Debug.Log("게임 종료");
+        DataManager.SavePlayerData();
     }
 }

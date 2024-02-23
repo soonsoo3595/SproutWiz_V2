@@ -34,6 +34,7 @@ public class SoundEffect : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         originVolume = audioSource.volume;
+        audioSource.volume = DataManager.playerData.sfxVolume;
     }
 
     private void Start()

@@ -167,8 +167,6 @@ public class RewardSystem : MonoBehaviour
                 }
             }
 
-            DataManager.playerData.gold += DataManager.GameData.DrawLineGold;
-
             Debug.Log("한붓그리기 레벨 : " + level + ", 점수 : " + DrawStrokeScore);
         }
         #endregion
@@ -182,8 +180,6 @@ public class RewardSystem : MonoBehaviour
             {
                 griffonScore = DataManager.skillLibrary.GetEffect(SkillType.HuntBird, level);
             }
-
-            DataManager.playerData.gold += DataManager.GameData.GriffonGold;
 
             Debug.Log("그리폰(새) 퇴치 레벨 : " + level + ", 퇴치 시 점수 : " + griffonScore);
         }
@@ -233,10 +229,12 @@ public class RewardSystem : MonoBehaviour
         if (type == EMinigameType.DrawLine)
         {
             plusScore = DrawStrokeScore[index];
+            AddGold(DataManager.GameData.DrawLineGold);
         }
         else if(type == EMinigameType.Griffon)
         {
             plusScore = (int)griffonScore;
+            AddGold(DataManager.GameData.GriffonGold);
         }
 
         AddScore(plusScore);

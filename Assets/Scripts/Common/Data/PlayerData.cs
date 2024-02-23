@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerData
 {
+    public string userName;   // 유저 이름
     public int totalScore;    // 누적 스코어
     public int bestScore;      // 최고 기록 스코어
 
@@ -20,16 +21,16 @@ public class PlayerData
     public List<int> skillLevels = new List<int>();
 
     // 환경 설정
-    public float totalVolume = 1.0f;
     public float bgmVolume = 1.0f;
     public float sfxVolume = 1.0f;
 
     public bool isCorrectionMode = false;
 
-    public bool isFirstPlay = true;
-    
-    public PlayerData()
+    public PlayerData(string nickname)
     {
+        userName = nickname;
+        PlayerPrefs.SetInt("FirstPlay", 0);
+
         totalScore = 0;
         bestScore = 0;
 

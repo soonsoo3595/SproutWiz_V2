@@ -17,6 +17,7 @@ public class SoundBGM : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         originVolume = audioSource.volume;
+        audioSource.volume = DataManager.playerData.bgmVolume;
     }
 
     private void OnEnable()
