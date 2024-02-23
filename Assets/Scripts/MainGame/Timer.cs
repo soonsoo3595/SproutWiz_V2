@@ -39,6 +39,7 @@ public class Timer : MonoBehaviour
         scedulMiniGame = new SortedDictionary<float, IMiniGame>();
 
         originVolume = audioSource.volume;
+        SetVolume(PlayerPrefs.GetFloat("SFXVolume"));
     }
 
     public void StartTimer()

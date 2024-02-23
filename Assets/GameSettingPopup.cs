@@ -15,22 +15,22 @@ public class GameSettingPopup : MonoBehaviour
 
     void OnEnable()
     {
-        bgmSlider.value = DataManager.playerData.bgmVolume;
-        sfxSlider.value = DataManager.playerData.sfxVolume;
+        bgmSlider.value = PlayerPrefs.GetFloat("BGMVolume", 1f);
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", 1f);
 
         correctionMode.isOn = DataManager.playerData.isCorrectionMode;
     }
 
     public void SetBGMVolume(float ratio)
     {
-        DataManager.playerData.bgmVolume = ratio;
+        PlayerPrefs.SetFloat("BGMVolume", ratio);
 
         GameManager.Instance.soundBGM.SetVolume(ratio);
     }
 
     public void SetSFXVolume(float ratio)
     {
-        DataManager.playerData.sfxVolume = ratio;
+        PlayerPrefs.SetFloat("SFXVolume", ratio);
 
         GameManager.Instance.soundEffect.SetVolume(ratio);
     }

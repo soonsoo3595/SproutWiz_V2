@@ -17,7 +17,11 @@ public class SoundBGM : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         originVolume = audioSource.volume;
-        audioSource.volume = DataManager.playerData.bgmVolume;
+    }
+
+    private void Start()
+    {
+        SetVolume(PlayerPrefs.GetFloat("BGMVolume", 1.0f));
     }
 
     private void OnEnable()

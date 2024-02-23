@@ -74,6 +74,8 @@ public class ManaCollector : MonoBehaviour
     {
         originVolume = audioSource.volume;
 
+        SetVolume(PlayerPrefs.GetFloat("SFXVolume"));
+
         #region 햇빛마법 시간
         {
             int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.Overclock);
