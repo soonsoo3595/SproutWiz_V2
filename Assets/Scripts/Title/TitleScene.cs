@@ -40,9 +40,6 @@ public class TitleScene : MonoBehaviour
         }
     }
 
-    private void ShowPopup() => registerPopup.SetActive(true);
-
-    private void HidePopup() => registerPopup.SetActive(false);
 
     public void CheckUserName()
     {
@@ -56,18 +53,23 @@ public class TitleScene : MonoBehaviour
 
         // 중복 검사
 
-        DataManager.playerData = new PlayerData(inputField.text);
+        DataManager.playerData.userName = inputField.text;
+        PlayerPrefs.SetInt("FirstPlay", 0);
 
         HidePopup();
         StartCoroutine(ReadyToStart());
     }
+
+    private void ShowPopup() => registerPopup.SetActive(true);
+
+    private void HidePopup() => registerPopup.SetActive(false);
 
     IEnumerator ReadyToStart()
     {
         logo.transform.position = start.position;
         logo.transform.DOMove(end.position, 1.0f).SetEase(Ease.OutBounce);
 
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
 
         guide.SetActive(true);
         guideTxt.DOFade(1.0f, 1.0f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);

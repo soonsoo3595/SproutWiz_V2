@@ -19,7 +19,6 @@ public class PlayerData
     public PlayerData(string nickname)
     {
         userName = nickname;
-        PlayerPrefs.SetInt("FirstPlay", 0);
 
         totalScore = 0;
         bestScore = 0;

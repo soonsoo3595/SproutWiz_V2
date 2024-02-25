@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            DataManager.LoadGameData();
+            LoadData();
         }
         else if(Instance != this)
         {
@@ -59,11 +59,7 @@ public class GameManager : MonoBehaviour
                 }
                 else if(sceneList.Peek() == SceneType.Town)
                 {
-#if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;
-#else
-                Application.Quit();
-#endif
+                    EventManager.exitGame?.Invoke();
                 }
                 else
                 {
@@ -77,6 +73,25 @@ public class GameManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         Debug.Log("게임 종료");
-        DataManager.SavePlayerData();
+
+        if(!isDebugMode)
+        {
+            DataManager.SavePlayerData();
+        }
+    }
+
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit();
+#endif
+    }
+
+    private void LoadData()
+    {
+        DataManager.LoadGameData();
+        DataManager.playerData = new PlayerData("Default");
     }
 }
