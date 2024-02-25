@@ -11,6 +11,8 @@ public class GameSettingPopup : MonoBehaviour
 
     [Header("Correction")]
     public Toggle correctionMode;
+    public GameObject modeOn;
+    public GameObject modeOff;
     [SerializeField] private GameSetting gameSetting;
 
     void OnEnable()
@@ -42,12 +44,14 @@ public class GameSettingPopup : MonoBehaviour
         // 하드 코딩 -> 바꿔야 함
         if(isOn)
         {
+            modeOn.SetActive(true); modeOff.SetActive(false);
             gameSetting.DistanceFromHand = 327f;
             gameSetting.DistanceFromTetris_x = 0.47f;
             gameSetting.DistanceFromTetris_y = 0.7f;
         }
         else
         {
+            modeOn.SetActive(false); modeOff.SetActive(true);
             gameSetting.DistanceFromHand = 0f;
             gameSetting.DistanceFromTetris_x = 0f;
             gameSetting.DistanceFromTetris_y = 0f;
