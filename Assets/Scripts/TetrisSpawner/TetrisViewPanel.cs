@@ -10,10 +10,13 @@ public class TetrisViewPanel : MonoBehaviour
 
     private PreViewSystem preViewSystem;
 
+    [SerializeField]
+    private bool isTutorial;
+
 
     private void Awake()
     {
-        preViewSystem = new PreViewSystem(ViewSlots.Count);
+        preViewSystem = new PreViewSystem(ViewSlots.Count, isTutorial);
         tetrisList = new List<Transform>();
     }
 
@@ -100,9 +103,18 @@ public class TetrisViewPanel : MonoBehaviour
 
     private Transform SpawnTetris()
     {
-        Transform newTetris = Instantiate(preViewSystem.GetRandomTetris());
-        StateSetting(newTetris.GetComponent<TetrisObject>());
-        Rotate(newTetris);
+        Transform newTetris;
+
+        if (isTutorial)
+        {
+            newTetris = Instantiate(preViewSystem.GetTutorialTetris());
+        }
+        else
+        {
+            newTetris = Instantiate(preViewSystem.GetRandomTetris());
+            StateSetting(newTetris.GetComponent<TetrisObject>());
+            Rotate(newTetris);
+        }
 
         return newTetris;
     }
@@ -146,7 +158,4 @@ public class TetrisViewPanel : MonoBehaviour
             Tetris.SetUnitState(unitNum, secondElement);
         }
     }
-
-    
-
 }

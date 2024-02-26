@@ -12,10 +12,18 @@ public class TetrisUnit : TileUnit
 
     Element element;
 
+    [SerializeField] ElementType ElementType;
+
+    private void Awake()
+    {
+        element = new Element(ElementType);
+    }
+
     private void Start()
     {
-        SetBlockSprite(false);
         unitSprite.transform.rotation = Quaternion.identity;
+
+        SetBlockSprite(false);
     }
 
     public void SetUnitState(Element element)
