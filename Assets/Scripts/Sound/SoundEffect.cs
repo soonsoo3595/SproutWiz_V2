@@ -38,6 +38,8 @@ public class SoundEffect : MonoBehaviour
 
     private void Start()
     {
+        SetVolume(PlayerPrefs.GetFloat("SFXVolume", 1.0f));
+
         Allocate();
     }
 

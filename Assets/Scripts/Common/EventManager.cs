@@ -48,6 +48,11 @@ public static class EventManager
     public static UpdateUI updateUI;
     #endregion
 
+    #region TownEvent
+    public delegate void ExitGame();
+    public static ExitGame exitGame;
+    #endregion
+
     public static void ClearMainGameEvents()
     {
         tileHarvest = null;

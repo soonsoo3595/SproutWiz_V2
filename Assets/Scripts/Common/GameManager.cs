@@ -24,13 +24,12 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            LoadData();
         }
         else if(Instance != this)
         {
             Destroy(gameObject);
         }
-
-        DataManager.LoadData();
     }
 
     void Start()
@@ -45,7 +44,7 @@ public class GameManager : MonoBehaviour
     {
         if(Input.GetKeyUp(KeyCode.Escape))
         {
-            if(BackMgr.instance != null && BackMgr.instance.st.Count > 0)
+            if(BackMgr.instance != null && BackMgr.instance.GetCount() > 0)
             {
                 BackMgr.instance.Pop();
             }
@@ -60,11 +59,7 @@ public class GameManager : MonoBehaviour
                 }
                 else if(sceneList.Peek() == SceneType.Town)
                 {
-#if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;
-#else
-                Application.Quit();
-#endif
+                    EventManager.exitGame?.Invoke();
                 }
                 else
                 {
@@ -73,5 +68,30 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        Debug.Log("게임 종료");
+
+        if(!isDebugMode)
+        {
+            DataManager.SavePlayerData();
+        }
+    }
+
+    public void ExitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit();
+#endif
+    }
+
+    private void LoadData()
+    {
+        DataManager.LoadGameData();
+        DataManager.playerData = new PlayerData("Default");
     }
 }

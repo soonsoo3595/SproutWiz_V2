@@ -6,7 +6,7 @@ public class BackMgr : MonoBehaviour
 {
     public static BackMgr instance;
 
-    public Stack<PopupBtn> st;
+    private Stack<PopupBtn> st;
     
     void Start()
     {
@@ -15,6 +15,11 @@ public class BackMgr : MonoBehaviour
             instance = this;
             st = new Stack<PopupBtn>();
         }
+    }
+
+    public int GetCount()
+    {
+        return st.Count;
     }
 
     public void Push(PopupBtn popup)
@@ -31,5 +36,10 @@ public class BackMgr : MonoBehaviour
             
             popup.BackClick();
         }
+    }
+
+    public void Clear()
+    {
+        st.Clear();
     }
 }

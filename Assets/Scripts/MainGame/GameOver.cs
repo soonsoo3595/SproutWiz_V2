@@ -110,6 +110,12 @@ public class GameOver : MonoBehaviour
 
     private void SaveRecord()
     {
+        DataManager.playerData.totalScore += score;
+        if(DataManager.playerData.bestScore < score)
+        {
+            DataManager.playerData.bestScore = score;
+        }
+
         DataManager.playerData.gold += gold;
     }
 }

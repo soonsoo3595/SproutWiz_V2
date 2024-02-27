@@ -362,5 +362,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundBGM: {fileID: 5805772894834119630}
   soundEffect: {fileID: 9166353071790148512}
-  isDebugMode: 1
+  isDebugMode: 0
   debugGold: 10000

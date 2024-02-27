@@ -30,6 +30,7 @@ public class MainGame : MonoBehaviour
     public GameRecord gameRecord;
 
     [Header("Status")]
+    public bool isStart = false;
     public bool isPaused = false;
     public bool isGameOver = false;
     public bool isMagicOn = false;
@@ -45,6 +46,28 @@ public class MainGame : MonoBehaviour
         GameStart();
     }
 
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            if (!isPaused && !isGameOver)
+            {
+                Pause();
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!isPaused && !isGameOver)
+            {
+                Pause();
+            }
+        }
+    }
+
     public void GameStart()
     {
         isGameOver = false;
@@ -55,6 +78,7 @@ public class MainGame : MonoBehaviour
     {
         GameManager.Instance.soundEffect.PlayOneShotSoundEffect("gameover");
 
+        isStart = false;
         isGameOver = true;
 
         gameOverPopup.SetActive(true);
@@ -112,6 +136,7 @@ public class MainGame : MonoBehaviour
             blind.SetActive(false);
         }
 
+        isStart = true;
         timer.StartTimer();
         castingCancel.ChargeStart();
         goalSystem.UpdateContainer();
@@ -119,6 +144,9 @@ public class MainGame : MonoBehaviour
 
     private void Pause()
     {
+        if (!isStart)
+            return;
+
         isPaused = true;
         pausePopup.SetActive(true);
 
