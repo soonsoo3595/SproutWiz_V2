@@ -17,4 +17,7 @@ public interface IMiniGame
     void Exit();
 
     float GetNextExcuteTime();
+
+    // 튜토리얼 실행
+    void ExcuteTutorial();
 }

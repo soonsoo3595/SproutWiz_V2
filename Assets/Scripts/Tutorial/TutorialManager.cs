@@ -6,6 +6,7 @@ public class TutorialManager : MonoBehaviour
 {
     [SerializeField] Transform UI;
     [SerializeField] GridSystemVisual GridSystemVisual;
+    [SerializeField] TutorialBlind tutorialBlind;
 
     private int TutorialOrder;
     private int TetrisOrder;
@@ -41,10 +42,13 @@ public class TutorialManager : MonoBehaviour
         if(TutorialOrder == 0)
         {
             UI.GetComponent<TutorialUI>().ShowTimeAndBlockGuide();
+
+            tutorialBlind.ShowObject(0);
         }
         else if(TutorialOrder == 1)
         {
-            UI.GetComponent<TutorialUI>().DisableButton();
+            UI.GetComponent<TutorialUI>().DisableBackground();
+            tutorialBlind.HideObject(0);
 
             ResetDeployable();
             EnableTargetGrid();
@@ -55,22 +59,63 @@ public class TutorialManager : MonoBehaviour
         }
         else if(TutorialOrder == 3)
         {
-            EnableTargetGrid();
-
-            UI.GetComponent<TutorialUI>().ShowTextBox();
+            // 수확 설명
+            UI.GetComponent<TutorialUI>().ShowTextBox(0);
         }
         else if(TutorialOrder == 4)
         {
-            UI.GetComponent<TutorialUI>().DisableButton();
+            UI.GetComponent<TutorialUI>().DisableBackground();
 
             EnableTargetGrid();
         }
         else if(TutorialOrder == 5)
         {
+            // 잠금 설명
+            UI.GetComponent<TutorialUI>().ShowTextBox(1);
+        }
+        else if(TutorialOrder == 6)
+        {
+            // 리롤 설명
+            UI.GetComponent<TutorialUI>().ShowTextBox(3);
+            tutorialBlind.ShowObject(1);
+        }
+        else if(TutorialOrder == 7)
+        {
+            UI.GetComponent<TutorialUI>().DisableBackground();
+            EnableTargetGrid();
+
+            tutorialBlind.HideObject(1);
+        }
+        else if(TutorialOrder == 8)
+        { 
+            // 마나맥 실행
+            MiniGameController.Instance.ExecuteTutorialMinigame(EMinigameType.DrawLine);
+
+            UI.GetComponent<TutorialUI>().ShowTextBox(4);
+        }
+        else if(TutorialOrder == 9)
+        {
+            UI.GetComponent<TutorialUI>().DisableBackground();
+        }
+        else if (TutorialOrder == 10)
+        {
+            UI.GetComponent<TutorialUI>().ShowTextBox(5);
+
+            // 그리폰 실행
+            MiniGameController.Instance.ExecuteTutorialMinigame(EMinigameType.Griffon);
+            UI.GetComponent<TutorialUI>().ShowTextBox(5);
 
         }
+        else if (TutorialOrder == 11)
+        {
+            UI.GetComponent<TutorialUI>().DisableBackground();
+        }
+        else if (TutorialOrder == 12)
+        {
+            UI.GetComponent<TutorialUI>().ShowTextBox(6);
+        }
 
-        TutorialOrder++;
+            TutorialOrder++;
     }
 
     private void EnableTargetGrid()
