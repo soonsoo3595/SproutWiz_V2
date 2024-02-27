@@ -32,9 +32,9 @@ public class PopupBtn : MonoBehaviour
             popup.SetActive(false);
             back.SetActive(false);
 
-            if (BackMgr.instance.st.Count > 0)
+            if (BackMgr.instance.GetCount() > 0)
             {
-                BackMgr.instance.st.Pop();
+                BackMgr.instance.Pop();
             }
         }
         

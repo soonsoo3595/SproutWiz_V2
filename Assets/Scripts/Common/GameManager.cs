@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     {
         if(Input.GetKeyUp(KeyCode.Escape))
         {
-            if(BackMgr.instance != null && BackMgr.instance.st.Count > 0)
+            if(BackMgr.instance != null && BackMgr.instance.GetCount() > 0)
             {
                 BackMgr.instance.Pop();
             }

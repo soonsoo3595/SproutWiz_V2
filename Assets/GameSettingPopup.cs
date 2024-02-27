@@ -23,6 +23,11 @@ public class GameSettingPopup : MonoBehaviour
         correctionMode.isOn = DataManager.playerData.isCorrectionMode;
     }
 
+    private void Start()
+    {
+        SetCorrectionMode(correctionMode.isOn);
+    }
+
     public void SetBGMVolume(float ratio)
     {
         PlayerPrefs.SetFloat("BGMVolume", ratio);
