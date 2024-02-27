@@ -15,6 +15,8 @@ public class GridSystemVisual : MonoBehaviour
     readonly private Color DefualtOutLineColor = Color.white;
     readonly private Color DisadvantageTileColor = new Color(0.5f, 0.6f, 0.55f);
 
+    [SerializeField] TutorialManager tutorialManager;
+
     private void Start()
     {
         tileVisuals = new Transform[GridManager.Instance.GetWidth(), GridManager.Instance.GetHeight()];
@@ -51,6 +53,19 @@ public class GridSystemVisual : MonoBehaviour
         }
 
         ChangeSprite(position);
+
+        // Æ©Åä¸®¾ó.
+        if (tutorialManager)
+        {
+            SetBlinking(false, position);
+
+            Element element = GridManager.Instance.GetTileData(position).GetElement();
+
+            if (element.GetElementType() == ElementType.None)
+            {
+                tutorialManager.DisableDeployable(position);
+            }
+        }
     }
 
     private void UpdataAllVisuals()
@@ -245,5 +260,13 @@ public class GridSystemVisual : MonoBehaviour
        
 
         return result;
+    }
+
+
+    public void SetBlinking(bool blink, GridPosition position)
+    {
+        GridTileVisual visual = tileVisuals[position.x, position.y].GetComponent<GridTileVisual>();
+
+        visual.SetActiveBlink(blink);
     }
 }

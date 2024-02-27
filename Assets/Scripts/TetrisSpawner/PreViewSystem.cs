@@ -12,19 +12,32 @@ public class PreViewSystem
     private int[] countSpanwNum;
     private int[] countSpanwType;
 
-    public PreViewSystem(int slotNum)
+    private int TutorialOrder;
+
+    public PreViewSystem(int slotNum, bool isTutorial)
     {
         this.slotNum = slotNum;
         countSpanwNum = new int[4];
         countSpanwType = new int[8];
 
-        LoadPrefabs();
+        TutorialOrder = 0;
+
+        LoadPrefabs(isTutorial);
     }
 
-    private void LoadPrefabs()
+    private void LoadPrefabs(bool isTutorial)
     {
-        string path = "Prefabs/Tetris/";
+        string path;
 
+        if (isTutorial)
+        {
+            path = "Prefabs/TutorialTetris/";
+        }
+        else
+        {
+            path = "Prefabs/Tetris/";
+        }
+        
         TetrisPrefabs = Resources.LoadAll<Transform>(path);
         tetrisVariantCount = TetrisPrefabs.Length;
 
@@ -53,6 +66,15 @@ public class PreViewSystem
 
         countSpanwType[7]++;
         return TetrisPrefabs[Random.Range(0, tetrisVariantCount)];
+    }
+
+    public Transform GetTutorialTetris() 
+    {
+        Transform tetrisPrefabs = TetrisPrefabs[TutorialOrder];
+
+        TutorialOrder++;
+
+        return tetrisPrefabs;
     }
 
     public Element GetRandomElement()

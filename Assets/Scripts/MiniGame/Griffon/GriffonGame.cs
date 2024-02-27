@@ -134,6 +134,9 @@ public class GriffonGame : MonoBehaviour, IMiniGame
 
     public void PlayEffect()
     {
+        if (griffonObject == null)
+            return;
+
         Vector3 pos = griffonObject.transform.position;
         pos.z = 94;
 
@@ -146,5 +149,18 @@ public class GriffonGame : MonoBehaviour, IMiniGame
             particleObject.transform.position = pos;
             particleObject.GetComponent<ParticleSystem>().Play();
         }
+    }
+
+    public void ExcuteTutorial()
+    {
+        Debug.Log("튜토리얼 그리폰 실행!");
+
+        Excute();
+        Excute();
+    }
+
+    public void TutorialSuccess()
+    {
+
     }
 }

@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.Collections.AllocatorManager;
 
 public class GridTileVisual : MonoBehaviour
 {
@@ -11,9 +12,12 @@ public class GridTileVisual : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private GridTileEffecter effectObject;
 
+    [SerializeField] private Transform blink;
+
     SpriteRenderer tileSprite;
     SpriteRenderer cropSprite;
     SpriteRenderer outLineSprite;
+    SpriteRenderer blinkSprite;
 
     Animator CropAnim;
 
@@ -22,6 +26,7 @@ public class GridTileVisual : MonoBehaviour
         tileSprite = tileVisual.GetComponent<SpriteRenderer>();
         cropSprite = cropVisual.GetComponent<SpriteRenderer>();
         outLineSprite = outLine.GetComponent<SpriteRenderer>();
+        blinkSprite = blink.GetComponent<SpriteRenderer>();
 
         CropAnim = cropSprite.GetComponent<Animator>();
     }
@@ -61,6 +66,20 @@ public class GridTileVisual : MonoBehaviour
         outLineSprite.color = color;
     }
 
+
+    public void SetActiveBlink(bool isActive)
+    {
+        blink.gameObject.SetActive(isActive);
+
+        Color color = blinkSprite.color;
+        color.a = 1f;
+        blinkSprite.color = color;
+
+        if (isActive)
+        {
+            blinkSprite.DOFade(0.2f, 1).SetLoops(-1, LoopType.Yoyo);
+        }
+    }
 
     
     // trigger로 함수이름변경 필요.

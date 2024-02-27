@@ -126,7 +126,7 @@ public class Timer : MonoBehaviour
         if (!scedulMiniGame.ContainsKey(time))
         {
             scedulMiniGame.Add(time, game);
-            Debug.Log($"미니게임 예약 / 시간: {time}, 종류 : {game}");
+            Debug.Log($"미니게임 예약 / 현재시간: {runnigTime}, 예약시간: {time}, 종류 : {game}");
         }
         else
         {

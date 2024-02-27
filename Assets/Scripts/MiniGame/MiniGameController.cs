@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MiniGameController : MonoBehaviour
@@ -9,6 +10,8 @@ public class MiniGameController : MonoBehaviour
     [SerializeField] DrawLineGame drawLineGame;
     [SerializeField] GriffonGame griffonGame;
     [SerializeField] Timer Timer;
+
+    [SerializeField] TutorialManager tutorialManager;
 
     private void Awake()
     {
@@ -33,10 +36,28 @@ public class MiniGameController : MonoBehaviour
         }    
 
         miniGame.Excute();
-
+       
         // TODO: 상수 추출 필요.
         if(miniGame as DrawLineGame != null)
             StartCoroutine(ExitMiniGameAfter(miniGame, 5f));
+    }
+
+    public void ExecuteTutorialMinigame(EMinigameType type)
+    {
+        if (tutorialManager == null)
+            return;
+
+        switch (type)
+        {
+            case EMinigameType.DrawLine:
+                drawLineGame.ExcuteTutorial();
+                break;
+            case EMinigameType.Griffon:
+                griffonGame.ExcuteTutorial();
+                break;
+            default:
+                break;
+        }
     }
 
     IEnumerator ExitMiniGameAfter(IMiniGame miniGame, float delay)
@@ -52,6 +73,12 @@ public class MiniGameController : MonoBehaviour
             return;
 
         miniGame.Exit();
+
+        if (tutorialManager != null)
+        {
+            tutorialManager.ProceedStep();
+            return;
+        }
 
         Timer.ScheduleGame(miniGame.GetNextExcuteTime() + Timer.GetRunTime(), miniGame);
     }

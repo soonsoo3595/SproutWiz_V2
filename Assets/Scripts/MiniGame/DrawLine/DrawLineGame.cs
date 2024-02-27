@@ -96,12 +96,21 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
         Debug.Log($"pathLength = {pathLength}");
         Debug.Log($"startPoint = {startGridPosition.x}, {startGridPosition.y}");
 
+        MakePath();
+
+        SpawnPointObject();
+
+        isRunnig = true;
+    }
+
+    private void MakePath()
+    {
         for (int j = 1; j < pathLength; j++)
         {
             GridPosition preGridPosition = pathPointPositions[pathPointPositions.Count - 1];
 
             List<GridPosition> validPositions = new List<GridPosition>();
-            
+
             // 4방향 중 유효한 블록이 몇 개인지 체크
             for (int i = 0; i < 4; i++)
             {
@@ -132,22 +141,23 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
 
             //Debug.Log($"{j}번째 선택된 좌표 = {validPositions[randomDirection].x}, {validPositions[randomDirection].y}");
         }
+    }
 
-        for(int i = 1; i < pathPointPositions.Count; i++)
+    private void SpawnPointObject()
+    {
+        for (int i = 1; i < pathPointPositions.Count; i++)
         {
             Vector3 spawnPointWorldPos = GridManager.Instance.GetWorldPosition(pathPointPositions[i]);
             spawnPointWorldPos.z = 10;
 
             drawPointsObject[i] = Instantiate(midPointPrefab, spawnPointWorldPos, Quaternion.identity, CanvasWorldSpace);
-            
+
             DrawPoint drawPoint = drawPointsObject[i].GetComponent<DrawPoint>();
             drawPoint.DrawLine(pathPointPositions[i - 1], pathPointPositions[i]);
             drawPoint.SetMaster(this);
 
             //Debug.Log($"MidPoint : {pathPointPositions[i]}");
         }
-
-        isRunnig = true;
     }
 
     private GridPosition SelectStartPoint()
@@ -285,6 +295,8 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
         }
 
         isRunnig = false;
+
+  
     }
 
     public void Activate(float activateTime)
@@ -334,4 +346,31 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
         MiniGameController.Instance.ExitMiniGame(this);
     }
 
+    public void ExcuteTutorial()
+    {
+        Debug.Log("튜토리얼 한 붓 그리기 실행!");
+
+        pathLength = 4;
+        pathPointPositions = new List<GridPosition>();
+        drawPointsObject = new Transform[pathLength];
+
+        GridPosition startGridPosition = new GridPosition(1, 4);
+        Vector3 startPointWorldPos = GridManager.Instance.GetWorldPosition(startGridPosition);
+        startPointWorldPos.z = 10;
+
+        pathPointPositions.Add(startGridPosition);
+
+        drawPointsObject[0] = Instantiate(startPointPrefab, startPointWorldPos, Quaternion.identity, CanvasWorldSpace);
+        StartPoint startPoint = drawPointsObject[0].GetComponent<StartPoint>();
+        startPoint.SetMaster(this);
+
+        // MakePath
+        pathPointPositions.Add(new GridPosition(1, 3));
+        pathPointPositions.Add(new GridPosition(2, 3));
+        pathPointPositions.Add(new GridPosition(3, 3));
+
+        SpawnPointObject();
+
+        isRunnig = true;
+    }
 }
