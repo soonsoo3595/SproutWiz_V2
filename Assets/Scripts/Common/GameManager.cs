@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     public bool isDebugMode;
     public int debugGold;
 
+    [Header("For Tutorial")]
+    public bool isTutorial;
+
     void Awake()
     {
         if (Instance == null)

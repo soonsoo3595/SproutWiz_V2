@@ -22735,6 +22735,7 @@ MonoBehaviour:
   manaCollector: {fileID: 128066105}
   castingCancel: {fileID: 760861623}
   gameRecord: {fileID: 371425300}
+  isStart: 0
   isPaused: 0
   isGameOver: 0
   isMagicOn: 0
@@ -57849,6 +57850,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1293361619694493854, guid: 5aed305e16db9774d84f533e4e81b0bb, type: 3}
+      propertyPath: isTutorial
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2391678858265590559, guid: 5aed305e16db9774d84f533e4e81b0bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.8821158

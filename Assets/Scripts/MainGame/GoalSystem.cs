@@ -35,6 +35,12 @@ public class GoalSystem : MonoBehaviour
         totalGoalCount = 0;
         goalList = goalMaker.GetGoalList();
 
+        //튜토리얼 목표.
+        if(GameManager.Instance.isTutorial)
+        {
+            goalList = goalMaker.GetTutorialGoalList();
+        }
+
         for (int i = 0; i < goalList.Count; i++)
         {
             if (goalList[i].count == 0) continue;
@@ -69,6 +75,13 @@ public class GoalSystem : MonoBehaviour
         if (!isClear || isWaiting) return;
 
         GameManager.Instance.soundEffect.PlayOneShotSoundEffect("clearGoal");
+
+        // 튜토리얼에서는 다음 목표 진행이 없음.
+        if (GameManager.Instance.isTutorial)
+        {
+            mainGame.rewardSystem.AddScore(1000);
+            return;
+        }
 
         EventManager.recordUpdate(RecordType.ClearGoal);
         GetRewards();

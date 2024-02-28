@@ -76,6 +76,15 @@ public class GoalMaker : MonoBehaviour
         return goalList;
     }
 
+    public List<Goal> GetTutorialGoalList()
+    {
+        goalList[0].count = 0;
+        goalList[1].count = 1;
+        goalList[2].count = 0;
+
+        return goalList;
+    }
+
     public void NextStage()
     {
         currentStage++;

@@ -137,7 +137,12 @@ public class MainGame : MonoBehaviour
         }
 
         isStart = true;
-        timer.StartTimer();
+
+        if(!GameManager.Instance.isTutorial)
+        {
+            timer.StartTimer();
+        }
+
         castingCancel.ChargeStart();
         goalSystem.UpdateContainer();
     }
