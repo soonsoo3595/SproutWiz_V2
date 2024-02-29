@@ -60,6 +60,12 @@ public class TitleScene : MonoBehaviour
         StartCoroutine(ReadyToStart());
     }
 
+    public void InitData()
+    {
+        PlayerPrefs.DeleteAll();
+        GameManager.Instance.ExitGame();
+    }
+
     private void ShowPopup() => registerPopup.SetActive(true);
 
     private void HidePopup() => registerPopup.SetActive(false);

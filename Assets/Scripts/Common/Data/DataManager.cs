@@ -42,4 +42,5 @@ public static class DataManager
         var jsonString = JsonConvert.SerializeObject(playerData);
         File.WriteAllText(Application.persistentDataPath + "/PlayerData.json", jsonString);
     }
+
 }
