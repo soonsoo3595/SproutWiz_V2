@@ -30,14 +30,12 @@ public enum SkillType
     MultiHarvest,
     GoalReward,
     DrawLine,
-    CarvingStone,
     HuntBird,
     MiniGameGoldReward,
     ScrollMastery,
     ManaEfficiency,
     Overclock,
-    SunshineMagicMastery,
-    EquipMastery
+    SunshineMagicMastery
 }
 
 public enum EMinigameType

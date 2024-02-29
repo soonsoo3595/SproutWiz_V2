@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 235e6d71277dbb84fab07c1e876c2efd, type: 3}
-  m_Name: 4 Skill_CarvingStone
+  m_Name: 9 Skill_SunshineMagicMastery
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 1e079d6d14517f84d9c7159d8084cd68, type: 3}
-  category: 1
-  type: 4
-  title: "\uB3CC \uAE4E\uAE30 \uC7A5\uC778"
-  preDesc: "\uBBF8\uB2C8\uAC8C\uC784 '\uC6B4\uC11D \uC81C\uAC70' \uC131\uACF5 \uC2DC
-    \uC810\uC218"
-  sufDesc: "\uC810 \uC99D\uAC00"
+  category: 2
+  type: 9
+  title: "\uD587\uBE5B \uB9C8\uBC95 \uB9C8\uC2A4\uD130\uB9AC"
+  preDesc: "\uB9C8\uB098 \uC751\uC9D1\uAE30\uC758 \uD587\uBE5B \uB9C8\uBC95 \uD65C\uC131\uD654
+    \uC2DC \uC99D\uAC00\uD558\uB294 \uC810\uC218 "
+  sufDesc: "\uBC30\uB85C \uC99D\uAC00"
   effectList:
   - effect:
-    - 100
-    - 200
-    - 350
-    - 500
-    - 700
-  costs: b0040000140500004006000008070000d0070000
+    - 2.2
+    - 2.4
+    - 2.6
+    - 2.8
+    - 3
+  costs: 20030000b004000040060000d007000060090000

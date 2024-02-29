@@ -10,20 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 235e6d71277dbb84fab07c1e876c2efd, type: 3}
-  m_Name: 8 Skill_ManaEfficiency
+  m_Name: 5 Skill_MiniGameGoldReward
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 1e079d6d14517f84d9c7159d8084cd68, type: 3}
-  category: 2
-  type: 8
-  title: "\uB9C8\uB098 \uD6A8\uC728 \uAC1C\uC120"
-  preDesc: "\uB9C8\uB098 \uC751\uC9D1\uAE30 \uD65C\uC131\uD654\uB97C \uC704\uD55C
-    \uC694\uAD6C \uC2A4\uD0DD"
-  sufDesc: " \uAC10\uC18C"
+  category: 1
+  type: 5
+  title: "\uD2F0\uB04C \uBAA8\uC544 \uD0DC\uC0B0"
+  preDesc: "\uBBF8\uB2C8\uAC8C\uC784 \uC131\uACF5 \uC2DC \uD68D\uB4DD \uACE8\uB4DC"
+  sufDesc: "% \uC99D\uAC00"
   effectList:
   - effect:
-    - 2
-    - 3
-    - 4
-    - 5
-    - 6
-  costs: 58020000bc0200002003000084030000e8030000
+    - 0.1
+    - 0.15
+    - 0.2
+    - 0.25
+    - 0.3
+  costs: e8030000dc050000d0070000c4090000b80b0000

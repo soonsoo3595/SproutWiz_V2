@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 235e6d71277dbb84fab07c1e876c2efd, type: 3}
-  m_Name: 9 Skill_Overclock
+  m_Name: 4 Skill_HuntBird
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 1e079d6d14517f84d9c7159d8084cd68, type: 3}
-  category: 2
-  type: 9
-  title: "\uC624\uBC84\uD074\uB7ED"
-  preDesc: "\uB9C8\uB098 \uC751\uC9D1\uAE30\uC758 \uD587\uBE5B \uC9C0\uC18D\uC2DC\uAC04 "
-  sufDesc: "\uCD08 \uC99D\uAC00"
+  category: 1
+  type: 4
+  title: "\uC0C8 \uD1F4\uCE58 \uC804\uBB38\uAC00"
+  preDesc: "\uBBF8\uB2C8\uAC8C\uC784 '\uADF8\uB9AC\uD540 \uD1F4\uCE58' \uC131\uACF5
+    \uC2DC \uC810\uC218"
+  sufDesc: "\uC810 \uC99D\uAC00"
   effectList:
   - effect:
-    - 1
-    - 2
-    - 3
-    - 4
-    - 5
-  costs: bc020000e80300007805000008070000fc080000
+    - 50
+    - 80
+    - 110
+    - 150
+    - 200
+  costs: 4c0400001405000040060000d0070000c4090000

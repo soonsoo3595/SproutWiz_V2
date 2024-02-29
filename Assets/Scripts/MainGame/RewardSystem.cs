@@ -33,6 +33,7 @@ public class RewardSystem : MonoBehaviour
     // 미니게임 점수
     private float griffonScore;
     private List<int> DrawStrokeScore = new List<int> { 0, 0, 0 };
+    private float miniGameGoldBonus = 1f;
 
     private CinemachineImpulseSource impulseSource;
 
@@ -184,7 +185,19 @@ public class RewardSystem : MonoBehaviour
             Debug.Log("그리폰(새) 퇴치 레벨 : " + level + ", 퇴치 시 점수 : " + griffonScore);
         }
         #endregion
-       
+
+        #region 미니게임 골드 보너스
+        {
+            int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.MiniGameGoldReward);
+
+            if(level != 0)
+            {
+                miniGameGoldBonus += DataManager.skillLibrary.GetEffect(SkillType.MiniGameGoldReward, level);
+            }
+
+            Debug.Log("미니게임 성공 시 골드 증가량 획득 : " + level + ", 몇 % : " + miniGameGoldBonus);
+        }
+        #endregion
     }
 
 
@@ -223,20 +236,22 @@ public class RewardSystem : MonoBehaviour
     public void RewardMiniGame(EMinigameType type, int index)
     {
         int plusScore = 0;
+        int plusGold = 0;
 
         Debug.Log($"인자 index: {index}");
 
         if (type == EMinigameType.DrawLine)
         {
             plusScore = DrawStrokeScore[index];
-            AddGold(DataManager.GameData.DrawLineGold);
+            plusGold = DataManager.GameData.DrawLineGold;
         }
         else if(type == EMinigameType.Griffon)
         {
             plusScore = (int)griffonScore;
-            AddGold(DataManager.GameData.GriffonGold);
+            plusGold = DataManager.GameData.GriffonGold;
         }
 
         AddScore(plusScore);
+        AddGold((int)(plusGold * miniGameGoldBonus));
     }
 }

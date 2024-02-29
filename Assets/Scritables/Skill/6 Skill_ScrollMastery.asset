@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 235e6d71277dbb84fab07c1e876c2efd, type: 3}
-  m_Name: 6 Skill_MiniGameGoldReward
+  m_Name: 6 Skill_ScrollMastery
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 1e079d6d14517f84d9c7159d8084cd68, type: 3}
-  category: 1
+  category: 2
   type: 6
-  title: "\uD2F0\uB04C \uBAA8\uC544 \uD0DC\uC0B0"
-  preDesc: "\uBBF8\uB2C8\uAC8C\uC784 \uC131\uACF5 \uC2DC \uD68D\uB4DD \uACE8\uB4DC"
-  sufDesc: "% \uC99D\uAC00"
+  title: "\uC2A4\uD06C\uB864 \uB9C8\uC2A4\uD130\uB9AC"
+  preDesc: "\uCE90\uC2A4\uD305 \uCDE8\uC18C\uC758 \uC7AC\uC0AC\uC6A9 \uB300\uAE30\uC2DC\uAC04"
+  sufDesc: "\uCD08 \uAC10\uC18C"
   effectList:
   - effect:
-    - 0.1
-    - 0.15
-    - 0.2
-    - 0.25
-    - 0.3
-  costs: e8030000dc050000d0070000c4090000b80b0000
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+  costs: 5802000020030000e8030000b0040000dc050000
