@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
     [SerializeField] Transform UI;
     [SerializeField] GridSystemVisual GridSystemVisual;
     [SerializeField] TutorialBlind tutorialBlind;
+
+    [SerializeField] GameObject bottomBlind;
+
+    [SerializeField] Button CastingButton;
+    [SerializeField] SpawnBox spawnBox;
 
     private int TutorialOrder;
     private int TetrisOrder;
@@ -36,86 +42,124 @@ public class TutorialManager : MonoBehaviour
     public void ProceedStep()
     {
         // 다른 기능 터치효과 막아야함.
-
         Debug.Log($"튜토리얼 번호 : {TutorialOrder}");
 
-        if(TutorialOrder == 0)
-        {
-            UI.GetComponent<TutorialUI>().ShowTimeAndBlockGuide();
+        TutorialUI tutorialUI = UI.GetComponent<TutorialUI>();
 
+        if (TutorialOrder == 0)
+        {
+            // 제한시간, 스크롤 설명
+            tutorialUI.ShowTimeAndBlockGuide(true);
+
+            tutorialUI.ActiveBackground(true);
             tutorialBlind.ShowObject(0);
+
+            CastingButton.enabled = false;
+            spawnBox.enabled = false;
         }
         else if(TutorialOrder == 1)
         {
-            UI.GetComponent<TutorialUI>().DisableBackground();
-            tutorialBlind.HideObject(0);
+            // 목표 설명
+            tutorialUI.ShowTimeAndBlockGuide(false);
 
-            ResetDeployable();
-            EnableTargetGrid();
+            tutorialBlind.HideObject(0);
+            tutorialBlind.ShowObject(2);
         }
         else if(TutorialOrder == 2)
         {
+            // 드레그 설명
+            tutorialBlind.HideObject(2);
+
+            tutorialUI.ActiveBackground(false);
+            tutorialUI.EnableDragText(true);
+
+            ResetDeployable();
             EnableTargetGrid();
+
+            spawnBox.enabled = true;
         }
         else if(TutorialOrder == 3)
         {
-            // 수확 설명
-            UI.GetComponent<TutorialUI>().ShowTextBox(0);
+            tutorialUI.DisableUI();
+
+            tutorialUI.EnableDragText(false);
+            EnableTargetGrid();
         }
         else if(TutorialOrder == 4)
         {
-            UI.GetComponent<TutorialUI>().DisableBackground();
-
-            EnableTargetGrid();
+            // 수확 설명
+            tutorialUI.ShowTextBox(0);
+            tutorialUI.ActiveBackground(true);
         }
         else if(TutorialOrder == 5)
         {
-            // 잠금 설명
-            UI.GetComponent<TutorialUI>().ShowTextBox(1);
+            tutorialUI.DisableUI();
+
+            EnableTargetGrid();
         }
         else if(TutorialOrder == 6)
         {
-            // 리롤 설명
-            UI.GetComponent<TutorialUI>().ShowTextBox(3);
-            tutorialBlind.ShowObject(1);
+            // 잠금 설명
+            tutorialUI.ShowTextBox(1);
         }
         else if(TutorialOrder == 7)
         {
-            UI.GetComponent<TutorialUI>().DisableBackground();
-            EnableTargetGrid();
-
-            tutorialBlind.HideObject(1);
+            // 리롤 설명
+            tutorialUI.ShowTextBox(3);
+            tutorialBlind.ShowObject(1);
         }
         else if(TutorialOrder == 8)
-        { 
-            // 마나맥 실행
-            MiniGameController.Instance.ExecuteTutorialMinigame(EMinigameType.DrawLine);
+        {
+            // 리롤 유도
+            tutorialUI.EnableRerollText(true);
+            tutorialBlind.HideObject(1);
 
-            UI.GetComponent<TutorialUI>().ShowTextBox(4);
+            tutorialUI.HideTextBox();
+            tutorialUI.ActiveBackground(false);
+            tutorialUI.ActivateButton(false);
+
+            CastingButton.enabled = true;
         }
         else if(TutorialOrder == 9)
         {
-            UI.GetComponent<TutorialUI>().DisableBackground();
+            tutorialUI.DisableUI();
+            tutorialUI.ActiveBackground(true);
+            tutorialUI.EnableRerollText(false);
+            EnableTargetGrid();
+
+            CastingButton.enabled = false;
         }
         else if (TutorialOrder == 10)
         {
-            UI.GetComponent<TutorialUI>().ShowTextBox(5);
+            // 마나맥 실행
+            MiniGameController.Instance.ExecuteTutorialMinigame(EMinigameType.DrawLine);
 
-            // 그리폰 실행
-            MiniGameController.Instance.ExecuteTutorialMinigame(EMinigameType.Griffon);
-            UI.GetComponent<TutorialUI>().ShowTextBox(5);
-
+            tutorialUI.ShowTextBox(4);
         }
         else if (TutorialOrder == 11)
         {
-            UI.GetComponent<TutorialUI>().DisableBackground();
+            tutorialUI.DisableUI();
+
+            spawnBox.enabled = false;
         }
         else if (TutorialOrder == 12)
         {
-            UI.GetComponent<TutorialUI>().ShowTextBox(6);
+            tutorialUI.ShowTextBox(5);
+
+            // 그리폰 실행
+            MiniGameController.Instance.ExecuteTutorialMinigame(EMinigameType.Griffon);
+            tutorialUI.ShowTextBox(5);
+        }
+        else if (TutorialOrder == 13)
+        {
+            tutorialUI.DisableUI();
+        }
+        else if(TutorialOrder == 14)
+        {
+            tutorialUI.ShowTextBox(6);
         }
 
-            TutorialOrder++;
+        TutorialOrder++;
     }
 
     private void EnableTargetGrid()
@@ -151,5 +195,13 @@ public class TutorialManager : MonoBehaviour
     private void ApplyTetris(TetrisObject tetrisObject)
     {
         ProceedStep();
+    }
+
+    public void ClickCastingCancel()
+    {
+        if(TutorialOrder == 9)
+        {
+            ProceedStep();
+        }
     }
 }

@@ -8,10 +8,14 @@ public class TutorialUI : MonoBehaviour
 {
     [SerializeField] TutorialManager tutorialManager;
 
+    [SerializeField] GameObject backGround;
+
     [SerializeField] GameObject topText;
     [SerializeField] GameObject middleText;
     [SerializeField] GameObject bottomText;
     [SerializeField] GameObject TextBox;
+    [SerializeField] GameObject DragText;
+    [SerializeField] GameObject rerollText;
 
     private Button button;
 
@@ -30,27 +34,49 @@ public class TutorialUI : MonoBehaviour
         tutorialManager.ProceedStep();
     }
 
-    public void EnableBackground()
+    public void EnableUI()
     {
         button.gameObject.SetActive(true);
     }
 
-    public void DisableBackground()
+    public void DisableUI()
     {
         button.gameObject.SetActive(false);
     }
 
-    public void ShowTimeAndBlockGuide()
+    public void ActivateButton(bool param)
+    {
+        button.enabled = param;
+    }
+
+    public void ActiveBackground(bool param)
+    {
+        backGround.SetActive(param);
+    }
+
+    public void ShowTimeAndBlockGuide(bool param)
     {
         middleText.SetActive(false);
 
-        topText.SetActive(true);
-        bottomText.SetActive(true);
+        topText.SetActive(param);
+        bottomText.SetActive(param);
+    }
+
+    public void EnableDragText(bool param)
+    {
+        DragText.SetActive(param);
+    }
+
+    public void EnableRerollText(bool param)
+    {
+        rerollText.SetActive(param);
     }
 
     public void ShowTextBox(int index)
     {
-        EnableBackground();
+        EnableUI();
+
+        ActivateButton(true);
 
         middleText.SetActive(false);
         topText.SetActive(false);
@@ -85,5 +111,10 @@ public class TutorialUI : MonoBehaviour
         {
             TMP.SetText($"Test6 ... ");
         }
+    }
+
+    public void HideTextBox()
+    {
+        TextBox.SetActive(false);
     }
 }

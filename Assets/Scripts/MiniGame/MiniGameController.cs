@@ -104,6 +104,11 @@ public class MiniGameController : MonoBehaviour
                 break;
         }
     }
+
+    public void GriffonSuccess()
+    {
+        tutorialManager.ProceedStep();
+    }
 }
 
 

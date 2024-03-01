@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Timeline;
 using UnityEngine.UI;
 
 public class GriffonObject : MonoBehaviour, IPointerClickHandler
@@ -86,7 +87,8 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
             // 점수 갱신
             EventManager.miniGameSuccess(EMinigameType.Griffon, -1);
 
-            Master.PlayEffect();
+            Master.PlayEffect(transform.position);
+            Master.TutorialSuccess();
 
             isActive = false;
 
