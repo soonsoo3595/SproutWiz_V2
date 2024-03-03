@@ -36,6 +36,9 @@ public class MainGame : MonoBehaviour
     public bool isMagicOn = false;
     public bool skipReady = false;
 
+    [Header("Data")]
+    [SerializeField] private GameData gameData;
+
     void Awake()
     {
         pauseBtn.onClick.AddListener(Pause);
@@ -107,6 +110,8 @@ public class MainGame : MonoBehaviour
         timer.audioSource.UnPause();
     }
 
+    public GameData GetData() => gameData;
+
     private IEnumerator Ready()
     {
         if (!skipReady)
@@ -135,6 +140,12 @@ public class MainGame : MonoBehaviour
 
             blind.SetActive(false);
         }
+        else
+        {
+            goalSystem.StartCoroutine(goalSystem.StartAnimation(skipReady));
+        }
+
+        yield return new WaitForSeconds(1f);
 
         isStart = true;
         timer.StartTimer();

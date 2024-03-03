@@ -19,9 +19,7 @@ public class GoalSystem : MonoBehaviour
     private List<Goal> goalList;
 
     private int totalGoalCount;
-    private int goalScore;
     private float goalScoreBonus = 1f;
-    private int goalGold;
     private bool isWaiting = false;
 
     void Start()
@@ -76,20 +74,25 @@ public class GoalSystem : MonoBehaviour
         StartCoroutine(NextGoal());
     }
 
-    public IEnumerator StartAnimation()
+    public IEnumerator StartAnimation(bool skip = false)
     {
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
             OnGoal(i);
-            yield return new WaitForSeconds(1f);
+
+            if (skip)
+            {
+                yield return null;
+            }
+            else
+            {
+                yield return new WaitForSeconds(1f);
+            }
         }
     }
 
     private void Assign()
     {
-        goalScore = DataManager.GameData.GoalScore;
-        goalGold = DataManager.GameData.GoalGold;
-
         {
             int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.GoalReward);
             goalScoreBonus += DataManager.skillLibrary.GetEffect(SkillType.GoalReward, level);
