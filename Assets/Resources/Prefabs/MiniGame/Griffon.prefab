@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 500}
+  m_SizeDelta: {x: 500, y: 360}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3529537892483842385
 CanvasRenderer:
@@ -91,7 +91,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  particleObject: {fileID: 8347782360125709204}
 --- !u!95 &504734006467930897
 Animator:
   serializedVersion: 5
@@ -253,10 +252,5 @@ PrefabInstance:
 --- !u!4 &5512977853169788356 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3192627832025414775, guid: d17ad0b0f1a12ce4291a14a00732eaa8, type: 3}
-  m_PrefabInstance: {fileID: 6975079936166042035}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8347782360125709204 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1375060154918175271, guid: d17ad0b0f1a12ce4291a14a00732eaa8, type: 3}
   m_PrefabInstance: {fileID: 6975079936166042035}
   m_PrefabAsset: {fileID: 0}

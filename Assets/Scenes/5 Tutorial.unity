@@ -39635,6 +39635,7 @@ GameObject:
   - component: {fileID: 628083696}
   - component: {fileID: 628083698}
   - component: {fileID: 628083697}
+  - component: {fileID: 628083699}
   m_Layer: 5
   m_Name: FeverTextBox
   m_TagString: Untagged
@@ -39700,6 +39701,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 628083695}
   m_CullTransparentMesh: 1
+--- !u!114 &628083699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628083695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e131678a4050046b07262a16d21cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeMultiplie: {x: 1, y: 1}
+  PopupSpeed: 0.3
 --- !u!1 &628541586
 GameObject:
   m_ObjectHideFlags: 0
@@ -40582,6 +40597,7 @@ GameObject:
   - component: {fileID: 738744073}
   - component: {fileID: 738744075}
   - component: {fileID: 738744074}
+  - component: {fileID: 738744076}
   m_Layer: 5
   m_Name: TextBox
   m_TagString: Untagged
@@ -40647,6 +40663,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 738744072}
   m_CullTransparentMesh: 1
+--- !u!114 &738744076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738744072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e131678a4050046b07262a16d21cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeMultiplie: {x: 1, y: 1}
+  PopupSpeed: 0.3
 --- !u!1 &760861619
 GameObject:
   m_ObjectHideFlags: 0
@@ -46362,10 +46392,11 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC2A4\uD06C\uB864 \uBE14\uB85D\uC740 \uC0C9\uAE54\uBCC4\uB85C \uC18D\uC131\uC774
     \uC788\uC5B4\uC694 \n\uAC19\uC740 \uC18D\uC131\uC758 \uC2A4\uD06C\uB864 \uBE14\uB85D\uC774
-    \uC815\uC6A9\uB418\uC5B4\uC57C \uC2DD\uBB3C\uC774 \uC131\uC7A5\uD560 \uC218 \uC788\uC5B4\n\n\uC528\uC557\uC5D0\uC11C\uBD80\uD130
+    \uC801\uC6A9\uB418\uC57C \uC2DD\uBB3C\uC774 \uC131\uC7A5\uD560 \uC218 \uC788\uC5B4\uC694\n\n\uC528\uC557\uC5D0\uC11C\uBD80\uD130
     \uAC19\uC740 \uC18D\uC131\uC758 \uC2A4\uD06C\uB864\uC774 \uB450 \uBC88 \uC801\uC6A9\uB418\uBA74
-    \uC2DD\uBB3C\uC774 \uC218\uD655\uB418\uBA70 \uC810\uC218\uB97C \uC5BB\uC744 \uC218
-    \uC788\uC5B4\uC694!\n\n(...)"
+    \n\uC2DD\uBB3C\uC774 \uC218\uD655\uB418\uBA70 \uC810\uC218\uB97C \uC5BB\uC744
+    \uC218 \uC788\uC5B4\uC694!\n\n\uD55C \uBC88\uC5D0 \uC5EC \uAC1C\uC758 \uC2DD\uBB3C\uC774
+    \uC218\uD655\uB418\uBA74 \uC810\uC218\uB97C \uCD94\uAC00\uB85C \uC5BB\uC2B5\uB2C8\uB2E4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b3d4b3518e0fbbb459d44d4aefcbf508, type: 2}
   m_sharedMaterial: {fileID: 3556887788117054720, guid: b3d4b3518e0fbbb459d44d4aefcbf508, type: 2}
@@ -46392,15 +46423,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -51665,6 +51696,7 @@ MonoBehaviour:
   spawnBox: {fileID: 1214303304}
   drawLineIcon: {fileID: 143855355}
   sceneChange: {fileID: 2066183648}
+  manaCollector: {fileID: 0}
 --- !u!1 &1022055385
 GameObject:
   m_ObjectHideFlags: 0
@@ -52259,6 +52291,7 @@ GameObject:
   - component: {fileID: 1072386138}
   - component: {fileID: 1072386140}
   - component: {fileID: 1072386139}
+  - component: {fileID: 1072386141}
   m_Layer: 5
   m_Name: TextBox
   m_TagString: Untagged
@@ -52284,7 +52317,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.9993641, y: -428.79895}
-  m_SizeDelta: {x: 1200, y: 464.4}
+  m_SizeDelta: {x: 1133.03, y: 464.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1072386139
 MonoBehaviour:
@@ -52306,7 +52339,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b8e25c85c0a808745b2e82d7bbd94db4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 54061560775dfe948aad17c37c3b5d9f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -52324,6 +52357,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1072386137}
   m_CullTransparentMesh: 1
+--- !u!114 &1072386141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072386137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e131678a4050046b07262a16d21cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SizeMultiplie: {x: 1, y: 1}
+  PopupSpeed: 0.3
 --- !u!1 &1085112129
 GameObject:
   m_ObjectHideFlags: 0
@@ -111807,7 +111854,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\uBAA9\uD45C\uB294 \uB2E8\uACC4\uC5D0 \uB530\uB77C \uC218\uD655\uD574\uC57C
-    \uD558\uB294 \uC18D\uC131 \uBCC4 \uC2DD\uBB3C\uC758 \uAC1C\uC218\uAC00 \uB2EC\uB77C\uC838\uC694\n\n\uC2DD\uBB3C\uC744
+    \uD558\uB294 \uC18D\uC131 \uBCC4 \uC2DD\uBB3C\uC758 \n\uAC1C\uC218\uAC00 \uB2EC\uB77C\uC838\uC694\n\n\uC2DD\uBB3C\uC744
     \uC218\uD655\uD560 \uB54C\uB9C8\uB2E4 \uAC1C\uC218\uAC00 \uC904\uC5B4\uB4ED\uB2C8\uB2E4\n\n\uBAA9\uD45C
     \uB2EC\uC131 \uC2DC  \uBCF4\uC0C1\uC744 \uC5BB\uACE0 \uC7A0\uAE08 \uC0C1\uD0DC\uC758
     \uD0C0\uC77C\uB4E4\uC774 \uBAA8\uB450 \uD574\uAE08\uB429\uB2C8\uB2E4"
@@ -111837,15 +111884,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 46.2
+  m_fontSizeBase: 46.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

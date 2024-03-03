@@ -18,6 +18,8 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] SceneChange sceneChange;
 
+    [SerializeField] ManaCollector manaCollector;
+
     private int TutorialOrder;
     private int TetrisOrder;
 
@@ -76,6 +78,7 @@ public class TutorialManager : MonoBehaviour
 
             tutorialUI.ActiveBackground(false);
             tutorialUI.EnableDragText(true);
+            tutorialUI.ActivateButton(false);
 
             ResetDeployable();
             EnableTargetGrid();
