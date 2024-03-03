@@ -14,6 +14,8 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] Button CastingButton;
     [SerializeField] SpawnBox spawnBox;
 
+    [SerializeField] GameObject drawLineIcon;
+
     private int TutorialOrder;
     private int TetrisOrder;
 
@@ -37,6 +39,8 @@ public class TutorialManager : MonoBehaviour
         gridHeight = GridManager.Instance.GetHeight();
 
         EventManager.applyTetris += ApplyTetris;
+
+        GetComponent<SceneChange>().enabled = false;
     }
 
     public void ProceedStep()
@@ -131,14 +135,18 @@ public class TutorialManager : MonoBehaviour
         }
         else if (TutorialOrder == 10)
         {
-            // 마나맥 실행
+            // 마나맥 실행, 설명.
             MiniGameController.Instance.ExecuteTutorialMinigame(EMinigameType.DrawLine);
 
             tutorialUI.ShowTextBox(4);
+
+            drawLineIcon.SetActive(true);
         }
         else if (TutorialOrder == 11)
         {
             tutorialUI.DisableUI();
+
+            drawLineIcon.SetActive(false);
 
             spawnBox.enabled = false;
         }
@@ -157,6 +165,7 @@ public class TutorialManager : MonoBehaviour
         else if(TutorialOrder == 14)
         {
             tutorialUI.ShowTextBox(6);
+            GetComponent<SceneChange>().enabled = true;
         }
 
         TutorialOrder++;

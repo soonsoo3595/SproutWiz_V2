@@ -53,7 +53,8 @@ public enum SceneType
     MainGame,
     CraftShop,
     Town,
-    Loading
+    Loading,
+    Tutorial
 }
 
 public enum RecordType
