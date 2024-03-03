@@ -618,6 +618,7 @@ MonoBehaviour:
   - {fileID: 4290272337943995319}
   - {fileID: 4290272336877654382}
   skillPrefab: {fileID: 8174671502120203866, guid: 22a85d2926c62364db85a88cd34562c0, type: 3}
+  bar: {fileID: 8136591771111448349, guid: bfd50e3c03dfb6a4da33867633c1f25c, type: 3}
   skillInfo: {fileID: 1537658035}
   skillInfoPopup: {fileID: 1537658033}
   skillInfoBack: {fileID: 474964898}

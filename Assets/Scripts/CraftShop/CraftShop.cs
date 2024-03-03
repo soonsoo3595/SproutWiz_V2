@@ -16,6 +16,7 @@ public class CraftShop : MonoBehaviour
     [Header("Object")]
     public List<GameObject> skillCategory;
     public GameObject skillPrefab;
+    public GameObject bar;
 
     [Header("Popup")]
     public SkillInfo skillInfo;
@@ -62,6 +63,12 @@ public class CraftShop : MonoBehaviour
 
             skillObject.GetComponent<PopupBtn>().Register(skillInfoPopup, skillInfoBack);
             skillElement.SetSkill(skill);
+        }
+
+        for(int i = 0; i < 3; i++)
+        {
+            GameObject finBar = Instantiate(bar);
+            finBar.transform.SetParent(skillCategory[i].transform, false);
         }
 
         yield return null;
