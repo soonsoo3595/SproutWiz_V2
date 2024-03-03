@@ -59,6 +59,8 @@ public class GoalSystem : MonoBehaviour
 
     public void IsClearGoals()
     {
+        if(goalList == null) return;
+
         bool isClear = true;
 
         for (int i = 0; i < goalList.Count; i++)

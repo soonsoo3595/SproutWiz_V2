@@ -296,7 +296,6 @@ MonoBehaviour:
   triplecomboClip: {fileID: 8300000, guid: 29ce25f25207cbd43b8a23cb7cb01a38, type: 3}
   quadrupleClip: {fileID: 8300000, guid: 952d65c78653f2647ad3bdf8dfc7df7e, type: 3}
   gameoverClip: {fileID: 8300000, guid: e8975c8b3dfc8fd4eb2e899bb46966c1, type: 3}
-  lockClip: {fileID: 8300000, guid: 04fb27dadd0791a48b1191d3786add79, type: 3}
   clickClip: {fileID: 8300000, guid: 1563b2df1c25c5f4bacb369ddcd59627, type: 3}
   griffinClip: {fileID: 8300000, guid: 65badb836eef66c4c88235a4b6b71943, type: 3}
   drawlineClip: {fileID: 8300000, guid: d82466271a7a41f48bf2d495d12f0e00, type: 3}
@@ -362,5 +361,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundBGM: {fileID: 5805772894834119630}
   soundEffect: {fileID: 9166353071790148512}
-  isDebugMode: 1
+  isDebugMode: 0
   debugGold: 10000
+  isTutorial: 0
