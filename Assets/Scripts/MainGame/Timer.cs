@@ -73,18 +73,18 @@ public class Timer : MonoBehaviour
     {
         while(RemainTime > 0f)
         {
-            if(RemainTime > 5f && audioSource.isPlaying)
-            {
-                audioSource.Stop();
-            }
-            else if(RemainTime < 5f && !audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
-
             if(!mainGame.isPaused)
             {
                 RemainTime -= Time.deltaTime;
+
+                if (RemainTime > 5f && audioSource.isPlaying)
+                {
+                    audioSource.Stop();
+                }
+                else if (RemainTime < 5f && !audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
 
                 // 미니게임 스케줄러
                 runnigTime += Time.deltaTime;

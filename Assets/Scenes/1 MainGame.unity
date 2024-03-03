@@ -22052,7 +22052,7 @@ MonoBehaviour:
   isPaused: 0
   isGameOver: 0
   isMagicOn: 0
-  skipReady: 1
+  skipReady: 0
   gameData: {fileID: 11400000, guid: 341cf38ea2abcb946832a3fe2fbca3af, type: 2}
 --- !u!4 &371425299
 Transform:
@@ -50472,7 +50472,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1262560928}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 371425298}
+        m_TargetAssemblyTypeName: MainGame, Assembly-CSharp
+        m_MethodName: Continue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1262560928
 MonoBehaviour:
   m_ObjectHideFlags: 0
