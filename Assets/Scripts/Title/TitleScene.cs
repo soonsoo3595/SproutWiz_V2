@@ -34,6 +34,7 @@ public class TitleScene : MonoBehaviour
         else
         {
             Debug.Log("처음 플레이입니다");
+            PlayerPrefs.SetInt("FirstPlay", 1);
             // ShowPopup();
         }
 
