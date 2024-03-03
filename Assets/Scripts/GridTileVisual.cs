@@ -77,7 +77,8 @@ public class GridTileVisual : MonoBehaviour
 
         if (isActive)
         {
-            blinkSprite.DOFade(0.2f, 1).SetLoops(-1, LoopType.Yoyo);
+            blinkSprite.DOFade(0.2f, 0.8f).SetLoops(-1, LoopType.Yoyo);
+            SetOutLineAlpha(0);
         }
     }
 

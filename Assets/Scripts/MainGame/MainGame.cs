@@ -148,7 +148,12 @@ public class MainGame : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         isStart = true;
-        timer.StartTimer();
+
+        if(!GameManager.Instance.isTutorial)
+        {
+            timer.StartTimer();
+        }
+
         castingCancel.ChargeStart();
         goalSystem.UpdateContainer();
     }

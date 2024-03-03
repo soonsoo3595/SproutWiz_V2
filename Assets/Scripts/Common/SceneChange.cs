@@ -18,10 +18,23 @@ public class SceneChange : MonoBehaviour
 
     public void MoveScene()
     {
-        if(SceneManager.GetActiveScene().buildIndex == (int)SceneType.MainGame)
+        int ActiveSceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+        if (ActiveSceneIndex == (int)SceneType.MainGame ||
+            ActiveSceneIndex == (int)SceneType.Tutorial)
         {
             EventManager.ClearMainGameEvents();
         }
+
+        if(moveScene == SceneType.Tutorial)
+        {
+            GameManager.Instance.isTutorial = true;
+        }
+        else
+        {
+            GameManager.Instance.isTutorial = false;
+        }
+
 
         GameManager.Instance.sceneList.Push(moveScene);
         BackMgr.instance.Clear();

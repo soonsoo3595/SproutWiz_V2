@@ -12,10 +12,11 @@ public class GriffonGame : MonoBehaviour, IMiniGame
     [SerializeField] float MinimumTerm = 20f;
 
     [SerializeField] GameObject particlePrefab;
-    GameObject particleObject;
 
+    List<Transform> griffonList = new List<Transform>();
     Transform griffonObject;
-    int SpawnedGriffonCount = 0;
+
+    int spawnedGriffonCount = 0;
 
     float RecentExcuteTimeInIntervar;
 
@@ -44,7 +45,7 @@ public class GriffonGame : MonoBehaviour, IMiniGame
         isActivate = false;
         isRunnig = false;
 
-        SpawnedGriffonCount = 0;
+        spawnedGriffonCount = 0;
 
         RecentExcuteTimeInIntervar = Random.Range(0, IntervalTime);
         Debug.Log($"그리핀 최초 실행시간 : {RecentExcuteTimeInIntervar}");
@@ -64,14 +65,14 @@ public class GriffonGame : MonoBehaviour, IMiniGame
 
     public void Excute()
     {
-        if(SpawnedGriffonCount >= 4)
+        if(spawnedGriffonCount >= 4)
         {
             Debug.Log("그리핀 최대치 활동 중");
             return;
         }
 
         Debug.Log("그리핀 실행!");
-        SpawnedGriffonCount++;
+        spawnedGriffonCount++;
 
         GridPosition startGridPosition = SelectStartPoint();
         Vector3 startPointWorldPos = GridManager.Instance.GetWorldPosition(startGridPosition);
@@ -80,14 +81,18 @@ public class GriffonGame : MonoBehaviour, IMiniGame
         griffonObject = Instantiate(GriffonPrefab, startPointWorldPos, Quaternion.identity, CanvasWorldSpace);
         griffonObject.GetComponent<GriffonObject>().SetMaster(this);
 
+        griffonList.Add(griffonObject);
+
         isRunnig = true;
     }
 
     public void Exit()
     {
         if (griffonObject != null)
+        {
             Destroy(griffonObject.gameObject);
-
+        }
+            
         isRunnig = false;
     }
 
@@ -132,23 +137,14 @@ public class GriffonGame : MonoBehaviour, IMiniGame
         return new GridPosition(x, y);
     }
 
-    public void PlayEffect()
+    public void PlayEffect(Vector3 pos)
     {
-        if (griffonObject == null)
-            return;
+        //if (griffonObject == null)
+        //    return;
 
-        Vector3 pos = griffonObject.transform.position;
         pos.z = 94;
-
-        if (particleObject == null)
-        {
-            particleObject = Instantiate(particlePrefab, pos, Quaternion.identity);
-        }
-        else
-        {
-            particleObject.transform.position = pos;
-            particleObject.GetComponent<ParticleSystem>().Play();
-        }
+        spawnedGriffonCount--;
+        Instantiate(particlePrefab, pos, Quaternion.identity); 
     }
 
     public void ExcuteTutorial()
@@ -159,8 +155,16 @@ public class GriffonGame : MonoBehaviour, IMiniGame
         Excute();
     }
 
+
+    int toturialTargetCount = 0;
+
     public void TutorialSuccess()
     {
+        toturialTargetCount++;
 
+        if(toturialTargetCount == 2)
+        {
+            MiniGameController.Instance.GriffonSuccess();
+        }
     }
 }

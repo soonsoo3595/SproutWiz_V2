@@ -89,11 +89,18 @@ public class RewardSystem : MonoBehaviour
             plusScore = (int)magicScore;
         }
 
-        Debug.Log(count + "°³ ¼öÈ®ÇØ¼­ " + plusScore + "Á¡ È¹µæ");
-        AddScore(plusScore);
+        if (GameManager.Instance.isTutorial)
+        {
+            AddScore(1000);
+        }
+        else
+        {
+            Debug.Log(count + "°³ ¼öÈ®ÇØ¼­ " + plusScore + "Á¡ È¹µæ");
+            AddScore(plusScore);
 
-        int plusGold = count * 5;
-        AddGold(plusGold);
+            int plusGold = count * 5;
+            AddGold(plusGold);
+        }
 
         EventManager.recordUpdate(RecordType.Harvest, count);
 
@@ -242,13 +249,27 @@ public class RewardSystem : MonoBehaviour
 
         if (type == EMinigameType.DrawLine)
         {
-            plusScore = DrawStrokeScore[index];
-            plusGold = mainGame.GetData().DrawLineGold;
+            if (GameManager.Instance.isTutorial)
+            {
+                plusScore = 1000;
+            }
+            else
+            {
+                plusScore = DrawStrokeScore[index];
+                plusGold = mainGame.GetData().DrawLineGold;
+            }
         }
         else if(type == EMinigameType.Griffon)
         {
-            plusScore = (int)griffonScore;
-            plusGold = mainGame.GetData().GriffonGold;
+            if (GameManager.Instance.isTutorial)
+            {
+                plusScore = 500;
+            }
+            else
+            {
+                plusScore = (int)griffonScore;
+                plusGold = mainGame.GetData().GriffonGold;
+            }
         }
 
         AddScore(plusScore);

@@ -346,7 +346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7684287634735157507, guid: fd3c584dbb6a4e6488879d0e79f43917, type: 3}
       propertyPath: clearBehavior
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7684287634735157507, guid: fd3c584dbb6a4e6488879d0e79f43917, type: 3}
       propertyPath: cameraShake.duration
