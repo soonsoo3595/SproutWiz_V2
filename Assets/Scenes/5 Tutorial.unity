@@ -23366,7 +23366,8 @@ MonoBehaviour:
   isPaused: 0
   isGameOver: 0
   isMagicOn: 0
-  skipReady: 0
+  skipReady: 1
+  gameData: {fileID: 11400000, guid: 341cf38ea2abcb946832a3fe2fbca3af, type: 2}
 --- !u!4 &371425299
 Transform:
   m_ObjectHideFlags: 0
@@ -23616,7 +23617,6 @@ MonoBehaviour:
   mainGame: {fileID: 371425298}
   audioSource: {fileID: 406239960}
   timebar: {fileID: 719531787}
-  totalTime: 80
 --- !u!82 &406239960
 AudioSource:
   m_ObjectHideFlags: 0
