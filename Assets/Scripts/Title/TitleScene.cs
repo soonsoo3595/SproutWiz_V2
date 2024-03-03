@@ -30,14 +30,14 @@ public class TitleScene : MonoBehaviour
         {
             Debug.Log("처음 플레이가 아닙니다");
             DataManager.LoadPlayerData();
-
-            StartCoroutine(ReadyToStart());
         }
         else
         {
             Debug.Log("처음 플레이입니다");
-            ShowPopup();
+            // ShowPopup();
         }
+
+        StartCoroutine(ReadyToStart());
     }
 
 
