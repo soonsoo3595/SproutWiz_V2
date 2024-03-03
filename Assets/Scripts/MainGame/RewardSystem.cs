@@ -105,7 +105,7 @@ public class RewardSystem : MonoBehaviour
         #region 일반 수확 점수 계산
         {
             int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.Harvest);
-            harvestScore = DataManager.GameData.HarvestScore;
+            harvestScore = mainGame.GetData().HarvestScore;
 
             if (level != 0)
             {
@@ -122,7 +122,7 @@ public class RewardSystem : MonoBehaviour
 
             for(int i = 2; i <= 4; i++)
             {
-                multiHarvestScore[i] = DataManager.GameData.MultiHarvestScore[i];
+                multiHarvestScore[i] = mainGame.GetData().MultiHarvestScore[i];
             }
 
             if(level != 0)
@@ -140,7 +140,7 @@ public class RewardSystem : MonoBehaviour
         #region 햇빛마법 효과(점수 보너스)
         {
             int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.SunshineMagicMastery);
-            magicEffect = DataManager.GameData.SunshineMagicEffect;
+            magicEffect = mainGame.GetData().SunshineMagicEffect;
 
             if(level != 0)
             {
@@ -157,7 +157,7 @@ public class RewardSystem : MonoBehaviour
 
             for (int i = 0; i <= 2; i++)
             {
-                DrawStrokeScore[i] = DataManager.GameData.DrawLineScore[i];
+                DrawStrokeScore[i] = mainGame.GetData().DrawLineScore[i];
             }
 
             if (level != 0)
@@ -175,7 +175,7 @@ public class RewardSystem : MonoBehaviour
         #region 그리폰 퇴치 점수
         {
             int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.HuntBird);
-            griffonScore = DataManager.GameData.GriffonScore;
+            griffonScore = mainGame.GetData().GriffonScore;
 
             if (level != 0)
             {
@@ -243,12 +243,12 @@ public class RewardSystem : MonoBehaviour
         if (type == EMinigameType.DrawLine)
         {
             plusScore = DrawStrokeScore[index];
-            plusGold = DataManager.GameData.DrawLineGold;
+            plusGold = mainGame.GetData().DrawLineGold;
         }
         else if(type == EMinigameType.Griffon)
         {
             plusScore = (int)griffonScore;
-            plusGold = DataManager.GameData.GriffonGold;
+            plusGold = mainGame.GetData().GriffonGold;
         }
 
         AddScore(plusScore);

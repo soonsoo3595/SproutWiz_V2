@@ -79,7 +79,7 @@ public class ManaCollector : MonoBehaviour
         #region 햇빛마법 시간
         {
             int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.Overclock);
-            magicTime = DataManager.GameData.SunshineMagicTime;
+            magicTime = mainGame.GetData().SunshineMagicTime;
 
             if (level != 0)
             {
@@ -99,7 +99,7 @@ public class ManaCollector : MonoBehaviour
         #region 마나 응집기 최대 스택
         {
             int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.ManaEfficiency);
-            maxMana = DataManager.GameData.ManaCollectorMaxMana;
+            maxMana = mainGame.GetData().ManaCollectorMaxMana;
 
             if (level != 0)
             {
@@ -112,8 +112,8 @@ public class ManaCollector : MonoBehaviour
 
         #region 수확 시 획득하는 스택
         {
-            normalHarvestMana = DataManager.GameData.ManaCollectorHarvestMana;
-            multiHarvestMana = DataManager.GameData.ManaCollectorMultiHarvestMana;
+            normalHarvestMana = mainGame.GetData().ManaCollectorHarvestMana;
+            multiHarvestMana = mainGame.GetData().ManaCollectorMultiHarvestMana;
         }
         #endregion
 

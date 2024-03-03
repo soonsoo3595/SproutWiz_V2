@@ -77,7 +77,7 @@ public class CastingCancel : MonoBehaviour
     {
         {
             int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.ScrollMastery);
-            chargeTime = DataManager.GameData.CastingCancelChargeTime;
+            chargeTime = mainGame.GetData().CastingCancelChargeTime;
 
             if (level != 0)
             {

@@ -6,22 +6,11 @@ using UnityEngine;
 
 public static class DataManager
 {
-    private static GameData gameData;
-
-    public static GameData GameData
-    {
-        get
-        {
-            return gameData;
-        }
-    }
-
     public static PlayerData playerData;
     public static SkillLibrary skillLibrary = ScriptableObject.CreateInstance<SkillLibrary>();
 
     public static void LoadGameData()
     {
-        gameData = Resources.Load<GameData>("GameData");
         skillLibrary = Resources.Load<SkillLibrary>("SkillLibrary");
 
         Debug.Log("GameData Load Complete");

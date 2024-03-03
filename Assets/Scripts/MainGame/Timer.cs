@@ -26,14 +26,15 @@ public class Timer : MonoBehaviour
 
     SortedDictionary<float, IMiniGame> scedulMiniGame;
 
-
-    public float totalTime = 80f;
-
     private float originVolume;
+
+    private void Awake()
+    {
+        timeLimit = mainGame.GetData().TimeLimit;
+    }
 
     private void Start()
     {
-        timeLimit = DataManager.GameData.TimeLimit;
         EventManager.resetMainGame += ResetTimer;
 
         scedulMiniGame = new SortedDictionary<float, IMiniGame>();
