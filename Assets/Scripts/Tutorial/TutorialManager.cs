@@ -16,6 +16,8 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] GameObject drawLineIcon;
 
+    [SerializeField] SceneChange sceneChange;
+
     private int TutorialOrder;
     private int TetrisOrder;
 
@@ -39,8 +41,6 @@ public class TutorialManager : MonoBehaviour
         gridHeight = GridManager.Instance.GetHeight();
 
         EventManager.applyTetris += ApplyTetris;
-
-        GetComponent<SceneChange>().enabled = false;
     }
 
     public void ProceedStep()
@@ -135,6 +135,18 @@ public class TutorialManager : MonoBehaviour
         }
         else if (TutorialOrder == 10)
         {
+            // 피버 설명
+            tutorialUI.EnableUI();
+            tutorialUI.EnableFeverText(true);
+            tutorialUI.ActivateButton(true);
+
+            tutorialBlind.ShowObject(3);
+        }
+        else if (TutorialOrder == 11)
+        {
+            tutorialBlind.HideObject(3);
+            tutorialUI.EnableFeverText(false);
+
             // 마나맥 실행, 설명.
             MiniGameController.Instance.ExecuteTutorialMinigame(EMinigameType.DrawLine);
 
@@ -142,7 +154,7 @@ public class TutorialManager : MonoBehaviour
 
             drawLineIcon.SetActive(true);
         }
-        else if (TutorialOrder == 11)
+        else if (TutorialOrder == 12)
         {
             tutorialUI.DisableUI();
 
@@ -150,7 +162,7 @@ public class TutorialManager : MonoBehaviour
 
             spawnBox.enabled = false;
         }
-        else if (TutorialOrder == 12)
+        else if (TutorialOrder == 13)
         {
             tutorialUI.ShowTextBox(5);
 
@@ -158,14 +170,17 @@ public class TutorialManager : MonoBehaviour
             MiniGameController.Instance.ExecuteTutorialMinigame(EMinigameType.Griffon);
             tutorialUI.ShowTextBox(5);
         }
-        else if (TutorialOrder == 13)
+        else if(TutorialOrder == 14)
         {
             tutorialUI.DisableUI();
         }
-        else if(TutorialOrder == 14)
+        else if(TutorialOrder == 15)
         {
             tutorialUI.ShowTextBox(6);
-            GetComponent<SceneChange>().enabled = true;
+        }
+        else if(TutorialOrder == 16)
+        {
+            sceneChange.MoveScene();
         }
 
         TutorialOrder++;

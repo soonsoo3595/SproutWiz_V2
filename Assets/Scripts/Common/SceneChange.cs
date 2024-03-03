@@ -13,12 +13,6 @@ public class SceneChange : MonoBehaviour
     private void Awake()
     {
         btn = GetComponent<Button>();
-        
-    }
-
-    private void Start()
-    {
-        // 인스펙터에서 활성, 비활성 체크 위해서 Start 작성.
         btn.onClick.AddListener(MoveScene);
     }
 
@@ -26,7 +20,8 @@ public class SceneChange : MonoBehaviour
     {
         int ActiveSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
-        if (ActiveSceneIndex == (int)SceneType.MainGame)
+        if (ActiveSceneIndex == (int)SceneType.MainGame ||
+            ActiveSceneIndex == (int)SceneType.Tutorial)
         {
             EventManager.ClearMainGameEvents();
         }

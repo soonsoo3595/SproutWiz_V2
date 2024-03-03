@@ -16,6 +16,7 @@ public class TutorialUI : MonoBehaviour
     [SerializeField] GameObject TextBox;
     [SerializeField] GameObject DragText;
     [SerializeField] GameObject rerollText;
+    [SerializeField] GameObject feverText;
 
     private Button button;
 
@@ -70,6 +71,11 @@ public class TutorialUI : MonoBehaviour
     public void EnableRerollText(bool param)
     {
         rerollText.SetActive(param);
+    }
+
+    public void EnableFeverText(bool param)
+    {
+        feverText.SetActive(param);
     }
 
     public void ShowTextBox(int index)
