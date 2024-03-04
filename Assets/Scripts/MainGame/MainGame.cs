@@ -108,7 +108,9 @@ public class MainGame : MonoBehaviour
     public void Continue()
     {
         isPaused = false;
-        pausePopup.SetActive(false);
+
+        if(pausePopup != null)
+            pausePopup.SetActive(false);
 
         GameManager.Instance.soundEffect.Resume();
         manaCollector.audioSource.UnPause();
@@ -169,7 +171,9 @@ public class MainGame : MonoBehaviour
             return;
 
         isPaused = true;
-        pausePopup.SetActive(true);
+
+        if (pausePopup != null)
+            pausePopup.SetActive(true);
 
         GameManager.Instance.soundEffect.Pause();
         manaCollector.audioSource.Pause();

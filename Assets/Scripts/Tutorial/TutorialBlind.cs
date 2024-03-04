@@ -9,6 +9,7 @@ public class TutorialBlind : MonoBehaviour
     [SerializeField] GameObject Cast;
     [SerializeField] GameObject TargetBar;
     [SerializeField] GameObject fever;
+    [SerializeField] GameObject triangle;
 
     [SerializeField] RectTransform OriginTimeBar;
 
@@ -31,6 +32,9 @@ public class TutorialBlind : MonoBehaviour
             case 3:
                 fever.SetActive(true);
                 break;
+            case 4:
+                triangle.SetActive(true);
+                break;
         }
     }
 
@@ -50,6 +54,9 @@ public class TutorialBlind : MonoBehaviour
                 break;
             case 3:
                 fever.SetActive(false);
+                break;
+            case 4:
+                triangle.SetActive(false);
                 break;
         }
     }

@@ -71,14 +71,14 @@ public class GridTileVisual : MonoBehaviour
     {
         blink.gameObject.SetActive(isActive);
 
-        Color color = blinkSprite.color;
-        color.a = 1f;
-        blinkSprite.color = color;
-
         if (isActive)
         {
             blinkSprite.DOFade(0.2f, 0.8f).SetLoops(-1, LoopType.Yoyo);
             SetOutLineAlpha(0);
+        }
+        else
+        {
+            blinkSprite.DOKill(true);
         }
     }
 

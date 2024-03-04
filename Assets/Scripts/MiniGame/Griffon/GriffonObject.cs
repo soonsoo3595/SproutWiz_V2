@@ -21,6 +21,8 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
 
     private bool isActive;
 
+    MainGame mainGame;
+
     void Start()
     {
         SetRandomTargetPosition();
@@ -32,10 +34,23 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
         animator = GetComponent<Animator>();
 
         isActive = true;
+
+        mainGame = FindAnyObjectByType<MainGame>();
     }
 
     void Update()
     {
+        if (mainGame.isPaused)
+        {
+            animator.speed = 0f;
+            return;
+        }
+        else if(!mainGame.isPaused && animator.speed == 0f) 
+        {
+            animator.speed = 1f;
+        }
+            
+
         MoveToTargetPosition();
 
         // 목표 위치에 도달하면 새로운 위치 설정
