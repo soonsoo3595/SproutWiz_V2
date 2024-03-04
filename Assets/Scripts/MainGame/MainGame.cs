@@ -64,6 +64,11 @@ public class MainGame : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if(GameManager.Instance.isTutorial)
+            {
+                return;
+            }
+
             if (!isPaused && !isGameOver)
             {
                 Pause();

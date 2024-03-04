@@ -64,6 +64,10 @@ public class GameManager : MonoBehaviour
                 {
                     EventManager.exitGame?.Invoke();
                 }
+                else if(sceneList.Peek() == SceneType.Tutorial)
+                {
+
+                }
                 else
                 {
                     sceneList.Pop();
