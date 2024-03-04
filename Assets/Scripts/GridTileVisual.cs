@@ -69,10 +69,6 @@ public class GridTileVisual : MonoBehaviour
 
     public void SetActiveBlink(bool isActive)
     {
-        Color color = blinkSprite.color;
-        color.a = 0.7f;
-        blinkSprite.color = color;
-
         blink.gameObject.SetActive(isActive);
 
         if (isActive)
@@ -82,9 +78,8 @@ public class GridTileVisual : MonoBehaviour
         }
         else
         {
-            blinkSprite.DOComplete();
+            blinkSprite.DOKill(true);
         }
-
     }
 
     
