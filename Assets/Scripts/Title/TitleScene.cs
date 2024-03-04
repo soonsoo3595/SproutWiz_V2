@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
+using System.IO;
 
 public class TitleScene : MonoBehaviour
 {
@@ -28,12 +29,12 @@ public class TitleScene : MonoBehaviour
     {
         if(PlayerPrefs.HasKey("FirstPlay"))
         {
-            Debug.Log("처음 플레이가 아닙니다");
-            DataManager.LoadPlayerData();
+            if(File.Exists(Application.persistentDataPath + "/playerData.json"))
+                DataManager.LoadPlayerData();
+
         }
         else
         {
-            Debug.Log("처음 플레이입니다");
             PlayerPrefs.SetInt("FirstPlay", 1);
             // ShowPopup();
         }
