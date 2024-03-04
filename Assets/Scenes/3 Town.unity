@@ -1039,6 +1039,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -50
       objectReference: {fileID: 0}
+    - target: {fileID: 5158979226808175127, guid: 4fdd16b4b72443747a368c2c63630b81, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 192327351197027271, guid: 4fdd16b4b72443747a368c2c63630b81, type: 3}
@@ -1336,7 +1340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2015,6 +2019,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0.983
       objectReference: {fileID: 0}
+    - target: {fileID: 1729369576790124377, guid: a626a9e42f0630840b7ffbaa34f33a5b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2092414135885513452, guid: a626a9e42f0630840b7ffbaa34f33a5b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -2323,7 +2331,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -762.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1373060631462288177, guid: a626a9e42f0630840b7ffbaa34f33a5b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2630,7 +2639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
