@@ -1084,6 +1084,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2456883592740719033, guid: 4fdd16b4b72443747a368c2c63630b81, type: 3}
   m_PrefabInstance: {fileID: 791583244}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &791583247 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1441649888028538338, guid: 4fdd16b4b72443747a368c2c63630b81, type: 3}
+  m_PrefabInstance: {fileID: 791583244}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &791583248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1992,6 +1997,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -38.5
       objectReference: {fileID: 0}
+    - target: {fileID: 205411515681746419, guid: a626a9e42f0630840b7ffbaa34f33a5b, type: 3}
+      propertyPath: back
+      value: 
+      objectReference: {fileID: 791583247}
+    - target: {fileID: 205411515681746419, guid: a626a9e42f0630840b7ffbaa34f33a5b, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 205411515681746419, guid: a626a9e42f0630840b7ffbaa34f33a5b, type: 3}
+      propertyPath: popup
+      value: 
+      objectReference: {fileID: 1155708215}
     - target: {fileID: 669898750517715636, guid: a626a9e42f0630840b7ffbaa34f33a5b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -2107,7 +2124,15 @@ PrefabInstance:
     - target: {fileID: 4347568059516251286, guid: a626a9e42f0630840b7ffbaa34f33a5b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1155708215}
+      objectReference: {fileID: 1409352772}
+    - target: {fileID: 4347568059516251286, guid: a626a9e42f0630840b7ffbaa34f33a5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 4347568059516251286, guid: a626a9e42f0630840b7ffbaa34f33a5b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4424170382005119926, guid: a626a9e42f0630840b7ffbaa34f33a5b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2333,11 +2358,6 @@ RectTransform:
 --- !u!1 &1409352772 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2558959181878756852, guid: a626a9e42f0630840b7ffbaa34f33a5b, type: 3}
-  m_PrefabInstance: {fileID: 1409352769}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1409352774 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1729369576790124377, guid: a626a9e42f0630840b7ffbaa34f33a5b, type: 3}
   m_PrefabInstance: {fileID: 1409352769}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1555119996
@@ -3255,7 +3275,6 @@ GameObject:
   - component: {fileID: 2081965486}
   - component: {fileID: 2081965485}
   - component: {fileID: 2081965484}
-  - component: {fileID: 2081965487}
   - component: {fileID: 2081965488}
   m_Layer: 5
   m_Name: Setting
@@ -3326,7 +3345,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2081965485}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1409352772}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &2081965485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3365,21 +3396,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2081965482}
   m_CullTransparentMesh: 1
---- !u!114 &2081965487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2081965482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 231322e47ea601c44a1f9304dd5bab7c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  popup: {fileID: 1409352772}
-  back: {fileID: 1409352774}
 --- !u!114 &2081965488
 MonoBehaviour:
   m_ObjectHideFlags: 0
