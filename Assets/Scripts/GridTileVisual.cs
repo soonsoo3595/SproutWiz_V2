@@ -69,17 +69,22 @@ public class GridTileVisual : MonoBehaviour
 
     public void SetActiveBlink(bool isActive)
     {
-        blink.gameObject.SetActive(isActive);
-
         Color color = blinkSprite.color;
-        color.a = 1f;
+        color.a = 0.7f;
         blinkSprite.color = color;
+
+        blink.gameObject.SetActive(isActive);
 
         if (isActive)
         {
             blinkSprite.DOFade(0.2f, 0.8f).SetLoops(-1, LoopType.Yoyo);
             SetOutLineAlpha(0);
         }
+        else
+        {
+            blinkSprite.DOComplete();
+        }
+
     }
 
     

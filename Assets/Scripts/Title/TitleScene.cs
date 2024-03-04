@@ -37,6 +37,8 @@ public class TitleScene : MonoBehaviour
         {
             Debug.Log("처음 플레이입니다");
             ShowPopup();
+
+            GetComponentInChildren<SceneChange>().moveScene = SceneType.Tutorial;
         }
     }
 

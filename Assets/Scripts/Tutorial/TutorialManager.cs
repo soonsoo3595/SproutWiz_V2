@@ -20,6 +20,8 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] ManaCollector manaCollector;
 
+    [SerializeField] MainGame mainGame;
+
     private int TutorialOrder;
     private int TetrisOrder;
 
@@ -126,6 +128,7 @@ public class TutorialManager : MonoBehaviour
             tutorialUI.ActivateButton(false);
 
             CastingButton.enabled = true;
+            spawnBox.enabled = false;
         }
         else if(TutorialOrder == 9)
         {
@@ -135,6 +138,7 @@ public class TutorialManager : MonoBehaviour
             EnableTargetGrid();
 
             CastingButton.enabled = false;
+            spawnBox.enabled = true;
         }
         else if (TutorialOrder == 10)
         {
@@ -143,12 +147,17 @@ public class TutorialManager : MonoBehaviour
             tutorialUI.EnableFeverText(true);
             tutorialUI.ActivateButton(true);
 
+            manaCollector.Mana = 100;
+
             tutorialBlind.ShowObject(3);
         }
         else if (TutorialOrder == 11)
         {
             tutorialBlind.HideObject(3);
             tutorialUI.EnableFeverText(false);
+
+            manaCollector.ChargeMana(1);
+            manaCollector.Mana = 0;
 
             // 마나맥 실행, 설명.
             MiniGameController.Instance.ExecuteTutorialMinigame(EMinigameType.DrawLine);
@@ -172,10 +181,14 @@ public class TutorialManager : MonoBehaviour
             // 그리폰 실행
             MiniGameController.Instance.ExecuteTutorialMinigame(EMinigameType.Griffon);
             tutorialUI.ShowTextBox(5);
+
+            mainGame.isPaused = true;
         }
         else if(TutorialOrder == 14)
         {
             tutorialUI.DisableUI();
+
+            mainGame.isPaused = false;
         }
         else if(TutorialOrder == 15)
         {
