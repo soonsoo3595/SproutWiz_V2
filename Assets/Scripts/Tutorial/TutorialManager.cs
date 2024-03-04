@@ -99,11 +99,14 @@ public class TutorialManager : MonoBehaviour
             // 수확 설명
             tutorialUI.ShowTextBox(0);
             tutorialUI.ActiveBackground(true);
+
+            tutorialBlind.ShowObject(4);
         }
         else if(TutorialOrder == 5)
         {
             tutorialUI.DisableUI();
 
+            tutorialBlind.HideObject(4);
             EnableTargetGrid();
         }
         else if(TutorialOrder == 6)
