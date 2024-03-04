@@ -547,19 +547,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 326003185}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 457858238}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ExitGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
+      m_Calls: []
 --- !u!114 &326003185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,17 +655,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5aed305e16db9774d84f533e4e81b0bb, type: 3}
---- !u!114 &457858238 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1293361619694493854, guid: 5aed305e16db9774d84f533e4e81b0bb, type: 3}
-  m_PrefabInstance: {fileID: 457858237}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2412b302770831f40a14e7c4a3e355f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &521003281 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 493276791560335967, guid: 4fdd16b4b72443747a368c2c63630b81, type: 3}
@@ -1579,6 +1556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da0a0ec5de8244c40b91e128785943cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exitBtn: {fileID: 326003184}
   exitPopup: {fileID: 1029579265}
   firstTutorial: {fileID: 1555119996}
 --- !u!4 &1112177955
