@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Services.Leaderboards;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -108,12 +109,15 @@ public class GameOver : MonoBehaviour
         yield return null;
     }
 
-    private void SaveRecord()
+    private async void SaveRecord()
     {
         DataManager.playerData.totalScore += score;
+        await LeaderboardsService.Instance.AddPlayerScoreAsync(DataManager.TotalLeaderboardId, score);
+
         if(DataManager.playerData.bestScore < score)
         {
             DataManager.playerData.bestScore = score;
+            await LeaderboardsService.Instance.AddPlayerScoreAsync(DataManager.TopLeaderboardId, score);
         }
 
         DataManager.playerData.gold += gold;

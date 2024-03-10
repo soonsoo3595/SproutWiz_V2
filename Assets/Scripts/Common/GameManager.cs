@@ -53,20 +53,15 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                if (sceneList.Count == 0) return;
                 if (SceneManager.GetActiveScene().buildIndex == (int)SceneType.Loading) return;
 
-                if(sceneList.Peek() == SceneType.MainGame)
+                if(sceneList.Peek() == SceneType.MainGame || sceneList.Peek() == SceneType.Tutorial || sceneList.Peek() == SceneType.Title)
                 {
-                    
+                    return;
                 }
                 else if(sceneList.Peek() == SceneType.Town)
                 {
                     EventManager.exitGame?.Invoke();
-                }
-                else if(sceneList.Peek() == SceneType.Tutorial)
-                {
-
                 }
                 else
                 {
@@ -80,10 +75,10 @@ public class GameManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         Debug.Log("게임 종료");
-
+        // ExitGame();
         if(!isDebugMode)
         {
-            DataManager.SavePlayerData();
+            DataManager.SaveData();
         }
     }
 
@@ -92,13 +87,12 @@ public class GameManager : MonoBehaviour
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
-                Application.Quit();
+        Application.Quit();
 #endif
     }
 
     private void LoadData()
     {
         DataManager.LoadGameData();
-        DataManager.playerData = new PlayerData("Default");
     }
 }

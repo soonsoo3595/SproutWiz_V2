@@ -888,11 +888,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: f7516d02-c108-4b51-89d4-bdc8cd59dbab
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: "\uC0C8\uC2F9\uC758\uB9C8\uBC95\uC0AC"
+  organizationId: soonsoo3595
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
