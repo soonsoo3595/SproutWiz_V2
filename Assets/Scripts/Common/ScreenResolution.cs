@@ -1,30 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScreenResolution : MonoBehaviour
 {
-    Vector2 minAnchor;
-    Vector2 maxAnchor;
+    public int setWidth = 1440; // 사용자 설정 너비
+    public int setHeight = 2770; // 사용자 설정 높이
 
-    void Start()
+    Resolution originResolution;
+
+    private void OnPreRender()
     {
-        var myRect = GetComponent<RectTransform>();
+        GL.Clear(true, true, Color.black);
+    }
 
-        minAnchor = Screen.safeArea.min;
-        maxAnchor = Screen.safeArea.max;
+    private void Start()
+    {
+        originResolution = Screen.currentResolution;
+        SceneManager.sceneLoaded += OnSceneChange;
+        // SetResolution();
+    }
 
-        minAnchor.x /= Screen.width;
-        minAnchor.y /= Screen.height;
 
-        maxAnchor.x /= Screen.width;
-        maxAnchor.y /= Screen.height;
+    private void OnSceneChange(Scene scene, LoadSceneMode mode)
+    {
+        SetResolution();
+    }
 
-        myRect.anchorMin = minAnchor;
-        myRect.anchorMax = maxAnchor;
-        /*
-        int setWidth = 1440; // 사용자 설정 너비
-        int setHeight = 2770; // 사용자 설정 높이
+    private void SetResolution()
+    {
+        if(SceneManager.GetActiveScene().buildIndex != (int)SceneType.Town)
+        {
+            Screen.SetResolution(originResolution.width, originResolution.height, true);    
+            return;
+        }
 
         int deviceWidth = Screen.width; // 기기 너비 저장
         int deviceHeight = Screen.height; // 기기 높이 저장
@@ -41,6 +51,6 @@ public class ScreenResolution : MonoBehaviour
             float newHeight = ((float)deviceWidth / deviceHeight) / ((float)setWidth / setHeight); // 새로운 높이
             Camera.main.rect = new Rect(0f, (1f - newHeight) / 2f, 1f, newHeight); // 새로운 Rect 적용
         }
-        */
     }
+
 }
