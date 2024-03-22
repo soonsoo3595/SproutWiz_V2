@@ -1,8 +1,4 @@
-using CloudSaveSample;
-using Newtonsoft.Json;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.CloudSave;
@@ -26,20 +22,12 @@ public static class DataManager
 
     public async static void SaveData()
     {
-        if(!AuthenticationService.Instance.IsSignedIn)
-        {
-            Debug.Log("Not Signed In");
-            return;
-        }
-
         string writeLock = await SaveObjectData(AuthenticationService.Instance.PlayerId, playerData);
-        Debug.Log(writeLock);
     }
 
-    public async static void LoadData()
+    public async static Task LoadData()
     {
         playerData = await RetrieveSpecificData<PlayerData>(AuthenticationService.Instance.PlayerId);
-        Debug.Log(playerData);
     }   
 
     private async static Task<string> SaveObjectData(string key, PlayerData value)

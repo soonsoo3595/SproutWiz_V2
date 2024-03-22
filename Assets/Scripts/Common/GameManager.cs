@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,8 +15,10 @@ public class GameManager : MonoBehaviour
     [Header("Scene")]
     public Stack<SceneType> sceneList = new Stack<SceneType>();
 
-    [Header("For Debug")]
-    public bool isDebugMode;
+    [Header("Test")]
+    public bool isTestOnPC;
+    public bool dontSave;   // 세이브 안할거면 체크(다른 씬 먼저 테스트할때)
+    public bool canRecord;  // 리더보드에 랭킹 올릴건지(에디터에선 끄세요)
     public int debugGold;
 
     [Header("For Tutorial")]
@@ -27,7 +30,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            LoadData();
+            LoadGameData();
         }
         else if(Instance != this)
         {
@@ -37,10 +40,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if(isDebugMode)
-        {
-            DataManager.playerData.gold = debugGold;
-        }
+
     }
 
     void Update()
@@ -75,14 +75,18 @@ public class GameManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         Debug.Log("게임 종료");
-        // ExitGame();
-        if(!isDebugMode)
-        {
-            DataManager.SaveData();
-        }
+        Save();
     }
 
-    public void ExitGame()
+    public void Save()
+    {
+        if(CanSave())
+        {
+            DataManager.SaveData();
+        }   
+    }
+
+    public void Exit()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
@@ -91,7 +95,35 @@ public class GameManager : MonoBehaviour
 #endif
     }
 
-    private void LoadData()
+    /// <summary>
+    /// 현재 게임을 세이브 할 수 있는지
+    /// </summary>
+    /// <returns></returns>
+    private bool CanSave()
+    {
+        if (!AuthenticationService.Instance.IsSignedIn)
+        {
+            Debug.Log("Not Signed In");
+            return false;
+        }
+
+        if(SceneManager.GetActiveScene().buildIndex == (int)SceneType.Title)
+        {
+            return false;
+        }
+
+        if(dontSave)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// 게임에 필요한 데이터를 로드
+    /// </summary>
+    private void LoadGameData()
     {
         DataManager.LoadGameData();
     }

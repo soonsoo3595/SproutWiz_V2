@@ -22,8 +22,7 @@ public class Town : MonoBehaviour
             firstTutorial.SetActive(true);
         }
 
-        exitBtn.onClick.AddListener(() => GameManager.Instance.ExitGame());
-        signOut.onClick.AddListener(OnSignOut);
+        exitBtn.onClick.AddListener(() => GameManager.Instance.Exit());
     }
 
     private void OnEnable()
@@ -46,10 +45,4 @@ public class Town : MonoBehaviour
         exitPopup.Click();
     }
 
-    private void OnSignOut()
-    {
-        AuthenticationService.Instance.SignOut(true);
-        DataManager.SaveData();
-        DataManager.playerData = new PlayerData();
-    }
 }

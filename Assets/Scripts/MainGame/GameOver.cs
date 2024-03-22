@@ -111,13 +111,16 @@ public class GameOver : MonoBehaviour
 
     private async void SaveRecord()
     {
-        DataManager.playerData.totalScore += score;
-        await LeaderboardsService.Instance.AddPlayerScoreAsync(DataManager.TotalLeaderboardId, score);
-
-        if(DataManager.playerData.bestScore < score)
+        if (GameManager.Instance.canRecord)
         {
-            DataManager.playerData.bestScore = score;
-            await LeaderboardsService.Instance.AddPlayerScoreAsync(DataManager.TopLeaderboardId, score);
+            DataManager.playerData.totalScore += score;
+            await LeaderboardsService.Instance.AddPlayerScoreAsync(DataManager.TotalLeaderboardId, score);
+
+            if (DataManager.playerData.bestScore < score)
+            {
+                DataManager.playerData.bestScore = score;
+                await LeaderboardsService.Instance.AddPlayerScoreAsync(DataManager.TopLeaderboardId, score);
+            }
         }
 
         DataManager.playerData.gold += gold;

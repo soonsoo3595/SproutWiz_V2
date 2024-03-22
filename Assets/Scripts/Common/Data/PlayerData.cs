@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerData
 {
+    public string userID;     // 유저 고유 ID
+    public string userName;   // 유저 닉네임
+
     public int totalScore;    // 누적 스코어
     public int bestScore;      // 최고 기록 스코어
 
@@ -18,6 +21,9 @@ public class PlayerData
 
     public PlayerData()
     {
+        userID = "";
+        userName = "";
+
         totalScore = 0;
         bestScore = 0;
 
@@ -29,4 +35,9 @@ public class PlayerData
         }
     }
 
+    public void SetInitInfo(string playerID, string playerName)
+    {
+        userID = playerID;
+        userName = playerName;
+    } 
 }
