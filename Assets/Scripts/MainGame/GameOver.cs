@@ -121,8 +121,12 @@ public class GameOver : MonoBehaviour
                 DataManager.playerData.bestScore = score;
                 await LeaderboardsService.Instance.AddPlayerScoreAsync(DataManager.TopLeaderboardId, score);
             }
+
+            
         }
 
         DataManager.playerData.gold += gold;
+
+        GameManager.Instance.Save();
     }
 }

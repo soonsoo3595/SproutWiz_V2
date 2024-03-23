@@ -39,11 +39,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         if(Input.GetKeyUp(KeyCode.Escape))
@@ -73,19 +68,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private async void OnApplicationQuit()
+    public async void Save()
     {
-        Debug.Log("게임 종료");
-        await Save();
-    }
-
-    public async Task Save()
-    {
-        Debug.Log("게임 세이브");
-
         if(CanSave())
         {
-            Debug.Log("세이브 가능");
             await DataManager.SaveData();
         }   
     }
@@ -111,15 +97,8 @@ public class GameManager : MonoBehaviour
             return false;
         }
 
-        if(SceneManager.GetActiveScene().buildIndex == (int)SceneType.Title)
-        {
-            Debug.Log("Title Scene");
-            return false;
-        }
-
         if(dontSave)
         {
-            Debug.Log("Dont Save");
             return false;
         }
 

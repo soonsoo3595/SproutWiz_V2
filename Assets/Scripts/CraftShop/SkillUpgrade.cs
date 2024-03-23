@@ -56,6 +56,8 @@ public class SkillUpgrade : MonoBehaviour
             GameManager.Instance.soundEffect.PlayOneShotSoundEffect("upgrade");
             skillElement.AfterUpgrade();
             EventManager.updateUI();
+
+            GameManager.Instance.Save();
         }
         else
         {

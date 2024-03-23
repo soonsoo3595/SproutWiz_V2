@@ -38,6 +38,7 @@ public class Town : MonoBehaviour
     public void OnClickTutorial()
     {
         DataManager.playerData.isFirstPlay = false;
+        GameManager.Instance.Save();
     }
 
     public void OnEscape()
