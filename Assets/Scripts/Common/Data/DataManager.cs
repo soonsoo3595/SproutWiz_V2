@@ -20,8 +20,9 @@ public static class DataManager
         Debug.Log("GameData Load Complete");
     }
 
-    public async static void SaveData()
+    public async static Task SaveData()
     {
+        Debug.Log("SaveData");
         string writeLock = await SaveObjectData(AuthenticationService.Instance.PlayerId, playerData);
     }
 
@@ -32,8 +33,10 @@ public static class DataManager
 
     private async static Task<string> SaveObjectData(string key, PlayerData value)
     {
+        Debug.Log($"Saving {key}:{value}");
         try
         {
+            Debug.Log("Saving data to the cloud");
             Dictionary<string, object> oneElement = new Dictionary<string, object>
             {
                { key, value }

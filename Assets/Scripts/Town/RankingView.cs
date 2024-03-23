@@ -11,6 +11,8 @@ public class RankingView : MonoBehaviour
 
     private async void OnEnable()
     {
+        ranking.text = "";
+
         var scoreResponse = await LeaderboardsService.Instance.GetScoresAsync(DataManager.TopLeaderboardId);
 
         scoreResponse.Results.ForEach(score =>

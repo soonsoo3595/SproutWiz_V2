@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -72,17 +73,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnApplicationQuit()
+    private async void OnApplicationQuit()
     {
         Debug.Log("게임 종료");
-        Save();
+        await Save();
     }
 
-    public void Save()
+    public async Task Save()
     {
+        Debug.Log("게임 세이브");
+
         if(CanSave())
         {
-            DataManager.SaveData();
+            Debug.Log("세이브 가능");
+            await DataManager.SaveData();
         }   
     }
 
@@ -109,11 +113,13 @@ public class GameManager : MonoBehaviour
 
         if(SceneManager.GetActiveScene().buildIndex == (int)SceneType.Title)
         {
+            Debug.Log("Title Scene");
             return false;
         }
 
         if(dontSave)
         {
+            Debug.Log("Dont Save");
             return false;
         }
 

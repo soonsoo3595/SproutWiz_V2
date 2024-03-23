@@ -65,7 +65,7 @@ public class SignManager : MonoBehaviour
         googleBtn.gameObject.SetActive(false);
 #elif UNITY_ANDROID
         unityBtn.gameObject.SetActive(false);
-        guestBtn.gameObject.SetActive(false);
+        // guestBtn.gameObject.SetActive(false);
 #endif
         #endregion
 
@@ -102,7 +102,7 @@ public class SignManager : MonoBehaviour
         {
             await AuthenticationService.Instance.UpdatePlayerNameAsync(inputField.text);
 
-            DataManager.playerData.SetInitInfo(AuthenticationService.Instance.PlayerId, inputField.text);
+            DataManager.playerData.SetInitInfo(AuthenticationService.Instance.PlayerId, AuthenticationService.Instance.PlayerName);
         }
         catch (RequestFailedException ex)
         {
