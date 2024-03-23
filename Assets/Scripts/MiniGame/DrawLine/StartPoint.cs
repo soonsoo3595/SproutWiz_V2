@@ -33,6 +33,11 @@ public class StartPoint : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDr
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        EndDrag();
+    }
+
+    public void EndDrag()
+    {
         Master.SetIsDrag(false);
 
         SetActiveImage(false);

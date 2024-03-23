@@ -72,7 +72,10 @@ public class MiniGameController : MonoBehaviour
         if (!miniGame.IsRunnig)
             return;
 
-        miniGame.Exit();
+        if(miniGame is DrawLineGame)
+        {
+            miniGame.Exit();
+        }
 
         if (tutorialManager != null)
         {
@@ -80,7 +83,7 @@ public class MiniGameController : MonoBehaviour
             return;
         }
 
-        Timer.ScheduleGame(miniGame.GetNextExcuteTime() + Timer.GetRunTime(), miniGame);
+        Timer.ScheduleGame(miniGame.GetNextExcuteTime(), miniGame);
     }
 
     public void ActivateMiniGame(EMinigameType type, float runTime)
@@ -91,13 +94,13 @@ public class MiniGameController : MonoBehaviour
             case EMinigameType.DrawLine:
                 if (drawLineGame.GetAcivate()) return;
 
-                Timer.ScheduleGame(drawLineGame.GetNextExcuteTime() + runTime, drawLineGame);
+                Timer.ScheduleGame(drawLineGame.GetNextExcuteTime(), drawLineGame);
                 drawLineGame.Activate(runTime);
                 break;
             case EMinigameType.Griffon:
                 if (griffonGame.GetAcivate()) return;
 
-                Timer.ScheduleGame(griffonGame.GetNextExcuteTime() + runTime, griffonGame);
+                Timer.ScheduleGame(griffonGame.GetNextExcuteTime(), griffonGame);
                 griffonGame.Activate(runTime);
                 break;
             default:

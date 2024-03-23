@@ -93,9 +93,11 @@ public class Timer : MonoBehaviour
                 {
                     foreach (var pair in scedulMiniGame)
                     {
-                        if(pair.Key  <= runnigTime)
+                        //Debug.Log($"현재시간 : {runnigTime}");
+
+                        if (pair.Key  <= runnigTime)
                         {
-                            Debug.Log($"현재시간 : {runnigTime}, 예약시간 : {pair.Key + runnigTime}");
+                            //Debug.Log($"현재시간 : {runnigTime}, 예약시간 : {pair.Key}");
 
                             MiniGameController.Instance.ExecuteMiniGame(pair.Value);
                             scedulMiniGame.Remove(pair.Key);
@@ -125,14 +127,15 @@ public class Timer : MonoBehaviour
 
     public void ScheduleGame(float time, IMiniGame game)
     {
-        if (!scedulMiniGame.ContainsKey(time))
+        if (!scedulMiniGame.ContainsKey(time + runnigTime))
         {
-            scedulMiniGame.Add(time, game);
-            Debug.Log($"미니게임 예약 / 현재시간: {runnigTime}, 예약시간: {time}, 종류 : {game}");
+            scedulMiniGame.Add(time + runnigTime, game);
+            Debug.Log($"미니게임 예약 / 현재시간: {runnigTime}, 예약시간: {time + runnigTime}, 종류 : {game}");
         }
         else
         {
             // 시간 충돌 처리
+            Debug.Log($"미니게임 시간 충동");
         }
     }
 }
