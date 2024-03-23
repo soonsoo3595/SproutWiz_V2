@@ -103,7 +103,11 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
             EventManager.miniGameSuccess(EMinigameType.Griffon, -1);
 
             Master.PlayEffect(transform.position);
-            Master.TutorialSuccess();
+
+            if (GameManager.Instance.isTutorial)
+            { 
+                Master.TutorialSuccess(); 
+            }
 
             isActive = false;
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UIElements;
 
@@ -187,7 +188,7 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
 
         if(isDrag)
         {
-
+            CurrentDragSequence = 1;
         }
         else
         {
@@ -205,55 +206,32 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
                     {
                         point.SetActiveImage(false);
                     }
+                    else
+                    {
+                        Debug.Log("point is Null");
+                    }
                 }
 
                 StartPoint startPoint = drawPointsObject[0].GetComponent<StartPoint>();
                 startPoint.SetActiveImage(false);
             }
+
+            CurrentDragSequence = 0;
         }
 
-        CurrentDragSequence = 1;
+        //CurrentDragSequence = 1;
     }
 
     public void EnterDrawPoint(GridPosition position, DrawPoint drawPoint)
     {
-        //Debug.Log($"CurrentDragSequence : {CurrentDragSequence}");
+        Debug.Log($"CurrentDragSequence : {CurrentDragSequence}");
         //Debug.Log($"Compair Position : {pathPointPositions[CurrentDragSequence]} <-> {position}");
 
         if (position.Equals(pathPointPositions[CurrentDragSequence]))
         {
             if (CurrentDragSequence == pathLength - 1)
             {
-                Debug.Log($"Enter Last DrawPoint : {CurrentDragSequence} / {pathLength - 1}");
-
-                EventManager.recordUpdate(RecordType.DrawLine);
-                GameManager.Instance.soundEffect.PlayOneShotSoundEffect("drawline");
-
-                // TODO: 성공처리
-                // pathLength - 2 이거 수정필요.
-                EventManager.miniGameSuccess(EMinigameType.DrawLine, pathLength - 2);
-
-                drawPointsObject[0].GetComponent<StartPoint>().PlayEffect(true);
-
-                Vector3 pos = GridManager.Instance.GetWorldPosition(pathPointPositions[CurrentDragSequence]);
-                pos.z = 94;
-                if (EffectObject == null)
-                {
-                    EffectObject = Instantiate(EffectObjectPrefab, pos, Quaternion.identity);
-                }
-                else
-                {
-                    EffectObject.transform.position = pos;
-                    EffectObject.GetComponent<ParticleSystem>().Play();
-                }
-               
-
-                for (int i = 1; i < pathLength; i++)
-                {
-                    drawPointsObject[i].GetComponent<DrawPoint>().DisableImage();
-                }
-
-                StartCoroutine(SuccessAfterDelay(1f));;
+                EnterLastPoint();
             }
 
             drawPoint.SetActiveImage(true);
@@ -267,15 +245,58 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
             Debug.Log($"마나맥 잘못된 순서");
             Debug.Log($"CurrentDragSequence : {CurrentDragSequence} / {pathLength - 1}");
 
-            for(int i = 1; i <= CurrentDragSequence; i++)
+            for(int i = 1; i < pathLength; i++)
             {
                 DrawPoint point = drawPointsObject[i].GetComponent<DrawPoint>();
                 if (point != null)
                 {
                     point.SetActiveImage(false);
                 }
+                else
+                {
+                    Debug.Log("point is Null");
+                }
             }
+
+            StartPoint startPoint = drawPointsObject[0].GetComponent<StartPoint>();
+            startPoint.EndDrag();
+
+            CurrentDragSequence = 0;
         }
+    }
+
+    private void EnterLastPoint()
+    {
+        Debug.Log($"Enter Last DrawPoint : {CurrentDragSequence} / {pathLength - 1}");
+
+        EventManager.recordUpdate(RecordType.DrawLine);
+        GameManager.Instance.soundEffect.PlayOneShotSoundEffect("drawline");
+
+        // TODO: 성공처리
+        // pathLength - 2 이거 수정필요.
+        EventManager.miniGameSuccess(EMinigameType.DrawLine, pathLength - 2);
+
+        drawPointsObject[0].GetComponent<StartPoint>().PlayEffect(true);
+
+        Vector3 pos = GridManager.Instance.GetWorldPosition(pathPointPositions[CurrentDragSequence]);
+        pos.z = 94;
+        if (EffectObject == null)
+        {
+            EffectObject = Instantiate(EffectObjectPrefab, pos, Quaternion.identity);
+        }
+        else
+        {
+            EffectObject.transform.position = pos;
+            EffectObject.GetComponent<ParticleSystem>().Play();
+        }
+
+
+        for (int i = 1; i < pathLength; i++)
+        {
+            drawPointsObject[i].GetComponent<DrawPoint>().DisableImage();
+        }
+
+        StartCoroutine(SuccessAfterDelay(1f)); ;
     }
 
     public void Exit()
@@ -320,16 +341,9 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
     {
         float randomExcuteTime = Random.Range(0, IntervalTime);
 
-        float term = (MinimumTerm - RecentExcuteTimeInIntervar) + randomExcuteTime;
+        float term = MinimumTerm + randomExcuteTime;
 
-        if (term < MinimumTerm)
-        {
-            RecentExcuteTimeInIntervar = randomExcuteTime + term;
-        }
-        else
-        {
-            RecentExcuteTimeInIntervar = randomExcuteTime;
-        }
+        RecentExcuteTimeInIntervar = term;
 
         Debug.Log($"마나맥 다음 실행 시간 : {RecentExcuteTimeInIntervar}");
     }

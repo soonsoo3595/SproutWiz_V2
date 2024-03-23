@@ -10,11 +10,12 @@ public class GriffonGame : MonoBehaviour, IMiniGame
     [SerializeField] int ActivationScore = 4000;
     [SerializeField] float IntervalTime = 45f;
     [SerializeField] float MinimumTerm = 20f;
+    [SerializeField] int MaxSpawnableCount = 4;
 
     [SerializeField] GameObject particlePrefab;
 
     List<Transform> griffonList = new List<Transform>();
-    Transform griffonObject;
+    //Transform griffonObject;
 
     int spawnedGriffonCount = 0;
 
@@ -65,9 +66,13 @@ public class GriffonGame : MonoBehaviour, IMiniGame
 
     public void Excute()
     {
-        if(spawnedGriffonCount >= 4)
+        if(spawnedGriffonCount >= MaxSpawnableCount)
         {
             Debug.Log("그리핀 최대치 활동 중");
+
+            UpdateExcuteTime();
+            MiniGameController.Instance.ExitMiniGame(this);
+
             return;
         }
 
@@ -78,19 +83,30 @@ public class GriffonGame : MonoBehaviour, IMiniGame
         Vector3 startPointWorldPos = GridManager.Instance.GetWorldPosition(startGridPosition);
         startPointWorldPos.z = 10;
 
-        griffonObject = Instantiate(GriffonPrefab, startPointWorldPos, Quaternion.identity, CanvasWorldSpace);
+        Transform griffonObject = Instantiate(GriffonPrefab, startPointWorldPos, Quaternion.identity, CanvasWorldSpace);
         griffonObject.GetComponent<GriffonObject>().SetMaster(this);
 
         griffonList.Add(griffonObject);
 
         isRunnig = true;
+
+        if(!GameManager.Instance.isTutorial)
+        {
+            UpdateExcuteTime();
+            MiniGameController.Instance.ExitMiniGame(this);
+        }
     }
 
     public void Exit()
     {
-        if (griffonObject != null)
+        if (griffonList.Count != 0)
         {
-            Destroy(griffonObject.gameObject);
+            foreach(var griffon in griffonList)
+            {
+                Destroy(griffon.gameObject);
+            }
+
+            griffonList.Clear();
         }
             
         isRunnig = false;
@@ -147,6 +163,9 @@ public class GriffonGame : MonoBehaviour, IMiniGame
         Instantiate(particlePrefab, pos, Quaternion.identity); 
     }
 
+
+    int toturialTargetCount = 0;
+
     public void ExcuteTutorial()
     {
         Debug.Log("튜토리얼 그리폰 실행!");
@@ -154,9 +173,6 @@ public class GriffonGame : MonoBehaviour, IMiniGame
         Excute();
         Excute();
     }
-
-
-    int toturialTargetCount = 0;
 
     public void TutorialSuccess()
     {
