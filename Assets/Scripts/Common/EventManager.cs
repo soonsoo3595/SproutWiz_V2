@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using static EventManager;
+using System;
 
 public static class EventManager
 {
@@ -51,6 +48,10 @@ public static class EventManager
     #region TownEvent
     public delegate void ExitGame();
     public static ExitGame exitGame;
+    #endregion
+
+    #region TitleEvent
+    public static Action EnterGame;
     #endregion
 
     public static void ClearMainGameEvents()

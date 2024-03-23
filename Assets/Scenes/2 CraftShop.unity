@@ -515,8 +515,8 @@ GameObject:
   - component: {fileID: 234958331}
   - component: {fileID: 234958333}
   - component: {fileID: 234958332}
-  - component: {fileID: 234958334}
   - component: {fileID: 234958335}
+  - component: {fileID: 234958336}
   m_Layer: 5
   m_Name: Bg
   m_TagString: Untagged
@@ -585,18 +585,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234958330}
   m_CullTransparentMesh: 1
---- !u!114 &234958334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 234958330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 622f9b7616f709d4b9fed44f812ee32d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &234958335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,6 +610,18 @@ MonoBehaviour:
   skillInfo: {fileID: 1537658035}
   skillInfoPopup: {fileID: 1537658033}
   skillInfoBack: {fileID: 474964898}
+--- !u!114 &234958336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234958330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cef8088036c3a2479ff20a782b53fcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &265946714
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +9,7 @@ public class Town : MonoBehaviour
 {
     [Header("Exit")]
     public Button exitBtn;
+    public Button signOut;
 
     [Header("Popup")]
     public PopupBtn exitPopup;
@@ -14,13 +17,12 @@ public class Town : MonoBehaviour
 
     private void Start()
     {
-        if(PlayerPrefs.GetInt("FirstPlay") == 1)
+        if(DataManager.playerData.isFirstPlay)
         {
             firstTutorial.SetActive(true);
-            PlayerPrefs.SetInt("FirstPlay", 0);
         }
 
-        exitBtn.onClick.AddListener(() => GameManager.Instance.ExitGame());
+        exitBtn.onClick.AddListener(() => GameManager.Instance.Exit());
     }
 
     private void OnEnable()
@@ -33,8 +35,14 @@ public class Town : MonoBehaviour
         EventManager.exitGame -= OnEscape;
     }
 
+    public void OnClickTutorial()
+    {
+        DataManager.playerData.isFirstPlay = false;
+    }
+
     public void OnEscape()
     {
         exitPopup.Click();
     }
+
 }
