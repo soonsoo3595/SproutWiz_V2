@@ -34,8 +34,7 @@ public class GameOver : MonoBehaviour
     {
         score = mainGame.rewardSystem.Score;
         gold = mainGame.rewardSystem.Gold;
-
-        SaveRecord();
+        StartCoroutine(SaveRecord());
         StartCoroutine(ShowResult());
     }
 
@@ -109,7 +108,25 @@ public class GameOver : MonoBehaviour
         yield return null;
     }
 
-    private async void SaveRecord()
+    private IEnumerator SaveRecord()
+    {
+        while (true)
+        {
+            if (GameManager.Instance.CheckNetwork())
+            {
+                break;
+            }
+
+            yield return null;
+        }
+
+        ScoreUpdate();
+        DataManager.playerData.gold += gold;
+
+        GameManager.Instance.Save();
+    }
+
+    private async void ScoreUpdate()
     {
         if (GameManager.Instance.canRecord)
         {
@@ -122,11 +139,7 @@ public class GameOver : MonoBehaviour
                 await LeaderboardsService.Instance.AddPlayerScoreAsync(DataManager.TopLeaderboardId, score);
             }
 
-            
+
         }
-
-        DataManager.playerData.gold += gold;
-
-        GameManager.Instance.Save();
     }
 }

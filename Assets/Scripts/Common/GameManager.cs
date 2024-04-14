@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class GameManager : MonoBehaviour
 
     [Header("For Tutorial")]
     public bool isTutorial;
+
+    private GameObject networkPopup;
+    private Button networkBtn;
 
     void Awake()
     {
@@ -68,6 +72,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (SceneObject.Instance == null)
+            return;
+
+        networkPopup = SceneObject.Instance.networkPopup;
+        networkBtn = SceneObject.Instance.networkBtn;
+    }
+
     public async void Save()
     {
         if(CanSave())
@@ -85,6 +98,25 @@ public class GameManager : MonoBehaviour
 #endif
     }
 
+    public void RetryCheckNetwork()
+    {
+        networkPopup.SetActive(false);
+        CheckNetwork();
+    }
+
+    public bool CheckNetwork()
+    {
+        if(Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            networkPopup.SetActive(true);
+            return false;
+        }
+        else 
+        {
+            return true; 
+        }
+        
+    }
     /// <summary>
     /// 현재 게임을 세이브 할 수 있는지
     /// </summary>

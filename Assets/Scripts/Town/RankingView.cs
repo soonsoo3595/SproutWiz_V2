@@ -9,7 +9,27 @@ public class RankingView : MonoBehaviour
 {
     public TextMeshProUGUI ranking;
 
-    private async void OnEnable()
+    private void OnEnable()
+    {
+        StartCoroutine(ClickBoard());
+    }
+
+    private IEnumerator ClickBoard()
+    {
+        while (true)
+        {
+            if (GameManager.Instance.CheckNetwork())
+            {
+                break;
+            }
+
+            yield return null;
+        }
+
+        GetRanking();
+    }
+
+    private async void GetRanking()
     {
         ranking.text = "";
 

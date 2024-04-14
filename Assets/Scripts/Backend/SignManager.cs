@@ -69,7 +69,7 @@ public class SignManager : MonoBehaviour
 #endif
         #endregion
 
-        StartGame();
+        StartCoroutine(StartGame());
     }
 
     
@@ -82,8 +82,18 @@ public class SignManager : MonoBehaviour
 #endif
     }
 
-    public void StartGame()
+    public IEnumerator StartGame()
     {
+        while(true)
+        {
+            if(GameManager.Instance.CheckNetwork())
+            {
+                break;
+            }
+
+            yield return null;
+        }
+
         CheckSessionToken();
     }
 
@@ -91,9 +101,9 @@ public class SignManager : MonoBehaviour
     public async void CheckUserName()
     {
         // 닉네임 규칙 검사
-        if (inputField.text.Length < 2 || inputField.text.Length > 10)
+        if (inputField.text.Length < 2 || inputField.text.Length > 8)
         {
-            Debug.Log("닉네임은 2자 이상 10자 이하로 입력해주세요");
+            Debug.Log("닉네임은 2자 이상 8자 이하로 입력해주세요");
             inputField.text = "";
             return;
         }
