@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -143,8 +144,26 @@ public class TutorialManager : MonoBehaviour
             CastingButton.enabled = false;
             spawnBox.enabled = true;
         }
-        else if (TutorialOrder == 10)
+        else if(TutorialOrder == 10)
         {
+            GridPosition[] pos = new GridPosition[3];
+            pos[0] = new GridPosition(1, 1);
+            pos[1] = new GridPosition(1, 2);
+            pos[2] = new GridPosition(2, 1);
+
+            for (int i = 0; i < 3; i++)
+            {
+                GridManager.Instance.SetDeployableGrid(pos[i], true);
+                EventManager.changeTileData(pos[i]);
+            }
+
+            tutorialUI.ShowTextBox(7);
+            tutorialUI.ActiveBackground(true);
+        }
+        else if (TutorialOrder == 11)
+        {
+            tutorialUI.HideTextBox();
+
             // 피버 설명
             tutorialUI.EnableUI();
             tutorialUI.EnableFeverText(true);
@@ -154,7 +173,7 @@ public class TutorialManager : MonoBehaviour
 
             tutorialBlind.ShowObject(3);
         }
-        else if (TutorialOrder == 11)
+        else if (TutorialOrder == 12)
         {
             tutorialBlind.HideObject(3);
             tutorialUI.EnableFeverText(false);
@@ -169,7 +188,7 @@ public class TutorialManager : MonoBehaviour
 
             drawLineIcon.SetActive(true);
         }
-        else if (TutorialOrder == 12)
+        else if (TutorialOrder == 13)
         {
             tutorialUI.DisableUI();
 
@@ -177,7 +196,7 @@ public class TutorialManager : MonoBehaviour
 
             spawnBox.enabled = false;
         }
-        else if (TutorialOrder == 13)
+        else if (TutorialOrder == 14)
         {
             tutorialUI.ShowTextBox(5);
 
@@ -187,17 +206,17 @@ public class TutorialManager : MonoBehaviour
 
             mainGame.isPaused = true;
         }
-        else if(TutorialOrder == 14)
+        else if(TutorialOrder == 15)
         {
             tutorialUI.DisableUI();
 
             mainGame.isPaused = false;
         }
-        else if(TutorialOrder == 15)
+        else if(TutorialOrder == 16)
         {
             tutorialUI.ShowTextBox(6);
         }
-        else if(TutorialOrder == 16)
+        else if(TutorialOrder == 17)
         {
             sceneChange.MoveScene();
         }
