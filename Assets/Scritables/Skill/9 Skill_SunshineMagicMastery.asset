@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 235e6d71277dbb84fab07c1e876c2efd, type: 3}
   m_Name: 9 Skill_SunshineMagicMastery
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: a512dd2a321d4d4408dcf3d52e508f4c, type: 3}
+  sprite: {fileID: 21300000, guid: a63ff2313858aaf459360c69963ead4f, type: 3}
   category: 2
   type: 9
   title: "\uD587\uBE5B \uB9C8\uBC95 \uB9C8\uC2A4\uD130\uB9AC"

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 235e6d71277dbb84fab07c1e876c2efd, type: 3}
   m_Name: 6 Skill_ScrollMastery
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: a512dd2a321d4d4408dcf3d52e508f4c, type: 3}
+  sprite: {fileID: 21300000, guid: 53e5b5a6b531d7d4da193f2a75b756ce, type: 3}
   category: 2
   type: 6
   title: "\uC2A4\uD06C\uB864 \uB9C8\uC2A4\uD130\uB9AC"
