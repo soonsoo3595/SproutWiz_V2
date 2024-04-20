@@ -85,5 +85,12 @@ public class TutorialText : MonoBehaviour
             subText.SetText(
                $" ");
         }
+        else if(index == 7)
+        {
+            mainText.fontSize = 50;
+
+            mainText.SetText(
+                $"목표를 달성하면 잠겨있던 타일이 다시 열려요\n");
+        }
     }
 }
