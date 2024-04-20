@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.PlayerSettings;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -145,6 +146,17 @@ public class TutorialManager : MonoBehaviour
         }
         else if (TutorialOrder == 10)
         {
+            GridPosition[] pos = new GridPosition[3];
+            pos[0] = new GridPosition(1, 1);
+            pos[1] = new GridPosition(1, 2);
+            pos[2] = new GridPosition(2, 1);
+
+            for(int i = 0; i<3; i++)
+            {
+                GridManager.Instance.SetDeployableGrid(pos[i], true);
+                EventManager.changeTileData(pos[i]);
+            }
+
             // 피버 설명
             tutorialUI.EnableUI();
             tutorialUI.EnableFeverText(true);
