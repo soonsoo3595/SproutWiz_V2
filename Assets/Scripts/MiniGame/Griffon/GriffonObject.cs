@@ -102,7 +102,8 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
             // 점수 갱신
             EventManager.miniGameSuccess(EMinigameType.Griffon, -1);
 
-            Master.PlayEffect(transform.position);
+            //Master.PlayEffect(transform.position);
+            Master.ChatchGriffon(this.gameObject);
 
             if (GameManager.Instance.isTutorial)
             { 

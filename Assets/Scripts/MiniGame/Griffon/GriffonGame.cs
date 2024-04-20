@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class GriffonGame : MonoBehaviour, IMiniGame
 {
@@ -15,8 +16,8 @@ public class GriffonGame : MonoBehaviour, IMiniGame
     [SerializeField] GameObject particlePrefab;
 
     List<Transform> griffonList = new List<Transform>();
-    //Transform griffonObject;
 
+    // TODO: griffonList.Count로 대체 후 삭제 검토
     int spawnedGriffonCount = 0;
 
     float RecentExcuteTimeInIntervar;
@@ -153,13 +154,26 @@ public class GriffonGame : MonoBehaviour, IMiniGame
         return new GridPosition(x, y);
     }
 
-    public void PlayEffect(Vector3 pos)
+    public void ChatchGriffon(GameObject griffon)
     {
-        //if (griffonObject == null)
-        //    return;
+        if (griffon != null)
+        {
+            griffonList.Remove(griffon.transform);
 
+            spawnedGriffonCount--;
+
+            PlayEffect(griffon.transform.position);
+        }
+        else
+        {
+            Debug.Log("그리폰 삭제 에러");
+        }
+
+    }
+
+    private void PlayEffect(Vector3 pos)
+    {
         pos.z = 94;
-        spawnedGriffonCount--;
         Instantiate(particlePrefab, pos, Quaternion.identity); 
     }
 
