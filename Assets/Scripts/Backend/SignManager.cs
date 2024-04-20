@@ -8,6 +8,8 @@ using DG.Tweening;
 using System.Collections;
 using System;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
+
 
 #if UNITY_ANDROID
 using GooglePlayGames.BasicApi;
@@ -27,8 +29,10 @@ public class SignManager : MonoBehaviour
     [SerializeField] TMP_InputField inputField;
     [Space]
     [SerializeField] GameObject warningPopup;
-    [SerializeField] TextMeshProUGUI warningTxt;
     [SerializeField] Button okBtn;
+    [SerializeField] GameObject logoutPopup;
+    [SerializeField] Button logoutOkBtn;
+    [SerializeField] Button logoutBtn;
 
     async void Awake()
     {
@@ -58,6 +62,7 @@ public class SignManager : MonoBehaviour
 #endif
 
         okBtn.onClick.AddListener(() => GameManager.Instance.Exit());
+        logoutOkBtn.onClick.AddListener(() => GameManager.Instance.Exit());
         #endregion
 
         #region 기기에 맞는 로그인 버튼
@@ -68,8 +73,8 @@ public class SignManager : MonoBehaviour
         // guestBtn.gameObject.SetActive(false);
 #endif
         #endregion
-
-        StartCoroutine(StartGame());
+        
+        StartGame();
     }
 
     
@@ -82,17 +87,11 @@ public class SignManager : MonoBehaviour
 #endif
     }
 
-    public IEnumerator StartGame()
+    public void StartGame()
     {
-        while(true)
-        {
-            if(GameManager.Instance.CheckNetwork())
-            {
-                break;
-            }
+        SceneObject.Instance.ShowSAEMO(true);
 
-            yield return null;
-        }
+        GameManager.Instance.CheckNetwork();
 
         CheckSessionToken();
     }
@@ -168,15 +167,15 @@ public class SignManager : MonoBehaviour
         else
         {
             Debug.Log("토큰이 없습니다 로그인하세요");
+            SceneObject.Instance.ShowSAEMO(false);
             ShowSignInPanel(true);
         }
     }
 
     private void ShowSignInPanel(bool show) => signInPanel.SetActive(show);
 
-    private void ShowWarning(string notify)
+    private void ShowWarning()
     {
-        warningTxt.text = notify;
         warningPopup.SetActive(true);
     }
 
@@ -186,6 +185,8 @@ public class SignManager : MonoBehaviour
 
         await AuthenticationService.Instance.GetPlayerNameAsync(false);
 
+        SceneObject.Instance.ShowSAEMO(false);
+
         if (CheckFirstPlay())
         {
             ShowPopup();
@@ -193,13 +194,15 @@ public class SignManager : MonoBehaviour
         else
         {
             EventManager.EnterGame();
+            logoutBtn.gameObject.SetActive(true);
         }
+        
     }
 
     private void OnSignFailed(RequestFailedException exception)
     {
-        string notify = "로그인에 실패했습니다\n 게임을 다시 시작해주세요";
-        ShowWarning(notify);
+        SceneObject.Instance.ShowSAEMO(false);
+        ShowWarning();
         AuthenticationService.Instance.ClearSessionToken();
     }
 
@@ -219,6 +222,7 @@ public class SignManager : MonoBehaviour
     // Click Guest Login
     public async void SignInAnonymouslyRequest()
     {
+        SceneObject.Instance.ShowSAEMO(true);
         try
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
@@ -289,6 +293,7 @@ public class SignManager : MonoBehaviour
         else
         {
             Debug.Log("Unsuccessful login");
+            SceneObject.Instance.ShowSAEMO(false);
         }
     }
 
@@ -320,8 +325,7 @@ public class SignManager : MonoBehaviour
         // 데이터를 저장하고 게임 종료 후 재접속 유도
         GameManager.Instance.Save();
 
-        string notify = "로그아웃 되었습니다\n 게임을 다시 시작해주세요";
-        ShowWarning(notify);
+        logoutPopup.SetActive(true);
 
         AuthenticationService.Instance.SignOut(true);
     }

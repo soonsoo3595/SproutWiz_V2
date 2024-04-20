@@ -1,43 +1,76 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Services.Authentication;
 using Unity.Services.Leaderboards;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
+[System.Serializable]
+public class Ranker
+{
+    public TextMeshProUGUI userName;
+    public TextMeshProUGUI userScore;
+}
+
 public class RankingView : MonoBehaviour
 {
-    public TextMeshProUGUI ranking;
+    [SerializeField] private Ranker[] rankers;
+    [SerializeField] private TextMeshProUGUI playerName;
+    [SerializeField] private TextMeshProUGUI playerTopScore;
+    [SerializeField] private TextMeshProUGUI playerTotalScore;
 
     private void OnEnable()
     {
-        StartCoroutine(ClickBoard());
+        ClickBoard();
     }
 
-    private IEnumerator ClickBoard()
+    private void ClickBoard()
     {
-        while (true)
-        {
-            if (GameManager.Instance.CheckNetwork())
-            {
-                break;
-            }
+        GameManager.Instance.CheckNetwork();
 
-            yield return null;
-        }
+        playerName.text = DataManager.playerData.userName;
+        playerTopScore.text = DataManager.playerData.bestScore.ToString();
+        playerTotalScore.text = DataManager.playerData.totalScore.ToString();
 
-        GetRanking();
+        GetTopLeaderboard();
     }
 
-    private async void GetRanking()
+    public async void GetTopLeaderboard()
     {
-        ranking.text = "";
-
+        SceneObject.Instance.ShowSAEMO(true);
         var scoreResponse = await LeaderboardsService.Instance.GetScoresAsync(DataManager.TopLeaderboardId);
+        SceneObject.Instance.ShowSAEMO(false);
 
-        scoreResponse.Results.ForEach(score =>
+        for (int i = 0; i < 10; i++)
         {
-            ranking.text += score.Rank + ". " + score.PlayerName + " - " + score.Score + "\n";
-        });
+            if (i >= scoreResponse.Results.Count)
+            {
+                rankers[i].userName.text = "";
+                rankers[i].userScore.text = "";
+                continue;
+            }
+            rankers[i].userName.text = scoreResponse.Results[i].PlayerName;
+            rankers[i].userScore.text = scoreResponse.Results[i].Score.ToString();
+        }
+    }
+
+    public async void GetTotalLeaderboard()
+    {
+        SceneObject.Instance.ShowSAEMO(true);
+        var scoreResponse = await LeaderboardsService.Instance.GetScoresAsync(DataManager.TotalLeaderboardId);
+        SceneObject.Instance.ShowSAEMO(false);
+
+        for (int i = 0; i < 10; i++)
+        {
+            if (i >= scoreResponse.Results.Count)
+            {
+                rankers[i].userName.text = "";
+                rankers[i].userScore.text = "";
+                continue;
+            }
+            rankers[i].userName.text = scoreResponse.Results[i].PlayerName;
+            rankers[i].userScore.text = scoreResponse.Results[i].Score.ToString();
+        }
     }
 }

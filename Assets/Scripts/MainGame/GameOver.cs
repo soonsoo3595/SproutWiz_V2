@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.Services.Leaderboards;
 using UnityEngine;
@@ -34,8 +35,8 @@ public class GameOver : MonoBehaviour
     {
         score = mainGame.rewardSystem.Score;
         gold = mainGame.rewardSystem.Gold;
-        StartCoroutine(SaveRecord());
         StartCoroutine(ShowResult());
+        SaveRecord();
     }
 
     private void Retry()
@@ -108,25 +109,17 @@ public class GameOver : MonoBehaviour
         yield return null;
     }
 
-    private IEnumerator SaveRecord()
+    private async void SaveRecord()
     {
-        while (true)
-        {
-            if (GameManager.Instance.CheckNetwork())
-            {
-                break;
-            }
+        GameManager.Instance.CheckNetwork();
 
-            yield return null;
-        }
-
-        ScoreUpdate();
+        await ScoreUpdate();
         DataManager.playerData.gold += gold;
 
         GameManager.Instance.Save();
     }
 
-    private async void ScoreUpdate()
+    private async Task ScoreUpdate()
     {
         if (GameManager.Instance.canRecord)
         {
@@ -138,8 +131,6 @@ public class GameOver : MonoBehaviour
                 DataManager.playerData.bestScore = score;
                 await LeaderboardsService.Instance.AddPlayerScoreAsync(DataManager.TopLeaderboardId, score);
             }
-
-
         }
     }
 }

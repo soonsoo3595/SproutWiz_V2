@@ -10,6 +10,8 @@ public class SceneObject : MonoBehaviour
     public GameObject networkPopup;
     public Button networkBtn;
 
+    public GameObject saemo;
+
     private void Awake()
     {
         Instance = this;
@@ -21,5 +23,10 @@ public class SceneObject : MonoBehaviour
         {
             GameManager.Instance.RetryCheckNetwork();
         });
+    }
+
+    public void ShowSAEMO(bool isActive)
+    {
+        saemo.SetActive(isActive);
     }
 }

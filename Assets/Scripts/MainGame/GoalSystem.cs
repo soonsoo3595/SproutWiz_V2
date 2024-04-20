@@ -136,6 +136,8 @@ public class GoalSystem : MonoBehaviour
 
     private void OnGoal(int index)
     {
+        offGoals[index].transform.localPosition = locations[index].transform.localPosition;
+
         offGoals[index].transform.DOLocalMoveY(offGoals[index].transform.localPosition.y - 85f, 0.5f).SetEase(Ease.OutBack)
             .onComplete = () => {
                 offGoals[index].GetComponentInChildren<TextMeshProUGUI>().text = "";
