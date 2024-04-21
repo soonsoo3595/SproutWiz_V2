@@ -10,7 +10,7 @@ public class ScreenResolution : MonoBehaviour
 
     Resolution originResolution;
 
-    private void OnPreRender()
+    private void OnPreCull()
     {
         GL.Clear(true, true, Color.black);
     }

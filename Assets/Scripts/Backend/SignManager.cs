@@ -155,7 +155,7 @@ public class SignManager : MonoBehaviour
                     return;
                 }
 
-                await DataManager.LoadData();
+                // await DataManager.LoadData();
             }
             #endregion
             else
@@ -193,6 +193,8 @@ public class SignManager : MonoBehaviour
         }
         else
         {
+            await DataManager.LoadData();
+
             EventManager.EnterGame();
             logoutBtn.gameObject.SetActive(true);
         }
@@ -278,6 +280,7 @@ public class SignManager : MonoBehaviour
     #region 구글 로그인
     public void LoginGoogle()
     {
+        SceneObject.Instance.ShowSAEMO(true);
         Social.localUser.Authenticate(OnGoogleLogin);
     }
 

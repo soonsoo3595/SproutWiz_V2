@@ -29,6 +29,9 @@ public class PlayerData
 
         gold = 0;
 
+        PlayerPrefs.SetFloat("SFXVolume", 1f);
+        PlayerPrefs.SetFloat("BGMVolume", 1f);
+
         for(int i = 0; i < Enum.GetValues(typeof(SkillType)).Length; i++)
         {
             skillLevels.Add(0);
