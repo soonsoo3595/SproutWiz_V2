@@ -190,7 +190,7 @@ MonoBehaviour:
   bgmClips:
   - {fileID: 8300000, guid: 8ee869240fb6a434d98d39a1c16816f7, type: 3}
   - {fileID: 8300000, guid: cc04a63db1ed2fb4eaceec37dd290599, type: 3}
-  - {fileID: 8300000, guid: 8ee869240fb6a434d98d39a1c16816f7, type: 3}
+  - {fileID: 8300000, guid: b5ed2028e55b4e34eacdd158471e4556, type: 3}
   - {fileID: 8300000, guid: 8ee869240fb6a434d98d39a1c16816f7, type: 3}
   - {fileID: 0}
   - {fileID: 8300000, guid: cc04a63db1ed2fb4eaceec37dd290599, type: 3}
