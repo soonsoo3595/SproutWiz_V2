@@ -1,9 +1,5 @@
-using DG.Tweening;
 using System.Collections.Generic;
-using System.Text;
-using System.Xml.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class GridSystemVisual : MonoBehaviour
 {
@@ -47,7 +43,6 @@ public class GridSystemVisual : MonoBehaviour
         if(position == (-1, -1))
         {
             UpdataAllVisuals();
-            Debug.Log("모든 타일 비주얼 업데이트!");
 
             return;
         }

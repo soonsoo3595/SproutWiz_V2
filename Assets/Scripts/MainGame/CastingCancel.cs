@@ -84,7 +84,6 @@ public class CastingCancel : MonoBehaviour
                 chargeTime -= DataManager.skillLibrary.GetEffect(SkillType.ScrollMastery, level);
             }
 
-            Debug.Log("스크롤 마스터리 레벨 : " + level + ", 충전 시간 : " + chargeTime);
         }
 
         ChargeStack = 1;

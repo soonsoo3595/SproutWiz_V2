@@ -1,6 +1,4 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraOrthoHandler : MonoBehaviour
@@ -38,10 +36,10 @@ public class CameraOrthoHandler : MonoBehaviour
             middleUI.position = new Vector3(middleUI.position.x, middleUI.position.y + separationWorldSpace.y / 2, middleUI.position.z);
 
 
-        Debug.Log($"screenRatio: {screenRatio}");
-        Debug.Log($"screenWidth : {Screen.width}, screenHeight : {Screen.height}");
-        Debug.Log($"Safe Area: {safeArea}");
-        Debug.Log($"separationWorldSpaceY : {separationWorldSpace.y}");
-        Debug.Log($"separationY : {separationY}");
+        // Debug.Log($"screenRatio: {screenRatio}");
+        // Debug.Log($"screenWidth : {Screen.width}, screenHeight : {Screen.height}");
+        // Debug.Log($"Safe Area: {safeArea}");
+        // Debug.Log($"separationWorldSpaceY : {separationWorldSpace.y}");
+        // Debug.Log($"separationY : {separationY}");
     }
 }

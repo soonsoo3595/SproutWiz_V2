@@ -1,11 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 using Cinemachine;
-using System.Runtime.InteropServices;
 
 public class RewardSystem : MonoBehaviour
 {
@@ -95,7 +92,6 @@ public class RewardSystem : MonoBehaviour
         }
         else
         {
-            Debug.Log(count + "개 수확해서 " + plusScore + "점 획득");
             AddScore(plusScore);
 
             int plusGold = count * 5;
@@ -119,7 +115,6 @@ public class RewardSystem : MonoBehaviour
                 harvestScore += (int)DataManager.skillLibrary.GetEffect(SkillType.Harvest, level);
             }
 
-            Debug.Log("재배 효율 레벨 : " + level + ", 수확 시 점수 : " + harvestScore);
         }
         #endregion
 
@@ -140,7 +135,6 @@ public class RewardSystem : MonoBehaviour
                 }
             }
 
-            Debug.Log("멀티 수확 레벨 : " + level + ", 2개 수확 시 : " + multiHarvestScore[2] + ", 3개 수확 시 : " + multiHarvestScore[3] + ", 4개 수확 시 : " + multiHarvestScore[4]);
         }
         #endregion
 
@@ -154,7 +148,6 @@ public class RewardSystem : MonoBehaviour
                 magicEffect = DataManager.skillLibrary.GetEffect(SkillType.SunshineMagicMastery, level);
             }
 
-            Debug.Log("햇빛 마법 마스터리 레벨 : " + level + ", 햇빛 마법 활성화 보너스 : " + magicEffect);
         }
         #endregion
 
@@ -175,7 +168,6 @@ public class RewardSystem : MonoBehaviour
                 }
             }
 
-            Debug.Log("한붓그리기 레벨 : " + level + ", 점수 : " + DrawStrokeScore);
         }
         #endregion
 
@@ -189,7 +181,6 @@ public class RewardSystem : MonoBehaviour
                 griffonScore = DataManager.skillLibrary.GetEffect(SkillType.HuntBird, level);
             }
 
-            Debug.Log("그리폰(새) 퇴치 레벨 : " + level + ", 퇴치 시 점수 : " + griffonScore);
         }
         #endregion
 
@@ -202,7 +193,6 @@ public class RewardSystem : MonoBehaviour
                 miniGameGoldBonus += DataManager.skillLibrary.GetEffect(SkillType.MiniGameGoldReward, level);
             }
 
-            Debug.Log("미니게임 성공 시 골드 증가량 획득 : " + level + ", 몇 % : " + miniGameGoldBonus);
         }
         #endregion
     }
@@ -244,8 +234,6 @@ public class RewardSystem : MonoBehaviour
     {
         int plusScore = 0;
         int plusGold = 0;
-
-        Debug.Log($"인자 index: {index}");
 
         if (type == EMinigameType.DrawLine)
         {

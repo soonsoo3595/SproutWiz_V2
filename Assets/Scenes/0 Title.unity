@@ -1024,14 +1024,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1293361619694493854, guid: 5aed305e16db9774d84f533e4e81b0bb, type: 3}
-      propertyPath: networkBtn
-      value: 
-      objectReference: {fileID: 1481561937}
-    - target: {fileID: 1293361619694493854, guid: 5aed305e16db9774d84f533e4e81b0bb, type: 3}
-      propertyPath: networkPopup
-      value: 
-      objectReference: {fileID: 175707208}
     - target: {fileID: 2391678858265590559, guid: 5aed305e16db9774d84f533e4e81b0bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

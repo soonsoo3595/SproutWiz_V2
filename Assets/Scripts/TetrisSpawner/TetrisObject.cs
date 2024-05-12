@@ -160,7 +160,6 @@ public class TetrisObject : MonoBehaviour
     {
         if (unitNumber < 0 && unitNumber > GetUnitCount())
         {
-            Debug.Log("잘못된 유닛 번호");
             return;
         }
 

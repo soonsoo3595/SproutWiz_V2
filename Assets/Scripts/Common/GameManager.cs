@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -130,7 +128,6 @@ public class GameManager : MonoBehaviour
     {
         if (!AuthenticationService.Instance.IsSignedIn)
         {
-            Debug.Log("Not Signed In");
             return false;
         }
 

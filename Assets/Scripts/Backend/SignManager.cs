@@ -4,11 +4,8 @@ using Unity.Services.Authentication.PlayerAccounts;
 using Unity.Services.Core;
 using Unity.Services.Authentication;
 using TMPro;
-using DG.Tweening;
-using System.Collections;
 using System;
 using System.Threading.Tasks;
-using UnityEngine.SceneManagement;
 
 
 #if UNITY_ANDROID
@@ -102,7 +99,6 @@ public class SignManager : MonoBehaviour
         // 닉네임 규칙 검사
         if (inputField.text.Length < 2 || inputField.text.Length > 8)
         {
-            Debug.Log("닉네임은 2자 이상 8자 이하로 입력해주세요");
             inputField.text = "";
             return;
         }
@@ -140,8 +136,6 @@ public class SignManager : MonoBehaviour
 
         if(hasToken)
         {
-            Debug.Log("토큰이 남아있습니다");
-
             #region 토큰이 있는데 로그인 안 되어있는 경우 현재 토큰으로 로그인
             if (!AuthenticationService.Instance.IsSignedIn)
             {
@@ -166,7 +160,6 @@ public class SignManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("토큰이 없습니다 로그인하세요");
             SceneObject.Instance.ShowSAEMO(false);
             ShowSignInPanel(true);
         }
@@ -289,13 +282,11 @@ public class SignManager : MonoBehaviour
         if (success)
         {
             string idToken = ((PlayGamesLocalUser)Social.localUser).GetIdToken();
-            Debug.Log("Login with Google done. IdToken: " + idToken);
             // Call Unity Authentication SDK to sign in or link with Google.
             await SignInWithGoogleAsync(idToken);
         }
         else
         {
-            Debug.Log("Unsuccessful login");
             SceneObject.Instance.ShowSAEMO(false);
         }
     }
@@ -305,7 +296,6 @@ public class SignManager : MonoBehaviour
         try
         {
             await AuthenticationService.Instance.SignInWithGoogleAsync(idToken);
-            Debug.Log("SignIn is successful.");
         }
         catch (AuthenticationException ex)
         {

@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Timeline;
 using UnityEngine.UI;
 
 public class GriffonObject : MonoBehaviour, IPointerClickHandler
@@ -89,7 +86,6 @@ public class GriffonObject : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("±×¸®ÇÉ Å¬¸¯");
 
         if(isActive)
         {

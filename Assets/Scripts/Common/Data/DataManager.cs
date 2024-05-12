@@ -16,8 +16,6 @@ public static class DataManager
     public static void LoadGameData()
     {
         skillLibrary = Resources.Load<SkillLibrary>("SkillLibrary");
-
-        Debug.Log("GameData Load Complete");
     }
 
     public async static Task SaveData()
@@ -42,8 +40,6 @@ public static class DataManager
             // Saving data without write lock validation by passing the data as an object instead of a SaveItem
             Dictionary<string, string> result = await CloudSaveService.Instance.Data.Player.SaveAsync(oneElement);
             string writeLock = result[key];
-
-            Debug.Log($"Successfully saved {key}:{value} with updated write lock {writeLock}");
 
             return writeLock;
         }

@@ -1,6 +1,4 @@
-using JetBrains.Annotations;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
@@ -133,35 +131,6 @@ public class GoalMaker : MonoBehaviour
 
     private ElementType GetDifferentElement()
     {
-        /*
-        List<ElementType> elements = new List<ElementType>();
-    
-        if (prevElements.Count > 0)
-        {
-            while (prevElements.Count > 0)
-            {
-                List<int> list = new List<int>(3) { 1, 2, 3 };
-                list.Remove((int)prevElements.Dequeue());
-    
-                int rand = Random.Range(0, list.Count);
-                elements.Add((ElementType)list[rand]);
-            }
-        }
-        else
-        {
-            while(count > 0)
-            {
-                List<int> list = new List<int>(3) { 1, 2, 3 };
-    
-                int rand = Random.Range(0, list.Count);
-                elements.Add((ElementType)list[rand]);
-    
-                list.RemoveAt(rand);
-                count--;
-            }
-        }
-        return elements;
-        */
         List<ElementType> elements = new List<ElementType>(3) { ElementType.Fire, ElementType.Water, ElementType.Grass};
         elements.Remove(prevElement);
 

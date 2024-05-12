@@ -1,7 +1,4 @@
 using UnityEngine;
-using UnityEditor;
-using System.Collections;
-using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "GamSetting", menuName = "MyGame/Game Settings", order = 1)]
 public class GameSetting : ScriptableObject

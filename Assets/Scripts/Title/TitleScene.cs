@@ -1,13 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
-using System.IO;
-using Unity.Services.Authentication;
-using Unity.Services.Core;
-using System.Threading.Tasks;
 
 public class TitleScene : MonoBehaviour
 {

@@ -19,7 +19,6 @@ public class GridManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("LevelGrid already exist");
             Destroy(gameObject);
             return;
         }

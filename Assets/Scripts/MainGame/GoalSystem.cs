@@ -1,11 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
-using UnityEngine.UI;
-using System.Reflection;
 
 public class GoalSystem : MonoBehaviour
 {
@@ -111,7 +108,6 @@ public class GoalSystem : MonoBehaviour
         {
             int level = DataManager.skillLibrary.GetCurrentLevel(SkillType.GoalReward);
             goalScoreBonus += DataManager.skillLibrary.GetEffect(SkillType.GoalReward, level);
-            Debug.Log("목표 달성 시 점수 보너스 : " + goalScoreBonus);
         }
 
         #region 이벤트 등록

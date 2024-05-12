@@ -21,7 +21,6 @@ public class MiniGameController : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("MiniGmaeController already exist");
             Destroy(gameObject);
             return;
         }
@@ -31,7 +30,6 @@ public class MiniGameController : MonoBehaviour
     {
         if(!miniGame.IsActivate)
         {
-            Debug.Log("미니게임 비활성화 상태!");
             return;
         }    
 

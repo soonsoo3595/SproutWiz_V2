@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,7 +48,6 @@ public class GriffonGame : MonoBehaviour, IMiniGame
         spawnedGriffonCount = 0;
 
         RecentExcuteTimeInIntervar = Random.Range(0, IntervalTime);
-        Debug.Log($"그리핀 최초 실행시간 : {RecentExcuteTimeInIntervar}");
     }
 
     public void Activate(float activateTime)
@@ -57,7 +55,6 @@ public class GriffonGame : MonoBehaviour, IMiniGame
         if (isActivate)
             return;
 
-        Debug.Log("미니게임:그리핀 조건 달성");
 
         isActivate = true;
 
@@ -68,7 +65,6 @@ public class GriffonGame : MonoBehaviour, IMiniGame
     {
         if(spawnedGriffonCount >= MaxSpawnableCount)
         {
-            Debug.Log("그리핀 최대치 활동 중");
 
             UpdateExcuteTime();
             MiniGameController.Instance.ExitMiniGame(this);
@@ -76,7 +72,6 @@ public class GriffonGame : MonoBehaviour, IMiniGame
             return;
         }
 
-        Debug.Log("그리핀 실행!");
         spawnedGriffonCount++;
 
         GridPosition startGridPosition = SelectStartPoint();
@@ -127,7 +122,6 @@ public class GriffonGame : MonoBehaviour, IMiniGame
             RecentExcuteTimeInIntervar = randomExcuteTime;
         }
 
-        Debug.Log($"그리핀 다음 실행 시간 : {RecentExcuteTimeInIntervar}");
     }
 
     public float GetNextExcuteTime()
@@ -165,7 +159,6 @@ public class GriffonGame : MonoBehaviour, IMiniGame
         }
         else
         {
-            Debug.Log("그리폰 삭제 에러");
         }
 
     }
@@ -181,8 +174,6 @@ public class GriffonGame : MonoBehaviour, IMiniGame
 
     public void ExcuteTutorial()
     {
-        Debug.Log("튜토리얼 그리폰 실행!");
-
         Excute();
         Excute();
     }

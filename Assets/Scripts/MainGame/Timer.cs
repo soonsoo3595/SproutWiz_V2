@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -93,12 +92,8 @@ public class Timer : MonoBehaviour
                 {
                     foreach (var pair in scedulMiniGame)
                     {
-                        //Debug.Log($"현재시간 : {runnigTime}");
-
                         if (pair.Key  <= runnigTime)
                         {
-                            //Debug.Log($"현재시간 : {runnigTime}, 예약시간 : {pair.Key}");
-
                             MiniGameController.Instance.ExecuteMiniGame(pair.Value);
                             scedulMiniGame.Remove(pair.Key);
                             break;
@@ -130,12 +125,10 @@ public class Timer : MonoBehaviour
         if (!scedulMiniGame.ContainsKey(time + runnigTime))
         {
             scedulMiniGame.Add(time + runnigTime, game);
-            Debug.Log($"미니게임 예약 / 현재시간: {runnigTime}, 예약시간: {time + runnigTime}, 종류 : {game}");
         }
         else
         {
             // 시간 충돌 처리
-            Debug.Log($"미니게임 시간 충동");
         }
     }
 }

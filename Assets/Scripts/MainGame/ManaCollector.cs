@@ -62,7 +62,6 @@ public class ManaCollector : MonoBehaviour
         if (count == 0) return;
 
         Mana += (normalHarvestMana * count + multiHarvestMana[count]);
-        Debug.Log("마나 충전 : " + Mana + " / " + maxMana);
 
         if(Mana >= maxMana && !mainGame.isMagicOn)
         {
@@ -86,7 +85,6 @@ public class ManaCollector : MonoBehaviour
                 magicTime += DataManager.skillLibrary.GetEffect(SkillType.Overclock, level);
             }
 
-            Debug.Log("오버클럭 레벨 : " + level + ", 마법 시간 : " + magicTime);
         }
         #endregion
 
@@ -134,29 +132,6 @@ public class ManaCollector : MonoBehaviour
         mainGame.isMagicOn = false;
         Mana = 0;
     }
-
-    /*
-    IEnumerator CoolDown()
-    {
-        while (FeverStack < maxStack)
-        {
-            if(mainGame.isGameOver) yield break;
-
-            if (mainGame.isPaused)
-            {
-                yield return null;
-            }
-            else
-            {
-                FeverStack += 0.1f;
-
-                yield return new WaitForSeconds(0.1f);
-            }
-        }
-
-        magicBtn.interactable = true;
-    }
-    */
 
     IEnumerator ShowMagic()
     {

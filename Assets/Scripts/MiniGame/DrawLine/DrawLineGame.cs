@@ -1,10 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.UIElements;
 
 // TODO : 오브젝트 풀링 방식으로 교체 고려.
 
@@ -73,13 +69,10 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
         CurrentDragSequence = 0;
 
         RecentExcuteTimeInIntervar = Random.Range(0, IntervalTime);
-        Debug.Log($"마나맥 최초 실행시간 : {RecentExcuteTimeInIntervar}");
     }
 
     public void Excute()
     {
-        Debug.Log("한 붓 그리기 실행!");
-
         pathLength = Random.Range(2, MaxPathPointCount);
         pathPointPositions = new List<GridPosition>();
         drawPointsObject = new Transform[pathLength];
@@ -94,8 +87,6 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
         StartPoint startPoint = drawPointsObject[0].GetComponent<StartPoint>();
         startPoint.SetMaster(this);
 
-        Debug.Log($"pathLength = {pathLength}");
-        Debug.Log($"startPoint = {startGridPosition.x}, {startGridPosition.y}");
 
         MakePath();
 
@@ -132,7 +123,6 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
                     continue;
 
                 validPositions.Add(nextGridPosition);
-                //Debug.Log($"validPositions Add = {nextGridPosition.x}, {nextGridPosition.y}");
             }
 
             // 유효한 방향 중 랜덤 선택
@@ -140,7 +130,6 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
 
             pathPointPositions.Add(validPositions[randomDirection]);
 
-            //Debug.Log($"{j}번째 선택된 좌표 = {validPositions[randomDirection].x}, {validPositions[randomDirection].y}");
         }
     }
 
@@ -157,7 +146,6 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
             drawPoint.DrawLine(pathPointPositions[i - 1], pathPointPositions[i]);
             drawPoint.SetMaster(this);
 
-            //Debug.Log($"MidPoint : {pathPointPositions[i]}");
         }
     }
 
@@ -194,11 +182,9 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
         {
             if(CurrentDragSequence == pathLength)
             {
-                Debug.Log($"DrawGame Success");
             }
             else
             {
-                Debug.Log($"DrawGame Fail");
                 for (int i = 1; i < pathLength; i++)
                 {
                     DrawPoint point = drawPointsObject[i].GetComponent<DrawPoint>();
@@ -208,7 +194,6 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
                     }
                     else
                     {
-                        Debug.Log("point is Null");
                     }
                 }
 
@@ -224,9 +209,6 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
 
     public void EnterDrawPoint(GridPosition position, DrawPoint drawPoint)
     {
-        Debug.Log($"CurrentDragSequence : {CurrentDragSequence}");
-        //Debug.Log($"Compair Position : {pathPointPositions[CurrentDragSequence]} <-> {position}");
-
         if (position.Equals(pathPointPositions[CurrentDragSequence]))
         {
             if (CurrentDragSequence == pathLength - 1)
@@ -236,15 +218,10 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
 
             drawPoint.SetActiveImage(true);
 
-            Debug.Log($"CurrentDragSequence : {CurrentDragSequence} / {pathLength - 1}");
-
             CurrentDragSequence++;
         }
         else
         {
-            Debug.Log($"마나맥 잘못된 순서");
-            Debug.Log($"CurrentDragSequence : {CurrentDragSequence} / {pathLength - 1}");
-
             for(int i = 1; i < pathLength; i++)
             {
                 DrawPoint point = drawPointsObject[i].GetComponent<DrawPoint>();
@@ -254,7 +231,6 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
                 }
                 else
                 {
-                    Debug.Log("point is Null");
                 }
             }
 
@@ -267,8 +243,6 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
 
     private void EnterLastPoint()
     {
-        Debug.Log($"Enter Last DrawPoint : {CurrentDragSequence} / {pathLength - 1}");
-
         EventManager.recordUpdate(RecordType.DrawLine);
         GameManager.Instance.soundEffect.PlayOneShotSoundEffect("drawline");
 
@@ -325,8 +299,6 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
         if (isActivate)
             return;
 
-        Debug.Log("미니게임:마나맥 조건 달성");
-
         isActivate = true;
 
         UpdateExcuteTime();
@@ -344,8 +316,6 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
         float term = MinimumTerm + randomExcuteTime;
 
         RecentExcuteTimeInIntervar = term;
-
-        Debug.Log($"마나맥 다음 실행 시간 : {RecentExcuteTimeInIntervar}");
     }
 
     public float GetNextExcuteTime()
@@ -362,8 +332,6 @@ public class DrawLineGame : MonoBehaviour, IMiniGame
 
     public void ExcuteTutorial()
     {
-        Debug.Log("튜토리얼 한 붓 그리기 실행!");
-
         pathLength = 4;
         pathPointPositions = new List<GridPosition>();
         drawPointsObject = new Transform[pathLength];

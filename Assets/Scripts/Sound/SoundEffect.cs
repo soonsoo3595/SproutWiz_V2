@@ -51,12 +51,9 @@ public class SoundEffect : MonoBehaviour
         {
             if (clip != null)
                 audioSource.PlayOneShot(clip);
-            else
-                Debug.Log(str + " 소리가 없습니다");
         }
         else
         {
-            Debug.Log("No clip");
         }
     }
 

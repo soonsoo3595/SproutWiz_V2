@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.Services.Authentication;
 using Unity.Services.Leaderboards;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 [System.Serializable]
 public class Ranker
