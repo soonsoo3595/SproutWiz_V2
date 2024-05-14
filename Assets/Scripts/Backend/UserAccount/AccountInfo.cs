@@ -15,4 +15,11 @@ public class AccountInfo : MonoBehaviour
         playerID.text = AuthenticationService.Instance.PlayerId;
     }
 
+    public void DeleteAccount()
+    {
+        if (!AuthenticationService.Instance.IsSignedIn) return;
+
+        AuthenticationService.Instance.DeleteAccountAsync();
+        GameManager.Instance.Exit();
+    }
 }

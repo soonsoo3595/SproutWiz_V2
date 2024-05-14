@@ -67,7 +67,6 @@ public static class DataManager
 
             if (results.TryGetValue(key, out var item))
             {
-                Debug.Log(playerData.ToString());
                 return item.Value.GetAs<T>();
             }
             else
