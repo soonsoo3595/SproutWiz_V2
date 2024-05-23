@@ -9,11 +9,6 @@ using System.Threading.Tasks;
 using System.Collections;
 using Google.Play.AppUpdate;
 using Google.Play.Common;
-
-
-
-
-
 #if UNITY_ANDROID
 using GooglePlayGames.BasicApi;
 using GooglePlayGames;
@@ -37,7 +32,7 @@ public class SignManager : MonoBehaviour
     [SerializeField] Button logoutOkBtn;
     [SerializeField] Button logoutBtn;
 
-    AppUpdateManager appUpdateManager = null;
+    AppUpdateManager appUpdateManager;
     [SerializeField] TextMeshProUGUI updateTxt;
 
     async void Awake()
@@ -112,10 +107,10 @@ public class SignManager : MonoBehaviour
     #region 업데이트 확인
     IEnumerator CheckForUpdate()
     {
+        yield return new WaitForSeconds(0.5f);
+
         SceneObject.Instance.ShowSAEMO(true);
         updateTxt.gameObject.SetActive(true);
-
-        yield return new WaitForSeconds(0.5f);
 
         appUpdateManager = new AppUpdateManager();
         PlayAsyncOperation<AppUpdateInfo, AppUpdateErrorCode> appUpdateInfoOperation;
@@ -125,11 +120,13 @@ public class SignManager : MonoBehaviour
 
         if (appUpdateInfoOperation.IsSuccessful)
         {
+            Debug.Log("업데이트 확인 성공");
             var appUpdateInfoResult = appUpdateInfoOperation.GetResult();
 
             if (appUpdateInfoResult.UpdateAvailability == UpdateAvailability.UpdateAvailable)
             {
-                var appUpdateOptions = AppUpdateOptions.FlexibleAppUpdateOptions();
+                Debug.Log("업데이트 가능");
+                var appUpdateOptions = AppUpdateOptions.ImmediateAppUpdateOptions();
 
                 var startUpdateRequest = appUpdateManager.StartUpdate(appUpdateInfoResult, appUpdateOptions);
 

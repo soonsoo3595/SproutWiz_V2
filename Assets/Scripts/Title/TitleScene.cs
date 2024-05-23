@@ -9,6 +9,7 @@ public class TitleScene : MonoBehaviour
     [Header("Object")]
     [SerializeField] GameObject logo;
     [SerializeField] TextMeshProUGUI guideTxt;
+    [SerializeField] TextMeshProUGUI versionTxt;
     [SerializeField] Button startBtn;
     [SerializeField] Transform start;
     [SerializeField] Transform end;
@@ -23,6 +24,11 @@ public class TitleScene : MonoBehaviour
     private void OnDisable()
     {
         EventManager.EnterGame -= ShowAnimation;
+    }
+
+    private void Start()
+    {
+        versionTxt.text = $"ver {Application.version}";
     }
 
     private void ShowAnimation()
