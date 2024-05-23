@@ -6,6 +6,12 @@ using Unity.Services.Authentication;
 using TMPro;
 using System;
 using System.Threading.Tasks;
+using System.Collections;
+using Google.Play.AppUpdate;
+using Google.Play.Common;
+
+
+
 
 
 #if UNITY_ANDROID
@@ -30,6 +36,9 @@ public class SignManager : MonoBehaviour
     [SerializeField] GameObject logoutPopup;
     [SerializeField] Button logoutOkBtn;
     [SerializeField] Button logoutBtn;
+
+    AppUpdateManager appUpdateManager = null;
+    [SerializeField] TextMeshProUGUI updateTxt;
 
     async void Awake()
     {
@@ -71,7 +80,7 @@ public class SignManager : MonoBehaviour
 #endif
         #endregion
         
-        StartGame();
+        StartCoroutine(StartGame());
     }
 
     
@@ -84,15 +93,80 @@ public class SignManager : MonoBehaviour
 #endif
     }
 
-    public void StartGame()
+    public IEnumerator StartGame()
     {
         SceneObject.Instance.ShowSAEMO(true);
 
         GameManager.Instance.CheckNetwork();
 
+#if UNITY_ANDROID
+        if(!Application.isEditor)
+            yield return StartCoroutine(CheckForUpdate());
+#endif
+
         CheckSessionToken();
+
+        yield return null;
     }
 
+    #region 업데이트 확인
+    IEnumerator CheckForUpdate()
+    {
+        SceneObject.Instance.ShowSAEMO(true);
+        updateTxt.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        appUpdateManager = new AppUpdateManager();
+        PlayAsyncOperation<AppUpdateInfo, AppUpdateErrorCode> appUpdateInfoOperation;
+        appUpdateInfoOperation = appUpdateManager.GetAppUpdateInfo();
+
+        yield return appUpdateInfoOperation;
+
+        if (appUpdateInfoOperation.IsSuccessful)
+        {
+            var appUpdateInfoResult = appUpdateInfoOperation.GetResult();
+
+            if (appUpdateInfoResult.UpdateAvailability == UpdateAvailability.UpdateAvailable)
+            {
+                var appUpdateOptions = AppUpdateOptions.FlexibleAppUpdateOptions();
+
+                var startUpdateRequest = appUpdateManager.StartUpdate(appUpdateInfoResult, appUpdateOptions);
+
+                while (!startUpdateRequest.IsDone)
+                {
+                    if (startUpdateRequest.Status == AppUpdateStatus.Downloading)
+                        Debug.Log("다운로드 중");
+                    else if (startUpdateRequest.Status == AppUpdateStatus.Downloaded)
+                        Debug.Log("다운로드 완료");
+
+                    yield return null;
+                }
+
+                var result = appUpdateManager.CompleteUpdate();
+                while (!result.IsDone)
+                {
+                    yield return new WaitForEndOfFrame();
+                }
+                yield return (int)startUpdateRequest.Status;
+            }
+            else if (appUpdateInfoResult.UpdateAvailability == UpdateAvailability.UpdateNotAvailable)
+            {
+                Debug.Log("업데이트 없음");
+                yield return (int)UpdateAvailability.UpdateNotAvailable;
+            }
+            else
+            {
+                Debug.Log("알 수 없는 상태");
+                yield return (int)UpdateAvailability.Unknown;
+            }
+
+        }
+
+        SceneObject.Instance.ShowSAEMO(false);
+        updateTxt.gameObject.SetActive(false);
+    }
+    #endregion
     #region 닉네임 검사
     public async void CheckUserName()
     {
