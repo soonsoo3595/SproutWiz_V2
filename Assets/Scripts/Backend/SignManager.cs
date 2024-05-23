@@ -162,6 +162,10 @@ public class SignManager : MonoBehaviour
             }
 
         }
+        else
+        {
+            Debug.Log("업데이트 확인 실패");
+        }
 
         SceneObject.Instance.ShowSAEMO(false);
         updateTxt.gameObject.SetActive(false);
