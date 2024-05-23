@@ -776,7 +776,7 @@ MonoBehaviour:
   logoutPopup: {fileID: 63614340}
   logoutOkBtn: {fileID: 1135347788}
   logoutBtn: {fileID: 475770865}
-  updateTxt: {fileID: 0}
+  updateTxt: {fileID: 917246468}
 --- !u!114 &448876201
 MonoBehaviour:
   m_ObjectHideFlags: 0
