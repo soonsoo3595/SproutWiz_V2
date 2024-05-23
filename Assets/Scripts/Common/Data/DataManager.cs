@@ -6,7 +6,7 @@ using UnityEngine;
 
 public static class DataManager
 {
-    public static PlayerData playerData = new PlayerData();
+    public static PlayerData playerData;
     public static SkillLibrary skillLibrary = ScriptableObject.CreateInstance<SkillLibrary>();
 
     [Header("LeaderBoard")]
@@ -59,7 +59,7 @@ public static class DataManager
         return null;
     }
 
-    private async static Task<T> RetrieveSpecificData<T>(string key)
+    private async static Task<PlayerData> RetrieveSpecificData<T>(string key)
     {
         try
         {
@@ -67,11 +67,14 @@ public static class DataManager
 
             if (results.TryGetValue(key, out var item))
             {
-                return item.Value.GetAs<T>();
+                var playerData = item.Value.GetAs<PlayerData>();
+
+                return playerData;
             }
             else
             {
                 Debug.Log($"There is no such key as {key}!");
+                return new PlayerData();
             }
         }
         catch (CloudSaveValidationException e)

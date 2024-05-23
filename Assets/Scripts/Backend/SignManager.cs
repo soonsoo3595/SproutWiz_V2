@@ -180,14 +180,14 @@ public class SignManager : MonoBehaviour
 
         SceneObject.Instance.ShowSAEMO(false);
 
+        await DataManager.LoadData();
+
         if (CheckFirstPlay())
         {
             ShowPopup();
         }
         else
         {
-            await DataManager.LoadData();
-
             EventManager.EnterGame();
             logoutBtn.gameObject.SetActive(true);
         }

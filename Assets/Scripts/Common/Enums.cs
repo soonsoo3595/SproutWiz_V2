@@ -33,7 +33,8 @@ public enum SkillType
     ScrollMastery,
     ManaEfficiency,
     Overclock,
-    SunshineMagicMastery
+    SunshineMagicMastery,
+    END
 }
 
 public enum EMinigameType

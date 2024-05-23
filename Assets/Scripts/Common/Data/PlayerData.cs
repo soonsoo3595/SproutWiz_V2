@@ -13,7 +13,7 @@ public class PlayerData
     public int gold;           // 보유 골드
 
     // 업그레이드 레벨
-    public List<int> skillLevels = new List<int>();
+    public int[] skillLevels = new int[(int)SkillType.END];
 
     public bool isFirstPlay = true;
     public bool isCorrectionMode = false;
@@ -31,9 +31,9 @@ public class PlayerData
         PlayerPrefs.SetFloat("SFXVolume", 1f);
         PlayerPrefs.SetFloat("BGMVolume", 1f);
 
-        for(int i = 0; i < Enum.GetValues(typeof(SkillType)).Length; i++)
+        for(int i = 0; i < (int)SkillType.END; i++)
         {
-            skillLevels.Add(0);
+            skillLevels[i] = 0;
         }
     }
 
