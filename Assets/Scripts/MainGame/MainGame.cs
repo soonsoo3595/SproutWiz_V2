@@ -164,7 +164,7 @@ public class MainGame : MonoBehaviour
 
     private void Pause()
     {
-        if (!isStart)
+        if (!isStart || GameManager.Instance.isDrag)
             return;
 
         isPaused = true;

@@ -50,6 +50,7 @@ public class TetrisObject : MonoBehaviour
     public void AttachMouse(bool toggle)
     {
         isAttackedMouse = toggle;
+        GameManager.Instance.isDrag = toggle;
 
         if (isAttackedMouse)
         {

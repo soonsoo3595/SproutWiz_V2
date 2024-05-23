@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public bool isDrag = false;
+
     [Header("Audio")]
     public SoundBGM soundBGM;
     public SoundEffect soundEffect;
